@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VietJob - Nền tảng tuyển dụng hàng đầu Việt Nam</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple: #7C3AED;
+  --purple-dark: #5B21B6;
+  --purple-deeper: #4C1D95;
+  --purple-light: #EDE9FE;
+  --purple-mid: #A78BFA;
+  --purple-100: #F5F3FF;
+  --green: #16A34A;
+  --amber: #F59E0B;
+  --red: #EF4444;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-500: #6B7280;
+  --gray-300: #D1D5DB;
+  --gray-100: #F3F4F6;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,.13);
+  --shadow-purple: 0 8px 32px rgba(124,58,237,.25);
+}
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #FAFAFA;
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 68px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #EBEBEB;
+  display: flex; align-items: center;
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 28px;
+  width: 100%; display: flex; align-items: center; gap: 40px;
+}
+.logo {
+  font-size: 22px; font-weight: 900; color: var(--purple);
+  letter-spacing: -0.5px; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; gap: 6px;
+}
+.logo-dot { width: 8px; height: 8px; background: var(--amber); border-radius: 50%; margin-bottom: 2px; }
+.nav-links {
+  display: flex; align-items: center; gap: 6px; flex: 1;
+}
+.nav-link {
+  padding: 8px 12px; font-size: 14px; font-weight: 500;
+  color: var(--gray-700); border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; gap: 3px;
+  transition: all .18s; text-decoration: none; white-space: nowrap;
+}
+.nav-link:hover { color: var(--purple); background: var(--purple-100); }
+.nav-link.active { color: var(--purple); font-weight: 600; }
+.nav-link .arrow { font-size: 16px; opacity: .7; }
+.nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.btn-outline {
+  height: 38px; padding: 0 18px; border-radius: 8px;
+  border: 1.5px solid var(--purple); color: var(--purple);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  background: transparent; transition: all .18s; white-space: nowrap;
+}
+.btn-outline:hover { background: var(--purple-100); }
+.btn-solid {
+  height: 38px; padding: 0 18px; border-radius: 8px;
+  background: var(--purple); color: var(--white);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  border: none; transition: all .18s; white-space: nowrap;
+}
+.btn-solid:hover { background: var(--purple-dark); transform: translateY(-1px); box-shadow: var(--shadow-purple); }
+.btn-ntd {
+  height: 38px; padding: 0 18px; border-radius: 8px;
+  background: var(--purple-deeper); color: var(--white);
+  font-size: 13px; font-weight: 700; letter-spacing: .5px;
+  text-transform: uppercase; cursor: pointer; border: none;
+  transition: all .18s; white-space: nowrap;
+}
+.btn-ntd:hover { background: #3B1578; transform: translateY(-1px); }
+
+/* ── USER MENU (auth) ── */
+.user-menu { position: relative; }
+.user-btn {
+  display: flex; align-items: center; gap: 8px;
+  height: 38px; padding: 0 14px; border-radius: 8px;
+  background: var(--purple-100); border: 1.5px solid var(--purple-light);
+  cursor: pointer; transition: all .18s; font-family: 'Be Vietnam Pro', sans-serif;
+}
+.user-btn:hover { background: var(--purple-light); }
+.user-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--purple); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; flex-shrink: 0;
+}
+.user-name { font-size: 13px; font-weight: 700; color: var(--purple); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.user-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: white; border: 1px solid #EBEBEB; border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.12); min-width: 200px;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: all .18s; z-index: 200; padding: 8px;
+}
+.user-menu.open .user-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.ud-header { padding: 10px 12px 8px; border-bottom: 1px solid #F3F4F6; margin-bottom: 4px; }
+.ud-name { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.ud-email { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.ud-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; font-size: 13px; color: var(--gray-700);
+  font-weight: 500; border-radius: 8px; cursor: pointer;
+  text-decoration: none; transition: all .15s;
+}
+.ud-link:hover { background: var(--purple-100); color: var(--purple); }
+.ud-link i { font-size: 15px; color: var(--gray-400); }
+.ud-link:hover i { color: var(--purple); }
+.ud-divider { height: 1px; background: #F3F4F6; margin: 4px 0; }
+.ud-logout { color: #EF4444 !important; }
+.ud-logout:hover { background: #FEF2F2 !important; color: #EF4444 !important; }
+.ud-logout i { color: #EF4444 !important; }
+
+/* ── HERO ── */
+.hero {
+  margin-top: 68px;
+  background: linear-gradient(130deg, #2D0B6B 0%, #4C1D95 35%, #6D28D9 70%, #8B5CF6 100%);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(rgba(76,29,149,0.75), rgba(76,29,149,0.75)),
+              url('./img/hero.png') center/cover no-repeat;
+}
+.hero-inner {
+  max-width: 1280px; margin: 0 auto; padding: 52px 40px 48px;
+  width: 100%;
+  display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.95); font-size: 12px; font-weight: 600;
+  padding: 5px 14px; border-radius: 999px; margin-bottom: 20px;
+}
+.hero-badge-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+.hero h1 {
+  font-size: 50px; font-weight: 900; color: var(--white);
+  line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 14px;
+}
+.hero h1 span { color: var(--amber); }
+.hero-sub {
+  font-size: 15px; color: rgba(255,255,255,.75); margin-bottom: 28px; line-height: 1.65; max-width: 440px;
+}
+
+/* Search bar */
+.search-bar {
+  background: var(--white); border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.22);
+  display: flex; align-items: center; padding: 5px 5px 5px 0;
+  margin-bottom: 16px; overflow: hidden;
+}
+.search-field {
+  flex: 1; display: flex; align-items: center; gap: 8px;
+  padding: 9px 14px; border-right: 1px solid var(--gray-300);
+}
+.search-field:last-of-type { border-right: none; }
+.search-field .mat-icon { color: var(--gray-500); font-size: 18px; flex-shrink: 0; }
+.search-field input {
+  border: none; outline: none; font-size: 13px; color: var(--gray-900);
+  font-family: 'Be Vietnam Pro', sans-serif; width: 100%; background: transparent;
+}
+.search-field input::placeholder { color: var(--gray-500); }
+.search-btn {
+  height: 44px; padding: 0 24px; background: var(--purple); color: var(--white);
+  border: none; border-radius: 9px; font-size: 14px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; transition: all .18s;
+  font-family: 'Be Vietnam Pro', sans-serif; flex-shrink: 0;
+}
+.search-btn:hover { background: var(--purple-dark); }
+
+.hot-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.hot-label { font-size: 12px; color: rgba(255,255,255,.6); }
+.tag {
+  font-size: 11px; color: rgba(255,255,255,.88);
+  background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2);
+  padding: 3px 10px; border-radius: 999px; cursor: pointer;
+  transition: all .18s;
+}
+.tag:hover { background: rgba(255,255,255,.22); }
+
+/* Hero right — floating cards */
+.hero-right { position: relative; height: 300px; }
+.hero-illustration {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 320px; height: 240px;
+  background: rgba(255,255,255,.07); border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.14);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 10px;
+}
+.hero-illus-icon { font-size: 52px; color: rgba(255,255,255,.3); }
+.hero-illus-text { color: rgba(255,255,255,.4); font-size: 12px; }
+
+.float-card {
+  position: absolute; background: var(--white); border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0,0,0,.18); padding: 12px 14px;
+  animation: float 4s ease-in-out infinite;
+}
+.float-card-1 { top: 24px; left: 0; width: 210px; animation-delay: 0s; }
+.float-card-2 { bottom: 24px; right: 0; width: 228px; animation-delay: 1.6s; }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.fc-label { font-size: 10px; color: var(--gray-500); margin-bottom: 5px; font-weight: 500; }
+.fc-main { font-size: 13px; font-weight: 700; color: var(--gray-900); display: flex; align-items: center; gap: 5px; }
+.fc-badge {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+  background: var(--purple-light); color: var(--purple);
+}
+.fc-badge.green { background: #DCFCE7; color: var(--green); }
+.fc-sub { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
+.fc-avatars { display: flex; margin-top: 6px; }
+.fc-av {
+  width: 22px; height: 22px; border-radius: 50%; border: 2px solid white;
+  margin-right: -5px; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: white;
+}
+
+/* ── HERO STATS ── */
+.hero-stats {
+  border-top: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.12);
+}
+.hero-stats-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: repeat(3,1fr);
+}
+.stat-item {
+  text-align: center; padding: 18px 0;
+  border-right: 1px solid rgba(255,255,255,.12);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num { font-size: 26px; font-weight: 900; color: var(--white); letter-spacing: -1px; }
+.stat-label { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
+
+/* ── 3-COL SECTION ── */
+.three-col { background: var(--white); padding: 24px 0; border-bottom: 1px solid #EBEBEB; }
+.three-col-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 28px;
+  display: grid; grid-template-columns: 260px 1fr 260px; gap: 20px; align-items: start;
+}
+
+/* Category list */
+.cat-header {
+  font-size: 12px; font-weight: 800; color: var(--gray-700);
+  letter-spacing: .8px; text-transform: uppercase;
+  padding: 0 16px 12px; border-bottom: 1px solid #EBEBEB; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cat-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; font-size: 13.5px; color: var(--gray-700);
+  cursor: pointer; border-radius: 8px; transition: all .15s; font-weight: 500;
+}
+.cat-item:hover { background: var(--purple-100); color: var(--purple); }
+.cat-item:hover .cat-arrow { color: var(--purple); }
+.cat-arrow { font-size: 13px; color: var(--gray-300); }
+
+/* ── BANNER ── */
+.banner-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 300px;
+  background: #1a0533;
+  display: flex;
+  user-select: none;
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.banner-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide-1 { background: linear-gradient(120deg, #1a0533 0%, #3B1578 50%, #5B21B6 100%); }
+.slide-2 { background: linear-gradient(120deg, #0a1f3c 0%, #1a4080 50%, #2563EB 100%); }
+.slide-3 { background: linear-gradient(120deg, #1a1a0a 0%, #7c5c00 50%, #D97706 100%); }
+
+.banner-img-side {
+  width: 42%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.banner-img-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.banner-img-side::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 55%, rgba(0,0,0,0.15) 100%);
+}
+
+.slide-fade {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+}
+.slide-1 .slide-fade { background: linear-gradient(90deg, transparent, #3B1578); }
+.slide-2 .slide-fade { background: linear-gradient(90deg, transparent, #1a4080); }
+.slide-3 .slide-fade { background: linear-gradient(90deg, transparent, #7c5c00); }
+
+.banner-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 28px 28px 24px;
+  position: relative;
+  z-index: 3;
+}
+
+.b-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 4px 12px;
+  width: fit-content;
+  margin-bottom: 12px;
+  backdrop-filter: blur(4px);
+}
+.b-ribbon-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #FCD34D;
+  animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.b-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+.b-title em {
+  font-style: normal;
+  color: #FCD34D;
+}
+
+.b-perks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+.b-perk {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.b-perk-icon {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: rgba(74,222,128,0.25);
+  border: 1px solid rgba(74,222,128,0.5);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.b-perk-icon i { font-size: 9px; color: #4ADE80; }
+
+.b-actions { display: flex; align-items: center; gap: 10px; }
+
+.b-btn-primary {
+  background: #FCD34D;
+  color: #1a0533;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 9px 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: transform 0.15s, filter 0.15s;
+}
+.b-btn-primary:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+.b-btn-ghost {
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: background 0.15s;
+}
+.b-btn-ghost:hover { background: rgba(255,255,255,0.2); }
+
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  pointer-events: none;
+}
+.dc1 { width: 200px; height: 200px; top: -80px; right: 20px; }
+.dc2 { width: 120px; height: 120px; bottom: -40px; right: 80px; }
+.dc3 { width: 60px; height: 60px; top: 30px; right: 110px; background: rgba(255,255,255,0.03); }
+
+.salary-badge {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 8px 12px;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+.salary-label { font-size: 9px; color: rgba(255,255,255,0.55); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
+.salary-val { font-size: 14px; font-weight: 900; color: #FCD34D; margin-top: 1px; }
+
+.banner-nav {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dots { display: flex; gap: 5px; }
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.dot.active { width: 18px; background: #FCD34D; }
+
+.nav-arrows { display: flex; gap: 6px; }
+.nav-arrow {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+  font-size: 13px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+.nav-arrow:hover { background: rgba(255,255,255,0.25); }
+
+/* Tool cards */
+.tool-cards { display: flex; flex-direction: column; gap: 12px; }
+.tool-card {
+  background: white; border: 1px solid #EBEBEB; border-radius: 14px;
+  padding: 16px; display: flex; flex-direction: column; gap: 12px;
+  box-shadow: var(--shadow-sm); transition: all .2s;
+}
+.tool-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.tool-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.tool-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.tool-icon.purple { background: var(--purple-100); }
+.tool-icon.green { background: #DCFCE7; }
+.tool-icon .mat-icon { font-size: 24px; }
+.tool-icon.purple .mat-icon { color: var(--purple); }
+.tool-icon.green .mat-icon { color: var(--green); }
+.tool-title { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.tool-sub { font-size: 12px; color: var(--purple); font-weight: 600; margin-top: 2px; }
+.tool-btn-solid {
+  background: var(--purple); color: white; border: none;
+  font-size: 12px; font-weight: 700; padding: 9px 0; border-radius: 8px;
+  cursor: pointer; text-transform: uppercase; letter-spacing: .5px;
+  font-family: 'Be Vietnam Pro', sans-serif; transition: all .18s;
+}
+.tool-btn-solid:hover { background: var(--purple-dark); }
+.tool-btn-outline {
+  background: transparent; color: var(--purple);
+  border: 1.5px solid var(--purple);
+  font-size: 12px; font-weight: 700; padding: 8px 0; border-radius: 8px;
+  cursor: pointer; text-transform: uppercase; letter-spacing: .5px;
+  font-family: 'Be Vietnam Pro', sans-serif; transition: all .18s;
+}
+.tool-btn-outline:hover { background: var(--purple-100); }
+
+/* ── CATEGORIES GRID ── */
+.section { padding: 56px 0; }
+.section-white { background: white; }
+.section-gray { background: #F9FAFB; }
+.section-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+.section-header {
+  display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;
+}
+.section-title { font-size: 28px; font-weight: 800; color: var(--gray-900); letter-spacing: -.5px; }
+.section-link { font-size: 14px; font-weight: 600; color: var(--purple); text-decoration: none; }
+.section-link:hover { text-decoration: underline; }
+.section-subtitle { font-size: 15px; color: var(--gray-500); margin-top: 6px; }
+
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.cat-card {
+  background: white; border: 1.5px solid #EBEBEB; border-radius: 16px;
+  padding: 20px 18px; cursor: pointer; transition: all .22s;
+  display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden;
+}
+.cat-card::after {
+  content: '→'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 16px; color: var(--gray-300); transition: all .2s;
+}
+.cat-card:hover { border-color: var(--purple); box-shadow: 0 6px 24px rgba(124,58,237,.12); transform: translateY(-2px); }
+.cat-card:hover::after { color: var(--purple); right: 12px; }
+.cat-icon-wrap {
+  width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; transition: all .2s;
+}
+.cat-icon-wrap .mat-icon { font-size: 22px; transition: color .2s; }
+.cat-icon-wrap i { font-size: 22px; transition: color .2s; line-height: 1; }
+.cat-body { flex: 1; min-width: 0; }
+.cat-name { font-size: 13.5px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; line-height: 1.3; }
+.cat-count { font-size: 11.5px; color: var(--gray-500); font-weight: 500; }
+
+.cat-card:nth-child(1) .cat-icon-wrap { background: #EDE9FE; }
+.cat-card:nth-child(1) i, .cat-card:nth-child(1) .mat-icon { color: #7C3AED; }
+.cat-card:nth-child(1):hover { border-color: #7C3AED; }
+.cat-card:nth-child(1):hover .cat-icon-wrap { background: #7C3AED; }
+.cat-card:nth-child(2) .cat-icon-wrap { background: #FEF3C7; }
+.cat-card:nth-child(2) i, .cat-card:nth-child(2) .mat-icon { color: #D97706; }
+.cat-card:nth-child(2):hover { border-color: #D97706; }
+.cat-card:nth-child(2):hover .cat-icon-wrap { background: #D97706; }
+.cat-card:nth-child(3) .cat-icon-wrap { background: #DCFCE7; }
+.cat-card:nth-child(3) i, .cat-card:nth-child(3) .mat-icon { color: #16A34A; }
+.cat-card:nth-child(3):hover { border-color: #16A34A; }
+.cat-card:nth-child(3):hover .cat-icon-wrap { background: #16A34A; }
+.cat-card:nth-child(4) .cat-icon-wrap { background: #DBEAFE; }
+.cat-card:nth-child(4) i, .cat-card:nth-child(4) .mat-icon { color: #2563EB; }
+.cat-card:nth-child(4):hover { border-color: #2563EB; }
+.cat-card:nth-child(4):hover .cat-icon-wrap { background: #2563EB; }
+.cat-card:nth-child(5) .cat-icon-wrap { background: #FFE4E6; }
+.cat-card:nth-child(5) i, .cat-card:nth-child(5) .mat-icon { color: #E11D48; }
+.cat-card:nth-child(5):hover { border-color: #E11D48; }
+.cat-card:nth-child(5):hover .cat-icon-wrap { background: #E11D48; }
+.cat-card:nth-child(6) .cat-icon-wrap { background: #F3E8FF; }
+.cat-card:nth-child(6) i, .cat-card:nth-child(6) .mat-icon { color: #A21CAF; }
+.cat-card:nth-child(6):hover { border-color: #A21CAF; }
+.cat-card:nth-child(6):hover .cat-icon-wrap { background: #A21CAF; }
+.cat-card:nth-child(7) .cat-icon-wrap { background: #CCFBF1; }
+.cat-card:nth-child(7) i, .cat-card:nth-child(7) .mat-icon { color: #0D9488; }
+.cat-card:nth-child(7):hover { border-color: #0D9488; }
+.cat-card:nth-child(7):hover .cat-icon-wrap { background: #0D9488; }
+.cat-card:nth-child(8) .cat-icon-wrap { background: #FEE2E2; }
+.cat-card:nth-child(8) i, .cat-card:nth-child(8) .mat-icon { color: #DC2626; }
+.cat-card:nth-child(8):hover { border-color: #DC2626; }
+.cat-card:nth-child(8):hover .cat-icon-wrap { background: #DC2626; }
+
+/* ── JOB CARDS (TopCV style) ── */
+.jobs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.job-card {
+  background: white; border: 1.5px solid #E8E8E8; border-radius: 14px;
+  padding: 18px 18px 14px; transition: all .2s; cursor: pointer; position: relative;
+  display: flex; flex-direction: column; gap: 0;
+}
+.job-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,.09); border-color: #D1D5DB; transform: translateY(-2px); }
+.job-card.is-top { border-left: 3px solid var(--green); }
+
+/* Top row: logo + title/company + save btn */
+.job-card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.company-logo {
+  width: 64px; height: 64px; border-radius: 10px; flex-shrink: 0;
+  background: white; border: 1px solid #E5E7EB; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.company-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.job-card-info { flex: 1; min-width: 0; }
+.job-title {
+  font-size: 14.5px; font-weight: 700; color: var(--gray-900);
+  line-height: 1.4; margin-bottom: 5px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.job-card:hover .job-title { color: var(--purple); }
+.job-company {
+  font-size: 12px; color: var(--gray-500); font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-transform: uppercase; letter-spacing: .2px;
+}
+
+/* TOP badge */
+.top-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--green); color: white;
+  font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;
+  letter-spacing: .5px; margin-bottom: 5px;
+}
+
+/* AI badge (giữ nguyên) */
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: var(--purple-light); color: var(--purple);
+  font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  white-space: nowrap; margin-top: 5px;
+}
+.ai-badge .mat-icon { font-size: 11px; }
+
+/* Bottom row: tags + save */
+.job-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; border-top: 1px solid #F3F4F6; padding-top: 12px; margin-top: auto;
+}
+.job-tags { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.job-tag {
+  font-size: 12px; color: var(--gray-600); background: #F3F4F6;
+  padding: 5px 12px; border-radius: 999px; font-weight: 500; white-space: nowrap;
+  border: 1px solid #E8E8E8;
+}
+.job-tag.new-tag { color: var(--green); }
+.job-save {
+  width: 36px; height: 36px; border: 1.5px solid #E0E0E0; background: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #BDBDBD; transition: all .18s; flex-shrink: 0;
+}
+.job-save:hover { border-color: #EF4444; color: #EF4444; background: #FFF5F5; }
+.job-save .mat-icon { font-size: 17px; }
+
+/* ── AI SECTION ── */
+.ai-section {
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 50%, #F5F3FF 100%);
+  padding: 72px 0; position: relative; overflow: hidden;
+}
+.ai-section::before {
+  content: ''; position: absolute;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,.08) 0%, transparent 70%);
+  top: -200px; left: -100px;
+}
+.ai-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 28px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+}
+.ai-img-wrap { position: relative; height: 400px; }
+.ai-img-bg {
+  position: absolute; inset: 0; background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+  border-radius: 24px; overflow: hidden;
+}
+.ai-img { width: 100%; height: 100%; object-fit: cover; opacity: .7; mix-blend-mode: luminosity; }
+.ai-img-overlay {
+  position: absolute; inset: 0; background: linear-gradient(135deg, rgba(91,33,182,.85), rgba(124,58,237,.6));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+}
+.ai-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.3); display: flex; align-items: center; justify-content: center;
+  animation: spin 8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.ai-circle .mat-icon { font-size: 48px; color: white; animation: spin 8s linear infinite reverse; }
+.ai-title { font-size: 28px; font-weight: 800; color: var(--gray-900); margin-bottom: 12px; letter-spacing: -.5px; }
+.ai-desc { font-size: 15px; color: var(--gray-500); margin-bottom: 24px; line-height: 1.7; }
+.ai-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.ai-feature {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 600; color: var(--gray-900);
+}
+.ai-feature .mat-icon { font-size: 20px; color: var(--purple); }
+.ai-cta {
+  background: var(--purple); color: white; border: none;
+  font-size: 15px; font-weight: 700; padding: 14px 32px; border-radius: 10px;
+  cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; transition: all .2s;
+  box-shadow: var(--shadow-purple);
+}
+.ai-cta:hover { background: var(--purple-dark); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(124,58,237,.35); }
+
+/* ── EMPLOYERS ── */
+.emp-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; margin-bottom: 28px; }
+.emp-logo {
+  height: 64px; border: 1px solid #EBEBEB; border-radius: 12px;
+  background: white; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--gray-500);
+  cursor: pointer; transition: all .2s; overflow: hidden; padding: 8px;
+}
+.emp-logo img { width: 100%; height: 100%; object-fit: contain; }
+.emp-logo:hover { border-color: var(--purple); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+
+/* ── CV PROMO ── */
+.cv-promo {
+  background: linear-gradient(135deg, var(--purple-deeper) 0%, var(--purple-dark) 40%, var(--purple) 100%);
+  padding: 72px 0; overflow: hidden; position: relative;
+}
+.cv-promo::after {
+  content: ''; position: absolute; right: -100px; top: -100px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: rgba(255,255,255,.04); pointer-events: none;
+}
+.cv-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 28px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.cv-content h2 { font-size: 40px; font-weight: 900; color: white; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.15; }
+.cv-content p { font-size: 16px; color: rgba(255,255,255,.75); margin-bottom: 32px; line-height: 1.7; }
+.cv-btn {
+  background: white; color: var(--purple); border: none;
+  font-size: 15px; font-weight: 800; padding: 14px 32px; border-radius: 10px;
+  cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; transition: all .2s;
+}
+.cv-btn:hover { background: var(--purple-light); transform: translateY(-2px); }
+.cv-mockup { position: relative; display: flex; justify-content: center; }
+.cv-card {
+  background: white; width: 300px; border-radius: 16px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.3); padding: 24px;
+  transform: rotate(3deg); transition: transform .5s;
+}
+.cv-card:hover { transform: rotate(0deg); }
+.cv-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #EBEBEB; }
+.cv-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--purple-100); display: flex; align-items: center; justify-content: center; }
+.cv-avatar .mat-icon { color: var(--purple); }
+.cv-name { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+.cv-role { font-size: 12px; color: var(--purple); font-weight: 600; }
+.cv-bar-row { display: flex; flex-direction: column; gap: 10px; }
+.cv-bar-label { font-size: 11px; font-weight: 600; color: var(--gray-700); margin-bottom: 4px; display: flex; justify-content: space-between; }
+.cv-bar-track { height: 6px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+.cv-bar-fill { height: 100%; background: var(--purple); border-radius: 999px; }
+.cv-score-badge {
+  position: absolute; top: -16px; right: -16px;
+  background: var(--amber); color: white; width: 56px; height: 56px;
+  border-radius: 50%; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; box-shadow: 0 8px 24px rgba(245,158,11,.4);
+  font-weight: 900; font-size: 18px; border: 3px solid white;
+}
+.cv-score-badge span { font-size: 9px; font-weight: 600; opacity: .8; }
+
+/* ── TESTIMONIALS ── */
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.testi-card {
+  background: white; border: 1px solid #EBEBEB; border-radius: 16px;
+  padding: 24px; transition: all .2s;
+}
+.testi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.stars { display: flex; gap: 2px; margin-bottom: 14px; }
+.star { color: #FBBF24; font-size: 18px; }
+.testi-text { font-size: 14px; color: var(--gray-700); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-av {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: white; flex-shrink: 0;
+}
+.testi-name { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+.testi-role { font-size: 12px; color: var(--gray-500); }
+
+/* ── FOOTER ── */
+footer { background: #0F172A; padding: 56px 0 0; }
+.footer-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 28px;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px;
+}
+.footer-logo { font-size: 22px; font-weight: 900; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.footer-logo-dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; }
+.footer-desc { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 10px; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.6); cursor: pointer; transition: all .18s;
+}
+.social-btn:hover { background: var(--purple); border-color: var(--purple); color: white; }
+.footer-col h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
+.footer-link {
+  display: block; font-size: 13px; color: rgba(255,255,255,.5);
+  text-decoration: none; margin-bottom: 10px; transition: color .15s;
+}
+.footer-link:hover { color: rgba(255,255,255,.9); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 20px 28px; max-width: 1280px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 13px; color: rgba(255,255,255,.35); }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 13px; color: rgba(255,255,255,.35); text-decoration: none; }
+.footer-legal a:hover { color: rgba(255,255,255,.7); }
+
+/* ── PAGINATION ── */
+.jobs-pagination {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-top: 36px;
+}
+.page-arrow {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1.5px solid var(--gray-300); background: white;
+  font-size: 18px; cursor: pointer; color: var(--gray-700);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s; line-height: 1;
+}
+.page-arrow:hover:not(:disabled) { border-color: var(--purple); color: var(--purple); background: var(--purple-100); }
+.page-arrow:disabled { opacity: .35; cursor: default; }
+.page-numbers { display: flex; align-items: center; gap: 4px; }
+.page-btn {
+  min-width: 36px; height: 36px; border-radius: 8px;
+  border: 1.5px solid var(--gray-300); background: white;
+  font-size: 13px; font-weight: 600; cursor: pointer; color: var(--gray-700);
+  font-family: 'Be Vietnam Pro', sans-serif; padding: 0 10px;
+  transition: all .18s;
+}
+.page-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-100); }
+.page-btn.active { background: var(--purple); color: white; border-color: var(--purple); }
+.page-ellipsis { font-size: 13px; color: var(--gray-500); padding: 0 4px; }
+
+/* ── MEGA DROPDOWN ── */
+.nav-item { position: relative; }
+.nav-item.open .dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: all; }
+.nav-item.open .nav-link { color: var(--purple); background: var(--purple-100); }
+.nav-item::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 14px; display: none; }
+.nav-item.open::after { display: block; }
+
+.dropdown {
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(8px);
+  background: white; border: 1px solid #EBEBEB; border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.12);
+  opacity: 0; visibility: hidden; transition: opacity .18s, transform .18s;
+  z-index: 200; pointer-events: none; min-width: 220px;
+}
+.dropdown::before {
+  content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+  width: 12px; height: 12px; background: white; border: 1px solid #EBEBEB;
+  border-bottom: none; border-right: none; rotate: 45deg;
+}
+.dropdown.mega {
+  left: 0; transform: translateY(8px); min-width: 680px;
+  padding: 24px 28px;
+}
+.nav-item.open .dropdown.mega { transform: translateY(0); }
+.dropdown.mega::before { left: 60px; transform: none; }
+.mega-cols { display: grid; gap: 24px; }
+.mega-cols-2 { grid-template-columns: 1fr 1fr; }
+.mega-cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.mega-cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.dd-section-label {
+  font-size: 10px; font-weight: 800; color: var(--gray-500);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
+  padding-bottom: 8px; border-bottom: 1px solid #F3F4F6;
+}
+.dd-link {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--gray-700); font-weight: 500;
+  padding: 6px 8px; border-radius: 7px; text-decoration: none;
+  transition: all .15s; margin-bottom: 1px;
+}
+.dd-link:hover { color: var(--purple); background: var(--purple-100); }
+.dd-link i { font-size: 15px; color: var(--gray-400); flex-shrink: 0; }
+.dd-link:hover i { color: var(--purple); }
+.dd-badge {
+  font-size: 9px; font-weight: 800; color: white;
+  background: var(--purple); padding: 1px 6px; border-radius: 999px;
+  letter-spacing: .5px; text-transform: uppercase; margin-left: auto;
+}
+.dd-badge.green { background: var(--green); }
+.dropdown.simple { padding: 8px; min-width: 200px; left: 0; transform: translateY(8px); }
+.nav-item.open .dropdown.simple { transform: translateY(0); }
+.dropdown.simple::before { left: 24px; transform: none; }
+.dd-article {
+  background: var(--purple-100); border-radius: 10px; padding: 14px;
+  text-decoration: none; display: block; transition: background .15s;
+}
+.dd-article:hover { background: #DDD6FE; }
+.dd-article-label { font-size: 10px; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px; }
+.dd-article-title { font-size: 12.5px; font-weight: 700; color: var(--gray-900); line-height: 1.4; margin-bottom: 4px; }
+.dd-article-sub { font-size: 11px; color: var(--gray-500); line-height: 1.5; }
+
+.mat-icon {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block; line-height: 1; font-style: normal;
+}
+.mat-icon.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.nav-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 28px;
+  width: 100%; display: flex; align-items: center;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 6px;
+  flex: 1; justify-content: center;
+}
+
+.nav-actions {
+  display: flex; align-items: center; gap: 8px; 
+  flex-shrink: 0; margin-left: auto;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <div class="nav-inner">
+   <div class="logo" onclick="location.href='#'" style="cursor:pointer; display:flex; align-items:center; flex-shrink:0;">
+  <svg width="48" height="48" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="52" cy="80" rx="38" ry="50" fill="#7C3AED" transform="rotate(-10, 52, 80)"/>
+    <path d="M 20 110 Q 5 130 0 145 Q 18 128 35 120 Z" fill="#7C3AED"/>
+    <path d="M 52 70 Q 85 55 95 65 Q 78 72 60 80 Z" fill="#7C3AED"/>
+    <path d="M 55 72 Q 82 60 90 67 Q 74 72 60 78 Z" fill="#5B21B6"/>
+    <circle cx="60" cy="42" r="22" fill="#7C3AED"/>
+    <path d="M 78 40 L 94 36 L 80 46 Z" fill="#7C3AED"/>
+    <path d="M 79 39 L 91 36 L 80 43 Z" fill="#5B21B6"/>
+    <circle cx="66" cy="38" r="8" fill="white"/>
+    <circle cx="68" cy="38" r="5" fill="#7C3AED"/>
+    <circle cx="70" cy="36" r="1.5" fill="white"/>
+    <ellipse cx="44" cy="88" rx="18" ry="26" fill="white" opacity="0.92"/>
+    <path d="M 32 105 Q 44 118 58 108 Q 50 125 35 120 Z" fill="white" opacity="0.7"/>
+  </svg>
+  <span style="font-family:'Be Vietnam Pro',sans-serif; font-size:19px; font-weight:900; color:#7C3AED; letter-spacing:2px; margin-left:8px;">VIECJOB</span>
+</div>
+    <div class="nav-links">
+
+      <div class="nav-item">
+        <a class="nav-link active" href="#">Việc làm <span class="mat-icon arrow">expand_more</span></a>
+        <div class="dropdown mega">
+          <div class="mega-cols mega-cols-3">
+            <div>
+              <div class="dd-section-label">Việc làm</div>
+              <a class="dd-link" href="#"><i class="ti ti-search"></i>Tìm việc làm</a>
+              <a class="dd-link" href="#"><i class="ti ti-bookmark"></i>Việc làm đã lưu</a>
+              <a class="dd-link" href="#"><i class="ti ti-send"></i>Việc làm đã ứng tuyển</a>
+              <a class="dd-link" href="#"><i class="ti ti-sparkles"></i>Việc làm phù hợp <span class="dd-badge">AI</span></a>
+              <div class="dd-section-label" style="margin-top:16px">Theo lĩnh vực</div>
+              <a class="dd-link" href="#"><i class="ti ti-building-factory"></i>Sản xuất</a>
+              <a class="dd-link" href="#"><i class="ti ti-device-laptop"></i>IT - Phần mềm</a>
+              <a class="dd-link" href="#"><i class="ti ti-school"></i>Giáo dục / Đào tạo</a>
+              <a class="dd-link" href="#"><i class="ti ti-building"></i>Xây dựng</a>
+              <a class="dd-link" href="#"><i class="ti ti-shopping-cart"></i>Bán lẻ - FMCG</a>
+            </div>
+            <div>
+              <div class="dd-section-label">Theo vị trí</div>
+              <a class="dd-link" href="#"><i class="ti ti-chart-bar"></i>Nhân viên kinh doanh</a>
+              <a class="dd-link" href="#"><i class="ti ti-calculator"></i>Kế toán</a>
+              <a class="dd-link" href="#"><i class="ti ti-speakerphone"></i>Marketing</a>
+              <a class="dd-link" href="#"><i class="ti ti-users"></i>Hành chính nhân sự</a>
+              <a class="dd-link" href="#"><i class="ti ti-headset"></i>Chăm sóc khách hàng</a>
+              <a class="dd-link" href="#"><i class="ti ti-building-bank"></i>Ngân hàng</a>
+              <a class="dd-link" href="#"><i class="ti ti-code"></i>IT</a>
+              <a class="dd-link" href="#"><i class="ti ti-hammer"></i>Kỹ sư xây dựng</a>
+              <a class="dd-link" href="#"><i class="ti ti-brush"></i>Thiết kế đồ hoạ</a>
+              <a class="dd-link" href="#"><i class="ti ti-home"></i>Bất động sản</a>
+              <a class="dd-link" href="#"><i class="ti ti-phone"></i>Telesales</a>
+            </div>
+            <div>
+              <div class="dd-section-label">Khám phá & nâng cấp</div>
+              <a class="dd-link" href="#"><i class="ti ti-clipboard-list"></i>Bộ câu hỏi phỏng vấn <span class="dd-badge green">Mới</span></a>
+              <a class="dd-link" href="#"><i class="ti ti-brain"></i>Trắc nghiệm MBTI</a>
+              <a class="dd-link" href="#"><i class="ti ti-stars"></i>Trắc nghiệm MI</a>
+              <a class="dd-link" href="#"><i class="ti ti-certificate"></i>Đánh giá năng lực</a>
+              <a class="dd-link" href="#"><i class="ti ti-book"></i>Khóa học</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#">Công ty <span class="mat-icon arrow">expand_more</span></a>
+        <div class="dropdown simple">
+          <a class="dd-link" href="#"><i class="ti ti-building-skyscraper"></i>Danh sách công ty</a>
+          <a class="dd-link" href="#"><i class="ti ti-crown"></i>Công ty Pro <span class="dd-badge">Pro</span></a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#">CV/Hồ sơ <span class="mat-icon arrow">expand_more</span></a>
+        <div class="dropdown mega">
+          <div class="mega-cols mega-cols-3">
+            <div>
+              <div class="dd-section-label">Mẫu CV theo style</div>
+              <a class="dd-link" href="#"><i class="ti ti-layout"></i>CV Đơn giản</a>
+              <a class="dd-link" href="#"><i class="ti ti-layout-2"></i>CV Ấn tượng</a>
+              <a class="dd-link" href="#"><i class="ti ti-layout-board"></i>CV Chuyên nghiệp</a>
+              <a class="dd-link" href="#"><i class="ti ti-school"></i>CV Harvard</a>
+              <div class="dd-section-label" style="margin-top:16px">Mẫu CV theo vị trí</div>
+              <a class="dd-link" href="#"><i class="ti ti-chart-bar"></i>Nhân viên kinh doanh</a>
+              <a class="dd-link" href="#"><i class="ti ti-code"></i>Lập trình viên</a>
+              <a class="dd-link" href="#"><i class="ti ti-calculator"></i>Nhân viên kế toán</a>
+              <a class="dd-link" href="#"><i class="ti ti-speakerphone"></i>Chuyên viên marketing</a>
+            </div>
+            <div>
+              <div class="dd-section-label">Quản lý CV</div>
+              <a class="dd-link" href="#"><i class="ti ti-file-text"></i>Quản lý CV</a>
+              <a class="dd-link" href="#"><i class="ti ti-upload"></i>Tải CV lên</a>
+              <a class="dd-link" href="#"><i class="ti ti-help"></i>Hướng dẫn viết CV</a>
+              <a class="dd-link" href="#"><i class="ti ti-mail"></i>Quản lý Cover Letter</a>
+              <a class="dd-link" href="#"><i class="ti ti-file"></i>Mẫu Cover Letter</a>
+            </div>
+            <div>
+              <a class="dd-article" href="#">
+                <div class="dd-article-label">✨ Nổi bật</div>
+                <div class="dd-article-title">Bộ câu hỏi phỏng vấn Kế toán kèm gợi ý cách trả lời</div>
+                <div class="dd-article-sub">50 câu hỏi phỏng vấn kế toán theo nghiệp vụ chi tiết nhất</div>
+              </a>
+              <a class="dd-article" href="#" style="margin-top:10px">
+                <div class="dd-article-label">📄 Phổ biến</div>
+                <div class="dd-article-title">Tải mẫu đơn xin nghỉ việc mới nhất</div>
+                <div class="dd-article-sub">File Word chuẩn, hướng dẫn viết chuyên nghiệp</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#">Công cụ <span class="mat-icon arrow">expand_more</span></a>
+        <div class="dropdown mega" style="min-width:500px">
+          <div class="mega-cols mega-cols-2">
+            <div>
+              <div class="dd-section-label">Tài chính & Lương</div>
+              <a class="dd-link" href="#"><i class="ti ti-calculator"></i>Tính lương Gross - Net</a>
+              <a class="dd-link" href="#"><i class="ti ti-receipt-tax"></i>Tính thuế thu nhập cá nhân</a>
+              <a class="dd-link" href="#"><i class="ti ti-currency-dong"></i>Tra cứu lương <span class="dd-badge green">Mới</span></a>
+              <a class="dd-link" href="#"><i class="ti ti-trending-up"></i>Tính lãi suất kép</a>
+              <a class="dd-link" href="#"><i class="ti ti-shield"></i>Tính bảo hiểm thất nghiệp</a>
+              <a class="dd-link" href="#"><i class="ti ti-shield-check"></i>Tính bảo hiểm xã hội một lần</a>
+              <a class="dd-link" href="#"><i class="ti ti-piggy-bank"></i>Lập kế hoạch tiết kiệm</a>
+            </div>
+            <div>
+              <div class="dd-section-label">Ứng dụng</div>
+              <a class="dd-link" href="#"><i class="ti ti-device-mobile"></i>Mobile App VietJob</a>
+              <div class="dd-section-label" style="margin-top:16px">Công ty</div>
+              <a class="dd-link" href="#"><i class="ti ti-building-skyscraper"></i>Danh sách công ty</a>
+              <a class="dd-link" href="#"><i class="ti ti-crown"></i>Công ty nổi bật <span class="dd-badge">Pro</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a class="nav-link" href="#">Cẩm nang <span class="mat-icon arrow">expand_more</span></a>
+        <div class="dropdown simple" style="min-width:240px">
+          <a class="dd-link" href="#"><i class="ti ti-compass"></i>Định hướng nghề nghiệp</a>
+          <a class="dd-link" href="#"><i class="ti ti-bulb"></i>Bí kíp tìm việc</a>
+          <a class="dd-link" href="#"><i class="ti ti-cash"></i>Chế độ lương thưởng</a>
+          <a class="dd-link" href="#"><i class="ti ti-book"></i>Kiến thức chuyên ngành</a>
+          <a class="dd-link" href="#"><i class="ti ti-backpack"></i>Hành trang nghề nghiệp</a>
+          <a class="dd-link" href="#"><i class="ti ti-chart-line"></i>Thị trường & xu hướng</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- nav-actions với id để JS auth cập nhật -->
+    <div class="nav-actions" id="nav-actions">
+      <button class="btn-outline" onclick="location.href='dangky.html'">Đăng ký</button>
+      <button class="btn-solid" onclick="location.href='dangnhap.html'">Đăng nhập</button>
+      <button class="btn-ntd">NHÀ TUYỂN DỤNG</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        🚀 Nền tảng #1 Việt Nam 2026
+      </div>
+      <h1>Tìm việc làm<br/><span>mơ ước</span> của bạn</h1>
+      <p class="hero-sub">Hơn 500,000 việc làm từ 10,000+ công ty hàng đầu Việt Nam — từ kinh doanh, y tế, xây dựng đến sáng tạo. AI giúp bạn tìm đúng việc, đúng người.</p>
+
+      <div class="search-bar">
+        <div class="search-field">
+          <span class="mat-icon">search</span>
+          <input placeholder="Vị trí, kỹ năng, công ty..." type="text"/>
+        </div>
+        <div class="search-field">
+          <span class="mat-icon">location_on</span>
+          <input placeholder="Tất cả địa điểm" type="text"/>
+        </div>
+        <button class="search-btn">Tìm Việc Làm</button>
+      </div>
+
+      <div class="hot-tags">
+        <span class="hot-label">Phổ biến:</span>
+        <span class="tag">Kinh doanh</span>
+        <span class="tag">Kế toán</span>
+        <span class="tag">Kỹ sư xây dựng</span>
+        <span class="tag">Marketing</span>
+        <span class="tag">Giáo viên</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-illustration">
+        <span class="mat-icon hero-illus-icon">work</span>
+        <span class="hero-illus-text">10,000+ công ty đang tuyển dụng</span>
+      </div>
+      <div class="float-card float-card-1">
+        <div class="fc-label">🤖 AI gợi ý cho bạn</div>
+        <div class="fc-main">
+          Trưởng nhóm Kinh doanh
+          <span class="fc-badge">AI: 91%</span>
+        </div>
+        <div class="fc-sub">Vinamilk · 25 - 40 triệu VNĐ</div>
+        <div class="fc-avatars">
+          <div class="fc-av" style="background:#7C3AED">T</div>
+          <div class="fc-av" style="background:#5B21B6">H</div>
+          <div class="fc-av" style="background:#A78BFA">N</div>
+          <div style="width:22px;height:22px;border-radius:50%;border:2px solid white;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:8px;color:#6B7280;font-weight:700;">+64</div>
+        </div>
+      </div>
+      <div class="float-card float-card-2">
+        <div class="fc-label">🔔 Việc mới vừa đăng</div>
+        <div class="fc-main">
+          <span class="mat-icon filled" style="font-size:13px;color:#16A34A">circle</span>
+          Kế toán trưởng
+          <span class="fc-badge green">Vừa đăng</span>
+        </div>
+        <div class="fc-sub">Masan Group · Hà Nội · Thỏa thuận</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">500,000+</div>
+        <div class="stat-label">Việc làm đang tuyển</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10,000+</div>
+        <div class="stat-label">Công ty hàng đầu</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2,000,000+</div>
+        <div class="stat-label">Ứng viên tin dùng</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3-COL ── -->
+<section class="three-col">
+  <div class="three-col-inner">
+    <div>
+      <div class="cat-header">≡ &nbsp;Ngành nghề</div>
+      <div class="cat-item">Kinh Doanh/Bán Hàng <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Marketing/PR/Quảng Cáo <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Công Nghệ Thông Tin <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Hành Chính/Văn Phòng <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Kế Toán/Kiểm Toán <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Nhân Sự <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Điện/Điện Tử/Năng Lượng <span class="cat-arrow">→</span></div>
+    </div>
+
+    <!-- ── BANNER ── -->
+    <div class="banner-wrap">
+  <div class="banner-slide active" data-index="0">
+    <img src="./img/banner1.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+  </div>
+
+  <div class="banner-slide" data-index="1">
+    <img src="./img/banner4.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+  </div>
+
+  <div class="banner-slide" data-index="2">
+    <img src="./img/banner5.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+  </div>
+
+  <div class="banner-nav">
+    <div class="dots">
+      <div class="dot active" data-dot="0"></div>
+      <div class="dot" data-dot="1"></div>
+      <div class="dot" data-dot="2"></div>
+    </div>
+    <div class="nav-arrows">
+      <button class="nav-arrow" id="prev">&#8249;</button>
+      <button class="nav-arrow" id="next">&#8250;</button>
+    </div>
+  </div>
+</div>
+
+    <div class="tool-cards">
+      <div class="tool-card">
+        <div class="tool-card-top">
+          <div>
+            <div class="tool-title">Tạo CV tự động</div>
+            <div class="tool-sub">Chỉ 2 Phút</div>
+          </div>
+          <div class="tool-icon purple">
+            <span class="mat-icon">smart_toy</span>
+          </div>
+        </div>
+        <button class="tool-btn-solid">Tạo CV Ngay</button>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card-top">
+          <div>
+            <div class="tool-title">Đánh giá CV</div>
+            <div class="tool-sub">VietJob AI</div>
+          </div>
+          <div class="tool-icon green">
+            <span class="mat-icon" style="color:#16A34A">manage_search</span>
+          </div>
+        </div>
+        <button class="tool-btn-outline">Tải CV Lên</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED JOBS ── -->
+<section class="section section-gray">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Việc làm nổi bật hôm nay</div>
+        <div class="section-subtitle">Được AI gợi ý dựa trên hồ sơ và xu hướng thị trường</div>
+      </div>
+      <a href="#" class="section-link">Xem tất cả việc làm →</a>
+    </div>
+    <div class="jobs-grid">
+
+      <!-- Card 1 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/1200x/53/c3/aa/53c3aa62d625ae65a42da8e699201f39.jpg" alt="VNG"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Senior Frontend Developer</div>
+            <div class="job-company">VNG Corporation</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 94%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">2,000–3,500 USD</span>
+            <span class="job-tag new-tag">TP.HCM (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/3d/e6/6c/3de66c82f9f28eed4a5c37dfc0c4069e.jpg" alt="Shopee"/></div>
+          <div class="job-card-info">
+            <div class="job-title">UX/UI Design Lead</div>
+            <div class="job-company">Shopee Vietnam</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 88%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">Thỏa thuận</span>
+            <span class="job-tag new-tag">Hà Nội (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 3 — TOP -->
+      <div class="job-card is-top">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/72/1e/b1/721eb1ec1b5bf1d229e74174affe469b.jpg" alt="Momo"/></div>
+          <div class="job-card-info">
+            <div class="top-badge">♦ TOP</div>
+            <div class="job-title">Marketing Manager</div>
+            <div class="job-company">Momo E-Wallet</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 95%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">1,500–2,500 USD</span>
+            <span class="job-tag new-tag">TP.HCM (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Kế toán trưởng</div>
+            <div class="job-company">Vinamilk</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 87%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">30–50 triệu</span>
+            <span class="job-tag new-tag">TP.HCM (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/76/d8/cb/76d8cb03115a52e17c811409dad112bf.jpg" alt="Masan"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Trưởng nhóm Kinh doanh</div>
+            <div class="job-company">Masan Group</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 90%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">25–40 triệu</span>
+            <span class="job-tag new-tag">Hà Nội (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/3f/7e/28/3f7e28bdd5dc1966f25fef476bbf5175.jpg" alt="FPT"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Nhân viên Nhân sự</div>
+            <div class="job-company">FPT Corporation</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 83%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">12–18 triệu</span>
+            <span class="job-tag new-tag">Đà Nẵng (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/78/2d/8e/782d8e93443fd09180cb53a163c03c90.jpg" alt="Hoà Phát"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Kỹ sư Xây dựng</div>
+            <div class="job-company">Tập đoàn Hoà Phát</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 89%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">20–35 triệu</span>
+            <span class="job-tag new-tag">Hải Dương (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/1200x/e3/91/23/e3912325358791521ae7eeaadba883b8.jpg" alt="An Sinh"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Dược sĩ lâm sàng</div>
+            <div class="job-company">Bệnh viện An Sinh</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 92%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">18–28 triệu</span>
+            <span class="job-tag new-tag">TP.HCM (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vingroup"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Chuyên viên Marketing Digital</div>
+            <div class="job-company">Vingroup</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 86%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">18–30 triệu</span>
+            <span class="job-tag new-tag">Hà Nội (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="jobs-pagination">
+      <button class="page-arrow" id="jobs-prev">&#8249;</button>
+      <div class="page-numbers" id="page-numbers"></div>
+      <button class="page-arrow" id="jobs-next">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<section class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Khám phá theo ngành nghề</div>
+        <div class="section-subtitle">Tìm việc làm phù hợp trong hơn 25 lĩnh vực</div>
+      </div>
+      <a href="#" class="section-link">Xem tất cả ngành →</a>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-code"></i></div><div class="cat-body"><div class="cat-name">Kỹ thuật & Phần mềm</div><div class="cat-count">15,402 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-speakerphone"></i></div><div class="cat-body"><div class="cat-name">Marketing & PR</div><div class="cat-count">8,291 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-calculator"></i></div><div class="cat-body"><div class="cat-name">Kế toán & Tài chính</div><div class="cat-count">5,110 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-school"></i></div><div class="cat-body"><div class="cat-name">Giáo dục & Đào tạo</div><div class="cat-count">6,730 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-briefcase"></i></div><div class="cat-body"><div class="cat-name">Kinh doanh & Bán hàng</div><div class="cat-count">12,840 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-brush"></i></div><div class="cat-body"><div class="cat-name">Thiết kế & Sáng tạo</div><div class="cat-count">4,560 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-users"></i></div><div class="cat-body"><div class="cat-name">Nhân sự</div><div class="cat-count">3,920 việc làm</div></div></div>
+      <div class="cat-card"><div class="cat-icon-wrap"><i class="ti ti-stethoscope"></i></div><div class="cat-body"><div class="cat-name">Y tế & Dược</div><div class="cat-count">2,780 việc làm</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AI SECTION ── -->
+<section class="ai-section">
+  <div class="ai-inner">
+    <div class="ai-img-wrap">
+      <div class="ai-img-bg">
+        <img class="ai-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhN-QoC9197d9llSgDfxyGCxH_9ouiLCVd_Xk3Q3kWlc3a-NHTti247bKxEUQRmxJQv05Yu72PJzbPWYMGxZUyigVpXHB2Okq3CO5EnDrIDy8cV50UADFute5KTwT0yT7gy-fkWb2nphhHGQI36hs-CexL42R45qIILqFd0vTe592sH2t6o1W5pnSuEnyDXdSArcaM7eEXYe2qzsG8COt5A2WsibTN-QiOEEInAWiIGbp7OgTGqO-oRDXEriNMRGVRUEOi-GRF" alt="AI"/>
+        <div class="ai-img-overlay">
+          <div class="ai-circle">
+            <span class="mat-icon" style="font-size:48px;color:white;animation:spin 8s linear infinite reverse">psychology</span>
+          </div>
+          <div style="color:rgba(255,255,255,.9);font-size:16px;font-weight:700;">AI Matching Engine</div>
+          <div style="color:rgba(255,255,255,.6);font-size:13px;">Phân tích 50+ tiêu chí</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="display:inline-block;background:var(--purple-light);color:var(--purple);font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase;">✦ Công nghệ AI độc quyền</div>
+      <div class="ai-title">Ghép việc làm thông minh bằng AI</div>
+      <p class="ai-desc">Hệ thống AI của VietJob phân tích hơn 50 tiêu chí từ CV, kinh nghiệm, và sở thích của bạn để tìm ra công việc phù hợp nhất — tiết kiệm 70% thời gian tìm kiếm.</p>
+      <div class="ai-features">
+        <div class="ai-feature"><span class="mat-icon filled">check_circle</span>Phân tích CV tự động & cho điểm chi tiết</div>
+        <div class="ai-feature"><span class="mat-icon filled">check_circle</span>Gợi ý việc phù hợp 90%+ độ chính xác</div>
+        <div class="ai-feature"><span class="mat-icon filled">check_circle</span>Cập nhật gợi ý real-time mỗi ngày</div>
+        <div class="ai-feature"><span class="mat-icon filled">check_circle</span>Học và cải thiện theo sở thích của bạn</div>
+      </div>
+      <button class="ai-cta">Thử AI Matching ngay →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOP EMPLOYERS ── -->
+<section class="section section-white">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Nhà tuyển dụng hàng đầu</div>
+        <div class="section-subtitle">10,000+ công ty uy tín tin dùng VietJob</div>
+      </div>
+      <a href="#" class="section-link">Xem tất cả →</a>
+    </div>
+    <div class="emp-grid">
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+      <div class="emp-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CV PROMO ── -->
+<section class="cv-promo">
+  <div class="cv-inner">
+    <div class="cv-content">
+      <div style="display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;margin-bottom:20px;border:1px solid rgba(255,255,255,.25);">✨ Miễn phí hoàn toàn</div>
+      <h2>Tạo CV chuyên nghiệp trong 5 phút</h2>
+      <p>Hàng ngàn mẫu CV chuẩn ATS, tối ưu cho từng ngành nghề. AI tự động gợi ý nội dung và chỉnh sửa giúp bạn nổi bật hơn trong mắt nhà tuyển dụng.</p>
+      <button class="cv-btn">Tạo CV miễn phí →</button>
+    </div>
+    <div class="cv-mockup">
+      <div class="cv-card">
+        <div class="cv-card-header">
+          <div class="cv-avatar"><span class="mat-icon">person</span></div>
+          <div>
+            <div class="cv-name">Nguyễn Văn Minh</div>
+            <div class="cv-role">Senior Frontend Developer</div>
+          </div>
+        </div>
+        <div class="cv-bar-row">
+          <div>
+            <div class="cv-bar-label"><span>React.js</span><span style="color:var(--purple)">95%</span></div>
+            <div class="cv-bar-track"><div class="cv-bar-fill" style="width:95%"></div></div>
+          </div>
+          <div>
+            <div class="cv-bar-label"><span>TypeScript</span><span style="color:var(--purple)">88%</span></div>
+            <div class="cv-bar-track"><div class="cv-bar-fill" style="width:88%"></div></div>
+          </div>
+          <div>
+            <div class="cv-bar-label"><span>Node.js</span><span style="color:var(--purple)">75%</span></div>
+            <div class="cv-bar-track"><div class="cv-bar-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cv-score-badge">92<span>pts</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="section section-gray">
+  <div class="section-inner">
+    <div class="section-header" style="justify-content:center;text-align:center;">
+      <div>
+        <div class="section-title">Ứng viên nói gì về VietJob?</div>
+        <div class="section-subtitle">Hơn 2 triệu người đã tìm được việc làm mơ ước</div>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Tính năng AI Matching thực sự rất đỉnh. Tôi đã tìm được việc làm phù hợp chỉ sau 3 ngày đăng CV lên VietJob. Rất khuyên dùng!"</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:var(--purple)">A</div>
+          <div><div class="testi-name">Nguyễn Minh Anh</div><div class="testi-role">Marketing Specialist · Grab Vietnam</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Giao diện dễ sử dụng, hiện đại và tốc độ tải trang cực nhanh. Tôi thích cách hệ thống lọc việc làm theo mức lương và địa điểm."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:var(--purple-dark)">L</div>
+          <div><div class="testi-name">Trần Hoàng Long</div><div class="testi-role">Backend Engineer · Tiki</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Mẫu CV trên VietJob rất chuyên nghiệp. Tôi đã nhận được nhiều lời mời phỏng vấn sau khi sử dụng công cụ tạo CV tại đây."</p>
+        <div class="testi-author">
+          <div class="testi-av" style="background:var(--purple-deeper)">M</div>
+          <div><div class="testi-name">Lê Thị Mai</div><div class="testi-role">HR Executive · Vingroup</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="footer-logo-dot"></span>VietJob</div>
+      <p class="footer-desc">Kết nối tương lai sự nghiệp của hàng triệu người Việt qua công nghệ AI hàng đầu. Nền tảng tuyển dụng #1 Việt Nam 2026.</p>
+      <div class="footer-socials">
+        <div class="social-btn"><span class="mat-icon" style="font-size:18px">facebook</span></div>
+        <div class="social-btn"><span class="mat-icon" style="font-size:18px">mail</span></div>
+        <div class="social-btn"><span class="mat-icon" style="font-size:18px">language</span></div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Sản phẩm</h4>
+      <a href="#" class="footer-link">Tìm việc làm</a>
+      <a href="#" class="footer-link">Tạo CV chuyên nghiệp</a>
+      <a href="#" class="footer-link">Gợi ý việc bằng AI</a>
+      <a href="#" class="footer-link">Cẩm nang sự nghiệp</a>
+    </div>
+    <div class="footer-col">
+      <h4>Dành cho NTD</h4>
+      <a href="#" class="footer-link">Đăng tin tuyển dụng</a>
+      <a href="#" class="footer-link">Tìm kiếm ứng viên</a>
+      <a href="#" class="footer-link">Giải pháp nhân sự</a>
+      <a href="#" class="footer-link">Định vị thương hiệu</a>
+    </div>
+    <div class="footer-col">
+      <h4>Về VietJob</h4>
+      <a href="#" class="footer-link">Giới thiệu</a>
+      <a href="#" class="footer-link">Liên hệ</a>
+      <a href="#" class="footer-link">Hỗ trợ</a>
+      <a href="#" class="footer-link">Chính sách bảo mật</a>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 VietJob. Vietnam's Leading Job Platform.</span>
+      <div class="footer-legal">
+        <a href="#">Điều khoản</a>
+        <a href="#">Bảo mật</a>
+        <a href="#">Cookie</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── BANNER SLIDER ── */
+const slides = document.querySelectorAll('.banner-slide');
+const dots = document.querySelectorAll('.dot');
+let current = 0;
+let timer;
+
+function goTo(i) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = (i + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+function startAuto() { timer = setInterval(() => goTo(current + 1), 4000); }
+function resetAuto() { clearInterval(timer); startAuto(); }
+
+document.getElementById('next').onclick = () => { goTo(current + 1); resetAuto(); };
+document.getElementById('prev').onclick = () => { goTo(current - 1); resetAuto(); };
+dots.forEach(d => d.onclick = () => { goTo(+d.dataset.dot); resetAuto(); });
+startAuto();
+
+/* ── JOBS PAGINATION ── */
+const allCards = Array.from(document.querySelectorAll('.job-card'));
+const PER_PAGE = 9;
+let jobPage = 1;
+const totalPages = Math.ceil(allCards.length / PER_PAGE);
+
+function renderJobs() {
+  const start = (jobPage - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+  allCards.forEach((c, i) => c.style.display = (i >= start && i < end) ? '' : 'none');
+  renderPageNumbers();
+  document.getElementById('jobs-prev').disabled = jobPage === 1;
+  document.getElementById('jobs-next').disabled = jobPage === totalPages;
+}
+
+function renderPageNumbers() {
+  const container = document.getElementById('page-numbers');
+  container.innerHTML = '';
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= jobPage - 1 && i <= jobPage + 1)) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== '...') {
+      pages.push('...');
+    }
+  }
+  pages.forEach(p => {
+    if (p === '...') {
+      const el = document.createElement('span');
+      el.className = 'page-ellipsis'; el.textContent = '...';
+      container.appendChild(el);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'page-btn' + (p === jobPage ? ' active' : '');
+      btn.textContent = p;
+      btn.onclick = () => { jobPage = p; renderJobs(); };
+      container.appendChild(btn);
+    }
+  });
+}
+
+document.getElementById('jobs-prev').onclick = () => { if (jobPage > 1) { jobPage--; renderJobs(); } };
+document.getElementById('jobs-next').onclick = () => { if (jobPage < totalPages) { jobPage++; renderJobs(); } };
+renderJobs();
+
+/* ── DROPDOWN HOVER ── */
+document.querySelectorAll('.nav-item').forEach(item => {
+  let t;
+  item.addEventListener('mouseenter', () => { clearTimeout(t); item.classList.add('open'); });
+  item.addEventListener('mouseleave', () => { t = setTimeout(() => item.classList.remove('open'), 120); });
+});
+
+/* ── NAVBAR AUTH ── */
+(function() {
+  const SESSION_KEY = 'vietjob_session';
+
+  function getSession() {
+    try {
+      const ls = localStorage.getItem(SESSION_KEY);
+      if (ls) return JSON.parse(ls);
+      const ss = sessionStorage.getItem(SESSION_KEY);
+      if (ss) return JSON.parse(ss);
+    } catch {}
+    return null;
+  }
+
+  function clearSession() {
+    localStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem(SESSION_KEY);
+  }
+
+  const session = getSession();
+  const navActions = document.getElementById('nav-actions');
+  if (!navActions) return;
+
+  if (session) {
+    const initials = session.hoten
+      ? session.hoten.trim().split(' ').slice(-1)[0][0].toUpperCase()
+      : '?';
+
+    navActions.innerHTML = `
+      <div class="user-menu" id="user-menu">
+        <button class="user-btn" id="user-btn">
+          <div class="user-avatar">${initials}</div>
+          <span class="user-name">${session.hoten}</span>
+          <i class="ti ti-chevron-down" style="font-size:14px;color:var(--purple)"></i>
+        </button>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="ud-header">
+            <div class="ud-name">${session.hoten}</div>
+            <div class="ud-email">${session.email}</div>
+          </div>
+          <a class="ud-link" href="#"><i class="ti ti-user"></i> Hồ sơ của tôi</a>
+          <a class="ud-link" href="#"><i class="ti ti-briefcase"></i> Việc làm đã lưu</a>
+          <a class="ud-link" href="#"><i class="ti ti-send"></i> Việc làm đã ứng tuyển</a>
+          <a class="ud-link" href="#"><i class="ti ti-file-text"></i> CV của tôi</a>
+          <div class="ud-divider"></div>
+          <a class="ud-link ud-logout" href="#" id="logout-btn"><i class="ti ti-logout"></i> Đăng xuất</a>
+        </div>
+      </div>
+      <button class="btn-ntd">NHÀ TUYỂN DỤNG</button>
+    `;
+
+    document.getElementById('user-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      document.getElementById('user-menu').classList.toggle('open');
+    });
+    document.addEventListener('click', () => {
+      const menu = document.getElementById('user-menu');
+      if (menu) menu.classList.remove('open');
+    });
+    document.getElementById('logout-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      clearSession();
+      window.location.reload();
+    });
+
+  } else {
+    navActions.innerHTML = `
+      <button class="btn-outline" onclick="location.href='dangky.html'">Đăng ký</button>
+      <button class="btn-solid" onclick="location.href='dangnhap.html'">Đăng nhập</button>
+      <button class="btn-ntd">NHÀ TUYỂN DỤNG</button>
+    `;
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng nhập - VietJob</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --purple: #7C3AED;
+  --purple-dark: #5B21B6;
+  --purple-light: #EDE9FE;
+  --purple-100: #F5F3FF;
+  --green: #16A34A;
+  --red: #EF4444;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-600: #4B5563;
+  --gray-500: #6B7280;
+  --gray-400: #9CA3AF;
+  --gray-300: #D1D5DB;
+  --gray-200: #E5E7EB;
+  --gray-100: #F3F4F6;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  min-height: 100vh;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.card {
+  display: flex;
+  width: 1000px;
+  max-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 24px rgba(80,30,180,0.10);
+  border: 1px solid #E5E7EB;
+  background: white;
+  min-height: 580px;
+}
+
+.left {
+  width: 380px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.left img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top; display: block;
+}
+.left::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.16) 100%);
+  pointer-events: none;
+}
+
+.right {
+  flex: 1;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 600; color: var(--gray-500);
+  text-decoration: none; margin-bottom: 20px;
+  transition: color .15s;
+}
+.back-link:hover { color: var(--purple); }
+.back-link i { font-size: 15px; }
+
+.right-title {
+  font-size: 22px; font-weight: 800; color: var(--gray-900);
+  margin-bottom: 4px; text-align: center; letter-spacing: -0.3px;
+}
+.right-sub {
+  font-size: 13px; color: var(--gray-500); text-align: center; margin-bottom: 22px;
+}
+
+.social-section { text-align: center; margin-bottom: 14px; }
+.social-label { font-size: 12px; color: var(--gray-500); margin-bottom: 10px; }
+.social-btns { display: flex; justify-content: center; gap: 14px; }
+.soc-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: none; background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .18s; padding: 0;
+}
+.soc-btn:hover { transform: translateY(-2px); filter: drop-shadow(0 4px 8px rgba(0,0,0,0.20)); }
+.soc-btn svg { width: 40px; height: 40px; border-radius: 50%; display: block; }
+
+.or-divider {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+}
+.or-line { flex: 1; height: 1px; background: var(--gray-200); }
+.or-text { font-size: 12px; color: var(--gray-400); font-weight: 500; }
+
+.field { margin-bottom: 14px; }
+.fl { display: block; font-size: 12px; font-weight: 700; color: var(--gray-700); margin-bottom: 5px; }
+.fl .req { color: var(--red); }
+
+.inp-wrap { position: relative; }
+.inp-wrap .ico {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  font-size: 15px; color: var(--gray-400); pointer-events: none; transition: color .18s;
+}
+.inp-wrap:focus-within .ico { color: var(--purple); }
+.inp-wrap input {
+  width: 100%; height: 44px; border-radius: 4px;
+  border: 1.5px solid var(--gray-300); padding: 0 11px 0 34px;
+  font-size: 13px; color: var(--gray-900);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  outline: none; transition: border-color .18s, box-shadow .18s;
+}
+.inp-wrap input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(124,58,237,.1); }
+.inp-wrap.err input { border-color: var(--red); }
+.errmsg { font-size: 11px; color: var(--red); margin-top: 3px; display: none; font-weight: 600; }
+.errmsg.show { display: block; }
+
+.eye-btn {
+  position: absolute; right: 11px; top: 50%; transform: translateY(-50%);
+  cursor: pointer; color: var(--gray-400); font-size: 16px; transition: color .18s;
+}
+.eye-btn:hover { color: var(--purple); }
+
+.extra-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; margin-top: -4px;
+}
+.remember-row { display: flex; align-items: center; gap: 7px; }
+.remember-row input[type="checkbox"] { display: none; }
+.check-box {
+  width: 15px; height: 15px; border-radius: 3px; flex-shrink: 0;
+  border: 1.5px solid var(--gray-300); background: white;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .18s;
+}
+.remember-row input:checked + .check-box { background: var(--purple); border-color: var(--purple); }
+.remember-row input:checked + .check-box::after { content: '✓'; font-size: 9px; color: white; font-weight: 900; }
+.remember-txt { font-size: 12px; color: var(--gray-600); cursor: pointer; }
+.forgot-link {
+  font-size: 12px; font-weight: 700; color: var(--purple);
+  text-decoration: none; transition: opacity .15s;
+}
+.forgot-link:hover { text-decoration: underline; }
+
+/* Lỗi đăng nhập chung */
+.login-error {
+  background: #FEF2F2; border: 1px solid #FECACA; border-left: 3px solid var(--red);
+  padding: 10px 14px; border-radius: 4px; margin-bottom: 14px;
+  font-size: 12px; color: #DC2626; display: none; font-weight: 600;
+  align-items: center; gap: 7px;
+}
+.login-error.show { display: flex; }
+
+.submit-btn {
+  width: 100%; height: 50px; border-radius: 4px;
+  background: var(--purple); color: white; border: none;
+  font-size: 14px; font-weight: 900; letter-spacing: 1.2px; text-transform: uppercase;
+  cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .2s; box-shadow: 0 6px 20px rgba(124,58,237,.3);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-bottom: 14px;
+}
+.submit-btn:hover { background: var(--purple-dark); transform: translateY(-1px); }
+.submit-btn:active { transform: translateY(0); }
+
+.register-row { text-align: center; font-size: 13px; color: var(--gray-500); }
+.register-row a { color: var(--purple); font-weight: 700; text-decoration: none; }
+.register-row a:hover { text-decoration: underline; }
+
+/* Toast */
+.toast {
+  position: fixed; top: 20px; right: 20px; z-index: 999;
+  padding: 12px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  display: none; align-items: center; gap: 8px;
+  animation: slideIn .3s ease;
+}
+.toast.show { display: flex; }
+.toast.success { background: var(--green); }
+.toast.error { background: var(--red); }
+@keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Success */
+.success-wrap {
+  display: none; text-align: center; padding: 40px 20px;
+  animation: fadeUp .4s ease;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+.success-circle {
+  width: 80px; height: 80px; border-radius: 50%; background: #DCFCE7;
+  margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;
+}
+.success-circle i { font-size: 40px; color: var(--green); }
+.success-title { font-size: 22px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+.success-sub { font-size: 14px; color: var(--gray-500); margin-bottom: 8px; line-height: 1.65; }
+.success-name { font-size: 18px; font-weight: 800; color: var(--purple); margin-bottom: 20px; }
+.success-go {
+  display: inline-block; background: var(--purple); color: white;
+  padding: 13px 30px; border-radius: 4px; text-decoration: none;
+  font-size: 14px; font-weight: 800; transition: background .18s;
+}
+.success-go:hover { background: var(--purple-dark); }
+
+/* Forgot modal */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4); z-index: 100;
+  align-items: center; justify-content: center;
+}
+.modal-overlay.show { display: flex; animation: fadeUp .25s ease; }
+.modal-box {
+  background: white; border-radius: 12px; padding: 32px 36px;
+  width: 420px; max-width: 90vw;
+  box-shadow: 0 8px 40px rgba(80,30,180,0.18);
+}
+.modal-title { font-size: 18px; font-weight: 800; color: var(--gray-900); margin-bottom: 6px; }
+.modal-sub { font-size: 13px; color: var(--gray-500); margin-bottom: 20px; line-height: 1.5; }
+.modal-close {
+  float: right; cursor: pointer; color: var(--gray-400);
+  font-size: 20px; margin-top: -2px; transition: color .15s;
+}
+.modal-close:hover { color: var(--gray-700); }
+.modal-btn {
+  width: 100%; height: 46px; border-radius: 4px;
+  background: var(--purple); color: white; border: none;
+  font-size: 13px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase;
+  cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+  margin-top: 14px; transition: background .18s;
+}
+.modal-btn:hover { background: var(--purple-dark); }
+.modal-note { font-size: 11.5px; margin-top: 8px; display: none; font-weight: 600; }
+.modal-note.success { display: block; color: var(--green); }
+.modal-note.error   { display: block; color: var(--red); }
+
+@media (max-width: 780px) {
+  .card { flex-direction: column; }
+  .left { width: 100%; height: 200px; }
+  .right { padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">
+  <i class="ti ti-circle-check" id="toast-icon"></i>
+  <span id="toast-msg"></span>
+</div>
+
+<div class="card">
+
+  <div class="left">
+    <img src="img/Gemini_Generated_Image_ecatgmecatgmecat.png" alt="VietJob"/>
+  </div>
+
+  <div class="right">
+
+    <div id="form-section">
+
+      <a class="back-link" href="index.html">
+        <i class="ti ti-arrow-left"></i> Quay về trang chủ
+      </a>
+
+      <div class="right-title">Đăng Nhập VietJob</div>
+      <div class="right-sub">Chào mừng bạn quay lại 👋</div>
+
+      <div class="social-section">
+        <div class="social-label">Đăng nhập nhanh bằng</div>
+        <div class="social-btns">
+          <div class="soc-btn" title="Facebook">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1877F2"/><path d="M21.5 13.5h-2a3.5 3.5 0 0 0-3.5 3.5v2h-2v3.5h2V31h3.5v-8.5H22l.5-3.5h-3V17a.5.5 0 0 1 .5-.5h2v-3z" fill="white"/></svg>
+          </div>
+          <div class="soc-btn" title="Google">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="white"/><path d="M33 20.27c0-.94-.08-1.84-.23-2.72H20v5.14h7.28a6.22 6.22 0 0 1-2.7 4.08v3.38h4.37C31.6 27.95 33 24.36 33 20.27z" fill="#4285F4"/><path d="M20 34c3.65 0 6.71-1.21 8.95-3.28l-4.37-3.38c-1.21.81-2.76 1.3-4.58 1.3-3.52 0-6.5-2.38-7.57-5.57H7.93v3.49A13.99 13.99 0 0 0 20 34z" fill="#34A853"/><path d="M12.43 23.07A8.43 8.43 0 0 1 12 20c0-1.07.18-2.1.43-3.07v-3.49H7.93A14.01 14.01 0 0 0 6 20c0 2.26.54 4.4 1.93 6.56l4.5-3.49z" fill="#FBBC05"/><path d="M20 12.36c1.98 0 3.76.68 5.16 2.02l3.87-3.87A13.94 13.94 0 0 0 20 6c-4.7 0-8.73 2.72-10.07 7.44l4.5 3.49C15.5 14.07 17.48 12.36 20 12.36z" fill="#EA4335"/></svg>
+          </div>
+          <div class="soc-btn" title="LinkedIn">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#0A66C2"/><rect x="11" y="17" width="4" height="13" rx="0.5" fill="white"/><circle cx="13" cy="13" r="2.5" fill="white"/><path d="M20 17h3.5v1.8c.7-1.1 2-2 3.8-2 3.2 0 5.2 2 5.2 6V30h-4v-6.8c0-1.8-.7-3-2.2-3-1.6 0-2.3 1.2-2.3 3V30H20V17z" fill="white"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="or-divider">
+        <div class="or-line"></div>
+        <span class="or-text">Hoặc đăng nhập bằng email</span>
+        <div class="or-line"></div>
+      </div>
+
+      <!-- Thông báo lỗi đăng nhập -->
+      <div class="login-error" id="login-error">
+        <i class="ti ti-alert-circle"></i>
+        <span id="login-error-msg">Email hoặc mật khẩu không đúng</span>
+      </div>
+
+      <form id="login-form" novalidate>
+
+        <div class="field">
+          <label class="fl">Email <span class="req">*</span></label>
+          <div class="inp-wrap" id="wrap-email">
+            <input id="email" type="email" placeholder="Nhập email đăng nhập" autocomplete="email"/>
+            <i class="ti ti-mail ico"></i>
+          </div>
+          <div class="errmsg" id="err-email">Email không hợp lệ</div>
+        </div>
+
+        <div class="field">
+          <label class="fl">Mật khẩu <span class="req">*</span></label>
+          <div class="inp-wrap" id="wrap-pwd">
+            <input id="pwd" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password"/>
+            <i class="ti ti-lock ico"></i>
+            <span class="eye-btn" id="eye-btn"><i class="ti ti-eye" id="eye-ico"></i></span>
+          </div>
+          <div class="errmsg" id="err-pwd">Vui lòng nhập mật khẩu</div>
+        </div>
+
+        <div class="extra-row">
+          <label class="remember-row">
+            <input type="checkbox" id="remember"/>
+            <div class="check-box"></div>
+            <span class="remember-txt">Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="forgot-link" id="forgot-btn">Quên mật khẩu?</a>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="ti ti-login" style="font-size:17px"></i>
+          Đăng nhập
+        </button>
+
+        <div class="register-row">
+          Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="success-wrap" id="success-wrap">
+      <div class="success-circle"><i class="ti ti-check"></i></div>
+      <div class="success-title">Đăng nhập thành công! 🎉</div>
+      <p class="success-sub">Chào mừng trở lại,</p>
+      <div class="success-name" id="success-name"></div>
+      <a class="success-go" href="index.html">Vào trang chủ →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal quên mật khẩu -->
+<div class="modal-overlay" id="forgot-modal">
+  <div class="modal-box">
+    <span class="modal-close" id="modal-close"><i class="ti ti-x"></i></span>
+    <div class="modal-title">Quên mật khẩu?</div>
+    <p class="modal-sub">Nhập email đăng ký, chúng tôi sẽ gửi link đặt lại mật khẩu ngay.</p>
+    <div class="field">
+      <label class="fl">Email <span class="req">*</span></label>
+      <div class="inp-wrap" id="wrap-reset-email">
+        <input id="reset-email" type="email" placeholder="Nhập email đăng ký"/>
+        <i class="ti ti-mail ico"></i>
+      </div>
+      <div class="errmsg" id="err-reset-email">Email không hợp lệ</div>
+    </div>
+    <button class="modal-btn" id="reset-btn">
+      <i class="ti ti-send" style="font-size:14px;margin-right:6px"></i>
+      Gửi link đặt lại mật khẩu
+    </button>
+    <div class="modal-note" id="reset-note"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   STORAGE HELPERS
+============================================================ */
+const USERS_KEY    = 'vietjob_users';
+const SESSION_KEY  = 'vietjob_session';
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
+  catch { return []; }
+}
+
+function findUser(email, pwd) {
+  return getUsers().find(u =>
+    u.email.toLowerCase() === email.toLowerCase() && u.pwd === pwd
+  );
+}
+
+function saveSession(user, remember) {
+  const session = { email: user.email, hoten: user.hoten, loginAt: new Date().toISOString() };
+  if (remember) {
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  } else {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  }
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+function showToast(msg, type = 'success') {
+  const t  = document.getElementById('toast');
+  const ic = document.getElementById('toast-icon');
+  const m  = document.getElementById('toast-msg');
+  t.className = 'toast show ' + type;
+  ic.className = type === 'success' ? 'ti ti-circle-check' : 'ti ti-alert-circle';
+  m.textContent = msg;
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+/* ============================================================
+   EYE TOGGLE
+============================================================ */
+document.getElementById('eye-btn').addEventListener('click', () => {
+  const inp = document.getElementById('pwd');
+  const ico = document.getElementById('eye-ico');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  ico.className = inp.type === 'password' ? 'ti ti-eye' : 'ti ti-eye-off';
+});
+
+/* ============================================================
+   FORM SUBMIT — kiểm tra tài khoản trong localStorage
+============================================================ */
+document.getElementById('login-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const email    = document.getElementById('email').value.trim();
+  const pwd      = document.getElementById('pwd').value;
+  const remember = document.getElementById('remember').checked;
+  let ok = true;
+
+  // Ẩn lỗi cũ
+  document.getElementById('login-error').classList.remove('show');
+
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  document.getElementById('wrap-email').classList.toggle('err', !emailOk);
+  document.getElementById('err-email').classList.toggle('show', !emailOk);
+  if (!emailOk) ok = false;
+
+  document.getElementById('wrap-pwd').classList.toggle('err', !pwd);
+  document.getElementById('err-pwd').classList.toggle('show', !pwd);
+  if (!pwd) ok = false;
+
+  if (!ok) return;
+
+  // Tìm user trong localStorage
+  const user = findUser(email, pwd);
+
+  if (!user) {
+    // Hiện lỗi sai thông tin
+    const errBox = document.getElementById('login-error');
+    const errMsg = document.getElementById('login-error-msg');
+    // Phân biệt: email có tồn tại không
+    const emailRegistered = getUsers().some(u => u.email.toLowerCase() === email.toLowerCase());
+    errMsg.textContent = emailRegistered
+      ? 'Mật khẩu không đúng. Vui lòng thử lại hoặc đặt lại mật khẩu.'
+      : 'Email này chưa được đăng ký. Hãy tạo tài khoản mới.';
+    errBox.classList.add('show');
+    // Shake animation
+    document.getElementById('wrap-pwd').style.animation = 'none';
+    document.getElementById('wrap-email').style.animation = 'none';
+    return;
+  }
+
+  // ✅ Đăng nhập thành công — lưu session
+  saveSession(user, remember);
+
+  document.getElementById('success-name').textContent = user.hoten;
+  document.getElementById('form-section').style.display = 'none';
+  document.getElementById('success-wrap').style.display = 'block';
+});
+
+/* ============================================================
+   FORGOT PASSWORD MODAL
+============================================================ */
+document.getElementById('forgot-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('forgot-modal').classList.add('show');
+  document.getElementById('reset-note').className = 'modal-note';
+  document.getElementById('reset-email').value = '';
+  document.getElementById('wrap-reset-email').classList.remove('err');
+  document.getElementById('err-reset-email').classList.remove('show');
+});
+
+document.getElementById('modal-close').addEventListener('click', () =>
+  document.getElementById('forgot-modal').classList.remove('show')
+);
+
+document.getElementById('forgot-modal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('forgot-modal'))
+    document.getElementById('forgot-modal').classList.remove('show');
+});
+
+document.getElementById('reset-btn').addEventListener('click', () => {
+  const email   = document.getElementById('reset-email').value.trim();
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const noteEl  = document.getElementById('reset-note');
+
+  document.getElementById('wrap-reset-email').classList.toggle('err', !emailOk);
+  document.getElementById('err-reset-email').classList.toggle('show', !emailOk);
+  if (!emailOk) return;
+
+  // Kiểm tra email có tồn tại trong hệ thống không
+  const registered = getUsers().some(u => u.email.toLowerCase() === email.toLowerCase());
+  if (!registered) {
+    noteEl.textContent = '⚠ Email này chưa có tài khoản trong hệ thống.';
+    noteEl.className   = 'modal-note error';
+    return;
+  }
+
+  // Demo: hiện thông báo thành công
+  noteEl.textContent = '✓ Link đặt lại mật khẩu đã gửi đến ' + email;
+  noteEl.className   = 'modal-note success';
+  document.getElementById('reset-btn').disabled = true;
+  setTimeout(() => {
+    document.getElementById('forgot-modal').classList.remove('show');
+    document.getElementById('reset-btn').disabled = false;
+  }, 2500);
+});
+</script>
+</body>
+</html>

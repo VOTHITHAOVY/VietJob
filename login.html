@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Đăng ký / Đăng nhập - VietJob</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #7C3AED;
+      --purple-dark: #5B21B6;
+      --purple-deeper: #4C1D95;
+      --purple-light: #EDE9FE;
+      --purple-mid: #A78BFA;
+      --purple-100: #F5F3FF;
+      --green: #16A34A;
+      --amber: #F59E0B;
+      --red: #EF4444;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6B7280;
+      --gray-300: #D1D5DB;
+      --gray-100: #F3F4F6;
+      --white: #FFFFFF;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.13);
+      --shadow-purple: 0 8px 32px rgba(124,58,237,.25);
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 50%, #FAFAFA 100%);
+      color: var(--gray-900);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Background decorations */
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+      z-index: 0;
+    }
+    body::before { width: 600px; height: 600px; top: -200px; left: -100px; }
+    body::after { width: 400px; height: 400px; bottom: -100px; right: -50px; }
+
+    /* Auth Container */
+    .auth-container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg), var(--shadow-purple);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Left Panel - Branding */
+    .auth-brand {
+      background: linear-gradient(135deg, var(--purple-deeper) 0%, var(--purple-dark) 50%, var(--purple) 100%);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+
+    .auth-brand::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      top: -100px; right: -50px;
+    }
+
+    .auth-brand::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      bottom: -50px; left: -30px;
+    }
+
+    .brand-logo {
+      font-size: 24px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .brand-logo-dot {
+      width: 10px; height: 10px;
+      background: var(--amber);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.9); }
+    }
+
+    .brand-content {
+      z-index: 1;
+      margin: 40px 0;
+    }
+
+    .brand-title {
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title span {
+      color: var(--amber);
+    }
+
+    .brand-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .brand-stats {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-num {
+      font-size: 24px;
+      font-weight: 900;
+      color: white;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-footer {
+      z-index: 1;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .brand-footer a {
+      color: var(--amber);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Right Panel - Forms */
+    .auth-forms {
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .auth-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .auth-subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    /* Tab Switcher */
+    .auth-tabs {
+      display: flex;
+      background: var(--gray-100);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .auth-tabs::before {
+      content: '';
+      position: absolute;
+      height: calc(100% - 8px);
+      width: calc(50% - 4px);
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      top: 4px;
+      left: 4px;
+    }
+
+    .auth-tabs[data-tab="register"]::before {
+      transform: translateX(100%);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-500);
+      cursor: pointer;
+      border-radius: 10px;
+      transition: color 0.2s;
+      position: relative;
+      z-index: 1;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .tab-btn.active {
+      color: var(--purple);
+    }
+
+    /* Forms */
+    .auth-form {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      padding-left: 44px;
+      border: 2px solid var(--gray-300);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      transition: all 0.2s;
+      background: var(--white);
+      color: var(--gray-900);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 4px var(--purple-100);
+    }
+
+    .form-input.error {
+      border-color: var(--red);
+    }
+
+    .form-input.success {
+      border-color: var(--green);
+    }
+
+    .form-icon {
+      position: absolute;
+      left: 14px;
+      top: 42px;
+      color: var(--gray-400);
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+
+    .form-input:focus + .form-icon,
+    .form-input:not(:placeholder-shown) + .form-icon {
+      color: var(--purple);
+    }
+
+    .form-input.error + .form-icon {
+      color: var(--red);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 14px;
+      top: 42px;
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .password-toggle:hover {
+      color: var(--purple);
+      background: var(--purple-100);
+    }
+
+    .error-msg {
+      font-size: 11px;
+      color: var(--red);
+      margin-top: 6px;
+      display: none;
+      font-weight: 500;
+    }
+
+    .form-input.error ~ .error-msg {
+      display: block;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    /* Password Strength */
+    .password-strength {
+      margin-top: 8px;
+      display: none;
+    }
+
+    .password-strength.active {
+      display: block;
+    }
+
+    .strength-bar {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .strength-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .strength-fill.weak { width: 33%; background: var(--red); }
+    .strength-fill.medium { width: 66%; background: var(--amber); }
+    .strength-fill.strong { width: 100%; background: var(--green); }
+
+    .strength-text {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .strength-text.weak { color: var(--red); }
+    .strength-text.medium { color: var(--amber); }
+    .strength-text.strong { color: var(--green); }
+
+    /* Checkbox & Links */
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--gray-300);
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .checkbox.checked {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+
+    .checkbox.checked::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .checkbox-label {
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .checkbox-label a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .forgot-link {
+      font-size: 13px;
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .forgot-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--shadow-purple);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(124, 58, 237, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-btn .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .submit-btn.loading .spinner {
+      display: block;
+    }
+
+    .submit-btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 28px 0;
+      color: var(--gray-400);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* Social Login */
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      background: white;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .social-btn:hover {
+      border-color: var(--purple);
+      background: var(--purple-100);
+      color: var(--purple);
+      transform: translateY(-2px);
+    }
+
+    .social-btn.google { color: #DB4437; }
+    .social-btn.google:hover { background: #FFF5F5; border-color: #DB4437; }
+    
+    .social-btn.facebook { color: #1877F2; }
+    .social-btn.facebook:hover { background: #F0F7FF; border-color: #1877F2; }
+    
+    .social-btn.linkedin { color: #0A66C2; }
+    .social-btn.linkedin:hover { background: #F0F9FF; border-color: #0A66C2; }
+
+    .social-icon {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .auth-footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .auth-footer a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: white;
+      border-radius: 12px;
+      padding: 14px 20px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1000;
+      transform: translateX(150%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 360px;
+      border-left: 4px solid var(--green);
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.error {
+      border-left-color: var(--red);
+    }
+
+    .toast-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .toast.success .toast-icon { color: var(--green); }
+    .toast.error .toast-icon { color: var(--red); }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 2px;
+    }
+
+    .toast-msg {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .toast-close {
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .toast-close:hover {
+      color: var(--gray-700);
+      background: var(--gray-100);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .auth-container {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+      }
+
+      .auth-brand {
+        display: none;
+      }
+
+      .auth-forms {
+        padding: 40px 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .auth-forms {
+        padding: 32px 24px;
+      }
+
+      .auth-title {
+        font-size: 24px;
+      }
+
+      .form-input {
+        padding: 12px 14px;
+        padding-left: 42px;
+      }
+
+      .submit-btn {
+        padding: 14px;
+        font-size: 14px;
+      }
+    }
+
+    /* Utility */
+    .mat-icon {
+      font-family: 'Material Symbols Outlined';
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      font-style: normal;
+      font-size: 18px;
+    }
+
+    .mat-icon.filled {
+      font-variation-settings: 'FILL' 1;
+    }
+
+    .hidden { display: none !important; }
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-container">
+    <!-- Left Panel - Branding -->
+    <div class="auth-brand">
+      <div class="brand-logo">
+        <span class="brand-logo-dot"></span>
+        VietJob
+      </div>
+      
+      <div class="brand-content">
+        <h1 class="brand-title">Khởi đầu sự nghiệp <span>thành công</span></h1>
+        <p class="brand-desc">
+          Kết nối với 10,000+ công ty hàng đầu Việt Nam. 
+          AI thông minh giúp bạn tìm đúng việc, đúng người — nhanh hơn 70%.
+        </p>
+        
+        <div class="brand-stats">
+          <div class="stat">
+            <span class="stat-num">500K+</span>
+            <span class="stat-label">Việc làm</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">2M+</span>
+            <span class="stat-label">Ứng viên</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">94%</span>
+            <span class="stat-label">Hài lòng</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="brand-footer">
+        Bằng việc đăng ký, bạn đồng ý với <a href="#">Điều khoản</a> và <a href="#">Chính sách bảo mật</a> của VietJob.
+      </div>
+    </div>
+
+    <!-- Right Panel - Forms -->
+    <div class="auth-forms">
+      <div class="auth-header">
+        <h2 class="auth-title">Chào mừng trở lại!</h2>
+        <p class="auth-subtitle">Đăng nhập để tiếp tục hành trình sự nghiệp của bạn</p>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="auth-tabs" data-tab="login">
+        <button class="tab-btn active" data-target="login">Đăng nhập</button>
+        <button class="tab-btn" data-target="register">Đăng ký</button>
+      </div>
+
+      <!-- Login Form -->
+      <form class="auth-form active" id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email hoặc số điện thoại</label>
+          <input type="text" id="loginEmail" class="form-input" placeholder="nhap@example.com" required autocomplete="username">
+          <span class="mat-icon form-icon">mail</span>
+          <span class="error-msg">Vui lòng nhập email hoặc số điện thoại hợp lệ</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Mật khẩu</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+          <span class="mat-icon form-icon">lock</span>
+          <button type="button" class="password-toggle" aria-label="Hiện/ẩn mật khẩu">
+            <span class="mat-icon">visibility_off</span>
+          </button>
+          <span class="error-msg">Mật khẩu phải có ít nhất 6 ký tự</span>
+        </div>
+
+        <div class="form-row">
+          <label class="checkbox-group">
+            <span class="checkbox" id="rememberMe"></span>
+            <span class="checkbox-label">Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="forgot-link">Quên mật khẩu?</a>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="btn-text">Đăng nhập ngay</span>
+          <span class="spinner"></span>
+          <span class="mat-icon">arrow_forward</span>
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form class="auth-form" id="registerForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="regName">Họ và tên</label>
+          <input type="text" id="regName" class="form-input" placeholder="Nguyễn Văn A" required autocomplete="name">
+          <span class="mat-icon form-icon">person</span>
+          <span class="error-msg">Vui lòng nhập họ tên đầy đủ</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="nhap@example.com" required autocomplete="email">
+          <span class="mat-icon form-icon">mail</span>
+          <span class="error-msg">Vui lòng nhập email hợp lệ</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPhone">Số điện thoại</label>
+          <input type="tel" id="regPhone" class="form-input" placeholder="09xxxxxxxx" pattern="[0-9]{10}" required autocomplete="tel">
+          <span class="mat-icon form-icon">phone</span>
+          <span class="error-msg">Số điện thoại phải có 10 chữ số</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Mật khẩu</label>
+          <input type="password" id="regPassword" class="form-input" placeholder="Tối thiểu 8 ký tự" required autocomplete="new-password">
+          <span class="mat-icon form-icon">lock</span>
+          <button type="button" class="password-toggle" aria-label="Hiện/ẩn mật khẩu">
+            <span class="mat-icon">visibility_off</span>
+          </button>
+          <span class="error-msg">Mật khẩu cần ít nhất 8 ký tự, gồm chữ và số</span>
+          
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <span class="strength-text" id="strengthText">Độ mạnh mật khẩu</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regConfirm">Xác nhận mật khẩu</label>
+          <input type="password" id="regConfirm" class="form-input" placeholder="Nhập lại mật khẩu" required autocomplete="new-password">
+          <span class="mat-icon form-icon">lock</span>
+          <button type="button" class="password-toggle" aria-label="Hiện/ẩn mật khẩu">
+            <span class="mat-icon">visibility_off</span>
+          </button>
+          <span class="error-msg">Mật khẩu xác nhận không khớp</span>
+        </div>
+
+        <div class="form-row">
+          <label class="checkbox-group">
+            <span class="checkbox" id="agreeTerms"></span>
+            <span class="checkbox-label">
+              Tôi đồng ý với <a href="#">Điều khoản</a> và <a href="#">Chính sách bảo mật</a>
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="btn-text">Tạo tài khoản miễn phí</span>
+          <span class="spinner"></span>
+          <span class="mat-icon">arrow_forward</span>
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div class="divider">hoặc tiếp tục với</div>
+
+      <!-- Social Login -->
+      <div class="social-login">
+        <button class="social-btn google">
+          <span class="social-icon">G</span>
+          Tiếp tục với Google
+        </button>
+        <button class="social-btn facebook">
+          <span class="social-icon">f</span>
+          Tiếp tục với Facebook
+        </button>
+        <button class="social-btn linkedin">
+          <span class="social-icon">in</span>
+          Tiếp tục với LinkedIn
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <div class="auth-footer">
+        <span id="footerText">Chưa có tài khoản? <a href="#" data-switch="register">Đăng ký ngay</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span class="mat-icon toast-icon">check_circle</span>
+    <div class="toast-content">
+      <div class="toast-title">Thành công!</div>
+      <div class="toast-msg">Thông báo mẫu</div>
+    </div>
+    <button class="toast-close" aria-label="Đóng">
+      <span class="mat-icon">close</span>
+    </button>
+  </div>
+
+  <script>
+    // ── Tab Switching ──
+    const tabs = document.querySelectorAll('.tab-btn');
+    const forms = document.querySelectorAll('.auth-form');
+    const authTabs = document.querySelector('.auth-tabs');
+    const footerText = document.getElementById('footerText');
+
+    function switchTab(target) {
+      // Update tabs
+      tabs.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === target);
+      });
+      
+      // Update forms
+      forms.forEach(form => {
+        form.classList.toggle('active', form.id === target + 'Form');
+      });
+      
+      // Update slider
+      authTabs.dataset.tab = target;
+      
+      // Update footer text
+      if (target === 'login') {
+        footerText.innerHTML = 'Chưa có tài khoản? <a href="#" data-switch="register">Đăng ký ngay</a>';
+        document.querySelector('.auth-title').textContent = 'Chào mừng trở lại!';
+        document.querySelector('.auth-subtitle').textContent = 'Đăng nhập để tiếp tục hành trình sự nghiệp của bạn';
+      } else {
+        footerText.innerHTML = 'Đã có tài khoản? <a href="#" data-switch="login">Đăng nhập ngay</a>';
+        document.querySelector('.auth-title').textContent = 'Tạo tài khoản mới';
+        document.querySelector('.auth-subtitle').textContent = 'Bắt đầu hành trình tìm việc mơ ước của bạn';
+      }
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.target));
+    });
+
+    footerText.addEventListener('click', (e) => {
+      if (e.target.dataset.switch) {
+        e.preventDefault();
+        switchTab(e.target.dataset.switch);
+      }
+    });
+
+    // ── Password Toggle ──
+    document.querySelectorAll('.password-toggle').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const input = this.closest('.form-group').querySelector('.form-input');
+        const icon = this.querySelector('.mat-icon');
+        
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.textContent = 'visibility';
+        } else {
+          input.type = 'password';
+          icon.textContent = 'visibility_off';
+        }
+      });
+    });
+
+    // ── Checkbox Toggle ──
+    document.querySelectorAll('.checkbox').forEach(box => {
+      box.addEventListener('click', function() {
+        this.classList.toggle('checked');
+      });
+    });
+
+    // ── Password Strength ──
+    const regPassword = document.getElementById('regPassword');
+    const strengthFill = document.getElementById('strengthFill');
+    const strengthText = document.getElementById('strengthText');
+    const passwordStrength = document.getElementById('passwordStrength');
+
+    function checkPasswordStrength(password) {
+      let strength = 0;
+      if (password.length >= 8) strength++;
+      if (password.length >= 12) strength++;
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+      if (/\d/.test(password)) strength++;
+      if (/[^a-zA-Z0-9]/.test(password)) strength++;
+      return strength;
+    }
+
+    regPassword.addEventListener('input', function() {
+      const password = this.value;
+      
+      if (password.length > 0) {
+        passwordStrength.classList.add('active');
+        const strength = checkPasswordStrength(password);
+        
+        strengthFill.className = 'strength-fill';
+        strengthText.className = 'strength-text';
+        
+        if (strength <= 2) {
+          strengthFill.classList.add('weak');
+          strengthText.classList.add('weak');
+          strengthText.textContent = 'Mật khẩu yếu';
+        } else if (strength <= 4) {
+          strengthFill.classList.add('medium');
+          strengthText.classList.add('medium');
+          strengthText.textContent = 'Mật khẩu khá';
+        } else {
+          strengthFill.classList.add('strong');
+          strengthText.classList.add('strong');
+          strengthText.textContent = 'Mật khẩu mạnh ✓';
+        }
+      } else {
+        passwordStrength.classList.remove('active');
+      }
+    });
+
+    // ── Form Validation ──
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || /^0[0-9]{9}$/.test(email);
+    }
+
+    function validatePhone(phone) {
+      return /^0[0-9]{9}$/.test(phone);
+    }
+
+    function showError(input, show = true) {
+      input.classList.toggle('error', show);
+      input.classList.toggle('success', !show && input.value);
+    }
+
+    // Login Form
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail');
+      const password = document.getElementById('loginPassword');
+      let valid = true;
+
+      if (!validateEmail(email.value)) {
+        showError(email, true);
+        valid = false;
+      } else {
+        showError(email, false);
+      }
+
+      if (password.value.length < 6) {
+        showError(password, true);
+        valid = false;
+      } else {
+        showError(password, false);
+      }
+
+      if (valid) {
+        const btn = this.querySelector('.submit-btn');
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+          btn.classList.remove('loading');
+          btn.disabled = false;
+          showToast('success', 'Đăng nhập thành công!', 'Chào mừng bạn trở lại VietJob 🎉');
+          // Redirect here: window.location.href = '/dashboard';
+        }, 1500);
+      }
+    });
+
+    // Register Form
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('regName');
+      const email = document.getElementById('regEmail');
+      const phone = document.getElementById('regPhone');
+      const password = document.getElementById('regPassword');
+      const confirm = document.getElementById('regConfirm');
+      const agree = document.getElementById('agreeTerms');
+      let valid = true;
+
+      if (name.value.trim().length < 2) {
+        showError(name, true);
+        valid = false;
+      } else {
+        showError(name, false);
+      }
+
+      if (!validateEmail(email.value)) {
+        showError(email, true);
+        valid = false;
+      } else {
+        showError(email, false);
+      }
+
+      if (!validatePhone(phone.value)) {
+        showError(phone, true);
+        valid = false;
+      } else {
+        showError(phone, false);
+      }
+
+      if (checkPasswordStrength(password.value) < 3) {
+        showError(password, true);
+        valid = false;
+      } else {
+        showError(password, false);
+      }
+
+      if (password.value !== confirm.value || confirm.value === '') {
+        showError(confirm, true);
+        valid = false;
+      } else {
+        showError(confirm, false);
+      }
+
+      if (!agree.classList.contains('checked')) {
+        showToast('error', 'Cần đồng ý điều khoản', 'Vui lòng chấp nhận Điều khoản sử dụng để tiếp tục');
+        valid = false;
+      }
+
+      if (valid) {
+        const btn = this.querySelector('.submit-btn');
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        // Simulate API call
+        setTimeout(() => {
+          btn.classList.remove('loading');
+          btn.disabled = false;
+          showToast('success', 'Đăng ký thành công!', 'Chào mừng bạn đến với VietJob! 🚀');
+          // Redirect here: window.location.href = '/onboarding';
+        }, 1500);
+      }
+    });
+
+    // Real-time validation on blur
+    document.querySelectorAll('.form-input').forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.value && !this.classList.contains('error')) {
+          this.classList.add('success');
+        }
+      });
+      
+      input.addEventListener('input', function() {
+        if (this.classList.contains('error')) {
+          // Re-validate on input after error
+          if (this.id === 'loginEmail' || this.id === 'regEmail') {
+            showError(this, !validateEmail(this.value));
+          } else if (this.id === 'regPhone') {
+            showError(this, !validatePhone(this.value));
+          } else if (this.id === 'regConfirm') {
+            const pwd = document.getElementById('regPassword').value;
+            showError(this, this.value !== pwd);
+          }
+        }
+      });
+    });
+
+    // ── Toast Notification ──
+    const toast = document.getElementById('toast');
+    
+    function showToast(type, title, message) {
+      toast.className = `toast ${type} show`;
+      toast.querySelector('.toast-title').textContent = title;
+      toast.querySelector('.toast-msg').textContent = message;
+      toast.querySelector('.toast-icon').textContent = type === 'success' ? 'check_circle' : 'error';
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    document.querySelector('.toast-close').addEventListener('click', () => {
+      toast.classList.remove('show');
+    });
+
+    // ── Social Login (Demo) ──
+    document.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const provider = this.classList.contains('google') ? 'Google' : 
+                        this.classList.contains('facebook') ? 'Facebook' : 'LinkedIn';
+        showToast('success', `Kết nối với ${provider}`, 'Đang chuyển hướng đến trang xác thực...');
+      });
+    });
+
+    // ── Forgot Password (Demo) ──
+    document.querySelector('.forgot-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = prompt('Nhập email của bạn để nhận liên kết đặt lại mật khẩu:');
+      if (email && validateEmail(email)) {
+        showToast('success', 'Đã gửi email!', 'Kiểm tra hộp thư đến để đặt lại mật khẩu');
+      } else if (email) {
+        showToast('error', 'Email không hợp lệ', 'Vui lòng nhập email chính xác');
+      }
+    });
+
+    // ── Keyboard Support ──
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.classList.contains('form-input')) {
+        const form = e.target.closest('form');
+        if (form) form.requestSubmit();
+      }
+    });
+  </script>
+</body>
+</html>
