@@ -1,0 +1,3253 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<style>
+    /* ============================================================
+   TABLE OF CONTENTS
+   ============================================================
+   1. GLOBAL STYLES & RESETS
+   2. TYPOGRAPHY
+   3. HEADER & NAVIGATION
+   4. BLOG LAYOUT & COMPONENTS
+   5. FOOTER
+   6. RESPONSIVE DESIGN
+   7. UTILITIES & HELPERS
+   8. CUSTOM COMPONENTS (MODAL, TOAST, ETC)
+   ============================================================ */
+
+/* ============================================================
+   1. GLOBAL STYLES & RESETS
+   ============================================================ */
+:root {
+    --primary-color: #0084ff;
+    --primary-dark: #0060cc;
+    --primary-light: #e6f3ff;
+    --secondary-color: #ff5722;
+    --secondary-dark: #e64a19;
+    --success-color: #34b207;
+    --danger-color: #ff5722;
+    --warning-color: #ffc107;
+    --dark-color: #111827;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --gray-900: #212529;
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 0.75rem;
+    --border-radius-xl: 1rem;
+    --box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --transition-default: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--gray-900);
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition-default);
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: var(--transition-default);
+}
+
+/* ============================================================
+   2. TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+}
+
+/* ============================================================
+   3. HEADER & NAVIGATION
+   ============================================================ */
+header.bg-white {
+    position: sticky !important;
+    top: 0;
+    z-index: 1030;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.navbar {
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: var(--gray-700);
+    padding: 0.5rem 1rem;
+    transition: var(--transition-default);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: var(--primary-color);
+}
+
+.dropdown-menu {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-md);
+    padding: 0.5rem 0;
+    min-width: 260px;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-700);
+    transition: var(--transition-default);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.btn-employer {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: var(--transition-default);
+}
+
+.btn-employer:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--box-shadow-md);
+    color: white;
+}
+
+/* User dropdown custom */
+.custom-dropdown-menu {
+    width: 340px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: var(--border-radius-lg);
+    padding: 1rem;
+}
+
+.dropdown-item-custom {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: var(--border-radius-md);
+    color: var(--gray-700);
+    font-weight: 500;
+    transition: var(--transition-default);
+}
+
+.dropdown-item-custom:hover {
+    background-color: var(--gray-100);
+    color: var(--primary-color);
+}
+
+.dropdown-item-custom img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================================
+   4. BLOG LAYOUT & COMPONENTS
+   ============================================================ */
+.blog-category {
+    position: sticky;
+    top: 72px;
+    z-index: 1020;
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.blog-banner-section .container-section {
+    background: linear-gradient(135deg, var(--primary-light) 0%, #d4e8ff 100%);
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+}
+
+.app-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+.app-description {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    max-width: 500px;
+}
+
+/* Post cards */
+.card.post {
+    transition: var(--transition-default);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--gray-200);
+}
+
+.card.post:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow-lg);
+}
+
+.post-featured {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+}
+
+.post-featured .img img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.post-featured:hover .img img {
+    transform: scale(1.05);
+}
+
+.post-featured .position-absolute {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+/* Search form */
+.search-post {
+    border: 2px solid var(--gray-200);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.search-post:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 132, 255, 0.1);
+}
+
+/* Section backgrounds */
+.bg-f5f5f5 {
+    background-color: #f5f7fa;
+}
+
+/* Scroll row loading animation */
+.scroll-row {
+    min-height: 200px;
+}
+
+/* ============================================================
+   5. FOOTER
+   ============================================================ */
+.footer {
+    background-color: var(--gray-100);
+    border-top: 1px solid var(--gray-200);
+    padding: 3rem 0 1.5rem;
+    margin-top: 3rem;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-title,
+.footer-links h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--gray-800);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    transition: var(--transition-default);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+    padding-left: 4px;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--gray-300);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 50%;
+    transition: var(--transition-default);
+    box-shadow: var(--box-shadow-sm);
+}
+
+.footer-social a:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-md);
+}
+
+.footer-social img {
+    width: 18px;
+    height: 18px;
+}
+
+.footer-info p {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    line-height: 1.6;
+}
+
+/* ============================================================
+   6. RESPONSIVE DESIGN
+   ============================================================ */
+/* Tablet & Mobile Navigation */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: white;
+        box-shadow: var(--box-shadow-lg);
+        transition: right 0.3s ease;
+        z-index: 1050;
+        padding: 1rem;
+        overflow-y: auto;
+    }
+    
+    .navbar-collapse.show {
+        right: 0;
+    }
+    
+    .navbar-toggler {
+        position: relative;
+        z-index: 1060;
+    }
+    
+    .navbar-nav {
+        flex-direction: column !important;
+        margin-top: 2rem;
+    }
+    
+    .navbar-nav .nav-item {
+        border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .dropdown-menu {
+        position: static !important;
+        float: none;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        padding-left: 1rem;
+    }
+    
+    .custom-dropdown-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 360px;
+        height: 100vh;
+        border-radius: 0;
+        transition: right 0.3s ease;
+    }
+    
+    .blog-category {
+        position: relative;
+        top: 0;
+    }
+    
+    .blog-category .navbar-toggler {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: var(--gray-100);
+        border-radius: var(--border-radius-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .footer-social {
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+    
+    .footer-bottom-grid .row > div {
+        text-align: center;
+    }
+    
+    .app-title {
+        font-size: 1.75rem;
+    }
+    
+    .blog-banner-section .container-section {
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .app-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .post-featured .img img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-employer {
+        padding: 0.375rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .custom-dropdown-menu {
+        width: 90%;
+    }
+    
+    .card.post .row {
+        flex-direction: column;
+    }
+    
+    .card.post .col-4 {
+        width: 100%;
+    }
+    
+    .card.post .col-8 {
+        width: 100%;
+        padding: 0.75rem;
+    }
+    
+    .card.post .col-4 .img {
+        height: 160px;
+        overflow: hidden;
+    }
+    
+    .card.post .col-4 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* ============================================================
+   7. UTILITIES & HELPERS
+   ============================================================ */
+.text-primary { color: var(--primary-color) !important; }
+.bg-primary { background-color: var(--primary-color) !important; }
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.text-secondary { color: var(--secondary-color) !important; }
+.bg-secondary { background-color: var(--secondary-color) !important; }
+
+.rounded-4 { border-radius: 1rem !important; }
+.rounded-5 { border-radius: 1.5rem !important; }
+
+.shadow-sm { box-shadow: var(--box-shadow-sm) !important; }
+.shadow { box-shadow: var(--box-shadow) !important; }
+.shadow-md { box-shadow: var(--box-shadow-md) !important; }
+.shadow-lg { box-shadow: var(--box-shadow-lg) !important; }
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.z-3 {
+    z-index: 1030;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background: transparent;
+    padding: 0.5rem 0;
+    margin-bottom: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: var(--gray-500);
+}
+
+.breadcrumb-item a {
+    color: var(--gray-600);
+    font-size: 0.875rem;
+}
+
+.breadcrumb-item.active {
+    color: var(--gray-800);
+    font-weight: 500;
+}
+
+/* ============================================================
+   8. CUSTOM COMPONENTS
+   ============================================================ */
+/* Modal Customization */
+.modal-content {
+    border: none;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-lg);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--gray-200);
+    padding: 1rem 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 1rem 1.5rem;
+}
+
+/* Toast */
+.toast-container {
+    z-index: 99999;
+}
+
+.toast {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-lg);
+}
+
+/* Support Button */
+.support-button {
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    z-index: 999;
+    background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2rem;
+    box-shadow: var(--box-shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-default);
+}
+
+.support-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-lg);
+    background: linear-gradient(135deg, var(--secondary-dark), #bf360c);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .support-button {
+        right: 16px;
+        bottom: 80px;
+        padding: 0.375rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .support-button svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Chat Widget */
+#chat-widget-btn {
+    transition: var(--transition-default);
+}
+
+#chat-widget-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Switcher Toggle */
+.switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.switch__input {
+    width: 36px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.switch__label {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.status_on {
+    color: var(--success-color) !important;
+}
+
+.status_off {
+    color: var(--danger-color) !important;
+}
+
+/* CV Card Grid */
+.cv-tpl-card {
+    transition: var(--transition-default);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.cv-tpl-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-md);
+}
+
+.cv-tpl-card.border-primary {
+    border-width: 2px !important;
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Print Styles */
+@media print {
+    header,
+    footer,
+    .blog-category,
+    .support-button,
+    #chat-widget-btn,
+    #jg-sp2-root,
+    .modal,
+    .toast-container {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
+</style>
+<head>
+       <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W4XCPHD');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Meta Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '677490495124417');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=677490495124417&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Meta Pixel Code -->
+   <meta charset="UTF-8">
+   <meta http-equiv="content-language" content="vi" />
+   <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      
+   <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "JobsGO",
+     "url": "https://jobsgo.vn/",
+     "inLanguage": "vi",
+     "potentialAction": {
+       "@type": "SearchAction",
+       "target": "https://jobsgo.vn/?q={search_term_string}",
+       "query-input": "required name=search_term_string"
+     }
+   }
+   </script>
+
+   <script type="application/ld+json">
+   {
+     "@context": "http://schema.org",
+     "@type": "Organization",
+     "name": "Công ty Cổ phần JobsGO",
+     "description": "JobsGO - Nền tảng tuyển dụng trực tuyến, App tuyển dụng, tìm việc làm nhanh trên Android và iOS. Kênh thông tin tuyển dụng và việc làm kết nối nhà tuyển dụng với ứng viên dễ dàng.",
+     "logo": "https://jobsgo.vn/_2025/img/logo.svg",
+     "url": "https://jobsgo.vn/",
+     "telephone": "+84 898 579 188",
+     "legalName": "CÔNG TY CỔ PHẦN JOBSGO",
+     "vatID": "108266100",
+     "numberOfEmployees": {
+       "@type": "QuantitativeValue",
+       "value": 300
+     },
+     "foundingDate": "2018-05-09",
+     "contactPoint": [
+       {
+         "@type": "ContactPoint",
+         "email": "contact@jobsgo.vn",
+         "contactType": "email"
+       },
+       {
+         "@type": "ContactPoint",
+         "telephone": "+84 70 505 2927",
+         "contactType": "customer service"
+       },
+       {
+         "@type": "ContactPoint",
+         "telephone": "+84 899 565 868",
+         "contactType": "hotline"
+       }
+     ],
+     "sameAs": [
+       "https://www.facebook.com/JobsGOVN",
+       "https://www.youtube.com/@jobsgo_vn",
+       "https://www.linkedin.com/company/josbgo.vn/",
+       "https://www.tiktok.com/@jobsgo.career",
+       "https://www.instagram.com/jobsgo_vn/"
+     ],
+     "address": [
+       {
+         "@type": "PostalAddress",
+         "streetAddress": "Tầng 3, Tòa nhà GIM, Ngõ 460 Khương Đình, Phường Khương Đình, Thành phố Hà Nội",
+         "addressLocality": "Phường Khương Đình, Hà Nội",
+         "postalCode": "100000",
+         "addressCountry": "VN"
+       },
+       {
+         "@type": "PostalAddress",
+         "streetAddress": "Tầng 5, Tòa nhà Phú Nhuận Plaza, Số 82 Trần Huy Liệu, Phường Cầu Kiệu, Thành phố Hồ Chí Minh",
+         "addressLocality": "Phường Đức Nhuận, TP Hồ Chí Minh",
+         "postalCode": "70000",
+         "addressCountry": "VN"
+       }
+     ]
+   }
+   </script>
+
+             <meta name="robots" content="index, follow">
+    <title>Phát triển sự nghiệp</title>
+      <meta name="csrf-param" content="_csrf-jobsgo-candidate">
+<meta name="csrf-token" content="9fo9pTggegbzRHLD_8S4tN3zWAq62m2pjY5TN3gt9qvHtVzLfHgKYZgXF7muk4nahLhpZP6RJ9n_6TtZLGOR-A==">
+   <link rel="stylesheet" href="/_2025/dist/bootstrap-5.3.8/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="/_2025/font/heroicons.css">
+   <link rel="stylesheet" href="/_2025/css/style.css?v=250715815312614">
+   <script type="text/javascript" src="/bolt/assets/js/core/libraries/jquery.min.js"></script>
+   <script src="/_2025/js/script.js?v=250715815312614"></script>
+   <script>
+    window.GtmParams = {"APPLY_FLOW":"applyFlow","APPLY_STEP":"applyStep","USER_LOGIN_STATE":"userLoginState"};
+    window.GtmEvents = {"REGISTER_SUCCESS":"register_success","CVGO_CREATED":"cvgo_created","LOGIN_CLICK":"login_click","LOGIN_SOCIAL_CLICK":"login_social_click","LOGIN_SUCCESS":"login_success","APPLY_CLICK":"apply_click","APPLY_SUCCESS":"apply_success","QUICK_APPLY":"quick_apply","VIEW_JOB":"view_job","CHAT_CLICK":"chat_click","SEARCH":"search"};
+    window.GtmFlows = {"LABOR_FORM":"labor_form","DYNAMIC_FORM":"dynamic_form","GUEST_FORM":"guest_form","SELECT_CV_FORM":"select_cv_form","UPDATE_CONTACT_PAGE":"update_contact_page"};
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ [GtmParams.USER_LOGIN_STATE]: 'loggedIn' });
+    window.gtm = function (d) { window.dataLayer.push(d); };
+</script></head>
+
+<!-- START:Test gọi tracking -->
+<script>
+      </script>
+
+<body class="page-blog page-blog-index">
+      <header class="bg-white">
+      <nav class="navbar navbar-expand-lg px-lg-4">
+         <div class="container-fluid">
+                        <a class="navbar-brand" href="/">
+               <img alt="Tìm việc làm, tuyển dụng cập nhật hàng ngày toàn quốc" loading="eager" src="/_2025/img/logo.svg" height="40">
+            </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <script>
+               document.addEventListener('DOMContentLoaded', function () {
+                   const dropdownLinks = document.querySelectorAll('.nav-link.dropdown-toggle');
+                   
+                   if (window.innerWidth > 991) {
+                       dropdownLinks.forEach(link => {
+                           link.removeAttribute('data-bs-toggle');
+                           link.addEventListener('click', function (e) {
+                               const href = this.getAttribute('href');
+                               if (href && href.trim() !== '#') {
+                                   window.location.href = href;
+                               }
+                           });
+                       });
+                   }
+               });
+
+               </script>
+               <ul class="navbar-nav mx-auto" style="flex-direction: row;flex-wrap: wrap;">
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="/viec-lam.html" role="button" data-bs-toggle="dropdown">Việc làm</a>
+                     <ul class="dropdown-menu pb-3">
+                        <li>
+                           <a class="teks-btn-search" href="/viec-lam.html"><i class="pb-heroicons pb-heroicons-magnifying-glass"></i> Tìm việc làm</a>
+                           <div class="container">
+                              <div class="row">
+                                 <div class="col-sm-4">
+                                    <div class="fw-bolder pt-2 pb-1 ps-3">Việc theo ngành nghề</div>
+                                    <ul class="list-unstyled">
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-chinh-ngan-hang-chung-khoan.html"> Việc làm Tài Chính/Ngân Hàng</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-ke-toan-kiem-toan.html"> Việc làm Kế Toán/Kiểm Toán</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-hanh-chinh-van-phong.html"> Việc làm Hành Chính/Văn Phòng</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-kinh-doanh-ban-hang.html"> Việc làm Kinh Doanh/Bán Hàng</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-marketing-pr-quang-cao.html"> Việc làm Marketing/Quảng Cáo</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-xay-dung-kien-truc-noi-that.html"> Việc làm Xây dựng/Kiến Trúc</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-cong-nghe-thong-tin.html"> Việc làm Công Nghệ Thông Tin</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-nhan-su.html"> Việc làm Nhân Sự</a></li>
+                                    </ul>
+                                 </div>
+                                 <div class="col-sm-3 ps-sm-0">
+                                    <div class="fw-bolder pt-2 pb-1 ps-3">Việc theo địa điểm</div>
+                                    <ul class="list-unstyled">
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-ho-chi-minh.html"> Việc làm tại Hồ Chí Minh</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-ha-noi.html"> Việc làm tại Hà Nội</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-da-nang.html"> Việc làm tại Đà Nẵng</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-can-tho.html"> Việc làm tại Cần Thơ</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-binh-duong.html"> Việc làm tại Bình Dương</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-hai-phong.html"> Việc làm tại Hải Phòng</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-dong-nai.html"> Việc làm tại Đồng Nai</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-tai-quang-ninh.html"> Việc làm tại Quảng Ninh</a></li>
+                                    </ul>
+                                 </div>
+                                 <div class="col-sm-4">
+                                    <div class="fw-bolder pt-2 pb-1 ps-3">Việc theo nhu cầu</div>
+                                    <ul class="list-unstyled">
+                                       <li><a class="dropdown-item" href="/viec-lam-tuyen-gap.html"> Việc làm Tuyển Gấp</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-noi-bat.html"> Việc làm Nổi Bật</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-lao-dong-pho-thong.html"> Việc làm Lao động phổ thông</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-khong-can-bang-cap.html"> Việc làm Không cần bằng cấp</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-online-tai-nha.html"> Việc làm Online tại nhà</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-part-time.html"> Việc làm Part-time</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-thoi-vu.html"> Việc làm Thời vụ</a></li>
+                                       <li><a class="dropdown-item" href="/viec-lam-remote.html"> Việc làm Remote</a></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="/cong-ty.html" role="button" data-bs-toggle="dropdown">Công ty</a>
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/cong-ty-tieu-bieu.html">Tiêu Biểu</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-noi-bat.html">Nổi Bật</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-tai-chinh-ngan-hang.html">Ngân Hàng</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-bao-hiem.html">Bảo Hiểm</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-cong-nghe.html">Công Nghệ</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-xay-dung.html">Xây Dựng</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-san-xuat.html">Sản Xuất</a></li>
+                        <li><a class="dropdown-item" href="/nha-hang.html">Nhà Hàng</a></li>
+                        <li><a class="dropdown-item" href="/khach-san.html">Khách Sạn</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-y-te.html">Y Tế</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-bat-dong-san.html">Bất Động Sản</a></li>
+                        <li><a class="dropdown-item" href="/cong-ty-giao-duc.html">Giáo Dục</a></li>
+                     </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">CV/Hồ sơ</a>
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/mau-cv-xin-viec.html">Tạo CV</a></li>
+                        <li><a class="dropdown-item" href="/phan-tich-cv.html">Tải lên file CV</a></li>
+                        <li><a class="dropdown-item" href="/tao-cv-bang-ai.html">Tạo CV bằng AI <small class="badge bg-warning">N</small></a></li>
+                        <li><a class="dropdown-item" href="/review-cv.html">Đánh giá CV bằng AI <small class="badge bg-warning">N</small></a></li>
+                     </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Công cụ</a>
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/tra-cuu-luong.html">Tra cứu lương</a></li>
+                        <li><a class="dropdown-item" href="/tinh-luong-gross-net.html">Đổi lương Gross - Net</a></li>
+                        <li><a class="dropdown-item" href="/la-ban-huong-nghiep.html">La Bàn Hướng Nghiệp</a></li>
+                        <li><a class="dropdown-item" href="/tinh-bao-hiem-xa-hoi-mot-lan.html">Tính Bảo Hiểm Xã Hội Một Lần</a></li>
+                        <li>
+                           <hr class="dropdown-divider mrg-bot-5 mrg-top-5">
+                           <strong class="ps-3 small d-block mb-1"><a class="text-dark" href="/trac-nghiem-tinh-cach.html"> Trắc nghiệm tính cách </a></strong>
+                        </li>
+                        <li><a class="dropdown-item" href="/trac-nghiem-tinh-cach-mbti.html">- Trắc nghiệm MBTI</a></li>
+                        <li><a class="dropdown-item" href="/trac-nghiem-tinh-cach-enneagram.html">- Trắc nghiệm ENNEAGRAM</a></li>
+                        <li><a class="dropdown-item" href="/trac-nghiem-disc.html">- Trắc nghiệm DISC</a></li>
+                        <li><a class="dropdown-item" href="/trac-nghiem-holland.html">- Trắc nghiệm HOLLAND</a></li>
+                        <li><a class="dropdown-item" href="/trac-nghiem-iq.html">- Trắc nghiệm IQ</a></li>
+                        <li><a class="dropdown-item" href="/trac-nghiem-eq.html">- Trắc nghiệm EQ</a></li>
+
+                     </ul>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="/blog/">Cẩm nang nghề nghiệp</a>
+                  </li>
+               </ul>
+               <div class="my-3 my-sm-0 d-flex align-items-center">
+                  <div class="dropdown">
+                                             <style>.switcher{display:inline-block;position:relative;font-size:16px}.switch__input,.switch__label:after,.switch__label:before{position:absolute;height:20px}.switcher-on{background:#f6fff3!important}.switcher-off{background:#fff3f3!important}.status_off{color:#ff5722!important}.status_on{color:#34b207!important}.switch__input{top:0;left:0;width:36px;opacity:0;z-index:0;order:1}.switch__label{display:block;padding:0;cursor:pointer;color:#4caf50;font-weight:600;font-size:14px}.switch__label:before{content:"";right:0;width:36px;background-color:rgba(0,0,0,.26);border-radius:14px;z-index:1;transition:background-color .28s cubic-bezier(.4, 0, .2, 1)}.switch__label:after{content:"";right:16px;width:20px;background-color:#fff;border-radius:14px;box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);z-index:2;transition:.28s cubic-bezier(.4, 0, .2, 1);transition-property:left,background-color}.switch__input:checked+.switch__label:before{background-color:#4caf50}.switch__input:checked+.switch__label:after{right:0}.dropdown-user>a,.nav .dropdown:hover>a,.nav .open>a,.nav .open>a:focus,.nav .open>a:hover{background-color:#fff!important}.navbar-nav>li>.dropdown-menu{border:1px solid rgba(0,0,0,.1)!important;box-shadow:0 4px 40px 0 rgba(0,0,0,.05)!important;min-width:250px!important}.navbar-nav>.dropdown-user img{border:0;max-height:36px;width:36px!important;top:0}.dropdown-menu>li>a:focus,.dropdown-menu>li>a:hover{color:#197bcd;background-color:#fff}.dropdown-menu .divider{margin:7px 0;background-color:#e8f3fc}.custom-dropdown-menu li,.cv-card .mascot{margin-bottom:8px}.custom-dropdown-menu{width:320px;border-radius:16px;border:1px solid #f0f0f0;box-shadow:0 4px 12px rgba(0,0,0,.1);padding:12px;list-style:none;max-height: 600px;overflow-y: auto;}.custom-dropdown-menu li:last-child{margin-bottom:0}.job-search-toggle-wrapper{background-color:#f0fcec;border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:500;color:#198754}.cv-card{border-radius:12px;text-align:center;text-decoration:none;display:block;color:inherit}.cv-card .mascot{width:100%}.cv-card .btn-cv{background-color:#06f;color:#fff;font-weight:700;border-radius:50px;padding:8px 16px;display:inline-block;text-decoration:none;font-size:.9rem}.custom-dropdown-menu .dropdown-item-custom{display:flex;align-items:center;align-items:center;padding:6px 12px;border-radius:10px;color:#333;text-decoration:none;font-weight:600;transition:background-color .2s;background:#f7f7f7;font-size:14px}.logout-wrapper,.logout-wrapper .dropdown-item-custom{background-color:#ffebeb!important}.custom-dropdown-menu .dropdown-item-custom:hover{background-color:#f8f9fa}.custom-dropdown-menu .dropdown-item-custom i{font-size:20px;color:#06f;margin-right:14px;width:22px;text-align:center}.logout-wrapper{border-radius:10px}.logout-wrapper .dropdown-item-custom,.logout-wrapper .dropdown-item-custom i{color:#dc3545!important}.dropdown-item-custom img{margin-right:10px}@media(max-width:1900px){.custom-dropdown-menu{max-height: 700px;}}@media(max-width:1600px){.custom-dropdown-menu{max-height: 600px;}}@media(max-width:1200px){.custom-dropdown-menu{max-height: 500px;}}
+                        
+                        </style>
+                        <div class="dropdown me-sm-3 me-0 text-end">
+                           <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              <img class="rounded-1 me-2" loading="lazy"
+                                 src="https://media.jobsgo.vn/uploads/thumb/img/male_thumb_300.jpg?v=1778472901"
+                                 alt="avatar" width="34" height="34">
+                              <span class="d-flex flex-column text-start">
+                                 <span class="fw-bold text-capitalize text-truncate" style="max-width:140px;">
+                                    T V                                 </span>
+                                 <span id="status_job_search"
+                                    class="text-success">
+                                    Đang tìm việc                                 </span>
+                              </span>
+                           </a>
+                           <ul class="dropdown-menu text-small custom-dropdown-menu">
+                              <!-- Đang tìm việc -->
+                              <li>
+                                 <div class="dropdown-item-custom dropdown-item-custom-switcher switcher-on" href="javascript: void(0)">
+                                    <div class="switcher w-100 d-flex align-items-center">
+                                       <input type="checkbox" id="switch__input" class="switch__input" checked>
+                                       <label for="switch__input" id="switch__label" class="switch__label status_on">Đang tìm việc</label>
+                                    </div>
+                                 </div>
+                              </li>
+
+                              <!-- Phân tích CV & Tạo CV Mới -->
+                              <li>
+                                 <div class="row g-2">
+                                    <div class="col-6">
+                                       <a href="/mau-cv-xin-viec.html" class="cv-card">
+                                          <!-- Replace with your mascot image -->
+                                          <img src="/_2025/img/menu-1.webp" class="mascot rounded" alt="Analyze CV Mascot">
+                                       </a>
+                                    </div>
+                                    <div class="col-6">
+                                       <a href="/review-cv.html" class="cv-card">
+                                          <!-- Replace with your mascot image -->
+                                          <img src="/_2025/img/menu-2.webp" class="mascot rounded" alt="Create CV Mascot">
+                                       </a>
+                                    </div>
+                                 </div>
+                              </li>
+
+                              <!-- Quản lý hồ sơ -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/cv" title="Hồ sơ xin việc"><img loading="eager" src="/_2025/img/menu/profile.svg" alt=""> Quản lý hồ sơ</a>
+                              </li>
+                              <!-- Cập nhật hồ sơ -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/profile" title="Hồ sơ xin việc"><img loading="eager" src="/_2025/img/menu/edit.svg" alt=""> Cập nhật hồ sơ</a>
+                              </li>
+                                                            <!-- Tải về CV -->
+                              <li>
+                                 <a class="dropdown-item-custom" data-bs-toggle="modal" data-bs-target="#downloadProfileModal" href="#" title="Tải về CV"><img loading="eager" src="/_2025/img/cv_go/download.svg" alt=""> Tải về CV</a>
+                              </li>
+                                                            <!-- Việc làm đã ứng tuyển -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/jobs-applied" title="Danh sách việc làm đã ứng tuyển"><img loading="eager" src="/_2025/img/menu/job-saved.svg" alt=""> Việc làm đã ứng tuyển</a>
+                              </li>
+                              <!-- Việc làm đã lưu -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/jobs-saved" title="Danh sách việc làm đã lưu"><img loading="eager" src="/_2025/img/menu/heart.svg" alt=""> Việc làm đã lưu</a>
+                              </li>
+                              <!-- Việc làm đã xem -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/jobs-viewed" title="Danh sách việc làm đã xem"><img loading="eager" src="/_2025/img/menu/job-view.svg" alt=""> Việc làm đã xem</a>
+                              </li>
+                              <!-- Việc làm phù hợp -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/viec-phu-hop" title="Danh sách việc làm phù hợp với hồ sơ của bạn"><i class="fs-4 pb-heroicons-briefcase"></i> Việc làm phù hợp</a>
+                              </li>
+                              <!-- NTD yêu cầu kết nối -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/connection-requests" target="_blank" title="Danh sách nhà tuyển dụng gửi yêu cầu kết nối"><img loading="eager" src="/_2025/img/cv_go/change-file.svg" alt=""> NTD gửi yêu cầu kết nối</a>
+                              </li>
+                              <!-- NTD đã xem hồ sơ -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/recruiter-view" target="_blank" title="Danh sách nhà tuyển dụng đã xem hồ sơ của bạn"><img loading="eager" src="/_2025/img/menu/eye.svg" alt=""> NTD đã xem hồ sơ</a>
+                              </li>
+                              <!-- Đổi mật khẩu -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/candidate/change-password" title="Đổi mật khẩu"><img loading="eager" src="/_2025/img/menu/lock.svg" alt=""> Đổi mật khẩu</a>
+                              </li>
+
+                              <!-- Cài đặt thông báo email -->
+                              <li>
+                                 <a class="dropdown-item-custom" href="/email-settings" title="Cài đặt thông báo email"><i class="fs-4 pb-heroicons-bell"></i> Cài đặt thông báo email</a>
+                              </li>
+
+                              <!-- Đăng xuất -->
+                              <li class="logout-wrapper">
+                                 <a class="dropdown-item-custom logout-link" href="/site/logout" data-reload="true" data-pjax="false" title="Bạn có chắc muốn đăng xuất khỏi hệ thống?">
+                                    <img loading="eager" src="/_2025/img/menu/logout.svg" alt="">
+                                    Đăng xuất
+                                 </a>
+                              </li>
+                           </ul>
+                        </div>
+                                       </div>
+                  <div class="vr mx-3"></div>
+                  <a href="https://employer.jobsgo.vn" target="_blank" class="btn btn-secondary btn-employer">NHÀ TUYỂN DỤNG</a>
+               </div>
+            </div>
+         </div>
+      </nav>
+   </header>
+      
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+   document.querySelectorAll('.scroll-row').forEach(container => {
+      const id = container.getAttribute('data-id');
+      const type = 'category';
+      const limit = 4;
+
+      fetch(`/blog/load-more/?type=${type}&id=${id}&limit=${limit}`)
+         .then(res => res.text())
+         .then(html => {
+            container.insertAdjacentHTML('beforeend', html);
+         });
+   });
+});
+</script>
+
+<style>
+header.bg-white{position:static!important}
+</style>
+<section class="blog-category bg-white border-bottom position-sticky top-0 z-3">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler w-100" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBlog" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="text-uppercase pt-1 float-start fs-6 fw-bold">Danh mục bài viết</span>
+          <i class="pb-heroicons float-end pb-heroicons-squares-2x2"></i> 
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavBlog">
+          <ul class="navbar-nav w-100 justify-content-between">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/blog/chuyen-muc/cam-nang-tim-viec/" id="dropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                Cẩm Nang Tìm Việc
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/cam-nang-tim-viec/tao-cv-an-tuong/">Tạo CV Ấn Tượng</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/cam-nang-tim-viec/ky-nang-phong-van/">Kỹ Năng Phỏng Vấn</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/cam-nang-tim-viec/chien-luoc-tim-viec/">Chiến Lược Tìm Việc</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/cam-nang-tim-viec/dam-phan-luong/">Đàm Phán Lương</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/cam-nang-tim-viec/huong-nghiep-fresher/">Hướng Nghiệp Fresher</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/blog/chuyen-muc/phat-trien-su-nghiep/" id="dropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                Phát Triển Sự Nghiệp
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown2">
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/phat-trien-su-nghiep/ky-nang-cong-so/">Kỹ Năng Công Sở</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/phat-trien-su-nghiep/lo-trinh-thang-tien/">Lộ Trình Thăng Tiến</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/phat-trien-su-nghiep/phat-trien-nang-luc/">Phát Triển Năng Lực</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/phat-trien-su-nghiep/ky-nang-ai/">Kỹ Năng AI</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/phat-trien-su-nghiep/can-bang-cuoc-song/">Cân Bằng Cuộc Sống</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown large-dropdown">
+              <a class="nav-link dropdown-toggle" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/" id="dropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                Kiến Thức Ngành Nghề
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown3">
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/cong-nghe-thong-tin/">Công Nghệ Thông Tin</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/tai-chinh-ngan-hang/">Tài Chính/Ngân Hàng</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/quang-cao-marketing/">Quảng Cáo/Marketing</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/kinh-doanh/">Kinh Doanh</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/ke-toan-kiem-toan/">Kế Toán/Kiểm Toán</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/du-lich/">Du Lịch</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/thiet-ke/">Thiết Kế</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/san-xuat-ky-thuat/">Sản Xuất/Kỹ Thuật</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/xay-dung-kien-truc/">Xây Dựng/Kiến Trúc</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/logistics/">Logistics</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/giao-duc-dao-tao/">Giáo Dục/Đào Tạo</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/tim-hieu-nganh-nghe/">Tìm Hiểu Ngành Nghề</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kien-thuc-nganh-nghe/ban-do-doanh-nghiep/">Bản Đồ Doanh Nghiệp</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/blog/chuyen-muc/goc-hr/" id="dropdown4" data-bs-toggle="dropdown" aria-expanded="false">
+                Góc HR
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown4">
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/goc-hr/thu-hut-nhan-tai/">Thu Hút Nhân Tài</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/goc-hr/phat-trien-nhan-su/">Phát Triển Nhân Sự</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/goc-hr/van-hoa-doanh-nghiep/">Văn Hóa Doanh Nghiệp</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/goc-hr/phap-ly-va-van-hanh/">Pháp Lý và Vận Hành</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/goc-hr/nghe-thuat-quan-tri/">Nghệ Thuật Quản Trị</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/blog/chuyen-muc/tin-tuc-va-su-kien/" id="dropdown5" data-bs-toggle="dropdown" aria-expanded="false">
+                Tin Tức và Sự Kiện
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown5">
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/tin-tuc-va-su-kien/xu-huong-thi-truong/">Xu Hướng Thị Trường</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/tin-tuc-va-su-kien/su-kien-noi-bat/">Sự Kiện Nổi Bật</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/tin-tuc-va-su-kien/goc-nhin-chuyen-gia/">Góc Nhìn Chuyên Gia</a></li>
+                <!--li><a class="dropdown-item" href="/blog/chuyen-muc/tin-tuc-va-su-kien/cap-nhat-tu-jobsgo/">Cập Nhật Từ JobsGO</a></li--!>
+                <li><a class="dropdown-item" href="/event/list" target="_blank">Danh Sách Sự Kiện</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/blog/chuyen-muc/kham-pha-ban-than/" id="dropdown6" data-bs-toggle="dropdown" aria-expanded="false">
+                Khám Phá Bản Thân
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown6">
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kham-pha-ban-than/trac-nghiem-tinh-cach/">Trắc Nghiệm Tính Cách</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kham-pha-ban-than/chiem-tinh-nghe-nghiep/">Chiêm Tinh Nghề Nghiệp</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kham-pha-ban-than/giai-ma-ban-than/">Giải Mã Bản Thân</a></li>
+                <li><a class="dropdown-item" href="/blog/chuyen-muc/kham-pha-ban-than/sach-hay/">Sách Hay</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+</section>
+<style>
+.form-control.search-post:focus {
+    box-shadow: none;
+}
+.post-featured .img img {
+    transform: scale(1);
+}
+</style>
+<section class="w-100  py-3 bg-light border-bottom">
+  <form method="get" action="/blog/">
+    <div class="container">
+      <div class="input-group input-group-md mx-auto">
+        <input
+          type="search"
+          name="k"
+          class="form-control search-post rounded-start-3"
+          placeholder="Tìm theo tên bài viết..."
+          value=""
+        >
+        <button class="btn btn-primary rounded-end-3 px-5" type="submit">
+          <i class="pb pb-heroicons pb-heroicons-solid-magnifying-glass"></i> Tìm kiếm
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+<section>
+   <div class="container mb-3 mt-sm-3 mb-sm-0 px-3">
+      <nav aria-label="breadcrumb" class="breadcrumb-nav px-0 pt-2 mb-sm-0 pt-sm-0">
+         <ol class="breadcrumb mb-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+             <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                 <a itemprop="item" href="/">
+                     <span itemprop="name">JobsGO</span>
+                 </a>
+                 <meta itemprop="position" content="1" />
+             </li>
+         
+             <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                 <span itemprop="name">Blog</span>
+                 <meta itemprop="position" content="2" />
+             </li>
+         </ol>
+
+      </nav>
+   </div>      
+</section>  
+
+<section class="py-sm-4 py-3" style="overflow: hidden; width: 100%; max-width: 100vw;">
+  <div class="blog-banner-section app-download-section">
+    <div class="container">
+      <div class="container-section rounded-5 align-items-center d-flex">
+        <div class="row align-items-center w-100">
+          <div class="col-6">
+            <h1 class="fs-1 app-title text-uppercase">
+                            Cẩm nang nghề nghiệp            </h1>
+            <p class="app-description">
+              Mang đến những kinh nghiệm, kiến thức hữu ích về cuộc sống công sở và hành trình nghề nghiệp.
+            </p>
+          </div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    
+<section>
+   <div class="container px-3">     
+      <div class="mb-sm-4">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold mb-0 fs-3">Bài Viết Nổi Bật</h2>
+         </div>
+         <div class="row g-2 g-sm-4">
+                        <div class="col-lg-6 mb-2 mb-sm-0">
+               <div class="card post-top post-featured bg-linear-gradient border-0 shadow-sm h-100 overflow-hidden">
+                  <div class="position-relative h-100">
+                     <a class="rounded-3 img" href="https://jobsgo.vn/blog/chung-chi-data-analyst/">
+                     <img loading="lazy" src="https://media-blog.jobsgo.vn/blog/wp-content/uploads/2026/05/chung-chi-data-analyst-image-1.jpg" class="img-fluid w-100" alt="Top 16 chứng chỉ Data Analyst bạn không nên bỏ qua">
+                     </a>
+                     <div class="position-absolute bottom-0 start-0 w-100 p-4 text-white bg-opacity-90">
+                        <h3 class="fs-5 mb-2">
+                           <a href="https://jobsgo.vn/blog/chung-chi-data-analyst/" class="text-white fw-bold text-decoration-none">Top 16 chứng chỉ Data Analyst bạn không nên bỏ qua</a>
+                        </h3>
+                        <div class="d-flex align-items-center gap-3 small mb-2">
+                           <div class="d-flex align-items-center"><i class="pb-heroicons pb-heroicons-calendar-days fs-5 me-2"></i> <span>21/05/2026</span></div>
+                           <div class="d-flex align-items-center"><i class="pb-heroicons pb-heroicons-user fs-5 me-2"></i> <span>Thúy Quỳnh</span></div>
+                        </div>
+                        <p class="mb-0 card-text text-white"> Trong kỷ nguyên số hóa, dữ liệu được ví như &#8220;mỏ dầu mới&#8221; và nghề phân tích dữ liệu đang trở thành xu hướng toàn cầu. Sở hữu một chứng chỉ Data Analyst uy tín không chỉ&#8230;</p>
+                        <a href="https://jobsgo.vn/blog/chung-chi-data-analyst/" class="text-white small mt-2 d-inline-block">Xem thêm »</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+                        <div class="col-lg-6 d-flex flex-column gap-3">
+                              <div class="card  post post-top border-0 overflow-hidden">
+                  <div class="row bg-f1f7ff g-2">
+                     <div class="col-4">
+                        <a class="rounded-3 img" href="https://jobsgo.vn/blog/cach-lam-affiliate-marketing-shopee/"><img loading="lazy" src="https://media-blog.jobsgo.vn/blog/wp-content/uploads/2026/05/cach-lam-affiliate-shopee-image-1.jpg" class="img-fluid h-100 object-fit-cover" alt="Hướng dẫn cách làm Affiliate Shopee cho người mới bắt đầu"></a>
+                     </div>
+                     <div class="col-8">
+                        <div class="card-body p-2">
+                           <h3 class="fs-6 fw-bold card-title mb-0">
+                              <a href="https://jobsgo.vn/blog/cach-lam-affiliate-marketing-shopee/" class="text-dark text-decoration-none">Hướng dẫn cách làm Affiliate Shopee cho người mới bắt đầu</a>
+                           </h3>
+                           <div class="text-muted small d-flex align-items-center">
+                              <i class="pb-heroicons pb-heroicons-calendar-days text-primary fs-5 me-2"></i> <span>21/05/2026</span>
+                           </div>
+                           <p class="card-text small">4.5/5 &#8211; (2 votes) Kiếm tiền online ngày càng trở nên phổ biến, và Affiliate Shopee chính là một trong những hình thức được nhiều người lựa chọn nhất hiện nay. Không cần vốn, không cần kho hàng, chỉ cần&#8230;</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+                              <div class="card  post post-top border-0 overflow-hidden">
+                  <div class="row bg-f1f7ff g-2">
+                     <div class="col-4">
+                        <a class="rounded-3 img" href="https://jobsgo.vn/blog/probation-la-gi/"><img loading="lazy" src="https://media-blog.jobsgo.vn/blog/wp-content/uploads/2026/05/probation-la-gi-image-1.jpg" class="img-fluid h-100 object-fit-cover" alt="Probation là gì? Quy định mới nhất về probation"></a>
+                     </div>
+                     <div class="col-8">
+                        <div class="card-body p-2">
+                           <h3 class="fs-6 fw-bold card-title mb-0">
+                              <a href="https://jobsgo.vn/blog/probation-la-gi/" class="text-dark text-decoration-none">Probation là gì? Quy định mới nhất về probation</a>
+                           </h3>
+                           <div class="text-muted small d-flex align-items-center">
+                              <i class="pb-heroicons pb-heroicons-calendar-days text-primary fs-5 me-2"></i> <span>21/05/2026</span>
+                           </div>
+                           <p class="card-text small"> Probation là gì? Probation là giai đoạn thử việc, được coi như một phần quan trọng và cần thiết trong hành trình nghề nghiệp của bất kỳ cá nhân nào, cũng như trong quy trình tuyển dụng&#8230;</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+                              <div class="card  post post-top border-0 overflow-hidden">
+                  <div class="row bg-f1f7ff g-2">
+                     <div class="col-4">
+                        <a class="rounded-3 img" href="https://jobsgo.vn/blog/chung-chi-ccna-la-gi/"><img loading="lazy" src="https://media-blog.jobsgo.vn/blog/wp-content/uploads/2026/05/chung-chi-ccna-la-gi-image-1.jpg" class="img-fluid h-100 object-fit-cover" alt="Chứng chỉ CCNA là gì? Quy định về thi chứng chỉ CCNA"></a>
+                     </div>
+                     <div class="col-8">
+                        <div class="card-body p-2">
+                           <h3 class="fs-6 fw-bold card-title mb-0">
+                              <a href="https://jobsgo.vn/blog/chung-chi-ccna-la-gi/" class="text-dark text-decoration-none">Chứng chỉ CCNA là gì? Quy định về thi chứng chỉ CCNA</a>
+                           </h3>
+                           <div class="text-muted small d-flex align-items-center">
+                              <i class="pb-heroicons pb-heroicons-calendar-days text-primary fs-5 me-2"></i> <span>21/05/2026</span>
+                           </div>
+                           <p class="card-text small"> Trong kỷ nguyên số hóa hiện nay, hạ tầng mạng đóng vai trò như mạch máu kết nối mọi hoạt động của doanh nghiệp và tổ chức. Để chứng minh năng lực chuyên môn và mở rộng&#8230;</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+                              <div class="card  post post-top border-0 overflow-hidden">
+                  <div class="row bg-f1f7ff g-2">
+                     <div class="col-4">
+                        <a class="rounded-3 img" href="https://jobsgo.vn/blog/bien-ban-ban-giao-quy-tien-mat/"><img loading="lazy" src="https://media-blog.jobsgo.vn/blog/wp-content/uploads/2026/05/bien-ban-ban-giao-quy-tien-mat-image-1.jpg" class="img-fluid h-100 object-fit-cover" alt="[Cập nhật] Mẫu biên bản bàn giao quỹ tiền mặt mới nhất"></a>
+                     </div>
+                     <div class="col-8">
+                        <div class="card-body p-2">
+                           <h3 class="fs-6 fw-bold card-title mb-0">
+                              <a href="https://jobsgo.vn/blog/bien-ban-ban-giao-quy-tien-mat/" class="text-dark text-decoration-none">[Cập nhật] Mẫu biên bản bàn giao quỹ tiền mặt mới nhất</a>
+                           </h3>
+                           <div class="text-muted small d-flex align-items-center">
+                              <i class="pb-heroicons pb-heroicons-calendar-days text-primary fs-5 me-2"></i> <span>21/05/2026</span>
+                           </div>
+                           <p class="card-text small"> Trong hoạt động tài chính của bất kỳ doanh nghiệp hay tổ chức nào, biên bản bàn giao quỹ tiền mặt là một tài liệu không thể thiếu. Văn bản này đóng vai trò là cơ sở&#8230;</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+                           </div>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="bg-f5f5f5">
+   <div class="container px-3 py-4">
+      <div class="mb-sm-4">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fs-3 fw-bold mb-0">Kỹ Năng Phỏng Vấn</h2>
+            <a href="/blog/chuyen-muc/cam-nang-tim-viec/ky-nang-phong-van/" class="text-primary text-decoration-none fw-semibold">
+            Xem thêm <i class="pb-heroicons pb-heroicons-chevron-right fs-5"></i>
+            </a>
+         </div>
+         <div data-id="4537" class="scroll-row row g-2 g-sm-4">
+         </div>
+      </div>
+   </div>
+</section>
+<section>
+   <div class="container px-3 py-4">
+      <div class="mb-sm-4">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fs-3 fw-bold mb-0">Lộ Trình Thăng Tiến</h2>
+            <a href="/blog/chuyen-muc/phat-trien-su-nghiep/lo-trinh-thang-tien/" class="text-primary text-decoration-none fw-semibold">
+            Xem thêm <i class="pb-heroicons pb-heroicons-chevron-right fs-5"></i>
+            </a>
+         </div>
+         <div data-id="4538" class="scroll-row row g-2 g-sm-4">
+         </div>
+      </div>
+   </div>
+</section>
+<section>
+   <div class="container px-3 pb-4 mb-3">
+      <div class="row g-3">
+         <div class="col-md-6">
+            <a href="https://jobsgo.vn/tao-cv-bang-ai.html" class="d-block">
+            <img src="https://media.jobsgo.vn/_2025/img/blog_banner_2phut.png" alt="Tạo CV tự động chỉ 2 phút" class="img-fluid rounded-4 w-100 shadow-sm">
+            </a>
+         </div>
+         <div class="col-md-6">
+            <a href="https://jobsgo.vn/review-cv.html" class="d-block">
+            <img src="https://media.jobsgo.vn/_2025/img/blog_banner_ai.png" alt="Đánh giá CV JobsGO AI" class="img-fluid rounded-4 w-100 shadow-sm">
+            </a>
+         </div>
+      </div>
+   </div>
+</section><section>
+   <div class="container px-3 py-4">
+      <div class="mb-0">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fs-3 fw-bold mb-0">Trắc Nghiệm Tính Cách</h2>
+            <a href="/blog/chuyen-muc/kham-pha-ban-than/trac-nghiem-tinh-cach/" class="text-primary text-decoration-none fw-semibold">
+            Xem thêm <i class="pb-heroicons pb-heroicons-chevron-right fs-5"></i>
+            </a>
+         </div>
+         <div data-id="4552" class="scroll-row row g-2 g-sm-4">
+         </div>
+      </div>
+   </div>
+</section>
+<section class="py-4">
+   <div class="container">
+      <a href="https://jobsgo.vn/site/download" target="_blank">
+          <img src="/_2025/img/footer_banner.webp" loading="lazy" alt="QR Code" class="w-100 rounded-4" />
+      </a>
+   </div>
+</section>
+<section>
+   <div class="container px-3 py-4">
+      <div class="mb-sm-4">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fs-3 fw-bold mb-0">Hướng Nghiệp Fresher</h2>
+            <a href="/blog/chuyen-muc/cam-nang-tim-viec/huong-nghiep-fresher/" class="text-primary text-decoration-none fw-semibold">
+            Xem thêm <i class="pb-heroicons pb-heroicons-chevron-right fs-5"></i>
+            </a>
+         </div>
+         <div data-id="4532" class="scroll-row row g-2 g-sm-4">
+         </div>
+      </div>
+   </div>
+</section>
+<section class="bg-f5f5f5">
+   <div class="container px-3 py-4">
+      <div class="mb-sm-4">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fs-3 fw-bold mb-0">Văn Hoá Doanh Nghiệp</h2>
+            <a href="/blog/chuyen-muc/goc-hr/van-hoa-doanh-nghiep/" class="text-primary text-decoration-none fw-semibold">
+            Xem thêm <i class="pb-heroicons pb-heroicons-chevron-right fs-5"></i>
+            </a>
+         </div>
+         <div data-id="4553" class="scroll-row row g-2 g-sm-4">
+         </div>
+      </div>
+   </div>
+</section>
+   <footer class="bg-white footer">
+      <div class="container">
+         <div class="footer-columns">
+            <div class="footer-company">
+               <h3 class="footer-title">CÔNG TY CỔ PHẦN JOBSGO</h3>
+               <p style="max-width:250px"><strong>Trụ sở:</strong> Tầng 3, Tòa nhà GIM, Ngõ 460 Khương Đình, Phường Khương Đình, Thành phố Hà Nội<br>
+                  Điện thoại: <a href="tel:0974985192">0984.259.428</a>
+               </p>
+               <p style="max-width:250px"><strong>Chi nhánh:</strong> Tầng 5, Tòa nhà Phú Nhuận Plaza, Số 82 Trần Huy Liệu, Phường Cầu Kiệu, Thành phố Hồ Chí Minh<br>
+                  Điện thoại: <a href="tel:0902698348">0902.698.348</a>
+               </p>
+               <p>Email: <a href="/cdn-cgi/l/email-protection#b9dad6d7cdd8dacdf9d3d6dbcaded697cfd7"><span class="__cf_email__" data-cfemail="0e6d61607a6f6d7a4e64616c7d6961207860">[email&#160;protected]</span></a><br>
+                  Hỗ trợ ứng viên: <a href="tel:0348344515">034.834.4515</a><br>
+                  Hotline: <a href="tel:0348344515">034.834.4515</a>
+               </p>
+            </div>
+            <div class="footer-links">
+               <h4>Việc làm theo địa điểm</h4>
+               <ul>
+                  <li><a href="/viec-lam-tai-ho-chi-minh.html" title="Việc làm tại Hồ Chí Minh">TPHCM</a></li>
+                  <li><a href="/viec-lam-tai-ha-noi.html" title="Việc làm tại Hà Nội">Hà Nội</a></li>
+                  <li><a href="/viec-lam-tai-da-nang.html" title="Việc làm tại Đà Nẵng">Đà Nẵng</a>
+                  </li>
+                  <li><a href="/viec-lam-tai-can-tho.html" title="Việc làm tại Cần Thơ">Cần Thơ</a>
+                  </li>
+                  <li><a href="/viec-lam-tai-binh-duong.html" title="Việc làm tại Bình Dương">Bình
+                        Dương</a>
+                  </li>
+                  <li><a href="/viec-lam-tai-hai-phong.html" title="Việc làm tại Hải Phòng">Hải
+                        Phòng</a>
+                  </li>
+                  <li><a href="/viec-lam-tai-dong-nai.html" title="Việc làm tại Đồng Nai">Đồng Nai</a>
+                  </li>
+                  <li><a href="/viec-lam-tai-quang-ninh.html" title="Việc làm tại Quảng Ninh">Quảng
+                        Ninh</a>
+                  </li>
+                  <li><a href="/viec-lam-tai-bac-ninh.html" title="Việc làm tại Bắc Ninh">Bắc
+                        Ninh</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="footer-links">
+               <h4>Việc theo ngành nghề</h4>
+               <ul>
+                 <li><a class="dropdown-item" href="/viec-lam-tai-chinh-ngan-hang-chung-khoan.html"> Tài Chính/Ngân Hàng</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-ke-toan-kiem-toan.html"> Kế Toán/Kiểm Toán</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-hanh-chinh-van-phong.html"> Hành Chính/Văn Phòng</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-kinh-doanh-ban-hang.html"> Kinh Doanh/Bán Hàng</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-marketing-pr-quang-cao.html"> Marketing/Quảng Cáo</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-xay-dung-kien-truc-noi-that.html"> Xây dựng/Kiến Trúc</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-cong-nghe-thong-tin.html"> Công Nghệ Thông Tin</a></li>
+                 <li><a class="dropdown-item" href="/viec-lam-hanh-chinh-van-phong.html"> Hành Chính/Văn Phòng</a></li>
+               </ul>
+            </div>
+            <div class="footer-links">
+               <h4>Việc theo chức danh</h4>
+               <ul>
+                  <li><a href="/viec-lam-thuc-tap-sinh.html" title="Việc làm Thực Tập Sinh">Thực Tập
+                        Sinh</a>
+                  </li>
+                  <li><a href="/viec-lam-tro-ly-giam-doc.html" title="Việc làm Trợ Lý">Trợ Lý</a></li>
+                  <li><a href="/viec-lam-nhan-vien-van-phong.html" title="Việc làm Tài Xế">Nhân Viên Văn
+                        Phòng</a>
+                  </li>
+                  <li><a href="/viec-lam-truong-phong.html" title="Việc làm Trưởng Phòng">Trưởng Phòng</a>
+                  </li>
+                  <li><a href="/viec-lam-giam-doc.html" title="Việc làm Giám đốc">Giám đốc</a></li>
+                  
+               </ul>
+            </div>
+            <div class="footer-links">
+               <h4>Việc theo loại hình</h4>
+               <ul>
+                  <li><a href="/viec-lam-part-time.html" title="Việc làm Part-time">Part-time</a></li>
+                  <li><a href="/viec-lam-online.html" title="Việc làm Online">Online</a></li>
+                  <li><a href="/viec-lam-thoi-vu.html" title="Việc làm Thời vụ">Thời vụ</a></li>
+                  <li><a href="/viec-lam-remote.html" title="Việc làm Remote">Remote</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-bottom">
+            <div class="container-bk">
+               <div class="footer-bottom-grid">
+                  <div class="row align-items-center">
+                     <div class="col-md-10">
+                        <div class="footer-links">
+                           <a href="https://jobsgo.vn/site/about-us" title="Về chúng tôi"><span>Giới thiệu</span></a>
+                           <a href="https://jobsgo.vn/doc/terms" title="Điều khoản sử dụng"><span>Điều khoản <br/> sử dụng</span></a>
+                           <a target="_blank" href="https://jobsgo.vn/doc/privacy-policy" title="Chính sách bảo mật"><span>Chính sách <br/> bảo mật</span></a>
+                           <a href="https://jobsgo.vn/site/giai-quyet-tranh-chap" title="Giải quyết <br> tranh chấp"><span>Giải quyết <br> tranh chấp</span></a>
+                           <a rel="nofollow" target="_blank" href="https://jobsgo.vn/pdf/viewer/?file=https://jobsgo.vn/jobsgo_thoa_thuan_mang_xa_hoi.pdf"><span>Thoả thuận <br> sử dụng mạng XH</span></a>
+                           <a target="_blank" href="https://jobsgo.vn/pdf/viewer/?file=/media/pdf/quy-che-hoat-dong.pdf" title="Quy chế hoạt động"><span>Quy chế</span></a>
+                           <a target="_blank" href="https://employer.jobsgo.vn" title="JobsGO dành cho Nhà tuyển dụng tìm kiếm nhân sự"><span>Nhà Tuyển Dụng</span></a>
+                           <a href="https://jobsgo.vn/site/faq" title="Câu hỏi thường gặp"><span>FAQ</span></a>
+                           <a href="https://jobsgo.vn/blog/" target="_blank" title="Tin tức"><span>Blog</span></a>
+                           <a href="https://jobsgo.vn/hoi-dap/cau-hoi/" target="_blank" title="Hỏi &amp; Đáp"><span>Hỏi &amp; Đáp</span></a>
+                           <a href="https://jobsgo.vn/sitemap.html" title="Sơ đồ trang web"><span>Sitemap</span></a>
+                           <a rel="nofollow" href="https://jobsgo.vn/media/pdf/quy_dinh_dang_tin.pdf"
+                                                        title="Quy định đăng tin"><span>Quy định <br> đăng tin</span></a>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="footer-social">
+                           <a rel="nofollow" target="_blank" href="https://www.facebook.com/JobsGOVN/"><img loading="lazy" src="/_2025/img/fb.svg" alt="Facebook"></a>
+                           <a rel="nofollow" target="_blank" href="https://www.linkedin.com/company/josbgo.vn/"><img loading="lazy" src="/_2025/img/li.svg" alt="LinkedIn"></a>
+                           <a rel="nofollow" target="_blank" href="https://www.instagram.com/jobsgo_vn/"><img loading="lazy" src="/_2025/img/it.svg" alt="Instagram"></a>
+                           <a rel="nofollow" target="_blank" href="https://www.tiktok.com/@jobsgo.career"><img loading="lazy" src="/_2025/img/tt.svg" alt="TikTok"></a>
+                           <a rel="nofollow" target="_blank" href="https://www.threads.net/@jobsgo_vn"><img loading="lazy" src="/_2025/img/th.svg" alt="Threads"></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-10">
+                        <div class="footer-info">
+                           <p class="mb-0">Số ĐKKD: 0108266100, cấp ngày 09/05/2018 do Sở Kế hoạch và Đầu tư Thành phố Hà Nội cấp.<br>
+                              Giấy phép thiết lập Mạng xã hội trên mạng số 568/GP-BTTTT do Bộ Thông tin & Truyền thông cấp ngày 30/08/2021.
+                              <br>
+                              © 2026 Công ty Cổ phần JobsGO. All Rights Reserved.
+                           </p>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <div class="footer-badges">
+                           <a target="_blank" rel="nofollow" href="http://online.gov.vn/Home/WebDetails/73770?AspxAutoDetectCookieSupport=1">
+                              <img loading="lazy" height="36" src="/_2025/img/dkbct.png" alt="Đã đăng ký Bộ Công Thương">
+                           </a>
+                           <a target="_blank" rel="nofollow" class="dmca-badge" href="https://www.dmca.com/Protection/Status.aspx?ID=e55daa77-daa9-423d-b07c-aaf9a0c10f4e">
+                              <img loading="lazy" height="20" src="/_2025/img/dmca.png" alt="DMCA Protected">
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:99999;">
+      <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="d-flex">
+            <div class="toast-body" id="toastBody">
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+      </div>
+   </div>
+   
+   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+      function showToast(message, type = 'warning') {
+         const toastEl = document.getElementById('toast');
+         const toastBody = document.getElementById('toastBody');
+
+         toastBody.textContent = message;
+         toastEl.className = `toast align-items-center text-white bg-${type} border-0`;
+
+         const toast = new bootstrap.Toast(toastEl);
+         toast.show();
+      }
+      window.alert = function(message) {
+         showToast(message);
+      };
+      document.querySelectorAll('.modal').forEach(modalEl => {
+         if (modalEl.querySelector('.has-error')) {
+            new bootstrap.Modal(modalEl).show();
+         }
+      });
+   </script>
+   
+   
+
+   <script>
+      window.addEventListener('load', function() {
+         $(function() {
+
+            
+               function getCookieToday() {
+                  const name = 'jobsgo-logged-today';
+                  const value = `; ${document.cookie}`;
+                  const parts = value.split(`; ${name}=`);
+                  if (parts.length === 2) return parts.pop().split(';').shift();
+                  return null;
+               }
+
+               function setCookieToday() {
+                  const name = 'jobsgo-logged-today';
+                  const value = 1;
+                  const now = new Date();
+                  now.setHours(23, 59, 59, 999);
+                  const expires = "expires=" + now.toUTCString();
+                  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+               }
+
+               if (!getCookieToday()) {
+                  $.ajax({
+                     url: "/api/logged?",
+                     success() {
+                        setCookieToday();
+                        dataLayer.push({
+                          event: 'ads_conversion',
+                          conversion_label: 'UpnvCOeNqcQDEJWJqcIo'
+                        });
+                     }
+                  });
+               }
+            
+            $(document).on('change', '.js-job-status-toggle, #switch__input, .page-candidate-pre-profile #jobStatus', function() {
+               $.ajax({
+                  url: '/api/profile',
+                  data: {
+                     pk: 1,
+                     name: 'status',
+                     value: $(this).is(':checked') ? 0 : 2
+                  },
+                  success: function(response) {
+                     response = $.parseJSON(response);
+                     const on = response.mess === 'on';
+                     const statusClass = on ? 'status_on' : 'status_off';
+                     const statusText = on ? 'Đang tìm việc' : 'Đã tắt tìm việc';
+
+                     // Toggle checkboxes everywhere
+                     $('#switch__input, #jobStatus, #seekingToggle, .js-job-status-toggle').prop('checked', on);
+
+                     // Update text labels everywhere
+                     $('#status_job_search')
+                        .text(statusText)
+                        .removeClass('status_on status_off text-success text-danger')
+                        .addClass(statusClass)
+                        .addClass(on ? 'text-success' : 'text-danger');
+
+                     $('#switch__label, #seekingLabel, .js-job-status-label')
+                        .text(statusText)
+                        .removeClass('status_on status_off')
+                        .addClass(statusClass);
+
+                     $('.status, .status-text')
+                        .text(statusText)
+                        .removeClass('status_on status_off')
+                        .addClass(statusClass);
+
+                     // Update wrappers
+                     $('.dropdown-item-custom-switcher')
+                        .toggleClass('switcher-on', on)
+                        .toggleClass('switcher-off', !on);
+
+                     // Pre-profile block style
+                     const $job = $('#jobStatus');
+                     const $wrap = $job.closest('.form-control');
+                     const $label = $('label[for="jobStatus"]');
+                     $wrap.toggleClass('bg-status', on).toggleClass('bg-status-danger', !on);
+                     $label
+                        .toggleClass('text-success', on)
+                        .toggleClass('text-danger', !on)
+                        .text(statusText);
+                  },
+                  error: function() {
+                     const statusClass = 'status_off';
+                     const statusText = 'Đã tắt tìm việc';
+
+                     $('#switch__input, #jobStatus, #seekingToggle, .js-job-status-toggle').prop('checked', false);
+
+                     $('#status_job_search')
+                        .text(statusText)
+                        .removeClass('status_on status_off text-success text-danger')
+                        .addClass(statusClass)
+                        .addClass('text-danger');
+
+                     $('#switch__label, #seekingLabel, .js-job-status-label')
+                        .text(statusText)
+                        .removeClass('status_on status_off')
+                        .addClass(statusClass);
+
+                     $('.status, .status-text')
+                        .text(statusText)
+                        .removeClass('status_on status_off')
+                        .addClass(statusClass);
+
+                     $('.dropdown-item-custom-switcher')
+                        .addClass('switcher-off')
+                        .removeClass('switcher-on');
+                  }
+               });
+            });
+
+            // Capture click on the logout link
+            $('.logout-link').on('click', function(event) {
+               event.preventDefault();
+
+               // Show the confirmation modal
+               $('#logoutModal').modal('show');
+
+               // Handle confirm button click
+               $('#confirmLogoutBtn').on('click', function() {
+                  // Redirect to the logout URL
+                  window.location.href = $('.logout-link').attr('href');
+               });
+            });
+         });
+      });
+   </script>
+      <style>
+    .zalo-chat-widget{display:none}
+</style>
+        <script>
+            localStorage.setItem('userContactInfo', '{"phone":"","zalo":""}');
+            localStorage.setItem('cvList', '[{"name":"CV 1779327535","link":"https:\/\/jobsgo.vn\/cv-go\/dHdwcFZtTjhvc0gxVWdmMUhvcVpXUT09"}]');
+        </script>
+<div id="chat-widget-btn"
+     style="position: fixed !important; bottom: 20px; right: 20px; width: 54px; height: 54px;
+            background: #0084ff; border-radius: 50%; cursor: pointer; z-index: 9999;
+            display: flex; align-items: center; justify-content: center; position:relative;">
+
+    <span id="chat-unread-badge"
+          style="position:absolute; top:-5px; right:-5px; background:red; color:white;
+                 padding:2px 6px; font-size:12px; border-radius:12px; display:none;">
+        0
+    </span>
+
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+        <path d="M20 2H4C2.897 2 2 2.897 2 4V18C2 19.103 2.897 20 4 20H18L22 24V4C22 2.897 21.103 2 20 2Z"/>
+    </svg>
+</div>
+
+<div id="chat-widget-box"
+     style="position: fixed; bottom: 50px; right: 50px; width: 400px; height: 550px;
+            background: #fff; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.3)!important;
+            overflow: hidden; display: none; z-index: 9999999999;">
+
+    <iframe id="chat-iframe"
+            referrerpolicy="no-referrer"
+            style="width:100%; height:100%; border:0;">
+    </iframe>
+</div>
+
+<div id="chat-widget-close"
+     style="position: fixed; z-index: 9999999999; bottom: 20px; right: 20px;
+            cursor: pointer; font-size: 30px; background: #fff; border-radius: 50%;
+            width: 50px; height: 50px; display:none;
+            align-items: center; justify-content: center;
+            box-shadow:0 0 10px rgba(0,0,0,0.2) !important;
+            line-height: 1; padding-bottom: 2px;">
+    &times;
+</div>
+
+<script>
+    const chatBtn   = document.getElementById('chat-btn');
+    const iframe    = document.getElementById('chat-iframe');
+    const widgetBtn = document.getElementById('chat-widget-btn');
+    const box       = document.getElementById('chat-widget-box');
+    const closeBtn  = document.getElementById('chat-widget-close');
+    const badge     = document.getElementById('chat-unread-badge');
+
+    let unread = 0;
+
+    function renderBadge() {
+        badge.innerText = unread;
+        badge.style.display = unread > 0 ? 'inline-block' : 'none';
+    }
+
+    function openWidget(url) {
+        if (url) {
+            iframe.src = url;
+        } else if (!iframe.src) {
+            iframe.src = 'https://chat.jobsgo.vn/';
+        }
+
+        box.style.display = 'block';
+        widgetBtn.style.display = 'none';
+        closeBtn.style.display = 'flex';
+
+        renderBadge();
+    }
+
+    if (chatBtn) {
+        chatBtn.onclick = function () {
+            const chatId          = this.getAttribute('data-chat-id');
+            const candidateId     = this.getAttribute('data-candidate-id');
+            const jobJson         = this.getAttribute('data-job-json');
+            const employerId      = this.getAttribute('data-employer-id');
+            const subemployerId   = this.getAttribute('data-subemployer-id');
+            const jobId           = jobJson ? (JSON.parse(jobJson).id || '').replace('job_', '') : '';
+            fetch('/ajax/chat-click', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                body: new URLSearchParams({
+                    candidate_id: candidateId,
+                    job_id: jobId,
+                    employer_id: employerId,
+                    subemployer_id: subemployerId,
+                }).toString()
+            });
+            let url = '/chat/access?c=' + encodeURIComponent(chatId);
+            if (jobJson) url += '&job=' + encodeURIComponent(jobJson);
+            openWidget(url);
+        };
+    }
+    widgetBtn.onclick = function () {
+        openWidget();
+    };
+    closeBtn.onclick = function () {
+        box.style.display = 'none';
+        widgetBtn.style.display = 'flex';
+        closeBtn.style.display = 'none';
+        renderBadge();
+    };
+    window.addEventListener('message', e => {
+        if (!e.data || e.data.type !== 'IM_UNREAD_TOTAL') return;
+
+        unread = Number(e.data.count) || 0;
+
+        if (box.style.display === 'none') {
+            renderBadge();
+        }
+    });
+    let refreshTimers = [];
+    function requestUnreadCount() {
+        iframe.contentWindow?.postMessage({ type: 'IM_REFRESH_CONVERSATION' }, '*');
+    }
+    iframe.onload = () => {
+        // Clear any pending retry timers from a previous load
+        refreshTimers.forEach(t => clearTimeout(t));
+        refreshTimers = [];
+        requestUnreadCount();
+        refreshTimers.push(setTimeout(requestUnreadCount, 2000));
+        refreshTimers.push(setTimeout(requestUnreadCount, 5000));
+    };
+    setTimeout(() => {
+        iframe.src = '/chat/access';
+    }, 1500);
+   
+</script>
+<style>
+.support-button {
+    position: fixed;
+    right: -40px;
+    top: 50%;
+    transform: rotate(-90deg);
+    z-index: 999;
+    background: #ff5722;
+    color: white;
+    border: none;
+    padding: 5px 15px 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.support-button svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.support-button:hover {
+    background: #e64a19;
+}
+
+#supportModal .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+}
+
+#supportModal .modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+}
+
+#supportModal .modal-header .close {
+    padding: 0;
+    top: 4px;
+    font-weight: 300 !important;
+    font-size: 35px !important;
+    opacity: .8;
+    color: white !important;
+    background: transparent;
+}
+
+#supportModal .modal-header {
+    background: linear-gradient(135deg, #ff5722 0%, #ff7043 100%);
+    color: white !important;
+    padding: 10px 25px !important;
+    align-items: center;
+}
+
+#supportModal .modal-header h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: white !important;
+}
+
+#supportModal .modal-header svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    fill: white;
+}
+
+#supportModal .modal-body {
+    padding: 10px 25px;
+    background: #ffffff;
+}
+
+#supportModal .form-group {
+    margin-bottom: 20px;
+}
+
+#supportModal .form-group label {
+    display: block;
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+#supportModal .captcha-row {
+    display: block;
+}
+
+#supportModal .captcha-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+#supportModal .captcha-top .captcha-label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+#supportModal .captcha-top img {
+    margin-bottom: 0 !important;
+}
+#supportModal .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+#supportModal .form-control:focus {
+    border-color: #ff5722;
+    box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+    background: #ffffff;
+}
+
+#supportModal .btn-group-vertical {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#supportModal .btn-group-vertical .btn {
+    box-shadow: none !important;
+    text-align: left;
+    padding: 5px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    background: #f8f9fa;
+    color: #2c3e50;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+#supportModal .btn-group-vertical label {
+    font-weight: 400;
+}
+
+#supportModal .btn-group-vertical .choice {
+    margin-right: 5px;
+}
+
+#supportModal .btn-group-vertical .btn input {
+    position: relative;
+    clip: initial;
+    margin-right: 5px;
+}
+
+#supportModal .uniform {
+    all: unset !important;
+}
+
+#supportModal .btn-group-vertical .btn:hover,
+#supportModal .btn-group-vertical .btn.active {
+    background: #fff5f2;
+}
+
+#supportModal .btn-default {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 2px solid #e9ecef;
+    color: #6c757d;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+#supportModal .btn-default:hover {
+    background: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+#supportModal .send-button {
+    background: #ff5722 !important;
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 190px;
+    transition: all 0.2s ease;
+    margin-bottom: 15px;
+}
+
+#supportModal .send-button:hover {
+    background: #f4511e;
+    transform: translateY(-1px);
+}
+
+#supportModal .send-button svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+#supportModal .zalo-direct-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 20px;
+    background: #0068FF;
+    color: white !important;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+#supportModal .zalo-direct-btn:hover {
+    background: #0055cc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 104, 255, 0.35);
+    text-decoration: none;
+    color: white !important;
+}
+
+#supportModal .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 12px;
+    color: #888;
+    font-size: 13px;
+}
+
+#supportModal .or-divider::before,
+#supportModal .or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e9ecef;
+}
+#supportModal #support-description{
+    height: 100px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    #supportModal .modal-dialog {
+        margin: 1rem;
+    }
+
+    #supportModal .modal-content {
+        border-radius: 12px;
+    }
+
+    #supportModal .modal-header,
+    #supportModal .modal-body,
+    #supportModal .modal-footer {
+        padding: 15px;
+    }
+    #supportModal .modal-title{
+        font-size: 15px !important;
+    }
+    #supportModal .form-control{
+        padding: 7px 12px;
+    }
+    #supportModal #support-description{
+        height: 80px;
+    }
+    #supportModal label.btn,#supportModal .form-control{
+        font-size: 13px;
+    }
+    #supportModal label.form-label{
+        font-size: 14px;
+    }
+    #supportModal .or-divider{
+        margin: 10px 0 10px;
+    }
+}
+
+#supportModal .btn-group-vertical {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Chia thành 2 cột */
+    gap: 8px;
+    /* Khoảng cách giữa các nút */
+    width: 100%;
+    /* Đảm bảo độ rộng tối đa */
+}
+
+#supportModal .btn-group-vertical .btn {
+    width: 100%;
+    /* Nút chiếm toàn bộ ô */
+    text-align: left;
+    /* Căn trái nội dung */
+}
+
+@media (max-width: 500px) {
+    .support-button {
+        right: -25px;
+        font-size: 13px;
+        gap: 5px;
+    }
+}
+</style>
+<!-- Nút mở modal -->
+<button class="support-button text-white btn btn-light" data-bs-toggle="modal" data-bs-target="#supportModal">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+        <path
+            d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80ZM364-182l48-110q-42-15-72.5-46.5T292-412l-110 46q23 64 71 112t111 72Zm-72-366q17-42 47.5-73.5T412-668l-46-110q-64 24-112 72t-72 112l110 46Zm188 188q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm116 178q63-24 110.5-71.5T778-364l-110-48q-15 42-46 72.5T550-292l46 110Zm72-368 110-46q-24-63-71.5-110.5T596-778l-46 112q41 15 71 45.5t47 70.5Z" />
+    </svg>
+    Hỗ trợ
+</button>
+
+<!-- Modal -->
+<div id="supportModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-6">Gửi Yêu Cầu Hỗ Trợ Hoặc Nhắn Tin Trực Tiếp</h4>
+                <button type="button" class="btn-close" style="filter: invert(1) grayscale(100%) brightness(200%);"
+                    data-bs-dismiss="modal" aria-label="Đóng"></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <a href="https://zalo.me/409462990633304042" target="_blank" rel="noopener" class="zalo-direct-btn">
+                        <img src="https://employer.jobsgo.vn/_2025/img/menu1/ic3.svg" alt="Zalo Icon">
+                        Nhắn tin trực tiếp với chúng tôi
+                    </a>
+                </div>
+                <div class="or-divider">Hoặc gửi thông tin hỗ trợ bằng mẫu dưới đây</div>
+                <form id="supportForm">
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label class="form-label" for="support-phone">Số điện thoại</label>
+                            <input type="tel" maxlength="10" id="support-phone" class="form-control"
+                                value=""
+                                placeholder="Số điện thoại" required>
+                        </div>
+                        <div class="col">
+                            <label class="form-label" for="support-email">Email</label>
+                            <input type="email" id="support-email" class="form-control"
+                                value="vothithaovy06@gmail.com"
+                                placeholder="Email">
+                        </div>
+                    </div>
+
+                    <!-- Chủ đề cần hỗ trợ -->
+                    <div class="mb-3">
+                        <label class="form-label">Chủ đề cần hỗ trợ</label>
+                        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons"> <label
+                                class="btn btn-default"> <input type="radio" name="category" value="Lỗi đăng ký"> Lỗi
+                                đăng ký </label> <label class="btn btn-default"> <input type="radio" name="category"
+                                    value="Lỗi điền hồ sơ"> Lỗi điền hồ sơ </label> <label class="btn btn-default">
+                                <input type="radio" name="category" value="Lỗi ứng tuyển"> Lỗi ứng tuyển </label> <label
+                                class="btn btn-default"> <input type="radio" name="category"
+                                    value="Lỗi tìm kiếm công việc"> Lỗi tìm kiếm việc </label> <label
+                                class="btn btn-default"> <input type="radio" name="category" value="Lỗi tải CV lên"> Lỗi
+                                tải CV lên </label> <label class="btn btn-default"> <input type="radio" name="category"
+                                    value="Lỗi tải CV xuống"> Lỗi tải CV xuống </label> </div>
+
+                    </div>
+
+                    <!-- Mô tả lỗi -->
+                    <div class="mb-3">
+                        <label class="form-label" for="support-description">Mô tả lỗi</label>
+                        <textarea id="support-description" class="form-control" required></textarea>
+                    </div>
+
+                    <!-- Captcha -->
+                    <div class="mb-3">
+                        <div class="captcha-row">
+                            <div class="captcha-top"><label class="form-label captcha-label">Mã xác nhận</label><img id="verifyCode-image" src="/site/captcha?v=6a0ed9588fe304.90549693" alt="" title="Click để đổi mã" style="cursor:pointer; border-radius: 8px; margin-bottom: 5px;"></div><div class="captcha-input-line"><input type="text" id="verifyCode" class="form-control" name="verifyCode" placeholder="Nhập mã xác nhận"></div>                        </div>
+                    </div>
+
+                    <!-- Nút gửi -->
+                    <div class="mt-3 border-0">
+                        <button type="submit" class="btn btn-primary send-button">Gửi yêu cầu hỗ trợ</button>
+                    </div>
+                </form>
+
+                <!-- Thông báo thành công -->
+                <div id="successMessage" class="alert alert-info mt-3" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        $('#supportModal').find('div.choice').removeClass('choice').css('display', 'inline-block');
+    }, 1000);
+
+    $("#supportForm").on("submit", function(event) {
+        event.preventDefault();
+
+        var submitButton = $(".send-button");
+        submitButton.prop("disabled", true).text("Đang gửi...");
+
+        let phone = document.getElementById("support-phone").value.trim();
+        let email = document.getElementById("support-email").value.trim();
+        let description = document.getElementById("support-description").value.trim();
+        let url = window.location.href;
+        let categoryElement = document.querySelector('input[name="category"]:checked');
+        let verifyCode = document.getElementById("verifyCode").value.trim();
+
+        if (!categoryElement) {
+            alert("Vui lòng chọn chủ đề cần hỗ trợ!");
+            submitButton.prop("disabled", false).text("Gửi");
+            return;
+        }
+
+        let formData = new FormData();
+        formData.set("phone", phone);
+        formData.set("email", email);
+        formData.set("category", categoryElement.value);
+        formData.set("description", description);
+        formData.set("url", url);
+        formData.set("verifyCode", verifyCode);
+
+        fetch("/support/request", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    $('#supportForm').hide();
+                    $('#successMessage').html(data.message).fadeIn();
+                } else {
+                    alert(data.message || "Có lỗi xảy ra, vui lòng thử lại.");
+                    submitButton.prop("disabled", false).text("Gửi");
+                    // Reload captcha nếu có
+                    if (typeof grecaptcha !== "undefined") {
+                        grecaptcha.reset();
+                    }
+                }
+            })
+            .catch(() => {
+                alert("Có lỗi xảy ra, vui lòng thử lại.");
+                submitButton.prop("disabled", false).text("Gửi");
+            });
+    });
+});
+</script>      
+<style>
+/* Header */
+.modal-header-custom {
+    background: linear-gradient(135deg, #2466c9, #4c8ef5);
+    color: white;
+    border-top-left-radius: 16px !important;
+    border-top-right-radius: 16px !important;
+}
+
+/* Box gợi ý */
+.tip-box {
+    background: #f3f6fc;
+}
+
+/* Buttons */
+.btn-cancel {
+    background: #f8f9fa;
+    border: 1px solid #dcdcdc;
+}
+
+.btn-ok {
+    background: linear-gradient(135deg, #2466c9, #4c8ef5);
+}
+
+/* Animation khi modal xuất hiện */
+.ask-create-cv-modal .modal-dialog {
+    transform: translateY(-40px);
+    opacity: 0;
+    transition: all .35s ease;
+}
+
+.ask-create-cv-modal.show .modal-dialog {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+</style>
+<div class="modal fade ask-create-cv-modal" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content rounded-4 shadow-lg">
+
+      <!-- Header -->
+      <div class="modal-header modal-header-custom text-center d-block py-4">
+        <h4 class="fw-bold mb-0 text-white">Đăng ký thành công!</h4>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body text-center px-4 py-3">
+        <p class="fs-6 mb-3">
+          Bạn đã tạo tài khoản <strong>JobsGO</strong> thành công.
+        </p>
+
+        <div class="tip-box rounded-3 text-start mx-auto p-3">
+          <div class="fw-semibold text-primary mb-1"><i class="pb-heroicons pb pb-heroicons-light-bulb"></i> Gợi ý tiếp theo</div>
+          <div class="text-muted">
+            Hãy tạo CV / tải CV lên để Nhà tuyển dụng thấy hồ sơ của bạn.
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer border-0 d-flex justify-content-between px-4 pb-4">
+        <button type="button" class="btn btn-light btn-cancel px-4 py-2 rounded-3" data-bs-dismiss="modal">
+          Hủy
+        </button>
+
+        <a target="_blank" href="/candidate/document-attachment" class="btn btn-ok px-4 py-2 rounded-3 text-white">
+          Tiếp tục <i class="pb pb-heroicons pb-heroicons-chevron-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const modalEl = document.getElementById('successModal');
+    const modal = new bootstrap.Modal(modalEl, {
+        backdrop: 'static',
+        keyboard: false
+    });
+
+    if (!localStorage.getItem("askCreateCvShown")) {
+
+        setTimeout(() => { modal.show(); }, 200);
+        localStorage.setItem("askCreateCvShown", "1");
+    }
+
+    const btnContinue = modalEl.querySelector('.btn-ok');
+    btnContinue.addEventListener('click', function () {
+        modal.hide();
+    });
+});
+
+</script>
+
+
+<!-- Download Profile Modal -->
+<div class="modal fade" id="downloadProfileModal" tabindex="-1" aria-labelledby="downloadProfileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="margin-top: 3%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="downloadProfileModalLabel">Tải về hồ sơ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="cv-tpl-loading" class="text-center py-4">
+                    <div class="spinner-border text-primary"></div>
+                    <p class="mt-2 text-muted">Đang tải danh sách mẫu CV...</p>
+                </div>
+                <div id="cv-tpl-grid" class="row g-3" style="display:none;max-height:460px;overflow-y:auto;"></div>
+                <div id="cv-email-panel" class="mt-3" style="display:none;">
+                    <label for="cv-email-input" class="form-label fw-semibold">Nhập email nhận CV</label>
+                    <div class="input-group">
+                        <input type="email" id="cv-email-input" class="form-control" placeholder="example@gmail.com" value="vothithaovy06@gmail.com">
+                        <button type="button" id="btn-send-cv-email-confirm" class="btn btn-success">
+                            <span id="btn-send-email-spinner" class="spinner-border spinner-border-sm me-1" style="display:none;"></span>
+                            Gửi
+                        </button>
+                    </div>
+                    <div id="cv-email-status" class="form-text mt-2"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-show-send-cv-email" class="btn btn-outline-success" disabled>
+                    <i class="fa fa-envelope me-1"></i> Gửi CV về email
+                </button>
+                <button type="button" id="btn-do-download-cv" class="btn btn-primary" disabled>
+                    <span id="btn-dl-spinner" class="spinner-border spinner-border-sm me-1" style="display:none;"></span>
+                    <i class="fa fa-download me-1"></i> Tải xuống
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+(function () {
+    var selectedThemeId = null;
+    var templatesLoaded = false;
+    var modal = document.getElementById('downloadProfileModal');
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    modal.addEventListener('show.bs.modal', function () {
+        if (templatesLoaded) return;
+        loadCvTemplates();
+    });
+
+    function loadCvTemplates() {
+        $.get('/candidate/get-cv-templates', function (res) {
+            if (!res.success) return;
+            var grid = $('#cv-tpl-grid');
+            grid.empty();
+            $.each(res.data, function (i, t) {
+                var col = $('<div class="col-6 col-md-3">');
+                col.html(
+                    '<div class="card cv-tpl-card h-100 position-relative" data-id="' + t.id + '" style="cursor:pointer;">' +
+                        '<img src="' + t.thumbnail + '" class="card-img-top" alt="' + t.name + '">' +
+                        '<div class="card-body p-2 text-center"><small class="fw-semibold">' + t.name + '</small></div>' +
+                    '</div>'
+                );
+                grid.append(col);
+            });
+            $('#cv-tpl-loading').hide();
+            grid.show();
+            templatesLoaded = true;
+
+            grid.on('click', '.cv-tpl-card', function () {
+                grid.find('.cv-tpl-card').removeClass('border border-primary border-2');
+                $(this).addClass('border border-primary border-2');
+                selectedThemeId = $(this).data('id');
+                $('#btn-do-download-cv').prop('disabled', false);
+                $('#btn-show-send-cv-email').prop('disabled', false);
+            });
+        });
+    }
+
+    $('#btn-show-send-cv-email').on('click', function () {
+        if (!selectedThemeId) return;
+        $('#cv-email-panel').slideDown(150);
+        $('#cv-email-status').removeClass('text-danger text-success text-muted').text('');
+        $('#cv-email-input').focus();
+    });
+
+    $('#btn-send-cv-email-confirm').on('click', function () {
+        if (!selectedThemeId) return;
+
+        var email = $.trim($('#cv-email-input').val());
+        if (!isValidEmail(email)) {
+            $('#cv-email-status')
+                .removeClass('text-success text-muted')
+                .addClass('text-danger')
+                .text('Email không hợp lệ. Vui lòng nhập lại.');
+            return;
+        }
+
+        var $btn = $(this);
+        $btn.prop('disabled', true);
+        $('#btn-send-email-spinner').show();
+        $('#cv-email-status')
+            .removeClass('text-danger text-success')
+            .addClass('text-muted')
+            .text('Đang gửi CV về email...');
+
+        $.post('/candidate/send-cv-to-email', {
+            theme_id: selectedThemeId,
+            email: email,
+            '_csrf-jobsgo-candidate': '9fo9pTggegbzRHLD_8S4tN3zWAq62m2pjY5TN3gt9qvHtVzLfHgKYZgXF7muk4nahLhpZP6RJ9n_6TtZLGOR-A=='
+        }, function (res) {
+            if (res.success) {
+                alert(res.message || 'CV đã được gửi về email của bạn. Vui lòng kiểm tra hộp thư đến.');
+                $('#cv-email-status')
+                    .removeClass('text-muted text-danger')
+                    .addClass('text-success')
+                    .text(res.message || 'CV đã được gửi về email của bạn. Vui lòng kiểm tra hộp thư đến.');
+            } else {
+                $('#cv-email-status')
+                    .removeClass('text-muted text-success')
+                    .addClass('text-danger')
+                    .text(res.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+            }
+        }).always(function () {
+            $btn.prop('disabled', false);
+            $('#btn-send-email-spinner').hide();
+        });
+    });
+
+    $('#btn-do-download-cv').on('click', function () {
+        if (!selectedThemeId) return;
+        var $btn = $(this);
+        $btn.prop('disabled', true);
+        $('#btn-dl-spinner').show();
+
+        $.post('/candidate/download-cv-with-theme', {
+            theme_id: selectedThemeId,
+            '_csrf-jobsgo-candidate': '9fo9pTggegbzRHLD_8S4tN3zWAq62m2pjY5TN3gt9qvHtVzLfHgKYZgXF7muk4nahLhpZP6RJ9n_6TtZLGOR-A=='
+        }, function (res) {
+            if (res.success && res.cv_id) {
+                 window.location = '/create-resume/get-pdf?cv_id=' + res.cv_id;
+            } else {
+                alert(res.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+            }
+        }).always(function () {
+            $btn.prop('disabled', false);
+            $('#btn-dl-spinner').hide();
+        });
+    });
+
+    modal.addEventListener('hidden.bs.modal', function () {
+        selectedThemeId = null;
+        $('#cv-tpl-grid .cv-tpl-card').removeClass('border border-primary border-2');
+        $('#btn-do-download-cv').prop('disabled', true);
+        $('#btn-show-send-cv-email').prop('disabled', true);
+        $('#cv-email-panel').hide();
+        $('#cv-email-input').val('');
+        $('#cv-email-status').removeClass('text-danger text-success text-muted').text('');
+    });
+})();
+</script>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+   <div class="modal-content">
+      <div class="modal-header" style="padding-left: 20px !important; padding-right: 20px !important">
+         <h5 class="modal-title text-bold" id="logoutModalLabel">Xác nhận</h5>
+         
+      </div>
+      <div class="modal-body" style="padding: 15px 20px !important;">
+         <img src="https://media.jobsgo.vn/media/icon_profile/logout.svg" alt="">
+         <span style="margin-left: 10px; font-size: 14px" class="text-muted" id="logoutMessage">Bạn có muốn thoát khỏi hệ thống?</span>
+         <div class="border-top-blue mt-15"></div>
+      </div>
+      <div class="modal-footer b" style="padding: 15px 20px !important">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+            style="background: transparent !important; border: 1px solid #afafaf !important; color: #777777 !important">
+            Hủy bỏ
+         </button>
+         <button type="button" class="btn btn-danger" id="confirmLogoutBtn">Đồng ý</button>
+      </div>
+   </div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var navbarNav = document.getElementById('navbarNav');
+    var customDropdownMenu = document.querySelector('.custom-dropdown-menu');
+    if (navbarNav && customDropdownMenu) {
+        navbarNav.addEventListener('show.bs.collapse', function() {
+            if (window.innerWidth < 992) {
+                customDropdownMenu.classList.add('show');
+            }
+        });
+        navbarNav.addEventListener('hide.bs.collapse', function() {
+            customDropdownMenu.classList.remove('show');
+        });
+    }
+});
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e7e803c861814d97a4f6d257ad7f8b01","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+﻿<style>
+#jg-sp2-root {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    z-index: 9998;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+.jg-sp2-panel {
+    width: 260px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 16px 48px rgba(0,80,180,.22), 0 4px 16px rgba(0,80,180,.1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(12px) scale(.97);
+    transition: opacity .3s cubic-bezier(.34,1.56,.64,1), transform .3s cubic-bezier(.34,1.56,.64,1);
+    pointer-events: none;
+    display: none;
+}
+.jg-sp2-panel.jg-sp2-show { display: block; }
+.jg-sp2-panel.jg-sp2-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+/* Header */
+.jg-sp2-header {
+    padding: 11px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, #0060cc 0%, #0084ff 100%);
+}
+.jg-sp2-htitle { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: .1px; margin: 0; }
+.jg-sp2-hright { display: flex; align-items: center; gap: 6px; }
+.jg-sp2-theme-btn {
+    width: 22px; height: 22px; border-radius: 5px;
+    background: rgba(255,255,255,.15); border: none;
+    color: rgba(255,255,255,.8); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background .15s; padding: 0;
+}
+.jg-sp2-theme-btn:hover { background: rgba(255,255,255,.25); color: #fff; }
+.jg-sp2-close {
+    width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.6); cursor: pointer; font-size: 18px; line-height: 1; border-radius: 4px;
+    transition: all .15s; background: none; border: none; font-family: inherit;
+}
+.jg-sp2-close:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* Sort bar */
+.jg-sp2-sort-bar {
+    display: none !important;
+}
+.jg-sp2-sort-label { font-size: 9px; font-weight: 500; color: #b0b8d4; text-transform: uppercase; letter-spacing: .4px; white-space: nowrap; }
+.jg-sp2-sort-btn {
+    font-size: 10px; font-weight: 600; font-family: inherit;
+    padding: 3px 9px; border-radius: 99px;
+    border: 1px solid #cce4ff; background: transparent; color: #5599cc;
+    cursor: pointer; transition: all .18s;
+    display: inline-flex; align-items: center; gap: 4px;
+}
+.jg-sp2-sort-btn:hover { background: #e6f3ff; color: #0084ff; border-color: #b3d4ff; }
+.jg-sp2-sort-btn.active {
+    background: linear-gradient(90deg, #0084ff, #0060cc);
+    border-color: transparent; color: #fff;
+    box-shadow: 0 2px 8px rgba(0,132,255,.3);
+}
+
+/* Job card */
+.jg-sp2-body { padding: 14px 16px; overflow: hidden; }
+.jg-sp2-job { background: #fff; }
+.jg-sp2-jtop { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.jg-sp2-logo {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: linear-gradient(135deg, #cce4ff, #99ccff);
+    border: 1px solid #66b3ff;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+}
+.jg-sp2-logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; }
+.jg-sp2-jinfo { flex: 1; min-width: 0; }
+.jg-sp2-jtitle { font-size: 13.5px; font-weight: 700; color: #111827; margin: 0 0 3px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.jg-sp2-jco { font-size: 12px; color: #6b7280; margin: 0; line-height: 1.4; }
+
+/* Info fields block */
+.jg-sp2-fields {
+    display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;
+    padding: 10px 12px; background: #f0f8ff; border-radius: 8px; border: 1px solid #dceeff;
+}
+.jg-sp2-field { display: flex; gap: 8px; align-items: center; }
+.jg-sp2-flabel { font-size: 11.5px; color: #9ca3af; width: 76px; flex-shrink: 0; }
+.jg-sp2-fval { font-size: 12px; color: #0060cc; font-weight: 600; min-width: 0; }
+.jg-sp2-fval-places { display: flex; flex-wrap: wrap; gap: 2px; align-items: center; }
+.jg-sp2-place-more {
+    display: inline-flex; align-items: center;
+    padding: 1px 5px; border-radius: 99px;
+    background: #cce4ff; color: #3399dd;
+    font-size: 9px; font-weight: 700;
+}
+
+/* Action buttons */
+.jg-sp2-actions { display: flex; gap: 8px; }
+.jg-sp2-btn-detail {
+    flex: 1; padding: 9px; border-radius: 8px;
+    border: 1px solid #e5e7eb; background: transparent;
+    font-size: 12.5px; font-weight: 600; color: #0084ff;
+    cursor: pointer; transition: all .15s; font-family: inherit;
+    text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+}
+.jg-sp2-btn-detail:hover { background: #e6f3ff; color: #0084ff; text-decoration: none; }
+.jg-sp2-btn-apply {
+    flex: 1; padding: 9px; border-radius: 8px;
+    border: none; background: linear-gradient(135deg, #0084ff, #0060cc);
+    font-size: 12.5px; font-weight: 600; color: #fff;
+    cursor: pointer; transition: opacity .15s; font-family: inherit;
+    text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+}
+.jg-sp2-btn-apply:hover { opacity: .88; color: #fff; text-decoration: none; }
+
+/* Footer with dots + nav */
+.jg-sp2-footer {
+    padding: 9px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: #f0f8ff; border-top: 1px solid #dceeff;
+}
+.jg-sp2-dots { display: flex; gap: 5px; align-items: center; }
+.jg-sp2-dot {
+    height: 6px; border-radius: 99px;
+    background: #b3d4ff; transition: all .2s; cursor: pointer;
+    border: none; padding: 0;
+}
+.jg-sp2-dot.active { width: 16px; background: #0084ff; }
+.jg-sp2-dot:not(.active) { width: 6px; }
+.jg-sp2-counter { font-size: 11px; font-weight: 600; color: #94a3b8; min-width: 44px; text-align: center; }
+.jg-sp2-nav { display: flex; gap: 4px; }
+.jg-sp2-nbtn {
+    width: 24px; height: 24px; border-radius: 6px;
+    border: 1px solid #b3d4ff; background: #fff; font-size: 13px; color: #0084ff;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all .15s; padding: 0;
+}
+.jg-sp2-nbtn:hover { background: #0084ff; color: #fff; border-color: #0084ff; }
+
+/* Loading & empty */
+.jg-sp2-loading { display: flex; align-items: center; justify-content: center; height: 80px; }
+.jg-sp2-spinner {
+    width: 22px; height: 22px;
+    border: 2px solid rgba(0,132,255,.2); border-top-color: #0084ff;
+    border-radius: 50%; animation: jg-sp2-spin .7s linear infinite;
+}
+@keyframes jg-sp2-spin { to { transform: rotate(360deg); } }
+.jg-sp2-empty {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: 20px 16px; text-align: center;
+}
+.jg-sp2-eico {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: #e6f3ff; border: 1.5px solid #cce4ff;
+    display: flex; align-items: center; justify-content: center; color: #0084ff;
+}
+.jg-sp2-etitle { font-size: 14px; font-weight: 600; color: #004499; margin: 0; }
+.jg-sp2-edesc { font-size: 11px; color: #64748b; margin: 4px 0 0; line-height: 1.6; }
+.jg-sp2-ebtn {
+    display: block; width: 100%; padding: 9px 14px;
+    background: linear-gradient(135deg, #0084ff, #0060cc);
+    border: none; border-radius: 10px; color: #fff;
+    font-size: 12px; font-weight: 600; text-align: center; text-decoration: none;
+    box-shadow: 0 2px 12px rgba(0,132,255,.3); font-family: inherit;
+}
+.jg-sp2-ebtn:hover { color: #fff; text-decoration: none; opacity: .9; }
+
+/* Dark theme overrides */
+.jg-sp2-panel.jg-sp2-dark {
+    background: linear-gradient(160deg, #1a2a6c 0%, #0f1e55 60%, #0a1640 100%);
+    box-shadow: 0 24px 64px rgba(10,22,64,.55), 0 0 0 1px rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.08);
+}
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-sort-bar { background: rgba(255,255,255,.04); border-bottom-color: rgba(255,255,255,.06); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-sort-label { color: rgba(200,215,255,.35); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-sort-btn { border-color: rgba(255,255,255,.12); color: rgba(200,215,255,.45); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-sort-btn:hover { background: rgba(255,255,255,.09); color: rgba(200,215,255,.85); border-color: rgba(255,255,255,.22); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-sort-btn.active { background: linear-gradient(90deg, #0070dd, #0084ff); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-job { background: transparent; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-logo { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.15); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-jtitle { color: #f0f8ff; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-jco { color: rgba(200,210,240,.7); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-fields { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.08); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-flabel { color: rgba(200,210,240,.5); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-fval { color: #b3d4ff; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-place-more { background: rgba(255,255,255,.1); color: rgba(200,215,255,.55); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-btn-detail { border-color: rgba(255,255,255,.15); color: #66b3ff; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-btn-detail:hover { background: rgba(255,255,255,.08); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-footer { background: rgba(255,255,255,.04); border-top-color: rgba(255,255,255,.06); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-dot { background: rgba(255,255,255,.2); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-dot.active { background: #0084ff; box-shadow: 0 0 6px rgba(0,132,255,.6); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-counter { color: rgba(200,215,255,.55); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-nbtn { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.12); color: rgba(200,215,255,.7); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-nbtn:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.2); color: #fff; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-spinner { border-color: rgba(0,132,255,.25); border-top-color: #0084ff; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-eico { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.1); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-etitle { color: #dceeff; }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-edesc { color: rgba(200,210,240,.5); }
+.jg-sp2-panel.jg-sp2-dark .jg-sp2-theme-btn { color: rgba(255,255,255,.8); }
+
+/* FAB */
+.jg-sp2-fab {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(135deg, #0060cc, #0084ff);
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(0,132,255,.5);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; position: relative;
+    transition: transform .2s, box-shadow .2s; flex-shrink: 0;
+}
+.jg-sp2-fab:hover { transform: scale(1.07); box-shadow: 0 6px 28px rgba(0,132,255,.65); }
+.jg-sp2-badge {
+    position: absolute; top: -4px; right: -4px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #ef4444; font-size: 10px; font-weight: 700;
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    border: 1px solid #fff;
+    animation: jg-sp2-pulse 2s ease-in-out infinite;
+}
+@keyframes jg-sp2-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+</style>
+
+<div id="jg-sp2-root">
+    <div id="jg-sp2-panel" class="jg-sp2-panel" role="dialog" aria-label="Gợi ý việc làm">
+        <div class="jg-sp2-header">
+            <span class="jg-sp2-htitle">Gợi ý việc làm</span>
+            <div class="jg-sp2-hright">
+                <button id="jg-sp2-theme-btn" class="jg-sp2-theme-btn" aria-label="Đổi giao diện" title="Đổi giao diện"></button>
+                <button class="jg-sp2-close" id="jg-sp2-close" aria-label="Đóng">&#215;</button>
+            </div>
+        </div>
+        <div id="jg-sp2-sort-bar" class="jg-sp2-sort-bar" style="display:none">
+            <span class="jg-sp2-sort-label">Sắp xếp:</span>
+            <button class="jg-sp2-sort-btn" data-sort="salary">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 9l2.5-3 2 1.5 3-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 3h-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                Lương cao
+            </button>
+            <button class="jg-sp2-sort-btn" data-sort="new">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="4.3" stroke="currentColor" stroke-width="1.4"/><path d="M6 3.8v2.4l1.4 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Mới đăng
+            </button>
+        </div>
+        <div class="jg-sp2-body" id="jg-sp2-body">
+            <div class="jg-sp2-loading"><div class="jg-sp2-spinner"></div></div>
+        </div>
+        <div id="jg-sp2-footer" class="jg-sp2-footer" style="display:none">
+            <div class="jg-sp2-dots" id="jg-sp2-dots"></div>
+            <div class="jg-sp2-nav">
+                <button class="jg-sp2-nbtn" id="jg-sp2-prev" aria-label="Trước">&#8249;</button>
+                <button class="jg-sp2-nbtn" id="jg-sp2-next" aria-label="Tiếp">&#8250;</button>
+            </div>
+        </div>
+    </div>
+    <button id="jg-sp2-fab" class="jg-sp2-fab" aria-label="Xem gợi ý việc làm" aria-expanded="false">
+        <span id="jg-sp2-fabicon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 22 22" fill="none">
+                <rect x="2" y="8" width="18" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M8 8V6.5A2.5 2.5 0 0111 4v0a2.5 2.5 0 012.5 2.5V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M2 13h18" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+        </span>
+        <span id="jg-sp2-badge" class="jg-sp2-badge" aria-hidden="true" style="display:none"></span>
+    </button>
+</div>
+
+<script>
+(function () {
+    var FETCH_URL = "\/ajax\/get-suggest-jobs-panel?layout=_simple";
+    var SVG_BAG  = '<svg width="30" height="30" viewBox="0 0 22 22" fill="none"><rect x="2" y="8" width="18" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M8 8V6.5A2.5 2.5 0 0111 4v0a2.5 2.5 0 012.5 2.5V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M2 13h18" stroke="currentColor" stroke-width="1.3"/></svg>';
+    var SVG_CLOSE = '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 2l9 9M11 2L2 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+    var SVG_BAG_EMPTY = '<svg width="26" height="26" viewBox="0 0 22 22" fill="none"><rect x="2" y="8" width="18" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M8 8V6.5A2.5 2.5 0 0111 4v0a2.5 2.5 0 012.5 2.5V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M2 13h18" stroke="currentColor" stroke-width="1.3"/></svg>';
+    var SVG_SUN  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l-1.41 1.41M4.93 19.07l1.41-1.41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    var SVG_MOON = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    var panel    = document.getElementById('jg-sp2-panel');
+    var fab      = document.getElementById('jg-sp2-fab');
+    var fabicon  = document.getElementById('jg-sp2-fabicon');
+    var badge    = document.getElementById('jg-sp2-badge');
+    var body     = document.getElementById('jg-sp2-body');
+    var footer   = document.getElementById('jg-sp2-footer');
+    var dotsEl   = document.getElementById('jg-sp2-dots');
+    var sortBar  = document.getElementById('jg-sp2-sort-bar');
+    var themeBtn = document.getElementById('jg-sp2-theme-btn');
+    var prevBtn  = document.getElementById('jg-sp2-prev');
+    var nextBtn  = document.getElementById('jg-sp2-next');
+
+    var jobs = [], idx = 0, isOpen = false, autoTimer = null, sliding = false, activeSort = '';
+
+    var THEME_KEY = 'jg_sp2_theme';
+    var activeTheme = (function() {
+        try { return localStorage.getItem(THEME_KEY) || 'light'; } catch(e) { return 'light'; }
+    }());
+
+    function applyTheme(theme) {
+        activeTheme = theme;
+        if (theme === 'dark') {
+            panel.classList.add('jg-sp2-dark');
+            themeBtn.innerHTML = SVG_SUN;
+            themeBtn.title = 'Chuyển giao diện sáng';
+        } else {
+            panel.classList.remove('jg-sp2-dark');
+            themeBtn.innerHTML = SVG_MOON;
+            themeBtn.title = 'Chuyển giao diện tối';
+        }
+        try { localStorage.setItem(THEME_KEY, theme); } catch(e) {}
+    }
+
+    themeBtn.addEventListener('click', function() {
+        applyTheme(activeTheme === 'light' ? 'dark' : 'light');
+    });
+    applyTheme(activeTheme);
+
+    var STORAGE_KEY = 'jg_sp2_state';
+    var AUTO_OPEN_LIMIT = 10;
+    var RESET_MS = 24 * 60 * 60 * 1000;
+
+    function getState() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
+    }
+    function saveState(s) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch(e) {}
+    }
+    function shouldAutoOpen() {
+        var s = getState(), now = Date.now();
+        if (s.firstOpen && (now - s.firstOpen) >= RESET_MS) { saveState({}); return true; }
+        if (s.dismissed) return false;
+        if ((s.count || 0) >= AUTO_OPEN_LIMIT) return false;
+        return true;
+    }
+    function recordAutoOpen() {
+        var s = getState(), now = Date.now();
+        if (!s.firstOpen) s.firstOpen = now;
+        s.count = (s.count || 0) + 1;
+        saveState(s);
+    }
+    function recordDismiss() {
+        var s = getState();
+        s.dismissed = true;
+        saveState(s);
+    }
+
+    function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function formatPlaces(placesStr) {
+        var places = placesStr.split(',').map(function(p) { return p.trim(); }).filter(Boolean);
+        if (places.length <= 2) return '<span class="jg-sp2-fval-places">' + places.map(esc).join(', ') + '</span>';
+        return '<span class="jg-sp2-fval-places">' + esc(places[0]) + ', ' + esc(places[1]) +
+            ' <span class="jg-sp2-place-more">+' + (places.length - 2) + '</span></span>';
+    }
+
+    function renderDots() {
+        if (!dotsEl) return;
+        if (jobs.length > 7) {
+            dotsEl.innerHTML = '<span class="jg-sp2-counter">' + (idx + 1) + ' / ' + jobs.length + '</span>';
+            return;
+        }
+        dotsEl.innerHTML = jobs.map(function(_, i) {
+            return '<button class="jg-sp2-dot' + (i === idx ? ' active' : '') + '" data-i="' + i + '" aria-label="Việc ' + (i + 1) + '"></button>';
+        }).join('');
+        dotsEl.querySelectorAll('.jg-sp2-dot').forEach(function(dot) {
+            dot.addEventListener('click', function() { navigate(0, parseInt(this.getAttribute('data-i'))); });
+        });
+    }
+
+    function buildJobCard(job) {
+        var logoHtml = job.logo
+            ? '<img src="' + esc(job.logo) + '" alt="' + esc(job.employer_name) + '" onerror="this.src=\'/img/employer-logo.jpg\'" style="width:100%;height:100%;object-fit:contain;border-radius:10px">'
+            : '';
+        var fieldsHtml = '';
+        if (job.salary) {
+            fieldsHtml += '<div class="jg-sp2-field"><span class="jg-sp2-flabel">Mức lương</span><span class="jg-sp2-fval">' + esc(job.salary) + '</span></div>';
+        }
+        if (job.place_names) {
+            fieldsHtml += '<div class="jg-sp2-field"><span class="jg-sp2-flabel">Địa điểm</span><span class="jg-sp2-fval">' + formatPlaces(job.place_names) + '</span></div>';
+        }
+        if (job.refresh_time) {
+            fieldsHtml += '<div class="jg-sp2-field"><span class="jg-sp2-flabel">Đăng</span><span class="jg-sp2-fval">' + esc(job.refresh_time) + '</span></div>';
+        }
+        return '<div class="jg-sp2-job">' +
+            '<div class="jg-sp2-jtop">' +
+                '<div class="jg-sp2-logo">' + logoHtml + '</div>' +
+                '<div class="jg-sp2-jinfo">' +
+                    '<p class="jg-sp2-jtitle" title="' + esc(job.job_title) + '">' + esc(job.job_title) + '</p>' +
+                    '<p class="jg-sp2-jco">' + esc(job.employer_name) + '</p>' +
+                '</div>' +
+            '</div>' +
+            (fieldsHtml ? '<div class="jg-sp2-fields">' + fieldsHtml + '</div>' : '') +
+            '<div class="jg-sp2-actions">' +
+                '<a href="' + esc(job.url) + '" class="jg-sp2-btn-detail" target="_blank" rel="noopener">Xem chi tiết</a>' +
+                '<a href="' + esc(job.url)+'&action=apply' + '" class="jg-sp2-btn-apply" target="_blank" rel="noopener">Ứng tuyển</a>' +
+            '</div>' +
+        '</div>';
+    }
+
+    function renderJob(i) {
+        idx = i;
+        body.innerHTML = buildJobCard(jobs[i]);
+        renderDots();
+    }
+
+    function navigate(dir, targetIdx) {
+        if (sliding) return;
+        var next = (targetIdx !== undefined) ? targetIdx : (idx + dir + jobs.length) % jobs.length;
+        var direction = (targetIdx !== undefined) ? (targetIdx > idx ? 1 : -1) : (dir > 0 ? 1 : -1);
+        if (next === idx && targetIdx === undefined) return;
+        var outCard = body.querySelector('.jg-sp2-job');
+        if (!outCard) { renderJob(next); resetAutoRotate(); return; }
+
+        sliding = true;
+        stopAutoRotate();
+
+        var tmp = document.createElement('div');
+        tmp.innerHTML = buildJobCard(jobs[next]);
+        var inCard = tmp.firstChild;
+
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'position:relative;overflow:hidden;border-radius:8px;height:' + outCard.offsetHeight + 'px';
+        outCard.parentNode.insertBefore(wrap, outCard);
+        wrap.appendChild(outCard);
+        outCard.style.position = 'relative';
+        outCard.style.zIndex = '1';
+
+        inCard.style.cssText = 'position:absolute;top:0;left:0;width:100%;box-sizing:border-box;z-index:2;transform:translateX(' + (direction > 0 ? '100%' : '-100%') + ')';
+        wrap.appendChild(inCard);
+
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                var t = 'transform .28s cubic-bezier(.4,0,.2,1)';
+                outCard.style.transition = t;
+                inCard.style.transition = t;
+                outCard.style.transform = direction > 0 ? 'translateX(-100%)' : 'translateX(100%)';
+                inCard.style.transform = 'translateX(0)';
+            });
+        });
+
+        setTimeout(function() {
+            sliding = false;
+            renderJob(next);
+            resetAutoRotate();
+        }, 300);
+    }
+
+    function renderEmpty() {
+        body.innerHTML =
+            '<div class="jg-sp2-empty">' +
+                '<div class="jg-sp2-eico">' + SVG_BAG_EMPTY + '</div>' +
+                '<div>' +
+                    '<p class="jg-sp2-etitle">Chưa có gợi ý phù hợp</p>' +
+                    '<p class="jg-sp2-edesc">Cập nhật hồ sơ để nhận gợi ý việc làm chính xác hơn.</p>' +
+                '</div>' +
+                '<a href="/candidate/profile" class="jg-sp2-ebtn">Cập nhật hồ sơ ngay</a>' +
+            '</div>';
+        footer.style.display = 'none';
+    }
+
+    function startAutoRotate() {
+        if (jobs.length > 1) {
+            autoTimer = setInterval(function() { navigate(1); }, 3500);
+        }
+    }
+    function stopAutoRotate() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    }
+    function resetAutoRotate() {
+        stopAutoRotate();
+        startAutoRotate();
+    }
+
+    function openPanel() {
+        isOpen = true;
+        panel.classList.add('jg-sp2-show');
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() { panel.classList.add('jg-sp2-open'); });
+        });
+        fab.setAttribute('aria-expanded', 'true');
+        fabicon.innerHTML = SVG_CLOSE;
+        badge.style.display = 'none';
+        if (jobs.length) { startAutoRotate(); }
+    }
+
+    function closePanel() {
+        isOpen = false;
+        panel.classList.remove('jg-sp2-open');
+        fab.setAttribute('aria-expanded', 'false');
+        fabicon.innerHTML = SVG_BAG;
+        if (jobs.length) { badge.textContent = jobs.length; badge.style.display = 'flex'; }
+        stopAutoRotate();
+        setTimeout(function() {
+            if (!isOpen) { panel.classList.remove('jg-sp2-show'); }
+        }, 300);
+    }
+
+    fab.addEventListener('click', function() {
+        if (isOpen) { recordDismiss(); closePanel(); } else { openPanel(); }
+    });
+    document.getElementById('jg-sp2-close').addEventListener('click', function() {
+        recordDismiss(); closePanel();
+    });
+    prevBtn.addEventListener('click', function() { navigate(-1); });
+    nextBtn.addEventListener('click', function() { navigate(1); });
+
+    sortBar.querySelectorAll('.jg-sp2-sort-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var sort = this.getAttribute('data-sort');
+            if (activeSort === sort) {
+                activeSort = '';
+                sortBar.querySelectorAll('.jg-sp2-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+            } else {
+                activeSort = sort;
+                sortBar.querySelectorAll('.jg-sp2-sort-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+            }
+            stopAutoRotate();
+            loadJobs(activeSort, false);
+        });
+    });
+
+    function loadJobs(sort, isInitial) {
+        body.innerHTML = '<div class="jg-sp2-loading"><div class="jg-sp2-spinner"></div></div>';
+        footer.style.display = 'none';
+        var url = FETCH_URL + (sort ? '?sort=' + encodeURIComponent(sort) : '');
+        fetch(url, { credentials: 'same-origin' })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.status === 1 && data.data && data.data.length > 0) {
+                    jobs = data.data;
+                    idx = 0;
+                    badge.textContent = jobs.length;
+                    badge.style.display = 'flex';
+                    footer.style.display = '';
+                    renderJob(0);
+                    if (isOpen) { resetAutoRotate(); }
+                    if (isInitial && shouldAutoOpen()) {
+                        setTimeout(function() {
+                            if (!isOpen) { openPanel(); recordAutoOpen(); }
+                        }, 3000);
+                    }
+                } else {
+                    renderEmpty();
+                }
+            })
+            .catch(function() { renderEmpty(); });
+    }
+
+    loadJobs('', true);
+}());
+</script>
+</html>

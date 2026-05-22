@@ -50,7 +50,7 @@ nav {
 }
 .nav-inner {
   max-width: 1280px; margin: 0 auto; padding: 0 28px;
-  width: 100%; display: flex; align-items: center; gap: 40px;
+  width: 100%; display: flex; align-items: center;
 }
 .logo {
   font-size: 22px; font-weight: 900; color: var(--purple);
@@ -59,7 +59,8 @@ nav {
 }
 .logo-dot { width: 8px; height: 8px; background: var(--amber); border-radius: 50%; margin-bottom: 2px; }
 .nav-links {
-  display: flex; align-items: center; gap: 6px; flex: 1;
+  display: flex; align-items: center; gap: 6px;
+  flex: 1; justify-content: center;
 }
 .nav-link {
   padding: 8px 12px; font-size: 14px; font-weight: 500;
@@ -70,7 +71,7 @@ nav {
 .nav-link:hover { color: var(--purple); background: var(--purple-100); }
 .nav-link.active { color: var(--purple); font-weight: 600; }
 .nav-link .arrow { font-size: 16px; opacity: .7; }
-.nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; margin-left: auto; }
 .btn-outline {
   height: 38px; padding: 0 18px; border-radius: 8px;
   border: 1.5px solid var(--purple); color: var(--purple);
@@ -135,111 +136,83 @@ nav {
 .ud-logout:hover { background: #FEF2F2 !important; color: #EF4444 !important; }
 .ud-logout i { color: #EF4444 !important; }
 
-/* ── HERO ── */
+/* ══════════════════════════════════════
+   ── HERO (redesigned — centered layout)
+   ══════════════════════════════════════ */
 .hero {
   margin-top: 68px;
-  background: linear-gradient(130deg, #2D0B6B 0%, #4C1D95 35%, #6D28D9 70%, #8B5CF6 100%);
+  background: linear-gradient(rgba(76,29,149,0.82), rgba(76,29,149,0.82)),
+              url('./img/hero1.png') center/cover no-repeat;
   display: flex; flex-direction: column;
-  overflow: hidden;
-  background: linear-gradient(rgba(76,29,149,0.75), rgba(76,29,149,0.75)),
-              url('./img/hero.png') center/cover no-repeat;
 }
 .hero-inner {
-  max-width: 1280px; margin: 0 auto; padding: 52px 40px 48px;
+  max-width: 860px; margin: 0 auto; padding: 72px 40px 64px;
   width: 100%;
-  display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: center;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 6px;
   background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
   color: rgba(255,255,255,.95); font-size: 12px; font-weight: 600;
-  padding: 5px 14px; border-radius: 999px; margin-bottom: 20px;
+  padding: 5px 14px; border-radius: 999px; margin-bottom: 22px;
 }
 .hero-badge-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
 
 .hero h1 {
-  font-size: 50px; font-weight: 900; color: var(--white);
-  line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 14px;
+  font-size: 52px; font-weight: 900; color: var(--white);
+  line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px;
 }
 .hero h1 span { color: var(--amber); }
 .hero-sub {
-  font-size: 15px; color: rgba(255,255,255,.75); margin-bottom: 28px; line-height: 1.65; max-width: 440px;
+  font-size: 15px; color: rgba(255,255,255,.75); margin-bottom: 32px; line-height: 1.65;
+  max-width: 560px;
 }
 
-/* Search bar */
+/* Search bar — wide single row */
 .search-bar {
   background: var(--white); border-radius: 12px;
   box-shadow: 0 16px 48px rgba(0,0,0,.22);
-  display: flex; align-items: center; padding: 5px 5px 5px 0;
-  margin-bottom: 16px; overflow: hidden;
+  display: flex; align-items: center; padding: 5px;
+  margin-bottom: 18px; overflow: hidden;
+  width: 100%;
 }
 .search-field {
   flex: 1; display: flex; align-items: center; gap: 8px;
-  padding: 9px 14px; border-right: 1px solid var(--gray-300);
+  padding: 10px 16px;
 }
-.search-field:last-of-type { border-right: none; }
-.search-field .mat-icon { color: var(--gray-500); font-size: 18px; flex-shrink: 0; }
+.search-field.location {
+  flex: 0 0 220px;
+  border-left: 1px solid var(--gray-300);
+}
+.search-field .mat-icon { color: var(--gray-500); font-size: 20px; flex-shrink: 0; }
 .search-field input {
-  border: none; outline: none; font-size: 13px; color: var(--gray-900);
+  border: none; outline: none; font-size: 14px; color: var(--gray-900);
   font-family: 'Be Vietnam Pro', sans-serif; width: 100%; background: transparent;
 }
 .search-field input::placeholder { color: var(--gray-500); }
+.search-field select {
+  border: none; outline: none; font-size: 14px; color: var(--gray-700);
+  font-family: 'Be Vietnam Pro', sans-serif; background: transparent;
+  cursor: pointer; width: 100%;
+}
 .search-btn {
-  height: 44px; padding: 0 24px; background: var(--purple); color: var(--white);
+  height: 48px; padding: 0 32px; background: var(--purple); color: var(--white);
   border: none; border-radius: 9px; font-size: 14px; font-weight: 700;
   cursor: pointer; white-space: nowrap; transition: all .18s;
   font-family: 'Be Vietnam Pro', sans-serif; flex-shrink: 0;
 }
 .search-btn:hover { background: var(--purple-dark); }
 
-.hot-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.hot-label { font-size: 12px; color: rgba(255,255,255,.6); }
+.hot-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.hot-label { font-size: 12px; color: rgba(255,255,255,.7); font-weight: 600; }
 .tag {
-  font-size: 11px; color: rgba(255,255,255,.88);
+  font-size: 12px; color: rgba(255,255,255,.88);
   background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2);
-  padding: 3px 10px; border-radius: 999px; cursor: pointer;
+  padding: 4px 14px; border-radius: 999px; cursor: pointer;
   transition: all .18s;
 }
 .tag:hover { background: rgba(255,255,255,.22); }
-
-/* Hero right — floating cards */
-.hero-right { position: relative; height: 300px; }
-.hero-illustration {
-  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-  width: 320px; height: 240px;
-  background: rgba(255,255,255,.07); border-radius: 20px;
-  border: 1px solid rgba(255,255,255,.14);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 10px;
-}
-.hero-illus-icon { font-size: 52px; color: rgba(255,255,255,.3); }
-.hero-illus-text { color: rgba(255,255,255,.4); font-size: 12px; }
-
-.float-card {
-  position: absolute; background: var(--white); border-radius: 12px;
-  box-shadow: 0 12px 36px rgba(0,0,0,.18); padding: 12px 14px;
-  animation: float 4s ease-in-out infinite;
-}
-.float-card-1 { top: 24px; left: 0; width: 210px; animation-delay: 0s; }
-.float-card-2 { bottom: 24px; right: 0; width: 228px; animation-delay: 1.6s; }
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-.fc-label { font-size: 10px; color: var(--gray-500); margin-bottom: 5px; font-weight: 500; }
-.fc-main { font-size: 13px; font-weight: 700; color: var(--gray-900); display: flex; align-items: center; gap: 5px; }
-.fc-badge {
-  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
-  background: var(--purple-light); color: var(--purple);
-}
-.fc-badge.green { background: #DCFCE7; color: var(--green); }
-.fc-sub { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
-.fc-avatars { display: flex; margin-top: 6px; }
-.fc-av {
-  width: 22px; height: 22px; border-radius: 50%; border: 2px solid white;
-  margin-right: -5px; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: white;
-}
 
 /* ── HERO STATS ── */
 .hero-stats {
@@ -258,23 +231,28 @@ nav {
 .stat-num { font-size: 26px; font-weight: 900; color: var(--white); letter-spacing: -1px; }
 .stat-label { font-size: 12px; color: rgba(255,255,255,.6); margin-top: 2px; }
 
-/* ── 3-COL SECTION ── */
-.three-col { background: var(--white); padding: 24px 0; border-bottom: 1px solid #EBEBEB; }
+/* ══════════════════════════════════════
+   ── 3-COL SECTION (taller, bigger)
+   ══════════════════════════════════════ */
+.three-col { background: var(--white); padding: 28px 0; border-bottom: 1px solid #EBEBEB; }
 .three-col-inner {
   max-width: 1280px; margin: 0 auto; padding: 0 28px;
-  display: grid; grid-template-columns: 260px 1fr 260px; gap: 20px; align-items: start;
+  display: grid; grid-template-columns: 240px 1fr 260px; gap: 20px; align-items: stretch;
 }
 
 /* Category list */
+.cat-sidebar {
+  display: flex; flex-direction: column;
+}
 .cat-header {
   font-size: 12px; font-weight: 800; color: var(--gray-700);
   letter-spacing: .8px; text-transform: uppercase;
-  padding: 0 16px 12px; border-bottom: 1px solid #EBEBEB; margin-bottom: 4px;
+  padding: 0 14px 12px; border-bottom: 1px solid #EBEBEB; margin-bottom: 4px;
   display: flex; align-items: center; gap: 8px;
 }
 .cat-item {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 16px; font-size: 13.5px; color: var(--gray-700);
+  padding: 11px 14px; font-size: 13px; color: var(--gray-700);
   cursor: pointer; border-radius: 8px; transition: all .15s; font-weight: 500;
 }
 .cat-item:hover { background: var(--purple-100); color: var(--purple); }
@@ -283,246 +261,66 @@ nav {
 
 /* ── BANNER ── */
 .banner-wrap {
-  border-radius: 20px;
+  border-radius: 14px;
   overflow: hidden;
   position: relative;
-  height: 300px;
+  aspect-ratio: 2 / 1;
   background: #1a0533;
   display: flex;
   user-select: none;
-}
-
-.banner-slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
-.banner-slide.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.slide-1 { background: linear-gradient(120deg, #1a0533 0%, #3B1578 50%, #5B21B6 100%); }
-.slide-2 { background: linear-gradient(120deg, #0a1f3c 0%, #1a4080 50%, #2563EB 100%); }
-.slide-3 { background: linear-gradient(120deg, #1a1a0a 0%, #7c5c00 50%, #D97706 100%); }
-
-.banner-img-side {
-  width: 42%;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.banner-img-side img {
+  align-self: flex-start;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
 }
-.banner-img-side::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 55%, rgba(0,0,0,0.15) 100%);
+.banner-slide {
+  position: absolute; inset: 0; display: flex;
+  opacity: 0; transition: opacity 0.6s ease; pointer-events: none;
 }
-
-.slide-fade {
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 80px;
-  z-index: 2;
-}
-.slide-1 .slide-fade { background: linear-gradient(90deg, transparent, #3B1578); }
-.slide-2 .slide-fade { background: linear-gradient(90deg, transparent, #1a4080); }
-.slide-3 .slide-fade { background: linear-gradient(90deg, transparent, #7c5c00); }
-
-.banner-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 28px 28px 28px 24px;
-  position: relative;
-  z-index: 3;
-}
-
-.b-ribbon {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 999px;
-  padding: 4px 12px;
-  width: fit-content;
-  margin-bottom: 12px;
-  backdrop-filter: blur(4px);
-}
-.b-ribbon-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: #FCD34D;
-  animation: blink 1.8s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-.b-title {
-  font-size: 22px;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-  margin-bottom: 10px;
-}
-.b-title em {
-  font-style: normal;
-  color: #FCD34D;
-}
-
-.b-perks {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 16px;
-}
-.b-perk {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.85);
-  font-weight: 500;
-}
-.b-perk-icon {
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: rgba(74,222,128,0.25);
-  border: 1px solid rgba(74,222,128,0.5);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.b-perk-icon i { font-size: 9px; color: #4ADE80; }
-
-.b-actions { display: flex; align-items: center; gap: 10px; }
-
-.b-btn-primary {
-  background: #FCD34D;
-  color: #1a0533;
-  border: none;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 900;
-  padding: 9px 20px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  transition: transform 0.15s, filter 0.15s;
-}
-.b-btn-primary:hover { transform: translateY(-2px); filter: brightness(1.08); }
-
-.b-btn-ghost {
-  background: rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.9);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  transition: background 0.15s;
-}
-.b-btn-ghost:hover { background: rgba(255,255,255,0.2); }
-
-.deco-circle {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.08);
-  pointer-events: none;
-}
-.dc1 { width: 200px; height: 200px; top: -80px; right: 20px; }
-.dc2 { width: 120px; height: 120px; bottom: -40px; right: 80px; }
-.dc3 { width: 60px; height: 60px; top: 30px; right: 110px; background: rgba(255,255,255,0.03); }
-
-.salary-badge {
-  position: absolute;
-  top: 16px; right: 16px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 10px;
-  padding: 8px 12px;
-  backdrop-filter: blur(8px);
-  z-index: 10;
-}
-.salary-label { font-size: 9px; color: rgba(255,255,255,0.55); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
-.salary-val { font-size: 14px; font-weight: 900; color: #FCD34D; margin-top: 1px; }
+.banner-slide.active { opacity: 1; pointer-events: auto; }
+.banner-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 .banner-nav {
-  position: absolute;
-  bottom: 16px;
-  right: 20px;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  position: absolute; bottom: 16px; right: 16px;
+  z-index: 20; display: flex; align-items: center; gap: 10px;
 }
 .dots { display: flex; gap: 5px; }
 .dot {
-  width: 6px; height: 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.35);
-  cursor: pointer;
-  transition: all 0.3s;
+  width: 6px; height: 6px; border-radius: 999px;
+  background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.3s;
 }
 .dot.active { width: 18px; background: #FCD34D; }
-
 .nav-arrows { display: flex; gap: 6px; }
 .nav-arrow {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: white;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-  font-size: 13px;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+  color: white; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .15s; font-size: 14px;
 }
-.nav-arrow:hover { background: rgba(255,255,255,0.25); }
+.nav-arrow:hover { background: rgba(255,255,255,.3); }
 
-/* Tool cards */
-.tool-cards { display: flex; flex-direction: column; gap: 12px; }
+/* Tool cards sidebar */
+.tool-cards { display: flex; flex-direction: column; gap: 14px; }
 .tool-card {
-  background: white; border: 1px solid #EBEBEB; border-radius: 14px;
-  padding: 16px; display: flex; flex-direction: column; gap: 12px;
-  box-shadow: var(--shadow-sm); transition: all .2s;
+  background: white; border: 1.5px solid #EBEBEB; border-radius: 12px;
+  padding: 20px 18px; display: flex; flex-direction: column; gap: 14px;
+  box-shadow: var(--shadow-sm); transition: all .2s; flex: 1;
 }
 .tool-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 .tool-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
 .tool-icon {
-  width: 44px; height: 44px; border-radius: 10px;
+  width: 48px; height: 48px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
 }
 .tool-icon.purple { background: var(--purple-100); }
 .tool-icon.green { background: #DCFCE7; }
-.tool-icon .mat-icon { font-size: 24px; }
+.tool-icon .mat-icon { font-size: 26px; }
 .tool-icon.purple .mat-icon { color: var(--purple); }
 .tool-icon.green .mat-icon { color: var(--green); }
-.tool-title { font-size: 14px; font-weight: 700; color: var(--gray-900); }
-.tool-sub { font-size: 12px; color: var(--purple); font-weight: 600; margin-top: 2px; }
+.tool-title { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+.tool-sub { font-size: 12px; color: var(--purple); font-weight: 600; margin-top: 3px; }
+.tool-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-top: 2px; }
 .tool-btn-solid {
   background: var(--purple); color: white; border: none;
-  font-size: 12px; font-weight: 700; padding: 9px 0; border-radius: 8px;
+  font-size: 13px; font-weight: 700; padding: 11px 0; border-radius: 8px;
   cursor: pointer; text-transform: uppercase; letter-spacing: .5px;
   font-family: 'Be Vietnam Pro', sans-serif; transition: all .18s;
 }
@@ -530,7 +328,7 @@ nav {
 .tool-btn-outline {
   background: transparent; color: var(--purple);
   border: 1.5px solid var(--purple);
-  font-size: 12px; font-weight: 700; padding: 8px 0; border-radius: 8px;
+  font-size: 13px; font-weight: 700; padding: 10px 0; border-radius: 8px;
   cursor: pointer; text-transform: uppercase; letter-spacing: .5px;
   font-family: 'Be Vietnam Pro', sans-serif; transition: all .18s;
 }
@@ -565,59 +363,59 @@ nav {
   width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center; transition: all .2s;
 }
-.cat-icon-wrap .mat-icon { font-size: 22px; transition: color .2s; }
 .cat-icon-wrap i { font-size: 22px; transition: color .2s; line-height: 1; }
 .cat-body { flex: 1; min-width: 0; }
 .cat-name { font-size: 13.5px; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; line-height: 1.3; }
 .cat-count { font-size: 11.5px; color: var(--gray-500); font-weight: 500; }
 
 .cat-card:nth-child(1) .cat-icon-wrap { background: #EDE9FE; }
-.cat-card:nth-child(1) i, .cat-card:nth-child(1) .mat-icon { color: #7C3AED; }
+.cat-card:nth-child(1) i { color: #7C3AED; }
 .cat-card:nth-child(1):hover { border-color: #7C3AED; }
 .cat-card:nth-child(1):hover .cat-icon-wrap { background: #7C3AED; }
 .cat-card:nth-child(2) .cat-icon-wrap { background: #FEF3C7; }
-.cat-card:nth-child(2) i, .cat-card:nth-child(2) .mat-icon { color: #D97706; }
+.cat-card:nth-child(2) i { color: #D97706; }
 .cat-card:nth-child(2):hover { border-color: #D97706; }
 .cat-card:nth-child(2):hover .cat-icon-wrap { background: #D97706; }
 .cat-card:nth-child(3) .cat-icon-wrap { background: #DCFCE7; }
-.cat-card:nth-child(3) i, .cat-card:nth-child(3) .mat-icon { color: #16A34A; }
+.cat-card:nth-child(3) i { color: #16A34A; }
 .cat-card:nth-child(3):hover { border-color: #16A34A; }
 .cat-card:nth-child(3):hover .cat-icon-wrap { background: #16A34A; }
 .cat-card:nth-child(4) .cat-icon-wrap { background: #DBEAFE; }
-.cat-card:nth-child(4) i, .cat-card:nth-child(4) .mat-icon { color: #2563EB; }
+.cat-card:nth-child(4) i { color: #2563EB; }
 .cat-card:nth-child(4):hover { border-color: #2563EB; }
 .cat-card:nth-child(4):hover .cat-icon-wrap { background: #2563EB; }
 .cat-card:nth-child(5) .cat-icon-wrap { background: #FFE4E6; }
-.cat-card:nth-child(5) i, .cat-card:nth-child(5) .mat-icon { color: #E11D48; }
+.cat-card:nth-child(5) i { color: #E11D48; }
 .cat-card:nth-child(5):hover { border-color: #E11D48; }
 .cat-card:nth-child(5):hover .cat-icon-wrap { background: #E11D48; }
 .cat-card:nth-child(6) .cat-icon-wrap { background: #F3E8FF; }
-.cat-card:nth-child(6) i, .cat-card:nth-child(6) .mat-icon { color: #A21CAF; }
+.cat-card:nth-child(6) i { color: #A21CAF; }
 .cat-card:nth-child(6):hover { border-color: #A21CAF; }
 .cat-card:nth-child(6):hover .cat-icon-wrap { background: #A21CAF; }
 .cat-card:nth-child(7) .cat-icon-wrap { background: #CCFBF1; }
-.cat-card:nth-child(7) i, .cat-card:nth-child(7) .mat-icon { color: #0D9488; }
+.cat-card:nth-child(7) i { color: #0D9488; }
 .cat-card:nth-child(7):hover { border-color: #0D9488; }
 .cat-card:nth-child(7):hover .cat-icon-wrap { background: #0D9488; }
 .cat-card:nth-child(8) .cat-icon-wrap { background: #FEE2E2; }
-.cat-card:nth-child(8) i, .cat-card:nth-child(8) .mat-icon { color: #DC2626; }
+.cat-card:nth-child(8) i { color: #DC2626; }
 .cat-card:nth-child(8):hover { border-color: #DC2626; }
 .cat-card:nth-child(8):hover .cat-icon-wrap { background: #DC2626; }
 
-/* ── JOB CARDS (TopCV style) ── */
+/* ══════════════════════════════════════
+   ── JOB CARDS — vuông hơn (radius 4px)
+   ══════════════════════════════════════ */
 .jobs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
 .job-card {
-  background: white; border: 1.5px solid #E8E8E8; border-radius: 14px;
+  background: white; border: 1.5px solid #E8E8E8; border-radius: 4px;
   padding: 18px 18px 14px; transition: all .2s; cursor: pointer; position: relative;
-  display: flex; flex-direction: column; gap: 0;
+  display: flex; flex-direction: column;
 }
 .job-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,.09); border-color: #D1D5DB; transform: translateY(-2px); }
 .job-card.is-top { border-left: 3px solid var(--green); }
 
-/* Top row: logo + title/company + save btn */
 .job-card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
 .company-logo {
-  width: 64px; height: 64px; border-radius: 10px; flex-shrink: 0;
+  width: 64px; height: 64px; border-radius: 4px; flex-shrink: 0;
   background: white; border: 1px solid #E5E7EB; overflow: hidden;
   box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 6px;
   display: flex; align-items: center; justify-content: center;
@@ -635,16 +433,12 @@ nav {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   text-transform: uppercase; letter-spacing: .2px;
 }
-
-/* TOP badge */
 .top-badge {
   display: inline-flex; align-items: center; gap: 4px;
   background: var(--green); color: white;
-  font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;
+  font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 3px;
   letter-spacing: .5px; margin-bottom: 5px;
 }
-
-/* AI badge (giữ nguyên) */
 .ai-badge {
   display: inline-flex; align-items: center; gap: 3px;
   background: var(--purple-light); color: var(--purple);
@@ -652,8 +446,6 @@ nav {
   white-space: nowrap; margin-top: 5px;
 }
 .ai-badge .mat-icon { font-size: 11px; }
-
-/* Bottom row: tags + save */
 .job-footer {
   display: flex; align-items: center; justify-content: space-between;
   gap: 8px; border-top: 1px solid #F3F4F6; padding-top: 12px; margin-top: auto;
@@ -661,13 +453,13 @@ nav {
 .job-tags { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
 .job-tag {
   font-size: 12px; color: var(--gray-600); background: #F3F4F6;
-  padding: 5px 12px; border-radius: 999px; font-weight: 500; white-space: nowrap;
+  padding: 5px 12px; border-radius: 4px; font-weight: 500; white-space: nowrap;
   border: 1px solid #E8E8E8;
 }
 .job-tag.new-tag { color: var(--green); }
 .job-save {
   width: 36px; height: 36px; border: 1.5px solid #E0E0E0; background: white;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
   cursor: pointer; color: #BDBDBD; transition: all .18s; flex-shrink: 0;
 }
 .job-save:hover { border-color: #EF4444; color: #EF4444; background: #FFF5F5; }
@@ -863,7 +655,6 @@ footer { background: #0F172A; padding: 56px 0 0; }
 .nav-item.open .nav-link { color: var(--purple); background: var(--purple-100); }
 .nav-item::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 14px; display: none; }
 .nav-item.open::after { display: block; }
-
 .dropdown {
   position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(8px);
   background: white; border: 1px solid #EBEBEB; border-radius: 16px;
@@ -924,19 +715,418 @@ footer { background: #0F172A; padding: 56px 0 0; }
   display: inline-block; line-height: 1; font-style: normal;
 }
 .mat-icon.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-.nav-inner {
-  max-width: 1280px; margin: 0 auto; padding: 0 28px;
-  width: 100%; display: flex; align-items: center;
-}
-.nav-links {
-  display: flex; align-items: center; gap: 6px;
-  flex: 1; justify-content: center;
+
+/* Thêm CSS cho phần gợi ý tìm kiếm */
+.search-container {
+  position: relative;
+  flex: 1;
 }
 
-.nav-actions {
-  display: flex; align-items: center; gap: 8px; 
-  flex-shrink: 0; margin-left: auto;
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  margin-top: 4px;
 }
+
+.search-suggestions.show {
+  display: block;
+}
+
+.suggestion-group {
+  padding: 8px 0;
+}
+
+.suggestion-group-header {
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #FAFAFA;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.suggestion-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.suggestion-item:hover {
+  background: var(--purple-100);
+}
+
+.suggestion-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--purple-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.suggestion-item-icon .mat-icon {
+  font-size: 18px;
+  color: var(--purple);
+}
+
+.suggestion-item-content {
+  flex: 1;
+}
+
+.suggestion-item-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+
+.suggestion-item-sub {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+.suggestion-item-jobs {
+  font-size: 11px;
+  color: var(--purple);
+  font-weight: 600;
+}
+
+.suggestion-highlight {
+  background: #FEF3C7;
+  color: var(--amber);
+}
+
+.recent-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.recent-search-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gray-500);
+  text-transform: uppercase;
+}
+
+.clear-recent {
+  font-size: 11px;
+  color: var(--purple);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.clear-recent:hover {
+  text-decoration: underline;
+}
+
+.search-loading {
+  padding: 16px;
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 13px;
+}
+/* Thêm animation cho dropdown */
+.search-suggestions {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* FIX: Đảm bảo dropdown hiển thị đúng */
+.search-field {
+  overflow: visible !important;
+}
+
+.search-container {
+  position: relative;
+  overflow: visible !important;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.15);
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none;
+  margin-top: 0;
+}
+
+/* Đảm bảo không bị che bởi các phần tử khác */
+.search-bar {
+  overflow: visible !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Fix cho hero section không bị cắt */
+.hero-inner {
+  overflow: visible !important;
+}
+
+.hero {
+  overflow: visible !important;
+}
+
+/* Đảm bảo suggestions hiển thị trên cùng */
+.search-suggestions.show {
+  display: block;
+}
+
+/* FIX COMPLETE - Dropdown suggestions */
+.search-bar {
+  position: relative;
+  z-index: 100;
+  overflow: visible !important;
+}
+
+.search-field {
+  overflow: visible !important;
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+  overflow: visible !important;
+  width: 100%;
+}
+
+/* Dropdown chính */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.05);
+  max-height: 420px;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none;
+  border: 1px solid #e5e7eb;
+}
+
+.search-suggestions.show {
+  display: block;
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nhóm gợi ý */
+.suggestion-group {
+  padding: 8px 0;
+}
+
+.suggestion-group-header {
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #f9fafb;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Item gợi ý */
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.suggestion-item:hover {
+  background: #f5f3ff;
+}
+
+.suggestion-item:active {
+  background: #ede9fe;
+}
+
+.suggestion-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.suggestion-item-icon .mat-icon {
+  font-size: 20px;
+  color: #7c3aed;
+}
+
+.suggestion-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.suggestion-item-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.suggestion-item-sub {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.suggestion-item-jobs {
+  font-size: 12px;
+  color: #7c3aed;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Highlight từ khóa */
+.suggestion-highlight {
+  background: #fef3c7;
+  color: #d97706;
+  font-weight: 700;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Recent search section */
+.recent-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.recent-search-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clear-recent {
+  font-size: 11px;
+  color: #7c3aed;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+.clear-recent:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+/* Scrollbar đẹp */
+.search-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-suggestions::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Đảm bảo không bị che bởi các phần tử khác */
+.hero-inner {
+  overflow: visible !important;
+}
+
+.hero {
+  overflow: visible !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-suggestions {
+    position: fixed;
+    top: auto;
+    left: 16px;
+    right: 16px;
+    bottom: auto;
+    max-height: 60vh;
+    margin-top: 0;
+  }
+  
+  .suggestion-item {
+    padding: 10px 12px;
+  }
+  
+  .suggestion-item-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+
 </style>
 </head>
 <body>
@@ -944,7 +1134,7 @@ footer { background: #0F172A; padding: 56px 0 0; }
 <!-- ── NAVBAR ── -->
 <nav>
   <div class="nav-inner">
-    <div class="logo" onclick="location.href='index.html'" style="cursor:pointer; display:flex; align-items:center; flex-shrink:0;">
+    <div class="logo" onclick="location.href='#'" style="cursor:pointer; display:flex; align-items:center; flex-shrink:0;">
       <svg width="48" height="48" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="52" cy="80" rx="38" ry="50" fill="#7C3AED" transform="rotate(-10, 52, 80)"/>
         <path d="M 20 110 Q 5 130 0 145 Q 18 128 35 120 Z" fill="#7C3AED"/>
@@ -961,8 +1151,8 @@ footer { background: #0F172A; padding: 56px 0 0; }
       </svg>
       <span style="font-family:'Be Vietnam Pro',sans-serif; font-size:19px; font-weight:900; color:#7C3AED; letter-spacing:2px; margin-left:8px;">VIECJOB</span>
     </div>
-    <div class="nav-links">
 
+    <div class="nav-links">
       <div class="nav-item">
         <a class="nav-link active" href="#">Việc làm <span class="mat-icon arrow">expand_more</span></a>
         <div class="dropdown mega">
@@ -1090,10 +1280,8 @@ footer { background: #0F172A; padding: 56px 0 0; }
           <a class="dd-link" href="#"><i class="ti ti-chart-line"></i>Thị trường & xu hướng</a>
         </div>
       </div>
-
     </div>
 
-    <!-- nav-actions với id để JS auth cập nhật -->
     <div class="nav-actions" id="nav-actions">
       <button class="btn-outline" onclick="location.href='dangky.html'">Đăng ký</button>
       <button class="btn-solid" onclick="location.href='dangnhap.html'">Đăng nhập</button>
@@ -1102,92 +1290,56 @@ footer { background: #0F172A; padding: 56px 0 0; }
   </div>
 </nav>
 
-<!-- ── HERO ── (giữ nguyên không thay đổi) -->
+<!-- ══════════════════════════════════════
+     ── HERO (centered, no float cards)
+     ══════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-inner">
-    <div>
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        🚀 Nền tảng #1 Việt Nam 2026
-      </div>
-      <h1>Tìm việc làm<br/><span>mơ ước</span> của bạn</h1>
-      <p class="hero-sub">Hơn 500,000 việc làm từ 10,000+ công ty hàng đầu Việt Nam — từ kinh doanh, y tế, xây dựng đến sáng tạo. AI giúp bạn tìm đúng việc, đúng người.</p>
+    <h1>Tìm kiếm <span>việc làm</span></h1>
+    <p class="hero-sub">Khám phá hơn 50,000+ cơ hội nghề nghiệp từ những tập đoàn hàng đầu Việt Nam. Khởi đầu hành trình thành công của bạn ngay hôm nay.</p>
 
-      <div class="search-bar">
-        <div class="search-field">
-          <span class="mat-icon">search</span>
-          <input placeholder="Vị trí, kỹ năng, công ty..." type="text"/>
-        </div>
-        <div class="search-field">
-          <span class="mat-icon">location_on</span>
-          <input placeholder="Tất cả địa điểm" type="text"/>
-        </div>
-        <button class="search-btn">Tìm Việc Làm</button>
-      </div>
-
-      <div class="hot-tags">
-        <span class="hot-label">Phổ biến:</span>
-        <span class="tag">Kinh doanh</span>
-        <span class="tag">Kế toán</span>
-        <span class="tag">Kỹ sư xây dựng</span>
-        <span class="tag">Marketing</span>
-        <span class="tag">Giáo viên</span>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="hero-illustration">
-        <span class="mat-icon hero-illus-icon">work</span>
-        <span class="hero-illus-text">10,000+ công ty đang tuyển dụng</span>
-      </div>
-      <div class="float-card float-card-1">
-        <div class="fc-label">🤖 AI gợi ý cho bạn</div>
-        <div class="fc-main">
-          Trưởng nhóm Kinh doanh
-          <span class="fc-badge">AI: 91%</span>
-        </div>
-        <div class="fc-sub">Vinamilk · 25 - 40 triệu VNĐ</div>
-        <div class="fc-avatars">
-          <div class="fc-av" style="background:#7C3AED">T</div>
-          <div class="fc-av" style="background:#5B21B6">H</div>
-          <div class="fc-av" style="background:#A78BFA">N</div>
-          <div style="width:22px;height:22px;border-radius:50%;border:2px solid white;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:8px;color:#6B7280;font-weight:700;">+64</div>
-        </div>
-      </div>
-      <div class="float-card float-card-2">
-        <div class="fc-label">🔔 Việc mới vừa đăng</div>
-        <div class="fc-main">
-          <span class="mat-icon filled" style="font-size:13px;color:#16A34A">circle</span>
-          Kế toán trưởng
-          <span class="fc-badge green">Vừa đăng</span>
-        </div>
-        <div class="fc-sub">Masan Group · Hà Nội · Thỏa thuận</div>
-      </div>
+    <div class="search-bar">
+  <div class="search-field" style="flex:1; position: relative; overflow: visible;">
+    <div class="search-container" style="flex:1; display: flex; align-items: center; position: relative; overflow: visible;">
+      <span class="mat-icon" style="color:#7C3AED">search</span>
+      <input 
+        id="job-search-input"
+        placeholder="Tên công việc, vị trí, kỹ năng..." 
+        type="text"
+        autocomplete="off"
+        style="flex: 1;"
+      />
+      <div id="search-suggestions" class="search-suggestions"></div>
     </div>
   </div>
+  <div class="search-field location" style="overflow: visible;">
+    <span class="mat-icon" style="color:#7C3AED">location_on</span>
+    <select id="province-select">
+      <option value="">Đang tải tỉnh/thành...</option>
+    </select>
+  </div>
+  <button class="search-btn" id="search-btn">Tìm kiếm</button>
+</div>
 
-  <div class="hero-stats">
-    <div class="hero-stats-inner">
-      <div class="stat-item">
-        <div class="stat-num">500,000+</div>
-        <div class="stat-label">Việc làm đang tuyển</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">10,000+</div>
-        <div class="stat-label">Công ty hàng đầu</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2,000,000+</div>
-        <div class="stat-label">Ứng viên tin dùng</div>
-      </div>
+    <div class="hot-tags">
+      <span class="hot-label">Phổ biến:</span>
+      <span class="tag">Kinh doanh</span>
+      <span class="tag">Kế toán</span>
+      <span class="tag">Marketing</span>
+      <span class="tag">Xây dựng</span>
+      <span class="tag">Giáo viên</span>
     </div>
   </div>
 </section>
 
-<!-- ── 3-COL SECTION (giữ nguyên) ── -->
+<!-- ══════════════════════════════════════
+     ── 3-COL (banner taller, tool cards bigger)
+     ══════════════════════════════════════ -->
 <section class="three-col">
   <div class="three-col-inner">
-    <div>
+
+    <!-- Category sidebar -->
+    <div class="cat-sidebar">
       <div class="cat-header">≡ &nbsp;Ngành nghề</div>
       <div class="cat-item">Kinh Doanh/Bán Hàng <span class="cat-arrow">→</span></div>
       <div class="cat-item">Marketing/PR/Quảng Cáo <span class="cat-arrow">→</span></div>
@@ -1196,18 +1348,20 @@ footer { background: #0F172A; padding: 56px 0 0; }
       <div class="cat-item">Kế Toán/Kiểm Toán <span class="cat-arrow">→</span></div>
       <div class="cat-item">Nhân Sự <span class="cat-arrow">→</span></div>
       <div class="cat-item">Điện/Điện Tử/Năng Lượng <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Xây Dựng/Kiến Trúc <span class="cat-arrow">→</span></div>
+      <div class="cat-item">Y Tế/Dược <span class="cat-arrow">→</span></div>
     </div>
 
-    <!-- BANNER -->
+    <!-- Banner -->
     <div class="banner-wrap">
       <div class="banner-slide active" data-index="0">
-        <img src="./img/banner1.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+        <img src="./img/banner1.png" alt=""/>
       </div>
       <div class="banner-slide" data-index="1">
-        <img src="./img/banner4.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+        <img src="./img/banner8.png" alt=""/>
       </div>
       <div class="banner-slide" data-index="2">
-        <img src="./img/banner5.png" alt="" style="width:100%; height:100%; object-fit:cover;">
+        <img src="./img/banner5.png" alt=""/>
       </div>
       <div class="banner-nav">
         <div class="dots">
@@ -1222,12 +1376,14 @@ footer { background: #0F172A; padding: 56px 0 0; }
       </div>
     </div>
 
+    <!-- Tool cards -->
     <div class="tool-cards">
       <div class="tool-card">
         <div class="tool-card-top">
           <div>
             <div class="tool-title">Tạo CV tự động</div>
             <div class="tool-sub">Chỉ 2 Phút</div>
+            <div class="tool-desc">AI phân tích hồ sơ và tạo CV chuẩn ATS ngay lập tức.</div>
           </div>
           <div class="tool-icon purple">
             <span class="mat-icon">smart_toy</span>
@@ -1240,6 +1396,7 @@ footer { background: #0F172A; padding: 56px 0 0; }
           <div>
             <div class="tool-title">Đánh giá CV</div>
             <div class="tool-sub">VietJob AI</div>
+            <div class="tool-desc">Chấm điểm CV, gợi ý cải thiện để nổi bật hơn.</div>
           </div>
           <div class="tool-icon green">
             <span class="mat-icon" style="color:#16A34A">manage_search</span>
@@ -1248,6 +1405,7 @@ footer { background: #0F172A; padding: 56px 0 0; }
         <button class="tool-btn-outline">Tải CV Lên</button>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1262,7 +1420,6 @@ footer { background: #0F172A; padding: 56px 0 0; }
       <a href="#" class="section-link">Xem tất cả việc làm →</a>
     </div>
     <div class="jobs-grid">
-      <!-- 9 job cards giữ nguyên như cũ -->
       <div class="job-card">
         <div class="job-card-top">
           <div class="company-logo"><img src="https://i.pinimg.com/1200x/53/c3/aa/53c3aa62d625ae65a42da8e699201f39.jpg" alt="VNG"/></div>
@@ -1280,8 +1437,6 @@ footer { background: #0F172A; padding: 56px 0 0; }
           <button class="job-save"><span class="mat-icon">favorite_border</span></button>
         </div>
       </div>
-      <!-- ... thêm các job khác tương tự ... -->
-      <!-- Vì code quá dài, tôi giữ nguyên các job card từ bản gốc, ở đây tôi chỉ đặt 3 job làm mẫu, bạn có thể copy lại toàn bộ jobs từ file index.html cũ -->
       <div class="job-card">
         <div class="job-card-top">
           <div class="company-logo"><img src="https://i.pinimg.com/736x/3d/e6/6c/3de66c82f9f28eed4a5c37dfc0c4069e.jpg" alt="Shopee"/></div>
@@ -1317,7 +1472,115 @@ footer { background: #0F172A; padding: 56px 0 0; }
           <button class="job-save"><span class="mat-icon">favorite_border</span></button>
         </div>
       </div>
-      <!-- Các job còn lại bạn có thể copy từ file cũ, do giới hạn độ dài tôi để 3 job minh họa, khi bạn thay file hãy giữ nguyên phần jobs-grid từ file gốc -->
+
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vinamilk"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Kế toán trưởng</div>
+            <div class="job-company">Vinamilk</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 87%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">30–50 triệu</span>
+            <span class="job-tag new-tag">TP.HCM (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/76/d8/cb/76d8cb03115a52e17c811409dad112bf.jpg" alt="Masan"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Trưởng nhóm Kinh doanh</div>
+            <div class="job-company">Masan Group</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 90%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">25–40 triệu</span>
+            <span class="job-tag new-tag">Hà Nội (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/3f/7e/28/3f7e28bdd5dc1966f25fef476bbf5175.jpg" alt="FPT"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Nhân viên Nhân sự</div>
+            <div class="job-company">FPT Corporation</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 83%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">12–18 triệu</span>
+            <span class="job-tag new-tag">Đà Nẵng (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/78/2d/8e/782d8e93443fd09180cb53a163c03c90.jpg" alt="Hoà Phát"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Kỹ sư Xây dựng</div>
+            <div class="job-company">Tập đoàn Hoà Phát</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 89%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">20–35 triệu</span>
+            <span class="job-tag new-tag">Hải Dương (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/1200x/e3/91/23/e3912325358791521ae7eeaadba883b8.jpg" alt="An Sinh"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Dược sĩ lâm sàng</div>
+            <div class="job-company">Bệnh viện An Sinh</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 92%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">18–28 triệu</span>
+            <span class="job-tag new-tag">TP.HCM (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <div class="job-card-top">
+          <div class="company-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg" alt="Vingroup"/></div>
+          <div class="job-card-info">
+            <div class="job-title">Chuyên viên Marketing Digital</div>
+            <div class="job-company">Vingroup</div>
+            <span class="ai-badge"><span class="mat-icon filled" style="font-size:11px">auto_awesome</span>AI: 86%</span>
+          </div>
+        </div>
+        <div class="job-footer">
+          <div class="job-tags">
+            <span class="job-tag">18–30 triệu</span>
+            <span class="job-tag new-tag">Hà Nội (mới)</span>
+          </div>
+          <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+        </div>
+      </div>
+
     </div>
     <div class="jobs-pagination">
       <button class="page-arrow" id="jobs-prev">&#8249;</button>
@@ -1526,7 +1789,6 @@ footer { background: #0F172A; padding: 56px 0 0; }
     </div>
   </div>
 </footer>
-
 <script>
 /* ── BANNER SLIDER ── */
 const slides = document.querySelectorAll('.banner-slide');
@@ -1535,6 +1797,7 @@ let current = 0;
 let timer;
 
 function goTo(i) {
+  if (!slides.length) return;
   slides[current].classList.remove('active');
   dots[current].classList.remove('active');
   current = (i + slides.length) % slides.length;
@@ -1544,29 +1807,48 @@ function goTo(i) {
 function startAuto() { timer = setInterval(() => goTo(current + 1), 4000); }
 function resetAuto() { clearInterval(timer); startAuto(); }
 
-document.getElementById('next').onclick = () => { goTo(current + 1); resetAuto(); };
-document.getElementById('prev').onclick = () => { goTo(current - 1); resetAuto(); };
-dots.forEach(d => d.onclick = () => { goTo(+d.dataset.dot); resetAuto(); });
-startAuto();
+const nextBtn = document.getElementById('next');
+const prevBtn = document.getElementById('prev');
+if (nextBtn) nextBtn.onclick = () => { goTo(current + 1); resetAuto(); };
+if (prevBtn) prevBtn.onclick = () => { goTo(current - 1); resetAuto(); };
+if (dots.length) dots.forEach(d => d.onclick = () => { goTo(+d.dataset.dot); resetAuto(); });
+if (slides.length) startAuto();
 
-/* ── JOBS PAGINATION ── */
+/* ── JOBS DATA ── */
 const allCards = Array.from(document.querySelectorAll('.job-card'));
-const PER_PAGE = 9;
+let filteredCards = [...allCards]; // Mảng chứa kết quả sau khi lọc
 let jobPage = 1;
-const totalPages = Math.ceil(allCards.length / PER_PAGE);
+let PER_PAGE = 9;
+let totalPages = Math.ceil(filteredCards.length / PER_PAGE);
 
 function renderJobs() {
   const start = (jobPage - 1) * PER_PAGE;
   const end = start + PER_PAGE;
-  allCards.forEach((c, i) => c.style.display = (i >= start && i < end) ? '' : 'none');
+  
+  // Ẩn/hiện card dựa trên filteredCards
+  allCards.forEach(card => card.style.display = 'none');
+  filteredCards.forEach((card, idx) => {
+    if (idx >= start && idx < end) {
+      card.style.display = '';
+    }
+  });
+  
   renderPageNumbers();
-  document.getElementById('jobs-prev').disabled = jobPage === 1;
-  document.getElementById('jobs-next').disabled = jobPage === totalPages;
+  const prevBtn = document.getElementById('jobs-prev');
+  const nextBtn = document.getElementById('jobs-next');
+  if (prevBtn) prevBtn.disabled = jobPage === 1;
+  if (nextBtn) nextBtn.disabled = jobPage === totalPages || filteredCards.length === 0;
 }
 
 function renderPageNumbers() {
   const container = document.getElementById('page-numbers');
+  if (!container) return;
   container.innerHTML = '';
+  if (totalPages === 0) {
+    container.innerHTML = '<span class="page-ellipsis">0</span>';
+    return;
+  }
+  
   const pages = [];
   for (let i = 1; i <= totalPages; i++) {
     if (i === 1 || i === totalPages || (i >= jobPage - 1 && i <= jobPage + 1)) {
@@ -1590,9 +1872,354 @@ function renderPageNumbers() {
   });
 }
 
-document.getElementById('jobs-prev').onclick = () => { if (jobPage > 1) { jobPage--; renderJobs(); } };
-document.getElementById('jobs-next').onclick = () => { if (jobPage < totalPages) { jobPage++; renderJobs(); } };
-renderJobs();
+/* ── SEARCH FUNCTION ── */
+// Lưu lịch sử tìm kiếm
+let recentSearches = JSON.parse(localStorage.getItem('recentJobSearches') || '[]');
+
+function saveRecentSearch(keyword) {
+  if (!keyword.trim()) return;
+  recentSearches = [keyword, ...recentSearches.filter(s => s !== keyword)];
+  if (recentSearches.length > 5) recentSearches.pop();
+  localStorage.setItem('recentJobSearches', JSON.stringify(recentSearches));
+}
+
+// Hàm reset tìm kiếm (được gọi từ HTML)
+window.resetSearch = function() {
+  const searchInput = document.getElementById('job-search-input');
+  if (searchInput) searchInput.value = '';
+  
+  // Reset filtered cards
+  filteredCards = [...allCards];
+  totalPages = Math.ceil(filteredCards.length / PER_PAGE);
+  jobPage = 1;
+  renderJobs();
+  
+  // Xóa thông báo không có kết quả
+  const noResultMsg = document.getElementById('no-search-results');
+  if (noResultMsg) noResultMsg.remove();
+};
+
+// Hàm thực hiện tìm kiếm (được gọi từ HTML)
+window.performSearch = function(keyword) {
+  if (!keyword || !keyword.trim()) {
+    resetSearch();
+    return;
+  }
+  
+  const searchTerm = keyword.toLowerCase().trim();
+  
+  // Lọc các job card
+  filteredCards = allCards.filter(card => {
+    const title = card.querySelector('.job-title')?.textContent.toLowerCase() || '';
+    const company = card.querySelector('.job-company')?.textContent.toLowerCase() || '';
+    const tags = Array.from(card.querySelectorAll('.job-tag')).map(t => t.textContent.toLowerCase());
+    
+    return title.includes(searchTerm) || 
+           company.includes(searchTerm) ||
+           tags.some(tag => tag.includes(searchTerm));
+  });
+  
+  totalPages = Math.ceil(filteredCards.length / PER_PAGE);
+  jobPage = 1;
+  renderJobs();
+  
+  // Hiển thị thông báo nếu không có kết quả
+  let noResultMsg = document.getElementById('no-search-results');
+  if (filteredCards.length === 0) {
+    if (!noResultMsg) {
+      const jobsGrid = document.querySelector('.jobs-grid');
+      if (jobsGrid) {
+        noResultMsg = document.createElement('div');
+        noResultMsg.id = 'no-search-results';
+        noResultMsg.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 60px 20px;';
+        noResultMsg.innerHTML = `
+          <span class="mat-icon" style="font-size: 48px; color: var(--gray-300); margin-bottom: 16px;">search_off</span>
+          <h3 style="font-size: 18px; color: var(--gray-700); margin-bottom: 8px;">Không tìm thấy việc làm phù hợp</h3>
+          <p style="color: var(--gray-500);">Hãy thử tìm kiếm với từ khóa khác hoặc xem tất cả việc làm</p>
+          <button onclick="resetSearch()" style="margin-top: 16px; padding: 8px 20px; background: var(--purple); color: white; border: none; border-radius: 8px; cursor: pointer;">Xem tất cả việc làm</button>
+        `;
+        jobsGrid.appendChild(noResultMsg);
+      }
+    }
+  } else if (noResultMsg) {
+    noResultMsg.remove();
+  }
+  
+  // Đóng dropdown gợi ý
+  const suggestionsDiv = document.getElementById('search-suggestions');
+  if (suggestionsDiv) suggestionsDiv.classList.remove('show');
+};
+
+// Hàm chọn gợi ý (được gọi từ HTML)
+window.selectSearch = function(keyword) {
+  const searchInput = document.getElementById('job-search-input');
+  if (searchInput) {
+    searchInput.value = keyword;
+    saveRecentSearch(keyword);
+    performSearch(keyword);
+  }
+  const suggestionsDiv = document.getElementById('search-suggestions');
+  if (suggestionsDiv) suggestionsDiv.classList.remove('show');
+};
+
+
+// Hàm xóa lịch sử (được gọi từ HTML)
+window.clearRecentSearches = function() {
+  recentSearches = [];
+  localStorage.setItem('recentJobSearches', JSON.stringify(recentSearches));
+  const searchInput = document.getElementById('job-search-input');
+  if (searchInput) {
+    // Gọi trực tiếp hàm renderSuggestions (đã được định nghĩa trong cùng scope)
+    if (typeof renderSuggestions === 'function') {
+      renderSuggestions(searchInput.value);
+    }
+  }
+};
+
+// Data gợi ý cho tìm kiếm
+// Cập nhật jobSuggestions với nhiều nghề nghiệp hơn
+const jobSuggestions = [
+  // Công nghệ thông tin
+  { title: "Kỹ sư phần mềm", category: "IT - Phần mềm", count: 1240, icon: "code" },
+  { title: "Lập trình viên Frontend", category: "IT - Phần mềm", count: 856, icon: "code" },
+  { title: "Lập trình viên Backend", category: "IT - Phần mềm", count: 723, icon: "code" },
+  { title: "Lập trình viên Fullstack", category: "IT - Phần mềm", count: 892, icon: "code" },
+  { title: "Kỹ sư DevOps", category: "IT - Phần mềm", count: 345, icon: "cloud" },
+  { title: "Kỹ sư Dữ liệu (Data Engineer)", category: "IT - Dữ liệu", count: 412, icon: "data_usage" },
+  { title: "Chuyên viên Phân tích dữ liệu", category: "IT - Dữ liệu", count: 567, icon: "analytics" },
+  { title: "Khoa học dữ liệu (Data Scientist)", category: "IT - Dữ liệu", count: 289, icon: "science" },
+  { title: "Kỹ sư AI/ML", category: "IT - Trí tuệ nhân tạo", count: 234, icon: "psychology" },
+  { title: "Chuyên viên An ninh mạng", category: "IT - Bảo mật", count: 378, icon: "security" },
+  { title: "Quản trị hệ thống", category: "IT - Hệ thống", count: 456, icon: "computer" },
+  { title: "Quản trị cơ sở dữ liệu (DBA)", category: "IT - Dữ liệu", count: 234, icon: "storage" },
+  { title: "Kiểm thử phần mềm (QA/Tester)", category: "IT - Kiểm thử", count: 567, icon: "bug_report" },
+  { title: "Chuyên viên IT Helpdesk", category: "IT - Hỗ trợ", count: 345, icon: "support_agent" },
+  { title: "Kỹ sư Mạng", category: "IT - Mạng", count: 234, icon: "router" },
+  { title: "Lập trình viên Mobile (iOS/Android)", category: "IT - Di động", count: 678, icon: "phone_android" },
+  { title: "Lập trình viên Game", category: "IT - Game", count: 234, icon: "sports_esports" },
+  { title: "Kỹ sư Điện tử - Viễn thông", category: "Kỹ thuật", count: 345, icon: "wifi" },
+  
+  // Kinh doanh & Bán hàng
+  { title: "Chuyên viên Kinh doanh", category: "Kinh doanh", count: 2341, icon: "trending_up" },
+  { title: "Nhân viên Bán hàng", category: "Bán hàng", count: 1856, icon: "shopping_cart" },
+  { title: "Trưởng nhóm Kinh doanh", category: "Kinh doanh", count: 567, icon: "group" },
+  { title: "Giám đốc Kinh doanh", category: "Kinh doanh", count: 123, icon: "business" },
+  { title: "Chuyên viên Phát triển thị trường", category: "Kinh doanh", count: 789, icon: "public" },
+  { title: "Nhân viên Xuất nhập khẩu", category: "Xuất nhập khẩu", count: 456, icon: "import_export" },
+  { title: "Chuyên viên Chăm sóc khách hàng", category: "Chăm sóc khách hàng", count: 1234, icon: "headset" },
+  { title: "Telesales", category: "Bán hàng", count: 892, icon: "phone" },
+  { title: "Nhân viên Bán hàng Online", category: "Bán hàng", count: 734, icon: "shopping_bag" },
+  { title: "Chuyên viên Kinh doanh Bất động sản", category: "Bất động sản", count: 567, icon: "home" },
+  { title: "Môi giới Bất động sản", category: "Bất động sản", count: 345, icon: "location_city" },
+  { title: "Chuyên viên Đấu thầu", category: "Kinh doanh", count: 234, icon: "gavel" },
+  
+  // Marketing & Truyền thông
+  { title: "Chuyên viên Marketing", category: "Marketing", count: 982, icon: "campaign" },
+  { title: "Chuyên viên Digital Marketing", category: "Marketing", count: 734, icon: "online_prediction" },
+  { title: "Chuyên viên SEO/SEM", category: "Marketing", count: 456, icon: "search" },
+  { title: "Chuyên viên Content Marketing", category: "Marketing", count: 567, icon: "description" },
+  { title: "Chuyên viên Social Media", category: "Marketing", count: 623, icon: "share" },
+  { title: "Chuyên viên Marketing Online", category: "Marketing", count: 789, icon: "ads_click" },
+  { title: "Trưởng phòng Marketing", category: "Marketing", count: 234, icon: "manager" },
+  { title: "Chuyên viên Quảng cáo", category: "Quảng cáo", count: 345, icon: "advertising" },
+  { title: "Chuyên viên PR - Truyền thông", category: "PR", count: 456, icon: "announcement" },
+  { title: "Chuyên viên Tổ chức sự kiện", category: "Sự kiện", count: 345, icon: "celebration" },
+  { title: "Chuyên viên Brand", category: "Marketing", count: 234, icon: "branding_watermark" },
+  { title: "Chuyên viên Nghiên cứu thị trường", category: "Marketing", count: 289, icon: "insights" },
+  
+  // Kế toán & Tài chính
+  { title: "Kế toán tổng hợp", category: "Kế toán", count: 671, icon: "calculate" },
+  { title: "Kế toán trưởng", category: "Kế toán", count: 345, icon: "account_balance" },
+  { title: "Kế toán công nợ", category: "Kế toán", count: 456, icon: "receipt" },
+  { title: "Kế toán kho", category: "Kế toán", count: 345, icon: "inventory" },
+  { title: "Kế toán thuế", category: "Kế toán", count: 278, icon: "request_quote" },
+  { title: "Kế toán lương", category: "Kế toán", count: 234, icon: "payments" },
+  { title: "Kiểm toán viên", category: "Kiểm toán", count: 345, icon: "audit" },
+  { title: "Chuyên viên Tài chính", category: "Tài chính", count: 456, icon: "finance" },
+  { title: "Chuyên viên Đầu tư", category: "Tài chính", count: 234, icon: "show_chart" },
+  { title: "Chuyên viên Phân tích tài chính", category: "Tài chính", count: 289, icon: "analytics" },
+  { title: "Giao dịch viên Ngân hàng", category: "Ngân hàng", count: 567, icon: "account_balance" },
+  { title: "Chuyên viên Tín dụng", category: "Ngân hàng", count: 345, icon: "credit_card" },
+  { title: "Chuyên viên Quản trị rủi ro", category: "Tài chính", count: 234, icon: "warning" },
+  
+  // Hành chính & Nhân sự
+  { title: "Nhân viên Hành chính", category: "Hành chính", count: 567, icon: "badge" },
+  { title: "Nhân viên Văn phòng", category: "Hành chính", count: 892, icon: "business_center" },
+  { title: "Thư ký", category: "Hành chính", count: 345, icon: "event_note" },
+  { title: "Lễ tân", category: "Hành chính", count: 234, icon: "door_front" },
+  { title: "Trợ lý", category: "Hành chính", count: 456, icon: "assistant" },
+  { title: "Chuyên viên Nhân sự", category: "Nhân sự", count: 834, icon: "people" },
+  { title: "Chuyên viên Tuyển dụng", category: "Nhân sự", count: 567, icon: "person_search" },
+  { title: "Chuyên viên Đào tạo", category: "Nhân sự", count: 345, icon: "school" },
+  { title: "Chuyên viên Lương thưởng", category: "Nhân sự", count: 234, icon: "payments" },
+  { title: "Trưởng phòng Nhân sự", category: "Nhân sự", count: 178, icon: "group" },
+  
+  // Kỹ thuật & Sản xuất
+  { title: "Kỹ sư Xây dựng", category: "Xây dựng", count: 512, icon: "construction" },
+  { title: "Kỹ sư Cơ khí", category: "Cơ khí", count: 456, icon: "settings" },
+  { title: "Kỹ sư Điện", category: "Điện", count: 345, icon: "electrical_services" },
+  { title: "Kỹ sư Tự động hóa", category: "Tự động hóa", count: 234, icon: "autorenew" },
+  { title: "Kỹ sư Công nghệ thực phẩm", category: "Thực phẩm", count: 234, icon: "restaurant" },
+  { title: "Kỹ sư Hóa học", category: "Hóa chất", count: 178, icon: "science" },
+  { title: "Kỹ sư Môi trường", category: "Môi trường", count: 189, icon: "eco" },
+  { title: "Quản đốc sản xuất", category: "Sản xuất", count: 345, icon: "factory" },
+  { title: "Kỹ thuật viên", category: "Kỹ thuật", count: 567, icon: "handyman" },
+  { title: "Kỹ sư Chất lượng (QA/QC)", category: "Chất lượng", count: 345, icon: "verified" },
+  
+  // Giáo dục & Đào tạo
+  { title: "Giáo viên Tiếng Anh", category: "Giáo dục", count: 678, icon: "school" },
+  { title: "Giáo viên Mầm non", category: "Giáo dục", count: 456, icon: "child_care" },
+  { title: "Giáo viên Tiểu học", category: "Giáo dục", count: 345, icon: "menu_book" },
+  { title: "Giảng viên Đại học", category: "Giáo dục", count: 234, icon: "account_balance" },
+  { title: "Chuyên viên Đào tạo", category: "Đào tạo", count: 289, icon: "training" },
+  { title: "Trợ giảng", category: "Giáo dục", count: 234, icon: "assistant" },
+  { title: "Gia sư", category: "Giáo dục", count: 567, icon: "tutor" },
+  
+  // Thiết kế & Nghệ thuật
+  { title: "Thiết kế Đồ họa", category: "Thiết kế", count: 423, icon: "brush" },
+  { title: "Thiết kế UI/UX", category: "Thiết kế", count: 345, icon: "design_services" },
+  { title: "Thiết kế Web", category: "Thiết kế", count: 278, icon: "web" },
+  { title: "Thiết kế Nội thất", category: "Thiết kế", count: 234, icon: "chair" },
+  { title: "Thiết kế Thời trang", category: "Thiết kế", count: 178, icon: "style" },
+  { title: "Nhân viên Dựng phim", category: "Nghệ thuật", count: 234, icon: "movie" },
+  { title: "Nhiếp ảnh gia", category: "Nghệ thuật", count: 189, icon: "photo_camera" },
+  
+  // Y tế & Dược
+  { title: "Bác sĩ Đa khoa", category: "Y tế", count: 234, icon: "local_hospital" },
+  { title: "Điều dưỡng viên", category: "Y tế", count: 456, icon: "health_and_safety" },
+  { title: "Dược sĩ", category: "Dược", count: 345, icon: "medication" },
+  { title: "Kỹ thuật viên Xét nghiệm", category: "Y tế", count: 234, icon: "biotech" },
+  { title: "Bác sĩ Răng hàm mặt", category: "Y tế", count: 178, icon: "dentistry" },
+  { title: "Chuyên viên Vật lý trị liệu", category: "Y tế", count: 189, icon: "fitness_center" },
+  
+  // Dịch vụ & Khách sạn
+  { title: "Lễ tân Khách sạn", category: "Khách sạn", count: 345, icon: "hotel" },
+  { title: "Buồng phòng", category: "Khách sạn", count: 234, icon: "bed" },
+  { title: "Nhân viên Phục vụ", category: "Nhà hàng", count: 567, icon: "restaurant" },
+  { title: "Bếp trưởng", category: "Nhà hàng", count: 234, icon: "restaurant_menu" },
+  { title: "Pha chế", category: "F&B", count: 345, icon: "coffee" },
+  { title: "Hướng dẫn viên Du lịch", category: "Du lịch", count: 234, icon: "tour" },
+  { title: "Đặt vé máy bay", category: "Du lịch", count: 178, icon: "flight" },
+  
+  // Vận tải & Logistics
+  { title: "Nhân viên Kho vận", category: "Logistics", count: 456, icon: "warehouse" },
+  { title: "Điều phối viên Logistics", category: "Logistics", count: 345, icon: "shipping" },
+  { title: "Tài xế", category: "Vận tải", count: 567, icon: "directions_car" },
+  { title: "Shipper", category: "Giao hàng", count: 892, icon: "delivery_dining" },
+  
+  // Luật & Pháp lý
+  { title: "Luật sư", category: "Luật", count: 234, icon: "gavel" },
+  { title: "Chuyên viên Pháp lý", category: "Pháp lý", count: 345, icon: "policy" },
+  { title: "Trợ lý Luật", category: "Luật", count: 234, icon: "assignment" },
+  
+  // Khác
+  { title: "Thợ điện", category: "Kỹ thuật", count: 345, icon: "electrical_services" },
+  { title: "Thợ sửa chữa", category: "Kỹ thuật", count: 234, icon: "build" },
+  { title: "Nhân viên Bảo vệ", category: "An ninh", count: 456, icon: "security" },
+  { title: "Tạp vụ", category: "Dịch vụ", count: 234, icon: "cleaning_services" },
+  { title: "Nhân viên Tạp vụ", category: "Dịch vụ", count: 178, icon: "cleaning_services" }
+];
+
+function highlightText(text, keyword) {
+  if (!keyword) return text;
+  const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return text.replace(regex, '<span class="suggestion-highlight">$1</span>');
+}
+
+function renderSuggestions(keyword) {
+  const suggestionsDiv = document.getElementById('search-suggestions');
+  if (!suggestionsDiv) return;
+  
+  if (!keyword.trim()) {
+    // Hiển thị lịch sử tìm kiếm + gợi ý phổ biến
+    let html = '';
+    if (recentSearches.length > 0) {
+      html += `
+        <div class="recent-search">
+        </div>
+        ${recentSearches.map(term => `
+          <div class="suggestion-item" onclick="selectSearch('${term.replace(/'/g, "\\'")}')">
+            <div class="suggestion-item-icon">
+              <span class="mat-icon">schedule</span>
+            </div>
+            <div class="suggestion-item-content">
+              <div class="suggestion-item-title">${term}</div>
+              <div class="suggestion-item-sub">Tìm kiếm trước đó</div>
+            </div>
+            <div class="suggestion-item-jobs">🔍</div>
+          </div>
+        `).join('')}
+      `;
+    }
+    html += `
+      <div class="suggestion-group">
+        <div class="suggestion-group-header">🔥 Gợi ý hôm nay</div>
+        ${jobSuggestions.slice(0, 6).map(job => `
+          <div class="suggestion-item" onclick="selectSearch('${job.title.replace(/'/g, "\\'")}')">
+            <div class="suggestion-item-icon">
+              <span class="mat-icon">${job.icon}</span>
+            </div>
+            <div class="suggestion-item-content">
+              <div class="suggestion-item-title">${job.title}</div>
+              <div class="suggestion-item-sub">${job.category} • ${job.count.toLocaleString()} việc làm</div>
+            </div>
+            <div class="suggestion-item-jobs">→</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    suggestionsDiv.innerHTML = html;
+    suggestionsDiv.classList.add('show');
+  } else {
+    const filtered = jobSuggestions.filter(job => 
+      job.title.toLowerCase().includes(keyword.toLowerCase()) ||
+      job.category.toLowerCase().includes(keyword.toLowerCase())
+    );
+    
+    if (filtered.length > 0) {
+      suggestionsDiv.innerHTML = `
+        <div class="suggestion-group">
+          <div class="suggestion-group-header">💼 ${filtered.length} kết quả cho "${keyword}"</div>
+          ${filtered.slice(0, 8).map(job => `
+            <div class="suggestion-item" onclick="selectSearch('${job.title.replace(/'/g, "\\'")}')">
+              <div class="suggestion-item-icon">
+                <span class="mat-icon">${job.icon}</span>
+              </div>
+              <div class="suggestion-item-content">
+                <div class="suggestion-item-title">${highlightText(job.title, keyword)}</div>
+                <div class="suggestion-item-sub">${job.category} • ${job.count.toLocaleString()} việc làm</div>
+              </div>
+              <div class="suggestion-item-jobs">${job.count}+</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      suggestionsDiv.innerHTML = `
+        <div class="suggestion-item" onclick="selectSearch('${keyword.replace(/'/g, "\\'")}')">
+          <div class="suggestion-item-icon">
+            <span class="mat-icon">search</span>
+          </div>
+          <div class="suggestion-item-content">
+            <div class="suggestion-item-title">Tìm kiếm "${keyword}"</div>
+            <div class="suggestion-item-sub">Nhấn Enter để tìm kiếm việc làm</div>
+          </div>
+          <div class="suggestion-item-jobs">↵</div>
+        </div>
+      `;
+    }
+  }
+}
+
+/* ── PAGINATION BUTTONS ── */
+const jobsPrev = document.getElementById('jobs-prev');
+const jobsNext = document.getElementById('jobs-next');
+if (jobsPrev) {
+  jobsPrev.onclick = () => { if (jobPage > 1) { jobPage--; renderJobs(); } };
+}
+if (jobsNext) {
+  jobsNext.onclick = () => { if (jobPage < totalPages) { jobPage++; renderJobs(); } };
+}
 
 /* ── DROPDOWN HOVER ── */
 document.querySelectorAll('.nav-item').forEach(item => {
@@ -1604,7 +2231,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
 //* ── NAVBAR AUTH (cập nhật link đến profile) ── */
 (function() {
   const SESSION_KEY = 'vietjob_session';
-
   function getSession() {
     try {
       const ls = localStorage.getItem(SESSION_KEY);
@@ -1614,21 +2240,17 @@ document.querySelectorAll('.nav-item').forEach(item => {
     } catch {}
     return null;
   }
-
   function clearSession() {
     localStorage.removeItem(SESSION_KEY);
     sessionStorage.removeItem(SESSION_KEY);
   }
-
   const session = getSession();
   const navActions = document.getElementById('nav-actions');
   if (!navActions) return;
-
   if (session) {
     const initials = session.hoten
       ? session.hoten.trim().split(' ').slice(-1)[0][0].toUpperCase()
       : '?';
-
     navActions.innerHTML = `
       <div class="user-menu" id="user-menu">
         <button class="user-btn" id="user-btn">
@@ -1651,21 +2273,26 @@ document.querySelectorAll('.nav-item').forEach(item => {
       </div>
       <button class="btn-ntd">NHÀ TUYỂN DỤNG</button>
     `;
-
-    document.getElementById('user-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      document.getElementById('user-menu').classList.toggle('open');
-    });
+    const userBtn = document.getElementById('user-btn');
+    if (userBtn) {
+      userBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const menu = document.getElementById('user-menu');
+        if (menu) menu.classList.toggle('open');
+      });
+    }
     document.addEventListener('click', () => {
       const menu = document.getElementById('user-menu');
       if (menu) menu.classList.remove('open');
     });
-    document.getElementById('logout-btn').addEventListener('click', (e) => {
-      e.preventDefault();
-      clearSession();
-      window.location.reload();
-    });
-
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        clearSession();
+        window.location.reload();
+      });
+    }
   } else {
     navActions.innerHTML = `
       <button class="btn-outline" onclick="location.href='dangky.html'">Đăng ký</button>
@@ -1674,6 +2301,108 @@ document.querySelectorAll('.nav-item').forEach(item => {
     `;
   }
 })();
+
+// Hàm gọi API lấy danh sách tỉnh thành
+async function loadProvinces() {
+  const selectEl = document.getElementById('province-select');
+  if (!selectEl) return;
+  
+  try {
+    const response = await fetch('https://provinces.open-api.vn/api/p/');
+    const provinces = await response.json();
+    
+    selectEl.innerHTML = '<option value="">Tỉnh/thành phố</option>';
+    provinces.sort((a, b) => a.name.localeCompare(b.name, 'vi'));
+    
+    provinces.forEach(province => {
+      const option = document.createElement('option');
+      option.value = province.code;
+      option.textContent = province.name;
+      selectEl.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Lỗi tải danh sách tỉnh thành:', error);
+    selectEl.innerHTML = '<option value="">Lỗi tải dữ liệu</option>';
+  }
+}
+
+
+
+/* ── SEARCH EVENT LISTENERS ── */
+// Cập nhật phần event listeners cho search
+document.addEventListener('DOMContentLoaded', () => {
+  loadProvinces();
+  
+  filteredCards = [...allCards];
+  totalPages = Math.ceil(filteredCards.length / PER_PAGE);
+  renderJobs();
+  
+  const searchInput = document.getElementById('job-search-input');
+  const suggestionsDiv = document.getElementById('search-suggestions');
+  const searchBtn = document.getElementById('search-btn');
+  
+  if (searchInput) {
+    // Focus - hiển thị suggestions
+    searchInput.addEventListener('focus', () => {
+      renderSuggestions(searchInput.value);
+      suggestionsDiv.classList.add('show');
+    });
+    
+    // Click - hiển thị suggestions
+    searchInput.addEventListener('click', (e) => {
+      e.stopPropagation();
+      renderSuggestions(searchInput.value);
+      suggestionsDiv.classList.add('show');
+    });
+    
+    // Input - cập nhật suggestions
+    searchInput.addEventListener('input', (e) => {
+      renderSuggestions(e.target.value);
+      suggestionsDiv.classList.add('show');
+    });
+    
+    // Enter - thực hiện tìm kiếm
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const keyword = searchInput.value;
+        if (keyword.trim()) {
+          saveRecentSearch(keyword);
+          performSearch(keyword);
+        }
+        suggestionsDiv.classList.remove('show');
+        searchInput.blur();
+      }
+    });
+  }
+  
+  if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+      const keyword = searchInput?.value;
+      if (keyword?.trim()) {
+        saveRecentSearch(keyword);
+        performSearch(keyword);
+      } else {
+        resetSearch();
+      }
+      suggestionsDiv.classList.remove('show');
+    });
+  }
+  
+  // Đóng dropdown khi click ra ngoài
+  document.addEventListener('click', (e) => {
+    if (searchInput && !searchInput.contains(e.target) && 
+        suggestionsDiv && !suggestionsDiv.contains(e.target)) {
+      suggestionsDiv.classList.remove('show');
+    }
+  });
+  
+  // Ngăn click bên trong dropdown đóng nó
+  if (suggestionsDiv) {
+    suggestionsDiv.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+});
 </script>
 
 </body>
