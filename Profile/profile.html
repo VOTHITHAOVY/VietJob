@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>VietJob - Dashboard Cá Nhân</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --purple: #7C3AED; --purple-dark: #5B21B6; --purple-deeper: #4C1D95;
+      --purple-light: #EDE9FE; --purple-mid: #A78BFA; --purple-100: #F5F3FF;
+      --green: #16A34A; --amber: #F59E0B; --red: #EF4444;
+      --gray-900: #111827; --gray-700: #374151; --gray-500: #6B7280;
+      --gray-300: #D1D5DB; --gray-100: #F3F4F6; --white: #FFFFFF;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08); --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-purple: 0 8px 32px rgba(124,58,237,.25);
+    }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: #FAFAFA; color: var(--gray-900); overflow-x: hidden; }
+
+    /* ── NAVBAR (giống index) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 68px; background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px); border-bottom: 1px solid #EBEBEB;
+      display: flex; align-items: center;
+    }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; width: 100%; display: flex; align-items: center; }
+    .logo { font-size: 22px; font-weight: 900; color: var(--purple); letter-spacing: -0.5px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; gap: 6px; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: center; }
+    .nav-link { padding: 8px 12px; font-size: 14px; font-weight: 500; color: var(--gray-700); border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 3px; transition: all .18s; text-decoration: none; white-space: nowrap; }
+    .nav-link:hover { color: var(--purple); background: var(--purple-100); }
+    .nav-link.active { color: var(--purple); font-weight: 600; background: var(--purple-100); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; margin-left: auto; }
+    .btn-outline { height: 38px; padding: 0 18px; border-radius: 8px; border: 1.5px solid var(--purple); color: var(--purple); font-size: 14px; font-weight: 600; cursor: pointer; background: transparent; transition: all .18s; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif; }
+    .btn-outline:hover { background: var(--purple-100); }
+    .btn-solid { height: 38px; padding: 0 18px; border-radius: 8px; background: var(--purple); color: var(--white); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all .18s; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif; }
+    .btn-solid:hover { background: var(--purple-dark); }
+    .btn-ntd { height: 38px; padding: 0 18px; border-radius: 8px; background: var(--purple-deeper); color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; cursor: pointer; border: none; transition: all .18s; white-space: nowrap; font-family: 'Be Vietnam Pro', sans-serif; }
+    .btn-ntd:hover { background: #3B1578; }
+    .mat-icon { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; display: inline-block; line-height: 1; font-style: normal; vertical-align: middle; }
+    .mat-icon.filled { font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24; }
+
+    /* User menu */
+    .user-menu { position: relative; }
+    .user-btn { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border-radius: 8px; background: var(--purple-100); border: 1.5px solid var(--purple-light); cursor: pointer; transition: all .18s; font-family: 'Be Vietnam Pro', sans-serif; }
+    .user-btn:hover { background: var(--purple-light); }
+    .user-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--purple); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+    .user-name { font-size: 13px; font-weight: 700; color: var(--purple); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: white; border: 1px solid #EBEBEB; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,.12); min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(8px); transition: all .18s; z-index: 200; padding: 8px; }
+    .user-menu.open .user-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .ud-header { padding: 10px 12px 8px; border-bottom: 1px solid #F3F4F6; margin-bottom: 4px; }
+    .ud-name { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+    .ud-email { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+    .ud-link { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; color: var(--gray-700); font-weight: 500; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all .15s; }
+    .ud-link:hover { background: var(--purple-100); color: var(--purple); }
+    .ud-link i { font-size: 15px; color: var(--gray-400); }
+    .ud-link:hover i { color: var(--purple); }
+    .ud-divider { height: 1px; background: #F3F4F6; margin: 4px 0; }
+    .ud-logout { color: #EF4444 !important; }
+    .ud-logout:hover { background: #FEF2F2 !important; color: #EF4444 !important; }
+    .ud-logout i { color: #EF4444 !important; }
+
+    /* ── MAIN LAYOUT ── */
+    .page-wrap { max-width: 1280px; margin: 0 auto; padding: 88px 28px 40px; display: flex; gap: 28px; align-items: flex-start; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { width: 280px; flex-shrink: 0; position: sticky; top: 84px; }
+    .sidebar-card { background: white; border-radius: 16px; border: 1px solid #EBEBEB; box-shadow: var(--shadow-sm); overflow: hidden; }
+    .sidebar-profile { text-align: center; padding: 24px 20px 16px; border-bottom: 1px solid #F3F4F6; background: linear-gradient(135deg, var(--purple-100), #F5F3FF); }
+    .avatar-wrap { position: relative; width: 80px; height: 80px; margin: 0 auto 12px; }
+    .avatar-circle { width: 80px; height: 80px; border-radius: 50%; background: var(--purple); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 900; border: 3px solid white; box-shadow: var(--shadow-purple); }
+    .avatar-verified { position: absolute; bottom: 0; right: 0; background: var(--purple); color: white; border-radius: 50%; padding: 3px; border: 2px solid white; display: flex; }
+    .sidebar-name { font-size: 18px; font-weight: 800; color: var(--gray-900); }
+    .sidebar-id { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+    .sidebar-email { font-size: 11px; background: white; padding: 4px 12px; border-radius: 999px; display: inline-block; margin-top: 8px; color: var(--gray-700); border: 1px solid #EBEBEB; }
+    .sidebar-progress { padding: 14px 16px; border-bottom: 1px solid #F3F4F6; }
+    .progress-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; }
+    .progress-label span:first-child { color: var(--gray-500); font-weight: 600; }
+    .progress-label span:last-child { color: var(--purple); font-weight: 800; }
+    .progress-bar { height: 6px; background: #F3F4F6; border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-mid)); border-radius: 999px; transition: width .6s ease; }
+    .sidebar-nav { padding: 12px; }
+    .nav-section-label { font-size: 10px; font-weight: 800; color: var(--gray-500); letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px 8px; }
+    .sidebar-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; font-size: 13.5px; font-weight: 500; color: var(--gray-700); text-decoration: none; transition: all .15s; cursor: pointer; }
+    .sidebar-link:hover { background: var(--purple-100); color: var(--purple); }
+    .sidebar-link.active { background: var(--purple-100); color: var(--purple); font-weight: 700; }
+    .sidebar-link i { font-size: 18px; }
+    .sidebar-divider { height: 1px; background: #F3F4F6; margin: 8px 0; }
+    .sidebar-link.logout { color: var(--red); }
+    .sidebar-link.logout:hover { background: #FEF2F2; }
+
+    /* ── CONTENT ── */
+    .content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+
+    /* Welcome banner */
+    .welcome-banner { background: linear-gradient(135deg, var(--purple-deeper) 0%, var(--purple-dark) 40%, var(--purple) 100%); border-radius: 20px; padding: 28px 32px; color: white; position: relative; overflow: hidden; }
+    .welcome-banner::after { content: ''; position: absolute; right: -60px; top: -60px; width: 240px; height: 240px; border-radius: 50%; border: 1px solid rgba(255,255,255,.1); }
+    .welcome-title { font-size: 26px; font-weight: 900; margin-bottom: 6px; }
+    .welcome-title span { color: #FCD34D; }
+    .welcome-sub { color: rgba(255,255,255,.8); font-size: 14px; }
+    .welcome-rocket { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); font-size: 80px; opacity: .12; }
+
+    /* Stats row */
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .stat-card { background: white; border: 1px solid #EBEBEB; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: var(--shadow-sm); transition: all .2s; }
+    .stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .stat-num { font-size: 32px; font-weight: 900; color: var(--purple); }
+    .stat-label { font-size: 12px; color: var(--gray-500); margin-top: 4px; font-weight: 500; }
+
+    /* Two cols */
+    .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* Profile completion card */
+    .card { background: white; border: 1px solid #EBEBEB; border-radius: 16px; padding: 22px; box-shadow: var(--shadow-sm); }
+    .card-title { font-size: 16px; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+    .card-badge { font-size: 11px; background: var(--purple-100); color: var(--purple); padding: 3px 10px; border-radius: 999px; font-weight: 700; }
+    .big-progress-val { font-size: 42px; font-weight: 900; color: var(--purple); }
+    .big-progress-bar { height: 10px; background: #F3F4F6; border-radius: 999px; overflow: hidden; margin: 12px 0; }
+    .big-progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-mid)); border-radius: 999px; transition: width .8s ease; }
+    .complete-btn { width: 100%; background: #FCD34D; color: #1a0533; border: none; border-radius: 10px; padding: 12px; font-size: 13px; font-weight: 800; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; transition: all .18s; text-transform: uppercase; letter-spacing: .5px; margin-top: 10px; }
+    .complete-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+    /* CV section */
+    .cv-list { display: flex; flex-direction: column; gap: 10px; }
+    .cv-item { display: flex; align-items: center; gap: 14px; padding: 14px; border: 1px solid #EBEBEB; border-radius: 12px; transition: all .18s; }
+    .cv-item:hover { border-color: var(--purple); background: var(--purple-100); }
+    .cv-icon { width: 44px; height: 52px; background: var(--purple-100); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cv-icon .mat-icon { font-size: 24px; color: var(--purple); }
+    .cv-name { font-size: 14px; font-weight: 700; color: var(--gray-900); }
+    .cv-date { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+    .cv-actions { display: flex; gap: 4px; margin-left: auto; }
+    .cv-actions button { width: 32px; height: 32px; border: none; background: transparent; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--gray-500); transition: all .15s; }
+    .cv-actions button:hover { background: var(--purple-100); color: var(--purple); }
+    .cv-actions .mat-icon { font-size: 18px; }
+    .create-cv-btn { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--purple); background: none; border: none; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; padding: 0; }
+    .create-cv-btn:hover { text-decoration: underline; }
+
+    /* Applications table */
+    .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #EBEBEB; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: #F9FAFB; }
+    th { padding: 11px 16px; text-align: left; font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; }
+    td { padding: 14px 16px; font-size: 13.5px; border-top: 1px solid #F3F4F6; }
+    tr:hover td { background: #FAFAFA; }
+    .job-link { font-weight: 700; color: var(--purple); text-decoration: none; }
+    .job-link:hover { text-decoration: underline; }
+    .status-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+    .status-interview { background: #DCFCE7; color: var(--green); }
+    .status-submitted { background: var(--purple-100); color: var(--purple); }
+    .status-rejected { background: #FEE2E2; color: var(--red); }
+
+    /* Suggestions */
+    .suggest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .suggest-card { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #EBEBEB; border-radius: 12px; background: white; transition: all .18s; cursor: pointer; }
+    .suggest-card:hover { border-color: var(--purple); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+    .suggest-logo { width: 44px; height: 44px; border-radius: 10px; background: var(--purple-100); border: 1px solid #EBEBEB; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .suggest-logo img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+    .suggest-title { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+    .suggest-company { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+    .suggest-salary { font-size: 11px; font-weight: 700; color: var(--purple); margin-top: 4px; }
+
+    /* ── FOOTER (giống index) ── */
+    footer { background: #0F172A; padding: 56px 0 0; margin-top: 48px; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-logo { font-size: 22px; font-weight: 900; color: white; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .footer-logo-dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; }
+    .footer-desc { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; margin-bottom: 20px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.6); cursor: pointer; transition: all .18s; }
+    .social-btn:hover { background: var(--purple); border-color: var(--purple); color: white; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
+    .footer-link { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 10px; transition: color .15s; }
+    .footer-link:hover { color: rgba(255,255,255,.9); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 20px 28px; max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.35); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.35); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,.7); }
+
+    /* Redirect overlay */
+    #auth-guard { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+    #auth-guard .logo-big { font-size: 32px; font-weight: 900; color: var(--purple); }
+    #auth-guard p { color: var(--gray-500); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<!-- Auth guard overlay -->
+<div id="auth-guard" style="display:none">
+  <div class="logo-big">VietJob</div>
+  <p>Bạn chưa đăng nhập. Đang chuyển hướng...</p>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">
+      <svg width="32" height="32" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="52" cy="80" rx="38" ry="50" fill="#7C3AED" transform="rotate(-10, 52, 80)"/>
+        <circle cx="60" cy="42" r="22" fill="#7C3AED"/>
+        <circle cx="66" cy="38" r="8" fill="white"/>
+        <circle cx="68" cy="38" r="5" fill="#7C3AED"/>
+        <ellipse cx="44" cy="88" rx="18" ry="26" fill="white" opacity="0.92"/>
+      </svg>
+      VIECJOB
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="../index.html">Việc làm</a>
+      <a class="nav-link" href="../index.html">Công ty</a>
+      <a class="nav-link active" href="#">Hồ sơ</a>
+      <a class="nav-link" href="#">Cẩm nang</a>
+    </div>
+    <div class="nav-actions" id="nav-actions">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGE ── -->
+<div class="page-wrap">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-profile">
+        <div class="avatar-wrap">
+          <div class="avatar-circle" id="sb-avatar">?</div>
+          <div class="avatar-verified"><span class="mat-icon" style="font-size:12px">verified</span></div>
+        </div>
+        <div class="sidebar-name" id="sb-name">...</div>
+        <div class="sidebar-id" id="sb-id">#------</div>
+        <div class="sidebar-email" id="sb-email">...</div>
+      </div>
+      <div class="sidebar-progress">
+        <div class="progress-label"><span>Hoàn thiện hồ sơ</span><span id="sb-progress-val">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="sb-progress-bar" style="width:0%"></div></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Quản lý tìm việc</div>
+        <a class="sidebar-link active" href="profile.html"><i class="ti ti-dashboard"></i> Bảng điều khiển</a>
+        <a class="sidebar-link" href="Save-Jobs.html"><i class="ti ti-bookmark"></i> Việc làm đã lưu</a>
+        <a class="sidebar-link" href="#"><i class="ti ti-send"></i> Việc làm đã ứng tuyển</a>
+        <div class="sidebar-divider"></div>
+        <div class="nav-section-label">Quản lý CV</div>
+        <a class="sidebar-link" href="#"><i class="ti ti-file-text"></i> Quản lý CV</a>
+        <a class="sidebar-link" href="#"><i class="ti ti-eye"></i> NTD xem hồ sơ</a>
+        <div class="sidebar-divider"></div>
+        <a class="sidebar-link logout" href="#" id="sidebar-logout"><i class="ti ti-logout"></i> Đăng xuất</a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <div class="content">
+    <!-- Welcome banner -->
+    <div class="welcome-banner">
+      <div class="welcome-title">Chào mừng bạn đã quay trở lại, <span id="welcome-firstname">bạn</span>! 👋</div>
+      <div class="welcome-sub">Khám phá những cơ hội việc làm mới nhất dành riêng cho bạn hôm nay.</div>
+      <span class="mat-icon welcome-rocket">rocket_launch</span>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-views">0</div>
+        <div class="stat-label">Lượt xem hồ sơ</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-saved">0</div>
+        <div class="stat-label">Việc làm đã lưu</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="stat-applied">0</div>
+        <div class="stat-label">Đã ứng tuyển</div>
+      </div>
+    </div>
+
+    <!-- Two cols: completion + cv -->
+    <div class="two-cols">
+      <!-- Profile completion -->
+      <div class="card">
+        <div class="card-title">Độ hoàn thiện hồ sơ <span class="card-badge" id="completion-badge">0%</span></div>
+        <div class="big-progress-val" id="completion-val">0%</div>
+        <div class="big-progress-bar"><div class="big-progress-fill" id="completion-bar" style="width:0%"></div></div>
+        <p style="font-size:13px;color:var(--gray-500);margin-bottom:0">Cập nhật thêm thông tin để hồ sơ nổi bật hơn với nhà tuyển dụng.</p>
+        <button class="complete-btn">Hoàn thiện ngay ✦</button>
+      </div>
+
+      <!-- CV list -->
+      <div class="card">
+        <div class="card-title">
+          CV của tôi
+          <button class="create-cv-btn"><i class="ti ti-circle-plus" style="font-size:16px"></i> Tạo CV mới</button>
+        </div>
+        <div class="cv-list">
+          <div class="cv-item">
+            <div class="cv-icon"><span class="mat-icon">description</span></div>
+            <div>
+              <div class="cv-name" id="cv-name-1">CV chính</div>
+              <div class="cv-date">Cập nhật hôm nay</div>
+            </div>
+            <div class="cv-actions">
+              <button title="Chỉnh sửa"><span class="mat-icon">edit</span></button>
+              <button title="Xem"><span class="mat-icon">visibility</span></button>
+              <button title="Tải xuống"><span class="mat-icon">download</span></button>
+            </div>
+          </div>
+          <div class="cv-item">
+            <div class="cv-icon"><span class="mat-icon">description</span></div>
+            <div>
+              <div class="cv-name">CV dự phòng</div>
+              <div class="cv-date">Chưa cập nhật</div>
+            </div>
+            <div class="cv-actions">
+              <button title="Chỉnh sửa"><span class="mat-icon">edit</span></button>
+              <button title="Xem"><span class="mat-icon">visibility</span></button>
+              <button title="Tải xuống"><span class="mat-icon">download</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Applications table -->
+    <div class="card">
+      <div class="card-title">Việc làm đã ứng tuyển</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Vị trí</th><th>Công ty</th><th>Ngày nộp</th><th>Trạng thái</th></tr>
+          </thead>
+          <tbody id="applications-tbody">
+            <tr><td colspan="4" style="text-align:center;color:var(--gray-500);padding:24px;font-size:13px">Chưa có đơn ứng tuyển nào.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Suggestions -->
+    <div class="card">
+      <div class="card-title">Gợi ý việc làm phù hợp <span class="card-badge">AI</span></div>
+      <div class="suggest-grid">
+        <div class="suggest-card">
+          <div class="suggest-logo"><img src="https://logo.clearbit.com/fpt.com.vn?size=80" alt="FPT" onerror="this.src='https://ui-avatars.com/api/?background=7C3AED&color=fff&name=FPT&size=44'"></div>
+          <div>
+            <div class="suggest-title">Product Engineer (React)</div>
+            <div class="suggest-company">FPT Software</div>
+            <div class="suggest-salary">25 – 40 triệu</div>
+          </div>
+        </div>
+        <div class="suggest-card">
+          <div class="suggest-logo"><img src="https://logo.clearbit.com/techcombank.com.vn?size=80" alt="Techcombank" onerror="this.src='https://ui-avatars.com/api/?background=F59E0B&color=fff&name=TCB&size=44'"></div>
+          <div>
+            <div class="suggest-title">Senior Frontend Architect</div>
+            <div class="suggest-company">Techcombank</div>
+            <div class="suggest-salary">45 – 60 triệu</div>
+          </div>
+        </div>
+        <div class="suggest-card">
+          <div class="suggest-logo"><img src="https://logo.clearbit.com/vingroup.net?size=80" alt="Vingroup" onerror="this.src='https://ui-avatars.com/api/?background=16A34A&color=fff&name=VNG&size=44'"></div>
+          <div>
+            <div class="suggest-title">Marketing Manager</div>
+            <div class="suggest-company">Vingroup</div>
+            <div class="suggest-salary">30 – 50 triệu</div>
+          </div>
+        </div>
+        <div class="suggest-card">
+          <div class="suggest-logo"><img src="https://logo.clearbit.com/shopee.vn?size=80" alt="Shopee" onerror="this.src='https://ui-avatars.com/api/?background=EF4444&color=fff&name=SPE&size=44'"></div>
+          <div>
+            <div class="suggest-title">UX/UI Designer</div>
+            <div class="suggest-company">Shopee Vietnam</div>
+            <div class="suggest-salary">Thỏa thuận</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="footer-logo-dot"></span>VietJob</div>
+      <p class="footer-desc">Kết nối tương lai sự nghiệp của hàng triệu người Việt qua công nghệ AI hàng đầu. Nền tảng tuyển dụng #1 Việt Nam 2026.</p>
+      <div class="footer-socials">
+        <div class="social-btn"><span class="mat-icon" style="font-size:18px">facebook</span></div>
+        <div class="social-btn"><span class="mat-icon" style="font-size:18px">mail</span></div>
+        <div class="social-btn"><span class="mat-icon" style="font-size:18px">language</span></div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Sản phẩm</h4>
+      <a href="#" class="footer-link">Tìm việc làm</a>
+      <a href="#" class="footer-link">Tạo CV chuyên nghiệp</a>
+      <a href="#" class="footer-link">Gợi ý việc bằng AI</a>
+      <a href="#" class="footer-link">Cẩm nang sự nghiệp</a>
+    </div>
+    <div class="footer-col">
+      <h4>Dành cho NTD</h4>
+      <a href="#" class="footer-link">Đăng tin tuyển dụng</a>
+      <a href="#" class="footer-link">Tìm kiếm ứng viên</a>
+      <a href="#" class="footer-link">Giải pháp nhân sự</a>
+      <a href="#" class="footer-link">Định vị thương hiệu</a>
+    </div>
+    <div class="footer-col">
+      <h4>Về VietJob</h4>
+      <a href="#" class="footer-link">Giới thiệu</a>
+      <a href="#" class="footer-link">Liên hệ</a>
+      <a href="#" class="footer-link">Hỗ trợ</a>
+      <a href="#" class="footer-link">Chính sách bảo mật</a>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 VietJob. Vietnam's Leading Job Platform.</span>
+      <div class="footer-legal"><a href="#">Điều khoản</a><a href="#">Bảo mật</a><a href="#">Cookie</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SESSION_KEY = 'vietjob_session';
+const PROFILE_KEY = 'vietjob_profile';
+
+function getSession() {
+  try {
+    const ls = localStorage.getItem(SESSION_KEY);
+    if (ls) return JSON.parse(ls);
+    const ss = sessionStorage.getItem(SESSION_KEY);
+    if (ss) return JSON.parse(ss);
+  } catch {}
+  return null;
+}
+
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY);
+  sessionStorage.removeItem(SESSION_KEY);
+}
+
+function getProfile(email) {
+  try {
+    const data = localStorage.getItem(PROFILE_KEY + ':' + email);
+    return data ? JSON.parse(data) : {};
+  } catch { return {}; }
+}
+
+function calcCompletion(session, profile) {
+  let score = 0;
+  const checks = [
+    session.hoten,
+    session.email,
+    profile.phone,
+    profile.dob,
+    profile.address,
+    profile.title,
+    profile.bio,
+    (profile.skills && profile.skills.length > 0),
+  ];
+  checks.forEach(c => { if (c) score += 1; });
+  return Math.round((score / checks.length) * 100);
+}
+
+function getInitials(name) {
+  if (!name) return '?';
+  const parts = name.trim().split(' ');
+  return parts[parts.length - 1][0].toUpperCase();
+}
+
+function getFirstName(name) {
+  if (!name) return 'bạn';
+  const parts = name.trim().split(' ');
+  return parts[parts.length - 1];
+}
+
+// ── INIT ──
+const session = getSession();
+
+if (!session) {
+  document.getElementById('auth-guard').style.display = 'flex';
+  setTimeout(() => location.href = '../dangnhap.html', 2000);
+} else {
+  const profile = getProfile(session.email);
+  const completion = calcCompletion(session, profile);
+  const initials = getInitials(session.hoten);
+  const firstName = getFirstName(session.hoten);
+
+  // Sidebar
+  document.getElementById('sb-avatar').textContent = initials;
+  document.getElementById('sb-name').textContent = session.hoten || 'Người dùng';
+  document.getElementById('sb-id').textContent = '#' + (session.id || session.email.slice(0, 6).toUpperCase());
+  document.getElementById('sb-email').textContent = session.email;
+  document.getElementById('sb-progress-val').textContent = completion + '%';
+  document.getElementById('sb-progress-bar').style.width = completion + '%';
+
+  // Welcome
+  document.getElementById('welcome-firstname').textContent = firstName;
+
+  // Stats — lấy từ localStorage nếu có
+  const savedJobs = JSON.parse(localStorage.getItem('vietjob_saved:' + session.email) || '[]');
+  const appliedJobs = JSON.parse(localStorage.getItem('vietjob_applied:' + session.email) || '[]');
+  document.getElementById('stat-views').textContent = profile.views || Math.floor(Math.random()*50 + 10);
+  document.getElementById('stat-saved').textContent = savedJobs.length;
+  document.getElementById('stat-applied').textContent = appliedJobs.length;
+
+  // Completion
+  document.getElementById('completion-val').textContent = completion + '%';
+  document.getElementById('completion-badge').textContent = completion + '%';
+  document.getElementById('completion-bar').style.width = completion + '%';
+
+  // CV name
+  const cvName = session.hoten ? session.hoten + ' - CV' : 'CV chính';
+  document.getElementById('cv-name-1').textContent = cvName;
+
+  // Applications table
+  const tbody = document.getElementById('applications-tbody');
+  if (appliedJobs.length > 0) {
+    tbody.innerHTML = appliedJobs.map(j => `
+      <tr>
+        <td><a class="job-link" href="#">${j.title}</a></td>
+        <td>${j.company}</td>
+        <td>${j.date || 'N/A'}</td>
+        <td><span class="status-badge ${j.status === 'Phỏng vấn' ? 'status-interview' : j.status === 'Từ chối' ? 'status-rejected' : 'status-submitted'}">${j.status || 'Đã nộp'}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  // Navbar
+  const navActions = document.getElementById('nav-actions');
+  navActions.innerHTML = `
+    <div class="user-menu" id="user-menu">
+      <button class="user-btn" id="user-btn">
+        <div class="user-avatar">${initials}</div>
+        <span class="user-name">${session.hoten}</span>
+        <i class="ti ti-chevron-down" style="font-size:14px;color:var(--purple)"></i>
+      </button>
+      <div class="user-dropdown" id="user-dropdown">
+        <div class="ud-header">
+          <div class="ud-name">${session.hoten}</div>
+          <div class="ud-email">${session.email}</div>
+        </div>
+        <a class="ud-link" href="profile.html"><i class="ti ti-user"></i> Hồ sơ của tôi</a>
+        <a class="ud-link" href="Save-Jobs.html"><i class="ti ti-bookmark"></i> Việc làm đã lưu</a>
+        <a class="ud-link" href="#"><i class="ti ti-send"></i> Việc làm đã ứng tuyển</a>
+        <a class="ud-link" href="#"><i class="ti ti-file-text"></i> CV của tôi</a>
+        <div class="ud-divider"></div>
+        <a class="ud-link ud-logout" href="#" id="logout-btn"><i class="ti ti-logout"></i> Đăng xuất</a>
+      </div>
+    </div>
+    <button class="btn-ntd">NHÀ TUYỂN DỤNG</button>
+  `;
+
+  document.getElementById('user-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('user-menu').classList.toggle('open');
+  });
+  document.addEventListener('click', () => {
+    const m = document.getElementById('user-menu');
+    if (m) m.classList.remove('open');
+  });
+  document.getElementById('logout-btn').addEventListener('click', e => {
+    e.preventDefault(); clearSession(); location.href = '../index.html';
+  });
+  document.getElementById('sidebar-logout').addEventListener('click', e => {
+    e.preventDefault(); clearSession(); location.href = '../index.html';
+  });
+}
+</script>
+</body>
+</html>

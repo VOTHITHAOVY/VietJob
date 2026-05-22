@@ -1,0 +1,58 @@
+/* saved-jobs.css - custom styles cho trang việc làm đã lưu */
+
+.lift-card {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+.lift-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -12px rgba(108, 63, 207, 0.25);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Scrollbar tinh tế */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1edf7;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7badf;
+  border-radius: 10px;
+}
+
+/* Hiệu ứng ripple cho nút (tuỳ chỉnh) */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+.ripple-btn:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+}
+
+/* Đảm bảo hình ảnh công ty không bị méo */
+.job-card img {
+  object-fit: contain;
+}
