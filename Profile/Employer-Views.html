@@ -1,0 +1,47 @@
+<div class="employer-views-container">
+  <div class="ev-header">
+    <h1>Nhà tuyển dụng xem hồ sơ</h1>
+    <p>Theo dõi các công ty quan tâm đến kinh nghiệm của bạn trong 30 ngày qua.</p>
+  </div>
+
+  <div class="ev-grid">
+    <!-- Cột trái: Biểu đồ + chỉ số -->
+    <div class="ev-left">
+      <div class="chart-section">
+        <h3>Xu hướng lượt xem</h3>
+        <div class="bar-chart" id="bar-chart">
+          <!-- Các cột sẽ được render bằng JS -->
+        </div>
+        <div class="chart-labels">
+          <span>01 Tháng 10</span>
+          <span>15 Tháng 10</span>
+          <span>Hôm nay</span>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card-big">
+          <div class="stat-label">Tổng lượt xem</div>
+          <div class="stat-number" id="total-views">1,284</div>
+          <div class="stat-trend positive" id="trend-percent">+12%</div>
+        </div>
+        <div class="stat-card-big">
+          <div class="stat-label">Tỉ lệ phản hồi</div>
+          <div class="stat-number" id="feedback-rate">84%</div>
+          <div class="stat-sub">Rất ấn tượng!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cột phải: Lượt xem gần đây -->
+    <div class="ev-right">
+      <h3>Lượt xem gần đây</h3>
+      <div id="recent-views-list" class="recent-views-list">
+        <!-- Sẽ render bằng JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="Css/Employer-Views.css">
+<script src="Js/Employer-Views.js"></script>

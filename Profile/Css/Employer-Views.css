@@ -1,0 +1,199 @@
+/* Employer-Views.css */
+.employer-views-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.ev-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.ev-header p {
+  color: #4B5563;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.ev-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+}
+
+/* Cột trái */
+.chart-section {
+  background: #FFFFFF;
+  border: 1px solid #EBEBEB;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.chart-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 160px;
+  margin-bottom: 12px;
+}
+
+.bar {
+  flex: 1;
+  background: #7C3AED;
+  border-radius: 8px 8px 0 0;
+  transition: height 0.3s;
+  min-width: 40px;
+}
+
+.chart-labels {
+  display: flex;
+  justify-content: space-around;
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 8px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.stat-card-big {
+  background: #FFFFFF;
+  border: 1px solid #EBEBEB;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.stat-trend {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.stat-trend.positive {
+  color: #16A34A;
+}
+
+.stat-trend.negative {
+  color: #EF4444;
+}
+
+.stat-sub {
+  font-size: 12px;
+  color: #7C3AED;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Cột phải */
+.ev-right h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.recent-views-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.view-item {
+  background: #F9FAFB;
+  border: 1px solid #EBEBEB;
+  border-radius: 12px;
+  padding: 16px;
+  transition: 0.2s;
+}
+
+.view-item:hover {
+  border-color: #7C3AED;
+}
+
+.view-company {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.view-company strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.view-industry {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+
+.view-time {
+  font-size: 12px;
+  color: #9CA3AF;
+  display: inline-block;
+  background: #F3F4F6;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-right: 8px;
+}
+
+.view-count {
+  font-size: 12px;
+  color: #7C3AED;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  border: 1px dashed #D1D5DB;
+}
+
+.empty-state .mat-icon {
+  font-size: 48px;
+  color: #D1D5DB;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .ev-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .bar-chart {
+    gap: 8px;
+  }
+  .bar {
+    min-width: 30px;
+  }
+}

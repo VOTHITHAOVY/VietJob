@@ -1,0 +1,226 @@
+/* Applied-Jobs.css */
+.applied-jobs-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.applied-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.applied-header p {
+  color: #4B5563;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Grid 2 cột */
+.applied-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+}
+
+/* Cột trái */
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #E5E7EB;
+  padding-bottom: 12px;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B7280;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.2s;
+}
+
+.filter-btn span {
+  font-weight: 400;
+  color: #9CA3AF;
+}
+
+.filter-btn.active {
+  background: #7C3AED;
+  color: white;
+}
+
+.filter-btn.active span {
+  color: white;
+}
+
+.filter-btn:hover:not(.active) {
+  background: #F3F4F6;
+  color: #374151;
+}
+
+/* Danh sách ứng tuyển */
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
+  min-height: 300px;
+}
+
+.application-item {
+  background: white;
+  border: 1px solid #EBEBEB;
+  border-radius: 16px;
+  padding: 20px;
+  transition: 0.2s;
+}
+
+.application-item:hover {
+  border-color: #7C3AED;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.app-job-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.app-company {
+  font-size: 14px;
+  color: #4B5563;
+  margin-bottom: 8px;
+}
+
+.app-date {
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 12px;
+}
+
+.app-status {
+  display: inline-block;
+  background: #FEF3C7;
+  color: #D97706;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.app-status.interview {
+  background: #DCFCE7;
+  color: #16A34A;
+}
+
+.app-status.viewed {
+  background: #DBEAFE;
+  color: #2563EB;
+}
+
+.app-status.submitted {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.app-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-detail {
+  background: none;
+  border: none;
+  color: #7C3AED;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-detail:hover {
+  text-decoration: underline;
+}
+
+.pagination-info {
+  font-size: 13px;
+  color: #6B7280;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid #F0F0F0;
+}
+
+/* Cột phải */
+.tip-card, .support-card {
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #EBEBEB;
+}
+
+.tip-card h3, .support-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.tip-card p, .support-card p {
+  font-size: 13px;
+  color: #4B5563;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.tip-btn, .support-btn {
+  background: #7C3AED;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tip-btn:hover, .support-btn:hover {
+  background: #5B21B6;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  border: 1px dashed #D1D5DB;
+}
+
+.empty-state .mat-icon {
+  font-size: 48px;
+  color: #D1D5DB;
+  margin-bottom: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .applied-main-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .filter-tabs {
+    justify-content: center;
+  }
+}

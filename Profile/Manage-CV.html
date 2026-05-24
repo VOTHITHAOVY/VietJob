@@ -1,0 +1,49 @@
+<div class="manage-cv-container">
+  <div class="manage-cv-header">
+    <h1>Quản lý CV</h1>
+    <p>Tạo, quản lý và theo dõi các hồ sơ chuyên nghiệp của bạn.</p>
+  </div>
+
+  <div class="manage-cv-grid">
+    <!-- Cột trái: Danh sách CV -->
+    <div class="cv-list-section">
+      <div id="cv-list" class="cv-list">
+        <!-- Sẽ render bởi JS -->
+      </div>
+    </div>
+
+    <!-- Cột phải: Các block hỗ trợ -->
+    <div class="cv-sidebar">
+      <div class="upgrade-card">
+        <h3>📈 Nâng cấp hồ sơ của bạn</h3>
+        <p>CV được tối ưu hóa giúp tăng 40% khả năng nhận lời mời phỏng vấn từ các công ty lớn.</p>
+        <button class="upgrade-btn" id="upgrade-btn">Xem gợi ý từ chuyên gia</button>
+      </div>
+
+      <div class="create-cv-card">
+        <h3>➕ Tạo CV mới</h3>
+        <p>Sử dụng mẫu chuyên nghiệp từ JobsGO để nâng tầm sự nghiệp.</p>
+        <button class="create-btn" id="create-cv-btn">Tạo CV ngay</button>
+      </div>
+
+      <div class="stats-card">
+        <h3>📊 Thống kê CV</h3>
+        <div class="stat-item">
+          <span class="stat-label">Lượt xem hồ sơ:</span>
+          <span class="stat-value" id="stat-views">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Lượt tải về:</span>
+          <span class="stat-value" id="stat-downloads">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Ứng tuyển thành công:</span>
+          <span class="stat-value" id="stat-success">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="Css/Manage-CV.css">
+<script src="Js/Manage-CV.js"></script>

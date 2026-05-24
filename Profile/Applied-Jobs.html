@@ -1,0 +1,43 @@
+<div class="applied-jobs-container">
+  <div class="applied-header">
+    <h1>Việc làm đã ứng tuyển</h1>
+    <p>Theo dõi tình trạng đơn ứng tuyển của bạn tại các công ty hàng đầu.</p>
+  </div>
+
+  <div class="applied-main-grid">
+    <!-- Cột trái: Filter + Danh sách -->
+    <div class="applied-left">
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-btn active" data-status="all">Tất cả <span id="count-all">(0)</span></button>
+        <button class="filter-btn" data-status="submitted">Đã nộp <span id="count-submitted">(0)</span></button>
+        <button class="filter-btn" data-status="viewed">Đã xem hồ sơ <span id="count-viewed">(0)</span></button>
+        <button class="filter-btn" data-status="interview">Mời phỏng vấn <span id="count-interview">(0)</span></button>
+      </div>
+
+      <div id="applications-list" class="applications-list">
+        <!-- Nội dung sẽ được render bởi JS -->
+      </div>
+
+      <div class="pagination-info" id="pagination-info">
+        Hiển thị <span id="showing-start">0</span> - <span id="showing-end">0</span> trong số <span id="total-count">0</span> ứng tuyển
+      </div>
+    </div>
+
+    <!-- Cột phải: Các block hỗ trợ -->
+    <div class="applied-right">
+      <div class="tip-card">
+        <h3>📈 Ghi điểm với nhà tuyển dụng</h3>
+        <p>Hơn 70% nhà tuyển dụng đánh giá cao việc ứng viên có Portfolio. Hãy cập nhật các dự án mới nhất ngay hôm nay!</p>
+        <button class="tip-btn" id="update-portfolio-btn">Cập nhật ngay</button>
+      </div>
+      <div class="support-card">
+        <h3>💬 Cần hỗ trợ?</h3>
+        <p>Chuyên gia JobsGO luôn sẵn sàng tư vấn CV cho bạn.</p>
+        <button class="support-btn" id="contact-support-btn">Liên hệ tư vấn</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="Css/Applied-Jobs.css">
+<script src="Js/Applied-Jobs.js"></script>

@@ -1,0 +1,205 @@
+/* ===== DASHBOARD CSS - TỔNG QUAN HỒ SƠ ===== */
+:root {
+  --purple: #7C3AED;
+  --purple-dark: #5B21B6;
+  --gray-900: #111827;
+  --gray-800: #1F2937;
+  --gray-700: #374151;
+  --gray-600: #4B5563;
+  --gray-500: #6B7280;
+  --gray-100: #F3F4F6;
+  --white: #FFFFFF;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Banner tím */
+.welcome-banner {
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  border-radius: 20px;
+  padding: 24px 28px;
+  border: 1px solid #E9E4FF;
+  margin-bottom: 8px;
+}
+.welcome-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 8px;
+}
+.welcome-title span {
+  color: var(--purple);
+}
+.welcome-desc {
+  color: var(--gray-600);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 3 chỉ số thống kê */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.stat-card {
+  background: white;
+  border: 1px solid #EBEBEB;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+}
+.stat-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--purple);
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--gray-500);
+  margin-top: 4px;
+}
+
+/* Section title */
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 8px 0 12px;
+  padding-left: 4px;
+  border-left: 4px solid var(--purple);
+}
+
+/* Thông tin cá nhân dạng lưới */
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #EBEBEB;
+}
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+.info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.info-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-800);
+}
+
+/* Kỹ năng - dạng tag */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #EBEBEB;
+}
+.skill-tag {
+  background: white;
+  border: 1px solid var(--purple);
+  color: var(--purple);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+.skill-tag:hover {
+  background: var(--purple);
+  color: white;
+}
+
+/* Học vấn */
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #EBEBEB;
+}
+.education-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E5E7EB;
+}
+.education-item:last-child {
+  border-bottom: none;
+}
+.edu-degree {
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.edu-major {
+  font-size: 13px;
+  color: var(--gray-600);
+}
+.edu-year {
+  font-size: 13px;
+  color: var(--purple);
+  font-weight: 600;
+}
+
+/* Mục tiêu nghề nghiệp */
+.career-goal {
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #EBEBEB;
+  font-style: italic;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+
+/* Ngôn ngữ */
+.languages-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #EBEBEB;
+}
+.lang-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.lang-name {
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.lang-level {
+  font-size: 13px;
+  color: var(--purple);
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

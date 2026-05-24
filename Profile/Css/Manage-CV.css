@@ -1,0 +1,187 @@
+/* Manage-CV.css */
+.manage-cv-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.manage-cv-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.manage-cv-header p {
+  color: #4B5563;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.manage-cv-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+}
+
+/* Cột trái - Danh sách CV */
+.cv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cv-item {
+  background: white;
+  border: 1px solid #EBEBEB;
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.cv-item:hover {
+  border-color: #7C3AED;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.cv-info {
+  flex: 2;
+}
+
+.cv-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.cv-status {
+  display: inline-block;
+  background: #DCFCE7;
+  color: #16A34A;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+.cv-status.private {
+  background: #FEE2E2;
+  color: #EF4444;
+}
+
+.cv-updated {
+  font-size: 13px;
+  color: #6B7280;
+  margin-top: 8px;
+}
+
+.cv-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-import {
+  background: #7C3AED;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-import:hover {
+  background: #5B21B6;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #F9FAFB;
+  border-radius: 16px;
+  border: 1px dashed #D1D5DB;
+}
+
+.empty-state .mat-icon {
+  font-size: 48px;
+  color: #D1D5DB;
+  margin-bottom: 12px;
+}
+
+/* Cột phải */
+.upgrade-card, .create-cv-card, .stats-card {
+  background: #F9FAFB;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #EBEBEB;
+}
+
+.upgrade-card h3, .create-cv-card h3, .stats-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.upgrade-card p, .create-cv-card p {
+  font-size: 13px;
+  color: #4B5563;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.upgrade-btn, .create-btn {
+  background: #7C3AED;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.upgrade-btn:hover, .create-btn:hover {
+  background: #5B21B6;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #4B5563;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #7C3AED;
+}
+
+@media (max-width: 768px) {
+  .manage-cv-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
