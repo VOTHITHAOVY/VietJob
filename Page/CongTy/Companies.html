@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Công Ty Tuyển Dụng - VietJob</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+    <link rel="stylesheet" href="../ViecLam/Jobs.css">
+    <link rel="stylesheet" href="Companies.css">
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="search-section">
+        <div class="search-wrap">
+            <div class="search-bar">
+                <div class="search-field">
+                    <span class="mat-icon">search</span>
+                    <input id="searchInput" placeholder="Tên công ty, ngành nghề, công nghệ..." type="text" />
+                </div>
+                <div class="search-field divider">
+                    <span class="mat-icon">location_on</span>
+                    <input placeholder="Tất cả địa điểm" type="text" />
+                </div>
+                <button class="search-btn" onclick="doSearch()">
+                    <span class="mat-icon" style="font-size:18px">search</span>Tìm kiếm
+                </button>
+            </div>
+            <div class="search-tags">
+                <span class="search-tag" onclick="quickSearch('Fintech')">Fintech</span>
+                <span class="search-tag" onclick="quickSearch('E-commerce')">E-commerce</span>
+                <span class="search-tag" onclick="quickSearch('Gaming')">Gaming</span>
+                <span class="search-tag" onclick="quickSearch('SaaS')">SaaS</span>
+                <span class="search-tag" onclick="quickSearch('Outsourcing')">Outsourcing</span>
+                <span class="search-tag" onclick="quickSearch('Startup')">Startup</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-wrap">
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="filter-sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title"><i class="ti ti-adjustments-horizontal"></i>Bộ lọc tìm kiếm</span>
+                <span class="sidebar-reset" onclick="resetAll()">Xoá tất cả</span>
+            </div>
+            <div class="sidebar-scroll">
+
+                <!-- Lĩnh vực chuyên môn -->
+                <div class="filter-section">
+                    <div class="filter-head">
+                        <h3 class="filter-title"><i class="ti ti-category"></i>Lĩnh vực chuyên môn</h3>
+                        <span class="filter-reset" onclick="resetGroup('linhVuc')">Xoá</span>
+                    </div>
+                    <div class="filter-group" id="linhVuc">
+                        <label class="filter-item"><input type="checkbox" value="IT" />IT – Phần mềm</label>
+                        <label class="filter-item"><input type="checkbox" value="Marketing" />Marketing / Quảng cáo</label>
+                        <label class="filter-item"><input type="checkbox" value="Ngân hàng" />Tài chính / Ngân hàng</label>
+                        <label class="filter-item"><input type="checkbox" value="Sản xuất" />Sản xuất</label>
+                        <label class="filter-item filter-more hidden"><input type="checkbox" value="Bán lẻ" />Bán lẻ / FMCG</label>
+                        <label class="filter-item filter-more hidden"><input type="checkbox" value="Logistics" />Logistics / Vận tải</label>
+                        <label class="filter-item filter-more hidden"><input type="checkbox" value="Y tế" />Y tế / Dược phẩm</label>
+                        <span class="show-more-btn" onclick="toggleMore(this)">Xem thêm +</span>
+                    </div>
+                </div>
+
+                <!-- Quy mô nhân sự -->
+                <div class="filter-section">
+                    <div class="filter-head">
+                        <h3 class="filter-title"><i class="ti ti-users"></i>Quy mô nhân sự</h3>
+                        <span class="filter-reset" onclick="resetSize()">Xoá</span>
+                    </div>
+                    <div class="size-chips" id="sizeChips">
+                        <span class="size-chip" onclick="toggleSize(this)" data-val="Dưới 50">Dưới 50</span>
+                        <span class="size-chip" onclick="toggleSize(this)" data-val="50-200">50 – 200</span>
+                        <span class="size-chip" onclick="toggleSize(this)" data-val="200-500">200 – 500</span>
+                        <span class="size-chip" onclick="toggleSize(this)" data-val="500-1000">500 – 1000</span>
+                        <span class="size-chip" onclick="toggleSize(this)" data-val="Trên 1000">Trên 1000</span>
+                    </div>
+                </div>
+
+                <!-- Loại hình công ty -->
+                <div class="filter-section">
+                    <div class="filter-head">
+                        <h3 class="filter-title"><i class="ti ti-building"></i>Loại hình công ty</h3>
+                        <span class="filter-reset" onclick="resetGroup('loaiHinhCty')">Xoá</span>
+                    </div>
+                    <div class="filter-group" id="loaiHinhCty">
+                        <label class="filter-item"><input type="checkbox" value="Trong nước" />Công ty Việt Nam</label>
+                        <label class="filter-item"><input type="checkbox" value="Nước ngoài" />Vốn đầu tư nước ngoài</label>
+                        <label class="filter-item"><input type="checkbox" value="MNC" />Đa quốc gia (MNC)</label>
+                        <label class="filter-item"><input type="checkbox" value="Startup" />Startup</label>
+                    </div>
+                </div>
+
+                <!-- Địa điểm làm việc -->
+                <div class="filter-section">
+                    <div class="filter-head">
+                        <h3 class="filter-title"><i class="ti ti-map-pin"></i>Địa điểm làm việc</h3>
+                        <span class="filter-reset">Xoá</span>
+                    </div>
+                    <select class="loc-select" onchange="filterByLocation(this.value)">
+                        <option value="">Tất cả tỉnh thành</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="TP. HCM">TP. Hồ Chí Minh</option>
+                        <option value="Đà Nẵng">Đà Nẵng</option>
+                        <option value="Cần Thơ">Cần Thơ</option>
+                    </select>
+                </div>
+
+                <!-- Phúc lợi nổi bật -->
+                <div class="filter-section">
+                    <div class="filter-head">
+                        <h3 class="filter-title"><i class="ti ti-gift"></i>Phúc lợi nổi bật</h3>
+                        <span class="filter-reset" onclick="resetGroup('phucLoi')">Xoá</span>
+                    </div>
+                    <div class="filter-group" id="phucLoi">
+                        <label class="filter-item"><input type="checkbox" value="bonus" />Thưởng theo hiệu suất</label>
+                        <label class="filter-item"><input type="checkbox" value="insurance" />Bảo hiểm sức khoẻ</label>
+                        <label class="filter-item"><input type="checkbox" value="remote" />Làm việc từ xa</label>
+                        <label class="filter-item"><input type="checkbox" value="flexible" />Giờ làm linh hoạt</label>
+                        <label class="filter-item"><input type="checkbox" value="esop" />Cổ phần / ESOP</label>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- ── RESULTS ── -->
+        <section class="results-area">
+            <div class="results-header">
+                <div class="results-count">Tìm thấy <strong id="totalCount">1,240</strong> công ty phù hợp</div>
+                <div class="results-right">
+                    <span class="sort-label">Sắp xếp:</span>
+                    <select class="sort-select" onchange="sortCompanies(this.value)">
+                        <option value="relevant">Phù hợp nhất</option>
+                        <option value="rating">Đánh giá cao nhất</option>
+                        <option value="jobs">Nhiều việc nhất</option>
+                        <option value="newest">Mới nhất</option>
+                    </select>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="btnGrid" onclick="setView('grid')" title="Lưới">
+                            <i class="ti ti-layout-grid"></i>
+                        </button>
+                        <button class="view-btn" id="btnList" onclick="setView('list')" title="Danh sách">
+                            <i class="ti ti-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="companies-grid" id="companiesGrid"></div>
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="../../Component/loader.js"></script>
+    <script src="Companies.js"></script>
+</body>
+
+</html>

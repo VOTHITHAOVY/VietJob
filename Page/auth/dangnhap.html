@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng nhập - VietJob</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+<link rel="stylesheet" href="dangnhap.css">
+</head>
+<body>
+
+<div class="toast" id="toast">
+  <i class="ti ti-circle-check" id="toast-icon"></i>
+  <span id="toast-msg"></span>
+</div>
+
+<div class="card">
+
+  <div class="left">
+    <img src="img/Gemini_Generated_Image_ecatgmecatgmecat.png" alt="VietJob"/>
+  </div>
+
+  <div class="right">
+
+    <div id="form-section">
+
+      <a class="back-link" href="../../index.html">
+        <i class="ti ti-arrow-left"></i> Quay về trang chủ
+      </a>
+
+      <div class="right-title">Đăng Nhập VietJob</div>
+      <div class="right-sub">Chào mừng bạn quay lại 👋</div>
+
+      <div class="social-section">
+        <div class="social-label">Đăng nhập nhanh bằng</div>
+        <div class="social-btns">
+          <div class="soc-btn" title="Facebook">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1877F2"/><path d="M21.5 13.5h-2a3.5 3.5 0 0 0-3.5 3.5v2h-2v3.5h2V31h3.5v-8.5H22l.5-3.5h-3V17a.5.5 0 0 1 .5-.5h2v-3z" fill="white"/></svg>
+          </div>
+          <div class="soc-btn" title="Google">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="white"/><path d="M33 20.27c0-.94-.08-1.84-.23-2.72H20v5.14h7.28a6.22 6.22 0 0 1-2.7 4.08v3.38h4.37C31.6 27.95 33 24.36 33 20.27z" fill="#4285F4"/><path d="M20 34c3.65 0 6.71-1.21 8.95-3.28l-4.37-3.38c-1.21.81-2.76 1.3-4.58 1.3-3.52 0-6.5-2.38-7.57-5.57H7.93v3.49A13.99 13.99 0 0 0 20 34z" fill="#34A853"/><path d="M12.43 23.07A8.43 8.43 0 0 1 12 20c0-1.07.18-2.1.43-3.07v-3.49H7.93A14.01 14.01 0 0 0 6 20c0 2.26.54 4.4 1.93 6.56l4.5-3.49z" fill="#FBBC05"/><path d="M20 12.36c1.98 0 3.76.68 5.16 2.02l3.87-3.87A13.94 13.94 0 0 0 20 6c-4.7 0-8.73 2.72-10.07 7.44l4.5 3.49C15.5 14.07 17.48 12.36 20 12.36z" fill="#EA4335"/></svg>
+          </div>
+          <div class="soc-btn" title="LinkedIn">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#0A66C2"/><rect x="11" y="17" width="4" height="13" rx="0.5" fill="white"/><circle cx="13" cy="13" r="2.5" fill="white"/><path d="M20 17h3.5v1.8c.7-1.1 2-2 3.8-2 3.2 0 5.2 2 5.2 6V30h-4v-6.8c0-1.8-.7-3-2.2-3-1.6 0-2.3 1.2-2.3 3V30H20V17z" fill="white"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="or-divider">
+        <div class="or-line"></div>
+        <span class="or-text">Hoặc đăng nhập bằng email</span>
+        <div class="or-line"></div>
+      </div>
+
+      <!-- Thông báo lỗi đăng nhập -->
+      <div class="login-error" id="login-error">
+        <i class="ti ti-alert-circle"></i>
+        <span id="login-error-msg">Email hoặc mật khẩu không đúng</span>
+      </div>
+
+      <form id="login-form" novalidate>
+
+        <div class="field">
+          <label class="fl">Email <span class="req">*</span></label>
+          <div class="inp-wrap" id="wrap-email">
+            <input id="email" type="email" placeholder="Nhập email đăng nhập" autocomplete="email"/>
+            <i class="ti ti-mail ico"></i>
+          </div>
+          <div class="errmsg" id="err-email">Email không hợp lệ</div>
+        </div>
+
+        <div class="field">
+          <label class="fl">Mật khẩu <span class="req">*</span></label>
+          <div class="inp-wrap" id="wrap-pwd">
+            <input id="pwd" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password"/>
+            <i class="ti ti-lock ico"></i>
+            <span class="eye-btn" id="eye-btn"><i class="ti ti-eye" id="eye-ico"></i></span>
+          </div>
+          <div class="errmsg" id="err-pwd">Vui lòng nhập mật khẩu</div>
+        </div>
+
+        <div class="extra-row">
+          <label class="remember-row">
+            <input type="checkbox" id="remember"/>
+            <div class="check-box"></div>
+            <span class="remember-txt">Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="forgot-link" id="forgot-btn">Quên mật khẩu?</a>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <i class="ti ti-login" style="font-size:17px"></i>
+          Đăng nhập
+        </button>
+
+        <div class="register-row">
+          Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="success-wrap" id="success-wrap">
+      <div class="success-circle"><i class="ti ti-check"></i></div>
+      <div class="success-title">Đăng nhập thành công! 🎉</div>
+      <p class="success-sub">Chào mừng trở lại,</p>
+      <div class="success-name" id="success-name"></div>
+      <a class="success-go" href="../../index.html">Vào trang chủ →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal quên mật khẩu -->
+<div class="modal-overlay" id="forgot-modal">
+  <div class="modal-box">
+    <span class="modal-close" id="modal-close"><i class="ti ti-x"></i></span>
+    <div class="modal-title">Quên mật khẩu?</div>
+    <p class="modal-sub">Nhập email đăng ký, chúng tôi sẽ gửi link đặt lại mật khẩu ngay.</p>
+    <div class="field">
+      <label class="fl">Email <span class="req">*</span></label>
+      <div class="inp-wrap" id="wrap-reset-email">
+        <input id="reset-email" type="email" placeholder="Nhập email đăng ký"/>
+        <i class="ti ti-mail ico"></i>
+      </div>
+      <div class="errmsg" id="err-reset-email">Email không hợp lệ</div>
+    </div>
+    <button class="modal-btn" id="reset-btn">
+      <i class="ti ti-send" style="font-size:14px;margin-right:6px"></i>
+      Gửi link đặt lại mật khẩu
+    </button>
+    <div class="modal-note" id="reset-note"></div>
+  </div>
+</div>
+
+<script src="dangnhap.js"></script>
+</body>
+</html>

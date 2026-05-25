@@ -1,0 +1,163 @@
+/* ============================================================
+   Profile.css  –  Chỉ chứa styles riêng của trang Profile
+   Reset / Variables / Nav / Footer → đã có trong Header.html
+   ============================================================ */
+
+/* ── PROFILE LAYOUT ── */
+.profile-main {
+  margin-top: 68px;
+  background: #F9FAFB;
+  min-height: calc(100vh - 68px - 400px);
+}
+
+.profile-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 28px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+}
+
+/* ── SIDEBAR ── */
+.profile-sidebar {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #EBEBEB;
+  padding: 24px 0;
+  height: fit-content;
+  position: sticky;
+  top: 88px;
+}
+
+.user-info {
+  text-align: center;
+  padding: 0 20px 20px;
+  border-bottom: 2px solid #D1D5DB;
+  margin-bottom: 16px;
+}
+
+.user-avatar-large {
+  width: 80px;
+  height: 80px;
+  background: var(--purple);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 auto 12px;
+}
+
+.user-name-large {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.user-email {
+  font-size: 13px;
+  color: var(--gray-500);
+  margin-top: 4px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-group {
+  margin-bottom: 0;
+}
+
+.menu-group.last-group {
+  border-top: 2px solid #D1D5DB;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.menu-group-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gray-500);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0 20px 12px;
+  margin-bottom: 8px;
+}
+
+.menu-group ul { list-style: none; }
+
+.menu-group li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all .18s;
+  border-radius: 12px;
+  margin: 0 8px;
+  width: calc(100% - 16px);
+}
+
+.menu-group li i { font-size: 18px; color: var(--gray-400); width: 24px; }
+
+.menu-group li:hover         { background: var(--purple-100); color: var(--purple); }
+.menu-group li:hover i       { color: var(--purple); }
+.menu-group li.active        { background: var(--purple-100); color: var(--purple); font-weight: 700; }
+.menu-group li.active i      { color: var(--purple); }
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  width: calc(100% - 16px);
+  margin: 12px 8px 0 8px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #EF4444;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all .18s;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  text-align: left;
+}
+.logout-btn i       { font-size: 18px; color: #EF4444; width: 24px; }
+.logout-btn:hover   { background: #FEF2F2; }
+
+/* ── CONTENT ── */
+.profile-content {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #EBEBEB;
+  padding: 32px;
+  min-height: 500px;
+}
+
+.placeholder-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  gap: 12px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .profile-container { grid-template-columns: 260px 1fr; gap: 24px; }
+}
+
+@media (max-width: 768px) {
+  .profile-container { grid-template-columns: 1fr; padding: 20px; }
+  .profile-sidebar   { position: static; }
+}

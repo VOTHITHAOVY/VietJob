@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>VietJob - Cài đặt tài khoản</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <!-- Dùng chung profile.css (đã có navbar, footer, dropdown) -->
+  <link rel="stylesheet" href="Css/profile.css">
+  <link rel="stylesheet" href="Css/Setting.css">
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+<div class="settings-container">
+  <div class="settings-header">
+    <h1>Cài đặt tài khoản</h1>
+    <p>Quản lý thông tin cá nhân, bảo mật và tùy chỉnh trải nghiệm của bạn.</p>
+  </div>
+
+  <div class="settings-grid">
+    <div class="settings-sidebar">
+      <div class="settings-category active" data-category="profile"><i class="ti ti-user"></i> Thông tin cá nhân</div>
+      <div class="settings-category" data-category="security"><i class="ti ti-lock"></i> Bảo mật</div>
+      <div class="settings-category" data-category="privacy"><i class="ti ti-shield"></i> Quyền riêng tư</div>
+      <div class="settings-category" data-category="notifications"><i class="ti ti-bell"></i> Thông báo</div>
+      <div class="settings-category" data-category="appearance"><i class="ti ti-palette"></i> Giao diện</div>
+      <div class="settings-category" data-category="social"><i class="ti ti-brand-github"></i> Liên kết mạng xã hội</div>
+    </div>
+
+    <div class="settings-content" id="settings-content">
+      <div class="loading">Đang tải...</div>
+    </div>
+  </div>
+
+  <div class="settings-actions">
+    <button class="btn-cancel" id="cancel-settings">Hủy</button>
+    <button class="btn-save" id="save-settings">Lưu thay đổi</button>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="../../Component/loader.js"></script>
+<script src="Js/Setting.js"></script>
+</body>
+</html>

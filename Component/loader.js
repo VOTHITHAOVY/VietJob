@@ -53,8 +53,8 @@ function initNavAuth() {
               <div class="ud-name">${session.hoten}</div>
               <div class="ud-email">${session.email}</div>
             </div>
-            <a class="ud-link" href="./Profile/Setting.html"><i class="ti ti-settings"></i> Cài đặt</a>
-            <a class="ud-link" href="./Profile/profile.html"><i class="ti ti-user"></i> Hồ sơ cá nhân</a>
+            <a class="ud-link" href="/Page/Profile/Setting.html"><i class="ti ti-settings"></i> Cài đặt</a>
+            <a class="ud-link" href="/Page/Profile/profile.html"><i class="ti ti-user"></i> Hồ sơ cá nhân</a>
             <div class="ud-divider"></div>
             <a class="ud-link ud-logout" href="#" id="logout-btn"><i class="ti ti-logout"></i> Đăng xuất</a>
           </div>
@@ -75,14 +75,14 @@ function initNavAuth() {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
           clearSession();
-          window.location.href = 'index.html';
+          window.location.href = '/index.html';
         });
       }
     }
   } else {
     navActions.innerHTML = `
-      <button class="btn-outline" onclick="location.href='dangky.html'">Đăng ký</button>
-      <button class="btn-solid" onclick="location.href='dangnhap.html'">Đăng nhập</button>
+      <button class="btn-outline" onclick="location.href='/Page/auth/dangky.html'">Đăng ký</button>
+      <button class="btn-solid" onclick="location.href='/Page/auth/dangnhap.html'">Đăng nhập</button>
       <button class="btn-ntd">NHÀ TUYỂN DỤNG</button>
     `;
     console.log('[initNavAuth] Chưa đăng nhập');
@@ -103,14 +103,28 @@ function initNavDropdowns() {
 
 function initActiveNavLink() {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  function setActive(clickedLink) {
+    document.querySelectorAll('.nav-links .nav-link').forEach(l => l.classList.remove('active'));
+    clickedLink.classList.add('active');
+  }
+
   document.querySelectorAll('.nav-links .nav-link').forEach(link => {
     const href = link.getAttribute('href');
-    if (href && href !== '#' && href !== 'index.html' && currentPage === href) {
+    if (!href || href === '#') return;
+
+    // Lấy tên file từ href (bỏ dấu / ở đầu nếu có)
+    const hrefPage = href.replace(/^\//, '').split('/').pop();
+
+    // Tô màu theo trang hiện tại khi load
+    const isHome = (hrefPage === 'index.html' || href === './') && (currentPage === 'index.html' || currentPage === '');
+    const isMatch = hrefPage && hrefPage !== 'index.html' && currentPage === hrefPage;
+    if (isHome || isMatch) {
       link.classList.add('active');
     }
-    if ((href === 'index.html' || href === './') && (currentPage === 'index.html' || currentPage === '')) {
-      link.classList.add('active');
-    }
+
+    // Tô màu khi click
+    link.addEventListener('click', () => setActive(link));
   });
 }
 
