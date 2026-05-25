@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JobsGO — Cẩm Nang Nghề Nghiệp</title>
     <link rel="stylesheet" href="Career-guide.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=Material+Symbols+Outlined&display=swap"
-        rel="stylesheet" />
+    <!-- Chỉ giữ Material Symbols nếu cần icon trong header/footer (không ảnh hưởng đến font chính) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -18,692 +15,691 @@
     <!-- Header được load bởi loader.js -->
     <div id="header-placeholder"></div>
 
-    <!-- ══════════════════ HERO ══════════════════ -->
-    <section class="hero">
-        <div class="hero-bg">
-            <div class="hero-orb orb1"></div>
-            <div class="hero-orb orb2"></div>
-            <div class="hero-grid"></div>
-        </div>
-        <div class="container hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Nền tảng nghề nghiệp #1 Việt Nam
-            </div>
-            <h1 class="hero-title">
-                Cẩm Nang<br />
-                <span class="hero-highlight">Nghề Nghiệp</span>
-            </h1>
-            <p class="hero-sub">
-                Bí kíp phỏng vấn, kỹ năng viết CV và xu hướng tuyển dụng mới nhất —<br />
-                để bạn tự tin chinh phục mọi cơ hội trong sự nghiệp.
-            </p>
+    <!-- ══════════════════ WRAPPER RIÊNG CHO TRANG CẨM NANG ══════════════════ -->
+    <div class="career-page">
 
-            <div class="hero-search">
-                <div class="search-box">
-                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
-                    </svg>
-                    <input type="text" placeholder="Tìm kiếm chủ đề bạn quan tâm…" />
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-orb orb1"></div>
+                <div class="hero-orb orb2"></div>
+                <div class="hero-grid"></div>
+            </div>
+            <div class="container hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Nền tảng nghề nghiệp #1 Việt Nam
                 </div>
-                <div class="search-filter">
-                    <select>
-                        <option>Tất cả</option>
-                        <option>Kỹ năng mềm</option>
-                        <option>Phỏng vấn</option>
-                        <option>Lương thưởng</option>
-                    </select>
-                </div>
-                <button class="btn-search">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
-                    </svg>
-                    Tìm kiếm
-                </button>
-            </div>
+                <h1 class="hero-title">
+                    Cẩm Nang<br />
+                    <span class="hero-highlight">Nghề Nghiệp</span>
+                </h1>
+                <p class="hero-sub">
+                    Bí kíp phỏng vấn, kỹ năng viết CV và xu hướng tuyển dụng mới nhất —<br />
+                    để bạn tự tin chinh phục mọi cơ hội trong sự nghiệp.
+                </p>
 
-            <div class="hero-tabs">
-                <button class="tab active">Phổ biến</button>
-                <button class="tab">Phỏng vấn</button>
-                <button class="tab">Viết CV</button>
-                <button class="tab">Kỹ năng mềm</button>
-                <button class="tab">Mức lương</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════ TOPICS ══════════════════ -->
-    <section class="topics section">
-        <div class="container">
-            <div class="section-head">
-                <span class="section-label">Chủ đề nổi bật</span>
-                <h2 class="section-title">Khám phá theo lĩnh vực</h2>
-            </div>
-
-            <div class="topics-grid">
-
-                <div class="topic-card" data-color="violet">
-                    <div class="topic-icon-wrap">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="48" height="48" rx="14" fill="url(#t1)" />
-                            <path d="M16 30l6-8 5 6 3-4 6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <circle cx="24" cy="18" r="4" fill="#fff" fill-opacity=".3" />
-                            <path d="M24 14v2M24 22v2M20 18h-2M30 18h-2" stroke="#fff" stroke-width="1.5"
-                                stroke-linecap="round" />
-                            <defs>
-                                <linearGradient id="t1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#8B5CF6" />
-                                    <stop offset="1" stop-color="#6D28D9" />
-                                </linearGradient>
-                            </defs>
+                <div class="hero-search">
+                    <div class="search-box">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
                         </svg>
+                        <input type="text" placeholder="Tìm kiếm chủ đề bạn quan tâm…" />
                     </div>
-                    <h3>Kỹ năng phỏng vấn</h3>
-                    <p>Chiến lược & bí quyết vượt qua mọi vòng phỏng vấn</p>
-                    <span class="topic-count">128 bài viết</span>
-                </div>
-
-                <div class="topic-card" data-color="amber">
-                    <div class="topic-icon-wrap">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="48" height="48" rx="14" fill="url(#t2)" />
-                            <rect x="14" y="13" width="20" height="22" rx="3" stroke="#fff" stroke-width="2" />
-                            <path d="M18 19h12M18 23h12M18 27h8" stroke="#fff" stroke-width="2"
-                                stroke-linecap="round" />
-                            <circle cx="33" cy="33" r="5" fill="#F59E0B" />
-                            <path d="M31 33h4M33 31v4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
-                            <defs>
-                                <linearGradient id="t2" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#F59E0B" />
-                                    <stop offset="1" stop-color="#D97706" />
-                                </linearGradient>
-                            </defs>
+                    <div class="search-filter">
+                        <select>
+                            <option>Tất cả</option>
+                            <option>Kỹ năng mềm</option>
+                            <option>Phỏng vấn</option>
+                            <option>Lương thưởng</option>
+                        </select>
+                    </div>
+                    <button class="btn-search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
                         </svg>
-                    </div>
-                    <h3>Viết CV chuyên nghiệp</h3>
-                    <p>Mẫu CV & hướng dẫn viết CV ấn tượng nhà tuyển dụng</p>
-                    <span class="topic-count">95 bài viết</span>
+                        Tìm kiếm
+                    </button>
                 </div>
 
-                <div class="topic-card" data-color="emerald">
-                    <div class="topic-icon-wrap">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="48" height="48" rx="14" fill="url(#t3)" />
-                            <path d="M14 34V26a10 10 0 0 1 20 0v8" stroke="#fff" stroke-width="2"
-                                stroke-linecap="round" />
-                            <path d="M10 34h28" stroke="#fff" stroke-width="2" stroke-linecap="round" />
-                            <circle cx="24" cy="18" r="4" fill="#fff" fill-opacity=".4" />
-                            <path d="M20 34v-4h8v4" stroke="#fff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <defs>
-                                <linearGradient id="t3" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#10B981" />
-                                    <stop offset="1" stop-color="#059669" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3>Mức lương & Đãi ngộ</h3>
-                    <p>Thống kê lương thị trường & cách đàm phán lương hiệu quả</p>
-                    <span class="topic-count">74 bài viết</span>
+                <div class="hero-tabs">
+                    <button class="tab active">Phổ biến</button>
+                    <button class="tab">Phỏng vấn</button>
+                    <button class="tab">Viết CV</button>
+                    <button class="tab">Kỹ năng mềm</button>
+                    <button class="tab">Mức lương</button>
                 </div>
-
-                <div class="topic-card" data-color="rose">
-                    <div class="topic-icon-wrap">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="48" height="48" rx="14" fill="url(#t4)" />
-                            <path d="M24 14c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10S29.523 14 24 14z"
-                                stroke="#fff" stroke-width="2" />
-                            <path d="M24 18v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M14 36c0-2.21 4.477-4 10-4s10 1.79 10 4" stroke="#fff" stroke-width="2"
-                                stroke-linecap="round" />
-                            <defs>
-                                <linearGradient id="t4" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#F43F5E" />
-                                    <stop offset="1" stop-color="#E11D48" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3>Kỹ năng mềm</h3>
-                    <p>Phát triển bản thân & nâng cao năng lực làm việc chuyên nghiệp</p>
-                    <span class="topic-count">112 bài viết</span>
-                </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ══════════════════ FEATURED ══════════════════ -->
-    <section class="featured section">
-        <div class="container">
-            <div class="section-head">
-                <span class="section-label">Bài viết tiêu điểm</span>
-                <h2 class="section-title">Được đọc nhiều nhất</h2>
-                <a href="#" class="see-all">Xem tất cả →</a>
-            </div>
+        <!-- TOPICS -->
+        <section class="topics section">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label">Chủ đề nổi bật</span>
+                    <h2 class="section-title">Khám phá theo lĩnh vực</h2>
+                </div>
 
-            <div class="featured-layout">
-                <!-- Main card -->
-                <article class="feat-main">
-                    <div class="feat-main-img">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-                            alt="Interview tips" loading="lazy" />
-                        <div class="feat-main-overlay"></div>
-                        <span class="feat-badge">Phỏng vấn</span>
-                    </div>
-                    <div class="feat-main-body">
-                        <div class="article-meta">
-                            <img src="https://i.pravatar.cc/32?img=47" alt="author" class="author-avatar" />
-                            <span class="author-name">Minh Thư</span>
-                            <span class="meta-dot">·</span>
-                            <span class="read-time">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 6v6l4 2" />
-                                </svg>
-                                8 phút đọc
-                            </span>
-                            <span class="meta-dot">·</span>
-                            <span class="date">01/06/2026</span>
+                <div class="topics-grid">
+                    <div class="topic-card" data-color="violet">
+                        <div class="topic-icon-wrap">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="48" height="48" rx="14" fill="url(#t1)" />
+                                <path d="M16 30l6-8 5 6 3-4 6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="24" cy="18" r="4" fill="#fff" fill-opacity=".3" />
+                                <path d="M24 14v2M24 22v2M20 18h-2M30 18h-2" stroke="#fff" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <defs>
+                                    <linearGradient id="t1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#8B5CF6" />
+                                        <stop offset="1" stop-color="#6D28D9" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
-                        <h2>10 Kỹ năng phỏng vấn then chốt giúp bạn chinh phục nhà tuyển dụng khó tính nhất</h2>
-                        <p>Phỏng vấn không chỉ là kiểm tra kỹ năng chuyên môn — đó là nghệ thuật thuyết phục. Khám phá
-                            10 bí quyết từ các chuyên gia nhân sự hàng đầu để mở đầu sự nghiệp thành công.</p>
-                        <a href="#" class="btn-read">
-                            Đọc bài viết
+                        <h3>Kỹ năng phỏng vấn</h3>
+                        <p>Chiến lược & bí quyết vượt qua mọi vòng phỏng vấn</p>
+                        <span class="topic-count">128 bài viết</span>
+                    </div>
+
+                    <div class="topic-card" data-color="amber">
+                        <div class="topic-icon-wrap">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="48" height="48" rx="14" fill="url(#t2)" />
+                                <rect x="14" y="13" width="20" height="22" rx="3" stroke="#fff" stroke-width="2" />
+                                <path d="M18 19h12M18 23h12M18 27h8" stroke="#fff" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <circle cx="33" cy="33" r="5" fill="#F59E0B" />
+                                <path d="M31 33h4M33 31v4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
+                                <defs>
+                                    <linearGradient id="t2" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F59E0B" />
+                                        <stop offset="1" stop-color="#D97706" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Viết CV chuyên nghiệp</h3>
+                        <p>Mẫu CV & hướng dẫn viết CV ấn tượng nhà tuyển dụng</p>
+                        <span class="topic-count">95 bài viết</span>
+                    </div>
+
+                    <div class="topic-card" data-color="emerald">
+                        <div class="topic-icon-wrap">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="48" height="48" rx="14" fill="url(#t3)" />
+                                <path d="M14 34V26a10 10 0 0 1 20 0v8" stroke="#fff" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <path d="M10 34h28" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+                                <circle cx="24" cy="18" r="4" fill="#fff" fill-opacity=".4" />
+                                <path d="M20 34v-4h8v4" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <defs>
+                                    <linearGradient id="t3" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#10B981" />
+                                        <stop offset="1" stop-color="#059669" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Mức lương & Đãi ngộ</h3>
+                        <p>Thống kê lương thị trường & cách đàm phán lương hiệu quả</p>
+                        <span class="topic-count">74 bài viết</span>
+                    </div>
+
+                    <div class="topic-card" data-color="rose">
+                        <div class="topic-icon-wrap">
+                            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="48" height="48" rx="14" fill="url(#t4)" />
+                                <path d="M24 14c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10S29.523 14 24 14z"
+                                    stroke="#fff" stroke-width="2" />
+                                <path d="M24 18v6l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M14 36c0-2.21 4.477-4 10-4s10 1.79 10 4" stroke="#fff" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <defs>
+                                    <linearGradient id="t4" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F43F5E" />
+                                        <stop offset="1" stop-color="#E11D48" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>Kỹ năng mềm</h3>
+                        <p>Phát triển bản thân & nâng cao năng lực làm việc chuyên nghiệp</p>
+                        <span class="topic-count">112 bài viết</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED -->
+        <section class="featured section">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label">Bài viết tiêu điểm</span>
+                    <h2 class="section-title">Được đọc nhiều nhất</h2>
+                    <a href="#" class="see-all">Xem tất cả →</a>
+                </div>
+
+                <div class="featured-layout">
+                    <article class="feat-main">
+                        <div class="feat-main-img">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+                                alt="Interview tips" loading="lazy" />
+                            <div class="feat-main-overlay"></div>
+                            <span class="feat-badge">Phỏng vấn</span>
+                        </div>
+                        <div class="feat-main-body">
+                            <div class="article-meta">
+                                <img src="https://i.pravatar.cc/32?img=47" alt="author" class="author-avatar" />
+                                <span class="author-name">Minh Thư</span>
+                                <span class="meta-dot">·</span>
+                                <span class="read-time">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 6v6l4 2" />
+                                    </svg>
+                                    8 phút đọc
+                                </span>
+                                <span class="meta-dot">·</span>
+                                <span class="date">01/06/2026</span>
+                            </div>
+                            <h2>10 Kỹ năng phỏng vấn then chốt giúp bạn chinh phục nhà tuyển dụng khó tính nhất</h2>
+                            <p>Phỏng vấn không chỉ là kiểm tra kỹ năng chuyên môn — đó là nghệ thuật thuyết phục. Khám phá
+                                10 bí quyết từ các chuyên gia nhân sự hàng đầu để mở đầu sự nghiệp thành công.</p>
+                            <a href="#" class="btn-read">
+                                Đọc bài viết
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <div class="feat-side">
+                        <article class="feat-card">
+                            <div class="feat-card-img">
+                                <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&q=80"
+                                    alt="CV" loading="lazy" />
+                                <span class="feat-badge small">Viết CV</span>
+                            </div>
+                            <div class="feat-card-body">
+                                <h3>Mẫu CV chuyên nghiệp cho ngành IT năm 2026</h3>
+                                <div class="article-meta small">
+                                    <span class="read-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M12 6v6l4 2" />
+                                        </svg> 5 phút</span>
+                                    <span class="meta-dot">·</span>
+                                    <span class="date">3 ngày trước</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="feat-card">
+                            <div class="feat-card-img">
+                                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=80"
+                                    alt="Salary" loading="lazy" />
+                                <span class="feat-badge small">Lương thưởng</span>
+                            </div>
+                            <div class="feat-card-body">
+                                <h3>Đàm phán lương: Đừng để mình bị "hớ" khi nhận việc mới</h3>
+                                <div class="article-meta small">
+                                    <span class="read-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M12 6v6l4 2" />
+                                        </svg> 6 phút</span>
+                                    <span class="meta-dot">·</span>
+                                    <span class="date">5 ngày trước</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="feat-card">
+                            <div class="feat-card-img">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&q=80"
+                                    alt="Skills" loading="lazy" />
+                                <span class="feat-badge small">Kỹ năng mềm</span>
+                            </div>
+                            <div class="feat-card-body">
+                                <h3>5 Kỹ năng giao tiếp giúp bạn lên vị trí lãnh đạo nhanh hơn</h3>
+                                <div class="article-meta small">
+                                    <span class="read-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M12 6v6l4 2" />
+                                        </svg> 4 phút</span>
+                                    <span class="meta-dot">·</span>
+                                    <span class="date">1 tuần trước</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI BANNER -->
+        <section class="ai-banner section">
+            <div class="container">
+                <div class="ai-card">
+                    <div class="ai-bg-shapes">
+                        <div class="ai-shape s1"></div>
+                        <div class="ai-shape s2"></div>
+                        <div class="ai-shape s3"></div>
+                    </div>
+                    <div class="ai-content">
+                        <div class="ai-badge">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                            Powered by AI
+                        </div>
+                        <h2>Gợi ý nghề nghiệp dành riêng cho bạn</h2>
+                        <p>Sử dụng công nghệ AI để phân tích hồ sơ và đưa ra những lời khuyên nghề nghiệp phù hợp nhất với
+                            mục tiêu của bạn.</p>
+                        <button class="btn-ai">
+                            Khám phá ngay
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
-                        </a>
+                        </button>
                     </div>
-                </article>
-
-                <!-- Side cards -->
-                <div class="feat-side">
-                    <article class="feat-card">
-                        <div class="feat-card-img">
-                            <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&q=80" alt="CV"
-                                loading="lazy" />
-                            <span class="feat-badge small">Viết CV</span>
-                        </div>
-                        <div class="feat-card-body">
-                            <h3>Mẫu CV chuyên nghiệp cho ngành IT năm 2026</h3>
-                            <div class="article-meta small">
-                                <span class="read-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg> 5 phút</span>
-                                <span class="meta-dot">·</span>
-                                <span class="date">3 ngày trước</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="feat-card">
-                        <div class="feat-card-img">
-                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=80" alt="Salary"
-                                loading="lazy" />
-                            <span class="feat-badge small">Lương thưởng</span>
-                        </div>
-                        <div class="feat-card-body">
-                            <h3>Đàm phán lương: Đừng để mình bị "hớ" khi nhận việc mới</h3>
-                            <div class="article-meta small">
-                                <span class="read-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg> 6 phút</span>
-                                <span class="meta-dot">·</span>
-                                <span class="date">5 ngày trước</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="feat-card">
-                        <div class="feat-card-img">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&q=80"
-                                alt="Skills" loading="lazy" />
-                            <span class="feat-badge small">Kỹ năng mềm</span>
-                        </div>
-                        <div class="feat-card-body">
-                            <h3>5 Kỹ năng giao tiếp giúp bạn lên vị trí lãnh đạo nhanh hơn</h3>
-                            <div class="article-meta small">
-                                <span class="read-time"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg> 4 phút</span>
-                                <span class="meta-dot">·</span>
-                                <span class="date">1 tuần trước</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════ AI BANNER ══════════════════ -->
-    <section class="ai-banner section">
-        <div class="container">
-            <div class="ai-card">
-                <div class="ai-bg-shapes">
-                    <div class="ai-shape s1"></div>
-                    <div class="ai-shape s2"></div>
-                    <div class="ai-shape s3"></div>
-                </div>
-                <div class="ai-content">
-                    <div class="ai-badge">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        Powered by AI
-                    </div>
-                    <h2>Gợi ý nghề nghiệp dành riêng cho bạn</h2>
-                    <p>Sử dụng công nghệ AI để phân tích hồ sơ và đưa ra những lời khuyên nghề nghiệp phù hợp nhất với
-                        mục tiêu của bạn.</p>
-                    <button class="btn-ai">
-                        Khám phá ngay
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="ai-visual">
-                    <div class="ai-cards-float">
-                        <div class="ai-float-card">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                                <polyline points="22 4 12 14.01 9 11.01" />
-                            </svg>
-                            <span>Phân tích CV hoàn chỉnh</span>
-                        </div>
-                        <div class="ai-float-card delay1">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 8v4l3 3" />
-                            </svg>
-                            <span>Tiết kiệm 80% thời gian</span>
-                        </div>
-                        <div class="ai-float-card delay2">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            <span>Phù hợp với 50K+ hồ sơ</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════ LATEST ARTICLES ══════════════════ -->
-    <section class="latest section">
-        <div class="container">
-            <div class="section-head">
-                <span class="section-label">Bài viết mới nhất</span>
-                <h2 class="section-title">Cập nhật mỗi ngày</h2>
-                <a href="#" class="see-all">Xem tất cả →</a>
-            </div>
-
-            <div class="articles-grid" id="articles-grid">
-
-                <article class="article-card">
-                    <div class="article-img">
-                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&q=80" alt=""
-                            loading="lazy" />
-                        <span class="article-cat">Quản lý</span>
-                    </div>
-                    <div class="article-body">
-                        <h3>Cách quản lý thời gian hiệu quả cho người đi làm bận rộn</h3>
-                        <p>5 phương pháp quản lý thời gian được các CEO hàng đầu thế giới áp dụng.</p>
-                        <div class="article-footer">
-                            <div class="article-author">
-                                <img src="https://i.pravatar.cc/28?img=12" alt="" />
-                                <span>Hoàng Nam</span>
-                            </div>
-                            <div class="article-stats">
-                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg> 2.4K</span>
-                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path
-                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                    </svg> 89</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="article-card">
-                    <div class="article-img">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&q=80" alt=""
-                            loading="lazy" />
-                        <span class="article-cat">Thăng tiến</span>
-                    </div>
-                    <div class="article-body">
-                        <h3>Lộ trình thăng tiến lên Manager trong 3 năm: Thực tế hay viển vông?</h3>
-                        <p>Phân tích chi tiết các yếu tố quyết định tốc độ thăng tiến trong doanh nghiệp.</p>
-                        <div class="article-footer">
-                            <div class="article-author">
-                                <img src="https://i.pravatar.cc/28?img=25" alt="" />
-                                <span>Nguyễn Lê</span>
-                            </div>
-                            <div class="article-stats">
-                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg> 3.1K</span>
-                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path
-                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                    </svg> 142</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="article-card">
-                    <div class="article-img">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80" alt=""
-                            loading="lazy" />
-                        <span class="article-cat">Pháp lý</span>
-                    </div>
-                    <div class="article-body">
-                        <h3>Bạn có biết: 5 quyền lợi của người lao động thường bị bỏ qua?</h3>
-                        <p>Những điều khoản pháp lý quan trọng mà mọi người đi làm cần biết để tự bảo vệ mình.</p>
-                        <div class="article-footer">
-                            <div class="article-author">
-                                <img src="https://i.pravatar.cc/28?img=38" alt="" />
-                                <span>Thu Trang</span>
-                            </div>
-                            <div class="article-stats">
-                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg> 1.8K</span>
-                                <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path
-                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                    </svg> 67</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-
-            <div class="load-more-wrap">
-                <button class="btn-load-more" id="load-more">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 5v14M5 12l7 7 7-7" />
-                    </svg>
-                    Xem thêm bài viết
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════ TOOLS ══════════════════ -->
-    <section class="tools section">
-        <div class="container">
-            <div class="section-head centered">
-                <span class="section-label">Công cụ miễn phí</span>
-                <h2 class="section-title">Hỗ trợ sự nghiệp toàn diện</h2>
-                <p class="section-desc">Bộ công cụ thông minh giúp bạn chuẩn bị cho sự nghiệp tốt nhất có thể.</p>
-            </div>
-
-            <div class="tools-grid">
-                <div class="tool-card primary-tool">
-                    <div class="tool-score-ring">
-                        <svg viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.15)"
-                                stroke-width="8" />
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="8"
-                                stroke-dasharray="188" stroke-dashoffset="47" stroke-linecap="round"
-                                transform="rotate(-90 50 50)" class="score-arc" />
-                        </svg>
-                        <div class="score-text"><strong>75</strong><span>/100</span></div>
-                    </div>
-                    <div class="tool-info">
-                        <h3>Kiểm tra độ mạnh CV</h3>
-                        <ul class="tool-checklist">
-                            <li class="done">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981"
-                                    stroke-width="2.5">
-                                    <path d="M20 6L9 17l-5-5" />
+                    <div class="ai-visual">
+                        <div class="ai-cards-float">
+                            <div class="ai-float-card">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
                                 </svg>
-                                Cập nhật thông tin cá nhân
-                            </li>
-                            <li class="done">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981"
-                                    stroke-width="2.5">
-                                    <path d="M20 6L9 17l-5-5" />
-                                </svg>
-                                Tải lên CV chuyên nghiệp
-                            </li>
-                            <li>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF"
+                                <span>Phân tích CV hoàn chỉnh</span>
+                            </div>
+                            <div class="ai-float-card delay1">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
                                     <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 8v4l3 3" />
                                 </svg>
-                                Làm bài test tính cách (MBTI)
-                            </li>
-                        </ul>
-                        <button class="btn-tool">Xem phân tích đầy đủ</button>
-                    </div>
-                </div>
-
-                <div class="tool-card">
-                    <div class="tool-icon-wrap amber">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                            <polyline points="14 2 14 8 20 8" />
-                            <line x1="16" y1="13" x2="8" y2="13" />
-                            <line x1="16" y1="17" x2="8" y2="17" />
-                            <polyline points="10 9 9 9 8 9" />
-                        </svg>
-                    </div>
-                    <h3>Tạo CV Online</h3>
-                    <p>Hơn 50+ mẫu CV đẹp, chuẩn ATS, tải về miễn phí trong 5 phút</p>
-                    <div class="tool-stat"><strong>120,000+</strong> CV đã tạo</div>
-                    <a href="#" class="btn-tool-outline">Tạo CV ngay</a>
-                </div>
-
-                <div class="tool-card">
-                    <div class="tool-icon-wrap violet">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <line x1="12" y1="1" x2="12" y2="23" />
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                        </svg>
-                    </div>
-                    <h3>Tính lương Gross → Net</h3>
-                    <p>Tra cứu mức lương thực nhận và so sánh với thị trường ngay lập tức</p>
-                    <div class="tool-stat"><strong>500K+</strong> lượt tra cứu</div>
-                    <a href="#" class="btn-tool-outline">Tính lương ngay</a>
-                </div>
-
-                <div class="tool-card">
-                    <div class="tool-icon-wrap rose">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                            <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                    </div>
-                    <h3>Trắc nghiệm nghề nghiệp</h3>
-                    <p>Khám phá nghề nghiệp phù hợp nhất với tính cách và năng lực của bạn</p>
-                    <div class="tool-stat"><strong>85K+</strong> bài kiểm tra</div>
-                    <a href="#" class="btn-tool-outline">Làm bài test</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════ TESTIMONIALS ══════════════════ -->
-    <section class="testimonials section">
-        <div class="container">
-            <div class="section-head centered">
-                <span class="section-label">Người dùng nói về chúng tôi</span>
-                <h2 class="section-title">Hàng triệu người tin dùng JobsGO</h2>
-            </div>
-
-            <div class="testi-grid">
-                <div class="testi-card">
-                    <div class="testi-stars">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                    </div>
-                    <p>"Nhờ bài viết về kỹ năng phỏng vấn trên JobsGO, tôi đã tự tin vượt qua 5 vòng phỏng vấn và nhận
-                        được offer từ công ty mơ ước."</p>
-                    <div class="testi-author">
-                        <img src="https://i.pravatar.cc/44?img=5" alt="" />
-                        <div>
-                            <strong>Nguyễn Văn An</strong>
-                            <span>Software Engineer tại FPT</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testi-card featured-testi">
-                    <div class="testi-stars">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                    </div>
-                    <p>"Công cụ tạo CV và tính lương của JobsGO giúp tôi tiết kiệm rất nhiều thời gian. CV được tạo ra
-                        đã nhận được phản hồi tích cực từ nhiều nhà tuyển dụng lớn."</p>
-                    <div class="testi-author">
-                        <img src="https://i.pravatar.cc/44?img=20" alt="" />
-                        <div>
-                            <strong>Trần Thị Hương</strong>
-                            <span>Marketing Intern tại Vingroup</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testi-card">
-                    <div class="testi-stars">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#E5E7EB">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                        </svg>
-                    </div>
-                    <p>"Tôi đã đọc được chia sẻ về cách đàm phán lương và áp dụng thành công — mức lương của tôi tăng
-                        40% sau khi đổi việc nhờ những tips này."</p>
-                    <div class="testi-author">
-                        <img src="https://i.pravatar.cc/44?img=33" alt="" />
-                        <div>
-                            <strong>Phạm Minh Đức</strong>
-                            <span>Project Manager</span>
+                                <span>Tiết kiệm 80% thời gian</span>
+                            </div>
+                            <div class="ai-float-card delay2">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                                <span>Phù hợp với 50K+ hồ sơ</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ══════════════════ CTA ══════════════════ -->
-    <section class="cta-section section">
-        <div class="container">
-            <div class="cta-card">
-                <div class="cta-text">
-                    <h2>Sẵn sàng bứt phá sự nghiệp?</h2>
-                    <p>Khám phá hàng nghìn bài viết và công cụ nghề nghiệp miễn phí — bắt đầu ngay hôm nay.</p>
+        <!-- LATEST ARTICLES -->
+        <section class="latest section">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-label">Bài viết mới nhất</span>
+                    <h2 class="section-title">Cập nhật mỗi ngày</h2>
+                    <a href="#" class="see-all">Xem tất cả →</a>
                 </div>
-                <div class="cta-form">
-                    <input type="email" placeholder="Nhập email của bạn…" />
-                    <button class="btn-cta">
-                        Đăng ký miễn phí
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
+
+                <div class="articles-grid" id="articles-grid">
+                    <article class="article-card">
+                        <div class="article-img">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&q=80" alt=""
+                                loading="lazy" />
+                            <span class="article-cat">Quản lý</span>
+                        </div>
+                        <div class="article-body">
+                            <h3>Cách quản lý thời gian hiệu quả cho người đi làm bận rộn</h3>
+                            <p>5 phương pháp quản lý thời gian được các CEO hàng đầu thế giới áp dụng.</p>
+                            <div class="article-footer">
+                                <div class="article-author">
+                                    <img src="https://i.pravatar.cc/28?img=12" alt="" />
+                                    <span>Hoàng Nam</span>
+                                </div>
+                                <div class="article-stats">
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg> 2.4K</span>
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path
+                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                        </svg> 89</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-img">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&q=80" alt=""
+                                loading="lazy" />
+                            <span class="article-cat">Thăng tiến</span>
+                        </div>
+                        <div class="article-body">
+                            <h3>Lộ trình thăng tiến lên Manager trong 3 năm: Thực tế hay viển vông?</h3>
+                            <p>Phân tích chi tiết các yếu tố quyết định tốc độ thăng tiến trong doanh nghiệp.</p>
+                            <div class="article-footer">
+                                <div class="article-author">
+                                    <img src="https://i.pravatar.cc/28?img=25" alt="" />
+                                    <span>Nguyễn Lê</span>
+                                </div>
+                                <div class="article-stats">
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg> 3.1K</span>
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path
+                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                        </svg> 142</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-img">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80" alt=""
+                                loading="lazy" />
+                            <span class="article-cat">Pháp lý</span>
+                        </div>
+                        <div class="article-body">
+                            <h3>Bạn có biết: 5 quyền lợi của người lao động thường bị bỏ qua?</h3>
+                            <p>Những điều khoản pháp lý quan trọng mà mọi người đi làm cần biết để tự bảo vệ mình.</p>
+                            <div class="article-footer">
+                                <div class="article-author">
+                                    <img src="https://i.pravatar.cc/28?img=38" alt="" />
+                                    <span>Thu Trang</span>
+                                </div>
+                                <div class="article-stats">
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg> 1.8K</span>
+                                    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path
+                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                        </svg> 67</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="load-more-wrap">
+                    <button class="btn-load-more" id="load-more">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12l7 7 7-7" />
                         </svg>
+                        Xem thêm bài viết
                     </button>
                 </div>
-                <p class="cta-note">Chúng tôi cam kết không gửi thư rác. Hủy đăng ký bất cứ lúc nào.</p>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- TOOLS -->
+        <section class="tools section">
+            <div class="container">
+                <div class="section-head centered">
+                    <span class="section-label">Công cụ miễn phí</span>
+                    <h2 class="section-title">Hỗ trợ sự nghiệp toàn diện</h2>
+                    <p class="section-desc">Bộ công cụ thông minh giúp bạn chuẩn bị cho sự nghiệp tốt nhất có thể.</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card primary-tool">
+                        <div class="tool-score-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.15)"
+                                    stroke-width="8" />
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="8"
+                                    stroke-dasharray="188" stroke-dashoffset="47" stroke-linecap="round"
+                                    transform="rotate(-90 50 50)" class="score-arc" />
+                            </svg>
+                            <div class="score-text"><strong>75</strong><span>/100</span></div>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Kiểm tra độ mạnh CV</h3>
+                            <ul class="tool-checklist">
+                                <li class="done">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                        stroke-width="2.5">
+                                        <path d="M20 6L9 17l-5-5" />
+                                    </svg>
+                                    Cập nhật thông tin cá nhân
+                                </li>
+                                <li class="done">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                        stroke-width="2.5">
+                                        <path d="M20 6L9 17l-5-5" />
+                                    </svg>
+                                    Tải lên CV chuyên nghiệp
+                                </li>
+                                <li>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                    </svg>
+                                    Làm bài test tính cách (MBTI)
+                                </li>
+                            </ul>
+                            <button class="btn-tool">Xem phân tích đầy đủ</button>
+                        </div>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon-wrap amber">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                                <line x1="16" y1="13" x2="8" y2="13" />
+                                <line x1="16" y1="17" x2="8" y2="17" />
+                                <polyline points="10 9 9 9 8 9" />
+                            </svg>
+                        </div>
+                        <h3>Tạo CV Online</h3>
+                        <p>Hơn 50+ mẫu CV đẹp, chuẩn ATS, tải về miễn phí trong 5 phút</p>
+                        <div class="tool-stat"><strong>120,000+</strong> CV đã tạo</div>
+                        <a href="#" class="btn-tool-outline">Tạo CV ngay</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon-wrap violet">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <line x1="12" y1="1" x2="12" y2="23" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <h3>Tính lương Gross → Net</h3>
+                        <p>Tra cứu mức lương thực nhận và so sánh với thị trường ngay lập tức</p>
+                        <div class="tool-stat"><strong>500K+</strong> lượt tra cứu</div>
+                        <a href="#" class="btn-tool-outline">Tính lương ngay</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon-wrap rose">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg>
+                        </div>
+                        <h3>Trắc nghiệm nghề nghiệp</h3>
+                        <p>Khám phá nghề nghiệp phù hợp nhất với tính cách và năng lực của bạn</p>
+                        <div class="tool-stat"><strong>85K+</strong> bài kiểm tra</div>
+                        <a href="#" class="btn-tool-outline">Làm bài test</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials section">
+            <div class="container">
+                <div class="section-head centered">
+                    <span class="section-label">Người dùng nói về chúng tôi</span>
+                    <h2 class="section-title">Hàng triệu người tin dùng JobsGO</h2>
+                </div>
+
+                <div class="testi-grid">
+                    <div class="testi-card">
+                        <div class="testi-stars">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <p>"Nhờ bài viết về kỹ năng phỏng vấn trên JobsGO, tôi đã tự tin vượt qua 5 vòng phỏng vấn và nhận
+                            được offer từ công ty mơ ước."</p>
+                        <div class="testi-author">
+                            <img src="https://i.pravatar.cc/44?img=5" alt="" />
+                            <div>
+                                <strong>Nguyễn Văn An</strong>
+                                <span>Software Engineer tại FPT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testi-card featured-testi">
+                        <div class="testi-stars">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <p>"Công cụ tạo CV và tính lương của JobsGO giúp tôi tiết kiệm rất nhiều thời gian. CV được tạo ra
+                            đã nhận được phản hồi tích cực từ nhiều nhà tuyển dụng lớn."</p>
+                        <div class="testi-author">
+                            <img src="https://i.pravatar.cc/44?img=20" alt="" />
+                            <div>
+                                <strong>Trần Thị Hương</strong>
+                                <span>Marketing Intern tại Vingroup</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testi-card">
+                        <div class="testi-stars">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#F59E0B">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#E5E7EB">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <p>"Tôi đã đọc được chia sẻ về cách đàm phán lương và áp dụng thành công — mức lương của tôi tăng
+                            40% sau khi đổi việc nhờ những tips này."</p>
+                        <div class="testi-author">
+                            <img src="https://i.pravatar.cc/44?img=33" alt="" />
+                            <div>
+                                <strong>Phạm Minh Đức</strong>
+                                <span>Project Manager</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-text">
+                        <h2>Sẵn sàng bứt phá sự nghiệp?</h2>
+                        <p>Khám phá hàng nghìn bài viết và công cụ nghề nghiệp miễn phí — bắt đầu ngay hôm nay.</p>
+                    </div>
+                    <div class="cta-form">
+                        <input type="email" placeholder="Nhập email của bạn…" />
+                        <button class="btn-cta">
+                            Đăng ký miễn phí
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="cta-note">Chúng tôi cam kết không gửi thư rác. Hủy đăng ký bất cứ lúc nào.</p>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- kết thúc career-page -->
 
     <!-- Footer được load bởi loader.js -->
     <div id="footer-placeholder"></div>

@@ -1,0 +1,249 @@
+/* ============================================================
+   CV.css – Riêng cho trang CV / Hồ sơ
+   Không chứa style Header/Footer, font 'Be Vietnam Pro'
+   ============================================================ */
+
+.cv-page {
+  --purple: #7C3AED;
+  --purple-dark: #5B21B6;
+  --purple-light: #EDE9FE;
+  --gray-900: #111827;
+  --gray-700: #374151;
+  --gray-600: #4B5563;
+  --gray-500: #6B7280;
+  --gray-400: #9CA3AF;
+  --gray-300: #D1D5DB;
+  --gray-100: #F3F4F6;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.1);
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition: 0.2s ease;
+}
+
+.cv-page *,
+.cv-page *::before,
+.cv-page *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-page {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #F9FAFB;
+  color: var(--gray-900);
+  line-height: 1.5;
+}
+
+.cv-page .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero CV */
+.cv-page .cv-hero {
+  background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);
+  padding: 80px 0 48px;
+  text-align: center;
+  margin-top: 68px; /* bù cho navbar fixed */
+}
+
+.cv-page .cv-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+
+.cv-page .cv-hero p {
+  font-size: 1rem;
+  color: var(--gray-700);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Toolbar */
+.cv-page .cv-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0 40px;
+}
+
+.cv-page .cv-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: 48px;
+  padding: 8px 16px;
+  gap: 8px;
+  max-width: 360px;
+}
+
+.cv-page .cv-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.cv-page .cv-filter {
+  display: flex;
+  gap: 8px;
+}
+
+.cv-page .cv-filter select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300);
+  background: white;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Grid mẫu CV */
+.cv-page .cv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.cv-page .cv-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+  border: 1px solid var(--gray-100);
+  cursor: pointer;
+}
+
+.cv-page .cv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--purple-light);
+}
+
+.cv-page .cv-card-img {
+  height: 180px;
+  background: #E5E7EB;
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-page .cv-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cv-page .cv-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--purple);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 40px;
+}
+
+.cv-page .cv-card-body {
+  padding: 20px;
+}
+
+.cv-page .cv-card-body h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.cv-page .cv-card-body p {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin-bottom: 16px;
+}
+
+.cv-page .cv-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+.cv-page .btn-use {
+  background: var(--purple-light);
+  color: var(--purple);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.cv-page .btn-use:hover {
+  background: var(--purple);
+  color: white;
+}
+
+/* CTA upload */
+.cv-page .cv-upload {
+  background: linear-gradient(135deg, var(--purple-light), white);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.cv-page .cv-upload h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.cv-page .btn-upload {
+  background: var(--purple);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-weight: 600;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.cv-page .btn-upload:hover {
+  background: var(--purple-dark);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cv-page .cv-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cv-page .cv-search {
+    max-width: 100%;
+  }
+  .cv-page .cv-hero h1 {
+    font-size: 1.8rem;
+  }
+}

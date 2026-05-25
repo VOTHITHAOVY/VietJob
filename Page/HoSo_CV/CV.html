@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CV Builder - VietJob</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+    <!-- CSS dùng chung (nav + footer) -->
+    <link rel="stylesheet" href="CV.css" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            important: true,
+            theme: {
+                extend: {
+                    colors: {
+                        "brand-primary": "#7C3AED",
+                        "brand-secondary": "#f97316",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#45464f",
+                        "outline-variant": "#c5c6d1",
+                        "surface-container": "#eceef0",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cv-card-hover:hover .cv-overlay {
+            opacity: 1;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Override body từ style.css cho trang CV */
+        body { background: #f7f9fb !important; }
+
+        /* Filter tabs */
+        .filter-tab {
+            white-space: nowrap;
+            font-weight: 500;
+            color: #45464f;
+            height: 48px;
+            padding: 0 8px;
+            border-bottom: 2px solid transparent;
+            border-top: none; border-left: none; border-right: none;
+            transition: color .18s, border-color .18s;
+            cursor: pointer;
+            background: none;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            font-size: 14px;
+        }
+        .filter-tab:hover { color: #7C3AED; }
+        .filter-tab.active {
+            color: #7C3AED;
+            border-bottom: 2px solid #7C3AED;
+            font-weight: 700;
+        }
+
+        /* CV section */
+        .cv-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .cv-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 1024px) { .cv-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px)  { .cv-grid { grid-template-columns: 1fr; } .cv-section { padding: 0 16px; } }
+
+        .cv-card {
+            background: white;
+            border: 2px solid #c5c6d1;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color .2s, box-shadow .2s, transform .2s;
+        }
+        .cv-card:hover {
+            border-color: #7C3AED;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, .15);
+            transform: translateY(-3px);
+        }
+        .cv-card-img {
+            position: relative;
+            height: 220px;
+            background: #eceef0;
+            overflow: hidden;
+        }
+        .cv-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cv-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 10px;
+            font-weight: 800;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+        .cv-badge.free { background: #16a34a; }
+        .cv-badge.premium { background: #f97316; }
+        .cv-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(124, 58, 237, .2);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .cv-overlay button {
+            background: white;
+            color: #7C3AED;
+            font-weight: 700;
+            padding: 8px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,.15);
+            transition: transform .15s;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .cv-overlay button:hover { transform: scale(1.05); }
+        .cv-card-body {
+            padding: 16px;
+            border-top: 1px solid #c5c6d1;
+        }
+        .cv-card-title { font-weight: 700; color: #191c1e; margin-bottom: 4px; font-size: 15px; }
+        .cv-card-sub { font-size: 12px; font-weight: 600; color: #45464f; margin-bottom: 14px; letter-spacing: .04em; }
+        .cv-card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .cv-card-rating { display: flex; align-items: center; gap: 4px; color: #eab308; font-size: 12px; font-weight: 700; }
+        .cv-card-uses { font-size: 12px; color: #45464f; font-style: italic; }
+        .cv-card-btn {
+            width: 100%;
+            padding: 10px;
+            background: #7C3AED;
+            color: white;
+            font-weight: 700;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background .18s;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            font-size: 14px;
+        }
+        .cv-card-btn:hover { background: #5B21B6; }
+        /* Category tab (dạng link) */
+.cat-tab {
+    white-space: nowrap;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #45464f;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: background .16s, color .16s;
+}
+.cat-tab:hover { background: #f3f0ff; color: #7C3AED; }
+.cat-tab.active { background: #7C3AED; color: white; font-weight: 700; }
+
+/* Language button */
+.lang-btn {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #45464f;
+    padding: 6px 10px;
+    border-radius: 7px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+}
+.lang-btn:hover { background: rgba(124,58,237,.12); color: #7C3AED; }
+.lang-btn.active {
+    background: white;
+    color: #7C3AED;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0,0,0,.10);
+}
+/* Pills filter */
+.cat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1.5px solid #c5c6d1;
+    background: white;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #45464f;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color .15s, background .15s, color .15s;
+    white-space: nowrap;
+}
+.cat-pill i { font-size: 16px; }
+.cat-pill:hover { border-color: #7C3AED; color: #7C3AED; }
+.cat-pill.active { background: #7C3AED; border-color: #7C3AED; color: white; font-weight: 700; }
+
+/* Language dropdown */
+.lang-drop {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #c5c6d1;
+    background: white;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #191c1e;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: auto;
+    position: relative;
+}
+.lang-drop:hover { border-color: #7C3AED; }
+.lang-flag { width: 20px; height: 20px; border-radius: 50%; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.lang-flag svg { width: 20px; height: 20px; border-radius: 50%; }
+.lang-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: white;
+    border: 1px solid #c5c6d1;
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 170px;
+    z-index: 99;
+    box-shadow: 0 4px 16px rgba(0,0,0,.1);
+}
+.lang-menu.open { display: block; }
+.lang-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13.5px;
+    color: #191c1e;
+    cursor: pointer;
+    transition: background .12s;
+}
+.lang-opt:hover { background: #f3f0ff; }
+.lang-opt.selected { color: #7C3AED; font-weight: 700; }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main style="padding-top: 68px;">
+
+        <!-- Hero -->
+        <section style="background: linear-gradient(135deg, #1e1065 0%, #7C3AED 100%); padding: 64px 0; text-align: center; color: white;">
+            <div class="cv-section">
+                <h1 style="font-size: 44px; font-weight: 900; letter-spacing: -1px; margin-bottom: 14px; line-height: 1.1;">Chọn mẫu CV phù hợp với bạn</h1>
+                <p style="font-size: 17px; opacity: .9; margin-bottom: 28px;">Hơn 30 mẫu CV chuyên nghiệp, tối ưu ATS — miễn phí hoàn toàn</p>
+                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <span style="padding: 6px 16px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">check_circle</span> Miễn phí 100%
+                    </span>
+                    <span style="padding: 6px 16px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">rocket_launch</span> Tối ưu ATS
+                    </span>
+                    <span style="padding: 6px 16px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 15px;">download</span> Tải PDF ngay
+                    </span>
+                </div>
+            </div>
+        </section>
+
+      <!-- Filter Bar -->
+<div style="background: white; position: sticky; top: 68px; z-index: 40; border-bottom: 1px solid #c5c6d1;">
+    <div class="cv-section" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px;">
+        <a href="https://www.topcv.vn/mau-cv" class="cat-pill active" onclick="selectPill(event,this)">
+            <i class="ti ti-layout-grid"></i> Tất cả
+        </a>
+        <a href="https://www.topcv.vn/mau-cv-tieng-anh/mau-don-gian" class="cat-pill" onclick="selectPill(event,this)">
+            <i class="ti ti-circle"></i> Đơn giản
+        </a>
+        <a href="https://www.topcv.vn/mau-cv-tieng-anh/mau-chuyen-nghiep" class="cat-pill" onclick="selectPill(event,this)">
+            <i class="ti ti-briefcase"></i> Chuyên nghiệp
+        </a>
+        <a href="https://www.topcv.vn/mau-cv-tieng-anh/mau-hien-dai" class="cat-pill" onclick="selectPill(event,this)">
+            <i class="ti ti-sparkles"></i> Hiện đại
+        </a>
+        <a href="https://www.topcv.vn/mau-cv-tieng-anh/mau-an-tuong" class="cat-pill" onclick="selectPill(event,this)">
+            <i class="ti ti-medal"></i> Ấn tượng
+        </a>
+        <a href="https://www.topcv.vn/mau-cv-tieng-anh/mau-harvard" class="cat-pill" onclick="selectPill(event,this)">
+            <i class="ti ti-school"></i> Harvard
+        </a>
+        <a href="https://www.topcv.vn/mau-cv-tieng-anh/mau-ats" class="cat-pill" onclick="selectPill(event,this)">
+            <i class="ti ti-device-desktop"></i> ATS
+        </a>
+
+        <div class="lang-drop" id="langDrop" onclick="toggleLangMenu(event)">
+            <span class="lang-flag" id="currentFlag"></span>
+            <span id="langLabel">Tiếng Việt</span>
+            <i class="ti ti-chevron-down" style="font-size:13px; color:#45464f;"></i>
+            <div class="lang-menu" id="langMenu">
+                <div class="lang-opt selected" data-lang="vi" onclick="pickLang(event,this)">
+                    <span class="lang-flag" id="flag-vi"></span> Tiếng Việt
+                </div>
+                <div class="lang-opt" data-lang="en" onclick="pickLang(event,this)">
+                    <span class="lang-flag" id="flag-en"></span> Tiếng Anh
+                </div>
+                <div class="lang-opt" data-lang="ja" onclick="pickLang(event,this)">
+                    <span class="lang-flag" id="flag-ja"></span> Tiếng Nhật
+                </div>
+                <div class="lang-opt" data-lang="ko" onclick="pickLang(event,this)">
+                    <span class="lang-flag" id="flag-ko"></span> Tiếng Hàn
+                </div>
+                <div class="lang-opt" data-lang="zh" onclick="pickLang(event,this)">
+                    <span class="lang-flag" id="flag-zh"></span> Tiếng Trung
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Gallery -->
+        <div style="padding: 40px 0 80px;">
+            <div class="cv-section">
+                <div class="cv-grid" id="cv-grid">
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Modern Professional" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Modern Professional</div>
+                            <div class="cv-card-sub">Phù hợp: IT, Kỹ thuật</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">1.2k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Creative Agency" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Creative Agency</div>
+                            <div class="cv-card-sub">Phù hợp: Marketing, Thiết kế</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">850 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Executive Senior" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Executive Senior</div>
+                            <div class="cv-card-sub">Phù hợp: Quản lý, Tài chính</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 5.0</div>
+                                <span class="cv-card-uses">2.4k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Simple & Elegant" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Simple &amp; Elegant</div>
+                            <div class="cv-card-sub">Phù hợp: Sinh viên, Sales</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">3.1k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Clean Minimal" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Clean Minimal</div>
+                            <div class="cv-card-sub">Phù hợp: IT, Tài chính</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">980 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Bold Creative" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Bold Creative</div>
+                            <div class="cv-card-sub">Phù hợp: Marketing, Thiết kế</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">1.5k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Harvard Classic" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Harvard Classic</div>
+                            <div class="cv-card-sub">Phù hợp: Quản lý, Ngân hàng</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">1.8k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Fresh Graduate" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Fresh Graduate</div>
+                            <div class="cv-card-sub">Phù hợp: Sinh viên, Fresher</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">4.2k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+
+                    <!-- Row 3 -->
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Tech Pro" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Tech Pro</div>
+                            <div class="cv-card-sub">Phù hợp: Lập trình viên, DevOps</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">2.0k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Brand Storyteller" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Brand Storyteller</div>
+                            <div class="cv-card-sub">Phù hợp: Marketing, PR</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">1.1k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Corporate Elite" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Corporate Elite</div>
+                            <div class="cv-card-sub">Phù hợp: Quản lý cấp cao</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">900 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Portfolio Designer" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Portfolio Designer</div>
+                            <div class="cv-card-sub">Phù hợp: UI/UX, Đồ hoạ</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">1.3k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Classic White" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Classic White</div>
+                            <div class="cv-card-sub">Phù hợp: Mọi ngành nghề</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">5.6k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Dark Mode Dev" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Dark Mode Dev</div>
+                            <div class="cv-card-sub">Phù hợp: Developer, Data</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">2.7k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Pastel Creative" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Pastel Creative</div>
+                            <div class="cv-card-sub">Phù hợp: Content, Social Media</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">760 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Finance Pro" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Finance Pro</div>
+                            <div class="cv-card-sub">Phù hợp: Kế toán, Kiểm toán</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">1.4k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Vivid Color" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Vivid Color</div>
+                            <div class="cv-card-sub">Phù hợp: Thiết kế, Sáng tạo</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">620 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Soft Modern" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Soft Modern</div>
+                            <div class="cv-card-sub">Phù hợp: Hành chính, Nhân sự</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">3.3k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Startup Founder" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Startup Founder</div>
+                            <div class="cv-card-sub">Phù hợp: Product, Startup</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">1.9k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Professional Gray" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Professional Gray</div>
+                            <div class="cv-card-sub">Phù hợp: Văn phòng, Luật</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">2.1k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 6 -->
+                    <div class="cv-card cv-card-hover" data-cat="marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Growth Hacker" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Growth Hacker</div>
+                            <div class="cv-card-sub">Phù hợp: Digital Marketing</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">870 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Timeline CV" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Timeline CV</div>
+                            <div class="cv-card-sub">Phù hợp: Mọi ngành, Trung cấp</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.4</div>
+                                <span class="cv-card-uses">2.5k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Geometric Art" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Geometric Art</div>
+                            <div class="cv-card-sub">Phù hợp: Kiến trúc, Thiết kế</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">540 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Banker Blue" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Banker Blue</div>
+                            <div class="cv-card-sub">Phù hợp: Ngân hàng, Bảo hiểm</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">1.6k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 7 -->
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Neat &amp; Tidy" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Neat &amp; Tidy</div>
+                            <div class="cv-card-sub">Phù hợp: Thực tập, Part-time</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.3</div>
+                                <span class="cv-card-uses">6.1k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Data Analyst" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Data Analyst</div>
+                            <div class="cv-card-sub">Phù hợp: Data, BI, Analytics</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">1.7k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Minimal Ink" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Minimal Ink</div>
+                            <div class="cv-card-sub">Phù hợp: Copywriter, Editor</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">980 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Fintech Modern" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Fintech Modern</div>
+                            <div class="cv-card-sub">Phù hợp: Fintech, E-commerce</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">1.0k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 8 -->
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Two Column" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Two Column</div>
+                            <div class="cv-card-sub">Phù hợp: Mọi ngành nghề</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">4.8k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Neon Pop" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Neon Pop</div>
+                            <div class="cv-card-sub">Phù hợp: Creative, Influencer</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">430 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Cloud Engineer" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Cloud Engineer</div>
+                            <div class="cv-card-sub">Phù hợp: Cloud, DevOps, SRE</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">1.1k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Senior Manager" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Senior Manager</div>
+                            <div class="cv-card-sub">Phù hợp: C-level, Giám đốc</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 5.0</div>
+                                <span class="cv-card-uses">2.2k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 9 -->
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Infographic Style" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Infographic Style</div>
+                            <div class="cv-card-sub">Phù hợp: Thiết kế, Sáng tạo</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">720 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Warm Beige" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Warm Beige</div>
+                            <div class="cv-card-sub">Phù hợp: Giáo viên, Tư vấn</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">1.3k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="AI Engineer" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">AI Engineer</div>
+                            <div class="cv-card-sub">Phù hợp: AI, ML, Research</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">890 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Investment Banker" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Investment Banker</div>
+                            <div class="cv-card-sub">Phù hợp: Đầu tư, Tài chính</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">660 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 10 -->
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Sales Champion" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Sales Champion</div>
+                            <div class="cv-card-sub">Phù hợp: Sales, Kinh doanh</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">2.9k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="UX Researcher" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">UX Researcher</div>
+                            <div class="cv-card-sub">Phù hợp: UX, Product Design</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">580 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="HR Specialist" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">HR Specialist</div>
+                            <div class="cv-card-sub">Phù hợp: Nhân sự, Tuyển dụng</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">1.4k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="E-Commerce Expert" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">E-Commerce Expert</div>
+                            <div class="cv-card-sub">Phù hợp: E-com, Logistics</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">1.7k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 11 -->
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Motion Designer" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Motion Designer</div>
+                            <div class="cv-card-sub">Phù hợp: Motion, Video, 3D</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.9</div>
+                                <span class="cv-card-uses">410 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Compact Classic" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Compact Classic</div>
+                            <div class="cv-card-sub">Phù hợp: Mọi cấp bậc</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.4</div>
+                                <span class="cv-card-uses">3.8k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe tai-chinh">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Blockchain Dev" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Blockchain Dev</div>
+                            <div class="cv-card-sub">Phù hợp: Web3, Crypto, DeFi</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">330 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="marketing pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Event Manager" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Event Manager</div>
+                            <div class="cv-card-sub">Phù hợp: Sự kiện, Truyền thông</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.5</div>
+                                <span class="cv-card-uses">1.2k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 12 -->
+                    <div class="cv-card cv-card-hover" data-cat="cong-nghe">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAse-xGxZBeu6WYg5NM8ssZSssWdBOLXi1erLXA8ORFktvYDTH2zQVBUWdPQkWeH8Uwdfz9OPLfTXNMKTyLL5NRst-7mlwMEZkRyG5TZ7wvHXceWkzbl-QgzGYfjagtZ5LbEppPwtUROpGSt0K8x3tmAzkcmBTwZVRkzOzKSx2bHD8q0u48EH8FTcVhi7l2Sq_31INnwqMwD26vS9eecSvce_X3nX5dcGUoDlcDy25d1MD9OQTDjUInLL2vGtickua4v_BpBAK-wQ0e" alt="Mobile Developer" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Mobile Developer</div>
+                            <div class="cv-card-sub">Phù hợp: iOS, Android, Flutter</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.7</div>
+                                <span class="cv-card-uses">1.5k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="tai-chinh pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxkrlIRIfAwY9WZrTJpnRPo1lkymq-Qw-m28wUEliO1H_PUhPZD0JhOO4OZrpY2ObJVKIxqVtt6lVrw70DM4zFrGOx8ydSTE8X5ButgCEgiRtEgRB4HuMwQB9XOkGL3M4QODYmOTU1Iw7dXW1dCFOSq3sGDftWlLU1BuunonCFjpgPl3iEDg1bU7vegP5RIa5wFfOniWxArVW5yH88msZEJJqLJqnD4Tr2FzMzHimX4xev27-AZfdRcoH9TbuNtRkJnRLQ61NsoUyT" alt="Audit Ready" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Audit Ready</div>
+                            <div class="cv-card-sub">Phù hợp: Kiểm toán, Compliance</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.6</div>
+                                <span class="cv-card-uses">780 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="thiet-ke marketing">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvKZV-m2h2oi9mAbYe94FKLF4WaHPGWunLC4nY9syRucVStmdkDGjJLnW0CjR3j1ss2H1NlGE4ZFECEhD5n86yP--2OL9-RgSalyiZJpNTF0uP8FairkpxP0PwnTFxFJJClIIfFjIu_jdZZVO8isWUoHJ69u8CTG3JJQlnf_Qg2Wefdss-ZztzzDJHu2MpXzCmTCvi4DopduqPtf_WmO2T_djhuIjSvqGotvoG-Fu_kh1Ffnab-l2Rv8C0qJXZkrzYKIa3C_QGXTW6" alt="Social Media Star" />
+                            <span class="cv-badge premium">Premium</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Social Media Star</div>
+                            <div class="cv-card-sub">Phù hợp: Social, KOL, Creator</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.8</div>
+                                <span class="cv-card-uses">950 lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-card cv-card-hover" data-cat="pho-thong">
+                        <div class="cv-card-img">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD4QfXakirno6ly5OBwmPp0A_pZ1OC0FHsaBTzv2Bzlav15--M6pIUORZ6ckVNQDTpjXenGMgpvCMQcaijDhYXZ5jwSrPilxaJOUqyFXpsHA6htSnL1b5RgSBdacJjT29_T7Ss8tioy5T7BWX33KZ6ujN5TAQVFx3Z-K1bzX80jLhRtZlfAzBi2htxIrVNI1Szgg7iIqsmzLykNtFjTtWWSU9rNq-lOGitP2DBVAC20l_2l8MWcxuaIjDxswS_pT8YeKi_csudkNW" alt="Entry Level" />
+                            <span class="cv-badge free">Miễn phí</span>
+                            <div class="cv-overlay"><button>Xem trước</button></div>
+                        </div>
+                        <div class="cv-card-body">
+                            <div class="cv-card-title">Entry Level</div>
+                            <div class="cv-card-sub">Phù hợp: Mới đi làm, Intern</div>
+                            <div class="cv-card-meta">
+                                <div class="cv-card-rating"><span class="material-symbols-outlined" style="font-size:15px;font-variation-settings:'FILL' 1;">star</span> 4.3</div>
+                                <span class="cv-card-uses">7.0k lượt dùng</span>
+                            </div>
+                            <button class="cv-card-btn">Dùng mẫu này</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Load more -->
+                <div style="margin-top: 48px; text-align: center;">
+                    <button style="padding: 12px 40px; border: 2px solid #7C3AED; color: #7C3AED; font-weight: 700; border-radius: 12px; background: transparent; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; transition: background .18s;" onmouseover="this.style.background='rgba(124,58,237,.06)'" onmouseout="this.style.background='transparent'">
+                        Xem thêm mẫu CV
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/Component/loader.js"></script>
+
+    <script>
+const FLAGS = {
+    vi: `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="10" fill="#DA251D"/><polygon points="10,4.5 11.5,8.8 16,8.8 12.5,11.4 13.8,15.5 10,12.9 6.2,15.5 7.5,11.4 4,8.8 8.5,8.8" fill="#FFFF00"/></svg>`,
+    en: `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ce"><circle cx="10" cy="10" r="10"/></clipPath></defs><g clip-path="url(#ce)"><rect width="20" height="20" fill="#012169"/><line x1="0" y1="0" x2="20" y2="20" stroke="#fff" stroke-width="3"/><line x1="20" y1="0" x2="0" y2="20" stroke="#fff" stroke-width="3"/><line x1="0" y1="0" x2="20" y2="20" stroke="#C8102E" stroke-width="1.5"/><line x1="20" y1="0" x2="0" y2="20" stroke="#C8102E" stroke-width="1.5"/><rect x="8.5" y="0" width="3" height="20" fill="#fff"/><rect x="0" y="8.5" width="20" height="3" fill="#fff"/><rect x="9" y="0" width="2" height="20" fill="#C8102E"/><rect x="0" y="9" width="20" height="2" fill="#C8102E"/></g></svg>`,
+    ja: `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="cj"><circle cx="10" cy="10" r="10"/></clipPath></defs><g clip-path="url(#cj)"><rect width="20" height="20" fill="#fff"/><circle cx="10" cy="10" r="5.5" fill="#BC002D"/></g></svg>`,
+    ko: `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ck"><circle cx="10" cy="10" r="10"/></clipPath></defs><g clip-path="url(#ck)"><rect width="20" height="20" fill="#fff"/><circle cx="10" cy="10" r="4.5" fill="#CD2E3A"/><path d="M10,5.5 a4.5,4.5 0 0,1 0,9" fill="#003478"/><line x1="3.5" y1="5.5" x2="6.5" y2="8.5" stroke="#000" stroke-width="1"/><line x1="4.5" y1="4.5" x2="7.5" y2="7.5" stroke="#000" stroke-width="1"/><line x1="13.5" y1="11.5" x2="16.5" y2="14.5" stroke="#000" stroke-width="1"/><line x1="13.5" y1="13.5" x2="16.5" y2="16.5" stroke="#000" stroke-width="1"/></g></svg>`,
+    zh: `<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="czh"><circle cx="10" cy="10" r="10"/></clipPath></defs><g clip-path="url(#czh)"><rect width="20" height="20" fill="#DE2910"/><polygon points="5,3.5 6,6.2 9,6.2 6.5,7.8 7.5,10.5 5,8.9 2.5,10.5 3.5,7.8 1,6.2 4,6.2" fill="#FFDE00"/><polygon points="11.5,2.5 12,3.8 13.4,3.8 12.3,4.6 12.7,5.9 11.5,5.1 10.3,5.9 10.7,4.6 9.6,3.8 11,3.8" fill="#FFDE00"/><polygon points="13.5,4.5 14,5.8 15.4,5.8 14.3,6.6 14.7,7.9 13.5,7.1 12.3,7.9 12.7,6.6 11.6,5.8 13,5.8" fill="#FFDE00"/><polygon points="14,7.5 14.5,8.8 15.9,8.8 14.8,9.6 15.2,10.9 14,10.1 12.8,10.9 13.2,9.6 12.1,8.8 13.5,8.8" fill="#FFDE00"/><polygon points="13,10 13.5,11.3 14.9,11.3 13.8,12.1 14.2,13.4 13,12.6 11.8,13.4 12.2,12.1 11.1,11.3 12.5,11.3" fill="#FFDE00"/></g></svg>`
+};
+
+const LABELS = { vi:'Tiếng Việt', en:'Tiếng Anh', ja:'Tiếng Nhật', ko:'Tiếng Hàn', zh:'Tiếng Trung' };
+
+function initFlags() {
+    ['vi','en','ja','ko','zh'].forEach(lang => {
+        const el = document.getElementById('flag-' + lang);
+        if (el) el.innerHTML = FLAGS[lang];
+    });
+    document.getElementById('currentFlag').innerHTML = FLAGS['vi'];
+}
+
+function selectPill(e, el) {
+    e.preventDefault();
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function toggleLangMenu(e) {
+    e.stopPropagation();
+    document.getElementById('langMenu').classList.toggle('open');
+}
+
+function pickLang(e, el) {
+    e.stopPropagation();
+    document.querySelectorAll('.lang-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    const lang = el.dataset.lang;
+    document.getElementById('currentFlag').innerHTML = FLAGS[lang];
+    document.getElementById('langLabel').textContent = LABELS[lang];
+    document.getElementById('langMenu').classList.remove('open');
+}
+
+document.addEventListener('click', function() {
+    document.getElementById('langMenu').classList.remove('open');
+});
+
+initFlags();
+</script>
+
+</body>
+</html>
