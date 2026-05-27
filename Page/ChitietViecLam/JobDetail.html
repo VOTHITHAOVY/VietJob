@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Senior Frontend Developer | ViecJob</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="JobDetail.css">
+
+    <style>
+        /* ── BREADCRUMB kiểu TopCV: xanh lá + dấu > xám ── */
+        .topcv-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #6b7280;
+            padding: 12px 0 16px;
+            flex-wrap: wrap;
+        }
+        .topcv-breadcrumb a {
+            color: #16A34A;          /* xanh lá như TopCV */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color .15s;
+        }
+        .topcv-breadcrumb a:hover {
+            color: #15803d;
+            text-decoration: underline;
+        }
+        .topcv-breadcrumb .bc-sep {
+            color: #9CA3AF;
+            font-size: 14px;
+            font-weight: 400;
+            user-select: none;
+        }
+        .topcv-breadcrumb .bc-current {
+            color: #374151;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-wrap" style="padding-top:80px;margin-top:0;max-width:100%;background:transparent;">
+
+    <!-- ── HERO ── -->
+    <div class="job-hero">
+        <div class="job-hero-inner">
+
+            <!-- Breadcrumb kiểu TopCV -->
+            <nav class="topcv-breadcrumb">
+                <a href="#">Trang chủ</a>
+                <span class="bc-sep">›</span>
+                <a href="#">Tìm việc làm</a>
+                <span class="bc-sep">›</span>
+                <a href="#">IT - Phần mềm</a>
+                <span class="bc-sep">›</span>
+                <a href="#">ReactJS</a>
+                <span class="bc-sep">›</span>
+                <span class="bc-current">Senior Frontend Developer (ReactJS / Tailwind CSS)</span>
+            </nav>
+
+            <div class="hero-card fade-up fade-up-1">
+                <div class="company-logo-box">
+                    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="80" rx="16" fill="#F5F3FF"/>
+                        <rect x="10" y="28" width="60" height="8" rx="4" fill="#7C3AED"/>
+                        <rect x="22" y="42" width="36" height="8" rx="4" fill="#A78BFA"/>
+                        <rect x="34" y="56" width="12" height="8" rx="4" fill="#C4B5FD"/>
+                        <circle cx="40" cy="20" r="8" fill="#4C1D95"/>
+                    </svg>
+                </div>
+
+                <div class="hero-info">
+                    <h1 class="hero-title">Senior Frontend Developer<br><span>(ReactJS / Tailwind CSS)</span></h1>
+                    <div class="hero-company">
+                        TECHWAVE TECHNOLOGY JSC
+                        <span class="mat-icon verified-icon">verified</span>
+                    </div>
+                    <div class="hero-meta">
+                        <div class="hero-meta-item">
+                            <div class="meta-label">Thu nhập</div>
+                            <div class="meta-value">$800 – $1,400 / tháng</div>
+                        </div>
+                        <div class="hero-meta-item">
+                            <div class="meta-label">Địa điểm</div>
+                            <div class="meta-value">Quận 1, TP. Hồ Chí Minh</div>
+                        </div>
+                        <div class="hero-meta-item">
+                            <div class="meta-label">Kinh nghiệm</div>
+                            <div class="meta-value">3+ năm</div>
+                        </div>
+                        <div class="hero-meta-item">
+                            <div class="meta-label">Hình thức</div>
+                            <div class="meta-value">Full-time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <button class="btn-apply" id="apply-btn">
+                        <span class="mat-icon" style="font-size:18px">send</span> Ứng tuyển ngay
+                    </button>
+                    <div style="display:flex;gap:8px;">
+                        <button class="btn-save"><span class="mat-icon" style="font-size:16px">favorite_border</span> Lưu tin</button>
+                        <button class="btn-save"><span class="mat-icon" style="font-size:16px">share</span> Chia sẻ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deadline bar -->
+        <div class="hero-strip fade-up fade-up-2">
+            <div class="deadline-bar">
+                <div class="dl-item"><span class="mat-icon">event</span> Đăng ngày: <strong>01/05/2026</strong></div>
+                <div class="dl-item"><span class="mat-icon">hourglass_empty</span> Hạn nộp: <strong style="color:#ef4444">31/12/2026</strong></div>
+                <div class="dl-item"><span class="mat-icon">visibility</span> <strong>1.247</strong> lượt xem</div>
+                <div class="dl-item"><span class="mat-icon">group</span> <strong>58</strong> ứng viên</div>
+                <div class="dl-match"><span class="pct">95%</span><span class="lbl">Điểm phù hợp AI</span></div>
+            </div>
+        </div>
+    </div>
+    <!-- Tab nav đã bỏ theo yêu cầu -->
+
+    <!-- ── MAIN CONTENT ── -->
+    <div style="max-width:1280px;margin:28px auto 64px;padding:0 28px;">
+        <div class="main-content">
+
+            <!-- LEFT COLUMN -->
+            <div>
+
+                <!-- ═══ KHUNG GỘP: Chi tiết + Phúc lợi + Tech Stack + Nice to have ═══ -->
+                <div class="job-content-card">
+
+                    <!-- Chi tiết công việc -->
+                    <div class="content-section" id="sec-detail">
+                        <div class="content-heading">Chi tiết công việc</div>
+
+                        <div class="sub-heading">Trách nhiệm</div>
+                        <ul class="job-list">
+                            <li>Thiết kế, xây dựng và duy trì các tính năng UI/UX chất lượng cao cho nền tảng thương mại điện tử hàng đầu bằng ReactJS.</li>
+                            <li>Phối hợp với UI/UX Designer chuyển đổi bản thiết kế Figma thành mã HTML/CSS/React chính xác, thân thiện với accessibility.</li>
+                            <li>Tối ưu hiệu suất ứng dụng: bundle size, tốc độ render, Core Web Vitals.</li>
+                            <li>Xây dựng thư viện component dùng chung với Tailwind CSS theo nguyên lý design system.</li>
+                            <li>Review code, hướng dẫn junior developer và đề xuất các giải pháp frontend tốt nhất.</li>
+                            <li>Tích hợp RESTful API và GraphQL, xử lý async state với React Query hoặc SWR.</li>
+                            <li>Viết unit test và integration test bằng Jest và React Testing Library để đảm bảo chất lượng code.</li>
+                        </ul>
+
+                        <div class="sub-heading" style="margin-top:20px">Yêu cầu</div>
+                        <ul class="job-list">
+                            <li>Tối thiểu 3 năm kinh nghiệm chuyên sâu về frontend với ReactJS.</li>
+                            <li>Thành thạo Tailwind CSS, SCSS hoặc CSS-in-JS.</li>
+                            <li>Hiểu sâu về JavaScript ES6+, TypeScript là lợi thế lớn.</li>
+                            <li>Kiến thức về Web Performance, SEO và Accessibility (WCAG 2.1).</li>
+                            <li>Có kinh nghiệm với Redux Toolkit, Zustand hoặc Jotai.</li>
+                            <li>Làm quen với Vite, Webpack và các công cụ build.</li>
+                            <li>Khả năng làm việc nhóm tốt, tư duy logic, giải quyết vấn đề linh hoạt.</li>
+                            <li>Đọc hiểu tài liệu kỹ thuật tiếng Anh.</li>
+                        </ul>
+
+                        <div class="sub-heading" style="margin-top:20px">Công nghệ sử dụng</div>
+                        <div class="tags">
+                            <span class="tag">ReactJS</span><span class="tag">TypeScript</span>
+                            <span class="tag">Tailwind CSS</span><span class="tag">Next.js</span>
+                            <span class="tag">Redux Toolkit</span><span class="tag">GraphQL</span>
+                            <span class="tag">Jest</span>
+                            <span class="tag secondary">Figma</span><span class="tag secondary">Storybook</span>
+                            <span class="tag neutral">Git / GitHub</span><span class="tag neutral">Vite</span><span class="tag neutral">CI/CD</span>
+                        </div>
+
+                        <div class="sub-heading" style="margin-top:20px">Ưu tiên thêm</div>
+                        <ul class="job-list">
+                            <li>Kinh nghiệm với micro-frontend và Module Federation.</li>
+                            <li>Đã từng làm việc trong lĩnh vực thương mại điện tử hoặc sản phẩm có lượng truy cập cao.</li>
+                            <li>Biết về Web3 / blockchain là một điểm cộng.</li>
+                        </ul>
+                    </div>
+
+                    <div style="height:1px;background:#f3f4f6;margin:28px 0;"></div>
+
+                    <!-- Phúc lợi & Đãi ngộ -->
+                    <div class="content-section" id="sec-benefits">
+                        <div class="content-heading">Phúc lợi & Đãi ngộ</div>
+                        <div class="benefit-list">
+                            <div class="benefit-row"><strong>Lương tháng 13 + Thưởng KPI</strong> — Thưởng theo hiệu suất, nhận hàng quý.</div>
+                            <div class="benefit-row"><strong>Bảo hiểm sức khoẻ cao cấp</strong> — Gói PVI Gold cho bạn và gia đình.</div>
+                            <div class="benefit-row"><strong>Review lương 2 lần/năm</strong> — Minh bạch, dựa trên năng lực.</div>
+                            <div class="benefit-row"><strong>Du lịch công ty hàng năm</strong> — Teambuilding theo quý + 1 chuyến full chi phí mỗi năm.</div>
+                            <div class="benefit-row"><strong>Ngân sách học tập</strong> — Lên đến $300/năm cho khóa học, hội thảo kỹ thuật.</div>
+                            <div class="benefit-row"><strong>MacBook Pro + màn hình phụ</strong> — Trang bị theo yêu cầu cá nhân.</div>
+                            <div class="benefit-row"><strong>Văn phòng hiện đại</strong> — Phòng game, quầy cà phê, bếp, sân thượng trồng cây.</div>
+                            <div class="benefit-row"><strong>Giờ làm việc linh hoạt</strong> — Core hours 9h–17h, WFH thứ Sáu hàng tuần.</div>
+                        </div>
+                        <div class="funny-text">
+                            <span class="mat-icon" style="color:#f59e0b;flex-shrink:0">psychology</span>
+                            <span><strong>Dị nè:</strong> Ở đây có khoảng sân thượng để trồng cà phê. Mỗi tháng có "cà phê cùng CEO" — uống thoải mái, nói gì cũng được, kể cả chuyện lương thưởng.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ Địa điểm làm việc ═══ -->
+                <div class="section-card" id="sec-location">
+                    <div class="content-heading">Địa điểm làm việc</div>
+                    <p style="font-size:14px;color:var(--gray-600);line-height:1.6">
+                        <strong>Tòa nhà TechWave Center</strong>, 123 Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh.
+                    </p>
+                    <div class="map-box">
+                        <iframe src="https://www.google.com/maps?q=TechWave+Center+123+Le+Loi+Ben+Thanh+District+1+Ho+Chi+Minh+City&output=embed"
+                            width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=TechWave+Center+123+Le+Loi+District+1+Ho+Chi+Minh+City"
+                            target="_blank"
+                            style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--purple);text-decoration:none;padding:7px 14px;border-radius:8px;background:var(--purple-100);border:1px solid rgba(124,58,237,.15);">
+                            <span class="mat-icon" style="font-size:16px">map</span> Mở trong Google Maps
+                        </a>
+                        <span style="display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--gray-500);padding:7px 14px;border-radius:8px;background:var(--gray-100);">
+                            <span class="mat-icon" style="font-size:16px">directions_transit</span> Cách ga Bến Thành 5 phút đi bộ
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ═══ Việc làm tương tự ═══ -->
+                <div id="sec-similar">
+                    <div class="similar-title">
+                        Việc làm tương tự <a href="#">Xem tất cả →</a>
+                    </div>
+                    <div class="similar-grid">
+                        <div class="sim-card"><div class="sim-card-top"><div class="sim-logo"><span class="mat-icon">corporate_fare</span></div><div class="sim-info"><div class="sim-title">Senior React Developer</div><div class="sim-company">FPT Software</div></div></div><div class="sim-footer"><span class="sim-salary">$1.000–$1.600</span><span class="sim-loc"><span class="mat-icon" style="font-size:12px">location_on</span> TP.HCM</span><span class="sim-match">92% match</span></div></div>
+                        <div class="sim-card"><div class="sim-card-top"><div class="sim-logo"><span class="mat-icon">rocket_launch</span></div><div class="sim-info"><div class="sim-title">Frontend Lead (React / Next.js)</div><div class="sim-company">Shopee Việt Nam</div></div></div><div class="sim-footer"><span class="sim-salary">Cạnh tranh</span><span class="sim-loc"><span class="mat-icon" style="font-size:12px">location_on</span> TP.HCM</span><span class="sim-match">88% match</span></div></div>
+                        <div class="sim-card"><div class="sim-card-top"><div class="sim-logo"><span class="mat-icon">code</span></div><div class="sim-info"><div class="sim-title">React / TypeScript Engineer</div><div class="sim-company">Tiki Corporation</div></div></div><div class="sim-footer"><span class="sim-salary">$900–$1.500</span><span class="sim-loc"><span class="mat-icon" style="font-size:12px">location_on</span> TP.HCM</span><span class="sim-match">85% match</span></div></div>
+                        <div class="sim-card"><div class="sim-card-top"><div class="sim-logo" style="background:#FEF3C7;border-color:#FDE68A"><span class="mat-icon" style="color:#D97706">hub</span></div><div class="sim-info"><div class="sim-title">UI Engineer – Design System</div><div class="sim-company">VNG Corporation</div></div></div><div class="sim-footer"><span class="sim-salary">$800–$1.400</span><span class="sim-loc"><span class="mat-icon" style="font-size:12px">location_on</span> TP.HCM</span><span class="sim-match">82% match</span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="sidebar" id="sec-company">
+
+                <div class="company-card">
+                    <div class="company-card-banner"></div>
+                    <div class="company-logo-float">
+                        <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="60" height="60" rx="12" fill="#F5F3FF"/>
+                            <rect x="8" y="22" width="44" height="6" rx="3" fill="#7C3AED"/>
+                            <rect x="16" y="32" width="28" height="6" rx="3" fill="#A78BFA"/>
+                            <rect x="24" y="42" width="12" height="6" rx="3" fill="#C4B5FD"/>
+                            <circle cx="30" cy="15" r="6" fill="#4C1D95"/>
+                        </svg>
+                    </div>
+                    <div class="company-card-body">
+                        <div class="company-name">TechWave Technology JSC</div>
+                        <div class="company-tagline">Nhà cung cấp giải pháp số hàng đầu · Việt Nam</div>
+                        <div class="company-stats">
+                            <div class="cs-row"><span class="mat-icon">groups</span> 100 – 499 nhân viên</div>
+                            <div class="cs-row"><span class="mat-icon">business_center</span> IT — Phần mềm</div>
+                            <div class="cs-row"><span class="mat-icon">language</span> <a href="#" style="color:var(--purple);text-decoration:none;font-weight:600">techwave.vn</a></div>
+                            <div class="cs-row"><span class="mat-icon">star</span> <span style="color:var(--amber);font-weight:700">4.6</span> <span style="font-size:12px;color:var(--gray-400)">(128 đánh giá)</span></div>
+                        </div>
+                        <button class="btn-view-company">Xem trang công ty</button>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-title">Thông tin chung</div>
+                    <div class="info-rows">
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">star</span></div><div><div class="ir-label">Cấp bậc</div><div class="ir-value">Nhân viên / Senior</div></div></div>
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">work_history</span></div><div><div class="ir-label">Kinh nghiệm</div><div class="ir-value">3+ năm</div></div></div>
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">group</span></div><div><div class="ir-label">Số lượng tuyển</div><div class="ir-value">5 người</div></div></div>
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">wc</span></div><div><div class="ir-label">Giới tính</div><div class="ir-value">Không yêu cầu</div></div></div>
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">school</span></div><div><div class="ir-label">Học vấn</div><div class="ir-value">Đại học trở lên</div></div></div>
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">event</span></div><div><div class="ir-label">Ngày bắt đầu</div><div class="ir-value">Thỏa thuận</div></div></div>
+                        <div class="info-row"><div class="ir-icon"><span class="mat-icon">home_work</span></div><div><div class="ir-label">Hình thức làm việc</div><div class="ir-value">Hybrid (WFH thứ Sáu)</div></div></div>
+                    </div>
+                </div>
+
+                <div class="cta-card">
+                    <h4>Xây dựng CV chuyên nghiệp</h4>
+                    <p>Sử dụng trình tạo CV bằng AI để tạo CV phù hợp với từng vị trí. Tăng 80% cơ hội trúng tuyển.</p>
+                    <button class="cta-btn"><span class="mat-icon" style="font-size:18px;color:var(--purple)">auto_awesome</span> Tạo CV ngay</button>
+                </div>
+
+                <div class="share-card">
+                    <div class="share-card-title">Chia sẻ việc làm</div>
+                    <div class="share-btns">
+                        <button class="share-btn fb"><span class="mat-icon" style="font-size:16px">thumb_up</span> Facebook</button>
+                        <button class="share-btn link"><span class="mat-icon" style="font-size:16px">link</span> Sao chép link</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sticky mobile bar -->
+<div class="sticky-bar">
+    <button class="btn-save" style="flex:1;background:#F3F4F6;border-color:#D1D5DB;color:var(--gray-700)">
+        <span class="mat-icon" style="font-size:18px">favorite_border</span> Lưu
+    </button>
+    <button class="btn-apply" style="flex:2;border-radius:12px">
+        <span class="mat-icon" style="font-size:18px">send</span> Ứng tuyển ngay
+    </button>
+</div>
+
+<script src="JobDetail.js"></script>
+</body>
+</html>

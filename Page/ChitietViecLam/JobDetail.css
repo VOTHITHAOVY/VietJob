@@ -1,0 +1,1781 @@
+/* ========== RESET & VARIABLES ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --purple: #7c3aed;
+  --purple-dark: #5b21b6;
+  --purple-deeper: #4c1d95;
+  --purple-light: #ede9fe;
+  --purple-mid: #a78bfa;
+  --purple-100: #f5f3ff;
+  --green: #16a34a;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-300: #d1d5db;
+  --gray-100: #f3f4f6;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: "Be Vietnam Pro", sans-serif;
+  background: #f4f5f7;
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+
+.mat-icon {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  display: inline-block;
+  line-height: 1;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+/* ========== HEADER OFFSET ========== */
+.page-wrap {
+  padding-top: 68px;
+}
+
+.spa-detail .page-wrap,
+.spa-detail.page-wrap {
+  padding-top: 0 !important;
+}
+
+/* ========== HERO ========== */
+.job-hero {
+  background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #6d28d9 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 48px 0 0;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.job-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.job-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px 24px 0 0;
+  padding: 36px 40px 40px;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.company-logo-box {
+  width: 88px;
+  height: 88px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-info {
+  flex: 1;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 40px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.badge-urgent {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-ai {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.badge-new {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.hero-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.hero-company {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meta-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.meta-value {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.btn-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 54px;
+  padding: 0 36px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+  transition: 0.2s;
+}
+
+.btn-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 24px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hero-strip {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.deadline-bar {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: none;
+  border-radius: 0 0 24px 24px;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.dl-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dl-match {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #7c3aed33, #a78bfa44);
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  padding: 6px 16px;
+  border-radius: 40px;
+}
+
+.dl-match .pct {
+  font-size: 16px;
+  font-weight: 900;
+  color: #c4b5fd;
+}
+
+/* ========== MAIN CONTENT – 2 CỘT ========== */
+.main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 28px 60px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* LEFT COLUMN – tất cả các section-card nằm trong thẻ div đầu tiên của main-content */
+.main-content>div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* RIGHT COLUMN – sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Section Cards */
+.section-card {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid #eef2f6;
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--purple-deeper);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--purple-light);
+}
+
+.title-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--purple-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-heading {
+  font-size: 15px;
+  font-weight: 800;
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  color: var(--gray-800);
+}
+
+.sub-heading::before {
+  content: "";
+  width: 5px;
+  height: 18px;
+  background: var(--purple);
+  border-radius: 4px;
+}
+
+.job-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-list li {
+  display: flex;
+  gap: 12px;
+  font-size: 14.5px;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+.job-list li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--purple-mid);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tag {
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--purple-100);
+  color: var(--purple-dark);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: #fafcff;
+  border-radius: 16px;
+  border: 1px solid #eef2f6;
+}
+
+.benefit-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--purple-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.benefit-text .b-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.benefit-text .b-desc {
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+
+/* Work Location – Map thật */
+.map-box {
+  margin-top: 16px;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 260px;
+  border: 1px solid #eef2f6;
+}
+
+.map-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Company Card */
+.company-card {
+  background: #fff;
+  border-radius: 24px;
+  border: 1px solid #eef2f6;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.company-card-banner {
+  height: 80px;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+  position: relative;
+}
+
+.company-logo-float {
+  position: absolute;
+  bottom: -30px;
+  left: 24px;
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-card-body {
+  padding: 40px 24px 24px;
+}
+
+.company-name {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.company-tagline {
+  font-size: 13px;
+  color: var(--gray-500);
+  margin: 4px 0 16px;
+}
+
+.company-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cs-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.btn-view-company {
+  width: 100%;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid var(--purple);
+  background: transparent;
+  color: var(--purple);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-view-company:hover {
+  background: var(--purple-100);
+}
+
+/* Info Card */
+.info-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid #eef2f6;
+  box-shadow: var(--shadow-card);
+}
+
+.info-card-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--purple-light);
+}
+
+.info-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ir-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--purple-100);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ir-label {
+  font-size: 11px;
+  color: var(--gray-500);
+  text-transform: uppercase;
+}
+
+.ir-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+/* CTA Card */
+.cta-card {
+  background: linear-gradient(135deg, #4c1d95, #7c3aed 60%, #a78bfa);
+  border-radius: 24px;
+  padding: 28px;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.25);
+}
+
+.cta-card h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.cta-card p {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--purple-dark);
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Share Card */
+.share-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid #eef2f6;
+}
+
+.share-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.share-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.share-btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 40px;
+  border: 1px solid var(--gray-300);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+/* Similar Jobs */
+.similar-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similar-title a {
+  color: var(--purple);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.similar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.sim-card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #eef2f6;
+  padding: 16px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.sim-card:hover {
+  border-color: var(--purple-mid);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sim-card-top {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.sim-logo {
+  width: 44px;
+  height: 44px;
+  background: var(--purple-100);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sim-info .sim-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.sim-info .sim-company {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.sim-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #eef2f6;
+}
+
+.sim-salary {
+  font-weight: 700;
+  color: var(--amber);
+}
+
+.sim-match {
+  background: var(--purple-100);
+  padding: 2px 8px;
+  border-radius: 20px;
+  color: var(--purple);
+  font-weight: 600;
+}
+
+/* Sticky Mobile Bar */
+.sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #eef2f6;
+  padding: 12px 20px;
+  gap: 12px;
+  z-index: 999;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.45s ease both;
+}
+
+.fade-up-1 {
+  animation-delay: 0.08s;
+}
+
+.fade-up-2 {
+  animation-delay: 0.15s;
+}
+
+.fade-up-3 {
+  animation-delay: 0.22s;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero-card {
+    flex-direction: column;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .similar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-bar {
+    display: flex;
+  }
+
+  .hero-actions {
+    display: none;
+  }
+
+  .deadline-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dl-match {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 24px;
+  }
+
+  .section-card {
+    padding: 20px;
+  }
+}
+
+:root {
+  --purple: #7C3AED;
+  --purple-dark: #5B21B6;
+  --purple-deeper: #4C1D95;
+  --purple-light: #EDE9FE;
+  --purple-mid: #A78BFA;
+  --purple-100: #F5F3FF;
+  --green: #16A34A;
+  --amber: #F59E0B;
+  --red: #EF4444;
+  --gray-900: #111827;
+  --gray-800: #1F2937;
+  --gray-700: #374151;
+  --gray-600: #4B5563;
+  --gray-500: #6B7280;
+  --gray-400: #9CA3AF;
+  --gray-300: #D1D5DB;
+  --gray-100: #F3F4F6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #F4F5F7;
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+
+.mat-icon {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+/* ── HERO ── */
+.job-hero {
+  background: #fff;
+  box-shadow: 0 1px 0 #eef2f6;
+  padding: 0;
+}
+
+.job-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 28px 0;
+}
+
+.topcv-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.topcv-breadcrumb a {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.topcv-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.topcv-breadcrumb .sep {
+  color: #d1d5db;
+}
+
+.topcv-breadcrumb .current {
+  color: #374151;
+  font-weight: 600;
+}
+
+.hero-card {
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 0 0 20px 0;
+  box-shadow: none;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.company-logo-box {
+  width: 96px;
+  height: 96px;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.company-logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hero-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-badges {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.badge-urgent {
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.badge-ai {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+}
+
+.badge-new {
+  background: #FFFBEB;
+  color: #D97706;
+  border: 1px solid #FDE68A;
+}
+
+.hero-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #111827;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.hero-title span {
+  font-size: 16px;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.hero-company {
+  font-size: 14px;
+  color: #7c3aed;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.verified-icon {
+  color: #7c3aed;
+  font-size: 16px !important;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-icon-wrap {
+  background: #f5f3ff;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.meta-icon-wrap .mat-icon {
+  color: #7c3aed;
+  font-size: 18px;
+}
+
+.meta-label {
+  color: #9ca3af;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.meta-value {
+  color: #111827;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.btn-apply {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  height: 46px;
+  padding: 0 28px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: background .15s;
+}
+
+.btn-apply:hover {
+  background: #6d28d9;
+}
+
+.btn-save {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  color: #374151;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .15s;
+}
+
+.btn-save:hover {
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+/* ── DEADLINE BAR ── */
+.hero-strip {
+  background: #f8f7ff;
+  border-top: 1px solid #ede9fe;
+  border-bottom: 1px solid #ede9fe;
+}
+
+.deadline-bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.dl-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.dl-item .mat-icon {
+  color: #a78bfa;
+  font-size: 16px;
+}
+
+.dl-item strong {
+  color: #374151;
+}
+
+.dl-match {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f5f3ff;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+.dl-match .pct {
+  color: #7c3aed;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.dl-match .lbl {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* ── TAB NAV ── */
+.job-tabs {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.job-tabs-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  gap: 0;
+}
+
+.job-tab {
+  padding: 13px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  transition: all .15s;
+  white-space: nowrap;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.job-tab:hover {
+  color: var(--purple);
+}
+
+.job-tab.active {
+  color: var(--purple);
+  border-bottom-color: var(--purple);
+}
+
+/* ── PAGE LAYOUT ── */
+.page-wrap {
+  max-width: 1280px;
+  margin: 28px auto 64px;
+  padding: 0 28px;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 22px;
+  align-items: start;
+}
+
+/* ── SECTION CARD ── */
+.section-card {
+  background: #fff;
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+
+/* ── JOB CONTENT (1 khung gộp) ── */
+.job-content-card {
+  background: #fff;
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+}
+
+/* Section heading bên trong khung gộp */
+.content-section {
+  margin-bottom: 32px;
+}
+
+.content-section:last-child {
+  margin-bottom: 0;
+}
+
+.content-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--purple);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--purple-light);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.content-heading::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--purple);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.sub-heading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin: 18px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 12px;
+}
+
+.job-list {
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.job-list li {
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.65;
+}
+
+/* Tech stack tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: var(--purple-100);
+  color: var(--purple);
+  border: 1px solid #ddd6fe;
+}
+
+.tag.secondary {
+  background: #F0FDF4;
+  color: #16A34A;
+  border-color: #BBF7D0;
+}
+
+.tag.neutral {
+  background: var(--gray-100);
+  color: var(--gray-600);
+  border-color: var(--gray-300);
+}
+
+/* Benefits list – plain text, no icons */
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.benefit-row {
+  padding: 10px 14px;
+  background: var(--gray-100);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+.benefit-row strong {
+  color: var(--gray-900);
+}
+
+/* Funny text */
+.funny-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fff7ed;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: var(--gray-700);
+  margin-top: 18px;
+  line-height: 1.6;
+}
+
+/* ── LOCATION CARD ── */
+.map-box {
+  margin-top: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #eef2f6;
+}
+
+.map-box iframe {
+  display: block;
+}
+
+/* ── SIMILAR JOBS ── */
+.similar-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similar-title a {
+  font-size: 13px;
+  color: var(--purple);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.similar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sim-card {
+  background: #fff;
+  border: 1.5px solid #eef2f6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.sim-card:hover {
+  border-color: var(--purple-mid);
+  box-shadow: 0 4px 16px rgba(124, 58, 237, .1);
+}
+
+.sim-card-top {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.sim-logo {
+  width: 36px;
+  height: 36px;
+  background: var(--purple-100);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sim-logo .mat-icon {
+  color: var(--purple);
+  font-size: 18px;
+}
+
+.sim-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+
+.sim-company {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+.sim-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sim-salary {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.sim-loc {
+  font-size: 11px;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.sim-match {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--purple-100);
+  color: var(--purple);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 84px;
+}
+
+/* Company card */
+.company-card {
+  background: #fff;
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.company-card-banner {
+  height: 72px;
+  background: linear-gradient(135deg, var(--purple-deeper), var(--purple));
+}
+
+.company-logo-float {
+  width: 56px;
+  height: 56px;
+  background: #fff;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  margin: -28px 0 0 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+}
+
+.company-logo-float svg,
+.company-logo-float img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.company-card-body {
+  padding: 12px 20px 20px;
+}
+
+.company-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+
+.company-tagline {
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 14px;
+}
+
+.company-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.cs-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--gray-700);
+}
+
+.cs-row .mat-icon {
+  color: var(--purple);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.btn-view-company {
+  width: 100%;
+  height: 36px;
+  border: 1.5px solid var(--purple);
+  background: #fff;
+  color: var(--purple);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .15s;
+}
+
+.btn-view-company:hover {
+  background: var(--purple);
+  color: #fff;
+}
+
+/* Info card */
+.info-card {
+  background: #fff;
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.info-card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 14px;
+}
+
+.info-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ir-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--purple-100);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ir-icon .mat-icon {
+  color: var(--purple);
+  font-size: 16px;
+}
+
+.ir-label {
+  font-size: 11px;
+  color: var(--gray-400);
+  line-height: 1.3;
+}
+
+.ir-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+/* CTA card */
+.cta-card {
+  background: linear-gradient(135deg, var(--purple-deeper), var(--purple));
+  border-radius: 14px;
+  padding: 20px;
+  color: #fff;
+}
+
+.cta-card h4 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.cta-card p {
+  font-size: 12px;
+  opacity: .85;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.cta-btn {
+  width: 100%;
+  height: 38px;
+  background: #fff;
+  color: var(--purple);
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* Share card */
+.share-card {
+  background: #fff;
+  border: 1px solid #eef2f6;
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.share-card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+
+.share-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.share-btn {
+  flex: 1;
+  height: 36px;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .15s;
+}
+
+.share-btn.fb {
+  color: #1877F2;
+  border-color: #BFDBFE;
+}
+
+.share-btn.fb:hover {
+  background: #EFF6FF;
+}
+
+.share-btn.link {
+  color: var(--gray-600);
+}
+
+.share-btn.link:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+/* Sticky bar */
+.sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #eef2f6;
+  padding: 12px 20px;
+  gap: 10px;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, .08);
+}
+
+@media (max-width: 768px) {
+  .sticky-bar {
+    display: flex;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .hero-card {
+    flex-wrap: wrap;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .similar-grid {
+    grid-template-columns: 1fr;
+  }
+}
