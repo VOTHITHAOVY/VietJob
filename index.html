@@ -15,13 +15,13 @@
 
 <body>
 
-  <!-- ── HEADER (tự động inject từ header.html) ── -->
+  <!-- ── HEADER ── -->
   <div id="header-placeholder"></div>
 
 
   <!-- ══════════════════════════════════════
-     ── HERO (centered, no float cards)
-     ══════════════════════════════════════ -->
+       HERO
+  ══════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
       <h1>Tìm kiếm <span>việc làm</span></h1>
@@ -49,33 +49,33 @@
 
       <div class="hot-tags">
         <span class="hot-label">Phổ biến:</span>
-        <span class="tag">Kinh doanh</span>
-        <span class="tag">Kế toán</span>
-        <span class="tag">Marketing</span>
-        <span class="tag">Xây dựng</span>
-        <span class="tag">Giáo viên</span>
+        <span class="tag" onclick="goToSearch('Kinh doanh')">Kinh doanh</span>
+        <span class="tag" onclick="goToSearch('Kế toán')">Kế toán</span>
+        <span class="tag" onclick="goToSearch('Marketing')">Marketing</span>
+        <span class="tag" onclick="goToSearch('Xây dựng')">Xây dựng</span>
+        <span class="tag" onclick="goToSearch('Giáo viên')">Giáo viên</span>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-     ── 3-COL (banner taller, tool cards bigger)
-     ══════════════════════════════════════ -->
+       3-COL
+  ══════════════════════════════════════ -->
   <section class="three-col">
     <div class="three-col-inner">
 
       <!-- Category sidebar -->
       <div class="cat-sidebar">
         <div class="cat-header">≡ &nbsp;Ngành nghề</div>
-        <div class="cat-item">Kinh Doanh/Bán Hàng <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Marketing/PR/Quảng Cáo <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Công Nghệ Thông Tin <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Hành Chính/Văn Phòng <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Kế Toán/Kiểm Toán <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Nhân Sự <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Điện/Điện Tử/Năng Lượng <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Xây Dựng/Kiến Trúc <span class="cat-arrow">→</span></div>
-        <div class="cat-item">Y Tế/Dược <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Kinh doanh')">Kinh Doanh/Bán Hàng <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Marketing')">Marketing/PR/Quảng Cáo <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Frontend')">Công Nghệ Thông Tin <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Hành chính')">Hành Chính/Văn Phòng <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Kế toán')">Kế Toán/Kiểm Toán <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Nhân sự')">Nhân Sự <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Điện')">Điện/Điện Tử/Năng Lượng <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Xây dựng')">Xây Dựng/Kiến Trúc <span class="cat-arrow">→</span></div>
+        <div class="cat-item" onclick="goToSearch('Y tế')">Y Tế/Dược <span class="cat-arrow">→</span></div>
       </div>
 
       <!-- Banner -->
@@ -129,19 +129,21 @@
     </div>
   </section>
 
-  <!-- ── FEATURED JOBS ── -->
+  <!-- ══════════════════════════════════════
+       FEATURED JOBS
+  ══════════════════════════════════════ -->
   <section class="section section-purple-soft">
     <div class="section-inner">
       <div class="section-header">
         <div>
           <div class="section-title">Việc làm nổi bật hôm nay</div>
         </div>
-        <a href="#" class="section-link">Xem tất cả việc làm →</a>
+        <a href="Page/ViecLam/Jobs.html" class="section-link">Xem tất cả việc làm →</a>
       </div>
       <div class="jobs-grid">
 
-        <!-- Card 1 -->
-        <div class="job-card">
+        <!-- Card 1 — VNG → job id: 1 -->
+        <div class="job-card" onclick="goToJob(1)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img
                 src="https://i.pinimg.com/1200x/53/c3/aa/53c3aa62d625ae65a42da8e699201f39.jpg" alt="VNG" /></div>
@@ -162,12 +164,14 @@
               <span class="job-tag">Không yêu cầu</span>
               <span class="job-tag highlight">7 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="job-card">
+        <!-- Card 2 — Shopee → job id: 7 -->
+        <div class="job-card" onclick="goToJob(7)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/3d/e6/6c/3de66c82f9f28eed4a5c37dfc0c4069e.jpg"
                 alt="Shopee" /></div>
@@ -188,12 +192,14 @@
               <span class="job-tag">Trên 2 năm</span>
               <span class="job-tag highlight">17 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 3 — Featured -->
-        <div class="job-card is-top">
+        <!-- Card 3 — Momo → job id: 3 -->
+        <div class="job-card is-top" onclick="goToJob(3)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/72/1e/b1/721eb1ec1b5bf1d229e74174affe469b.jpg"
                 alt="Momo" /></div>
@@ -214,12 +220,14 @@
               <span class="job-tag">Trên 3 năm</span>
               <span class="job-tag highlight">1 giờ trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 4 -->
-        <div class="job-card">
+        <!-- Card 4 — Vinamilk → job id: 4 -->
+        <div class="job-card" onclick="goToJob(4)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg"
                 alt="Vinamilk" /></div>
@@ -240,12 +248,14 @@
               <span class="job-tag">Trên 3 năm</span>
               <span class="job-tag highlight">27 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 5 — Featured -->
-        <div class="job-card">
+        <!-- Card 5 — Masan → job id: 5 -->
+        <div class="job-card" onclick="goToJob(5)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/76/d8/cb/76d8cb03115a52e17c811409dad112bf.jpg"
                 alt="Masan" /></div>
@@ -266,12 +276,14 @@
               <span class="job-tag">Trên 1 năm</span>
               <span class="job-tag highlight">37 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 6 -->
-        <div class="job-card">
+        <!-- Card 6 — FPT → job id: 2 -->
+        <div class="job-card" onclick="goToJob(2)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/3f/7e/28/3f7e28bdd5dc1966f25fef476bbf5175.jpg"
                 alt="FPT" /></div>
@@ -292,12 +304,14 @@
               <span class="job-tag">Trên 2 năm</span>
               <span class="job-tag highlight">17 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 7 -->
-        <div class="job-card">
+        <!-- Card 7 — Hoà Phát → job id: 6 -->
+        <div class="job-card" onclick="goToJob(6)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/78/2d/8e/782d8e93443fd09180cb53a163c03c90.jpg"
                 alt="Hoà Phát" /></div>
@@ -318,12 +332,14 @@
               <span class="job-tag">Trên 3 năm</span>
               <span class="job-tag highlight">1 giờ trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 8 — Featured -->
-        <div class="job-card is-top">
+        <!-- Card 8 — An Sinh → job id: 8 -->
+        <div class="job-card is-top" onclick="goToJob(8)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img
                 src="https://i.pinimg.com/1200x/e3/91/23/e3912325358791521ae7eeaadba883b8.jpg" alt="An Sinh" /></div>
@@ -344,12 +360,14 @@
               <span class="job-tag">Trên 3 năm</span>
               <span class="job-tag highlight">27 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
-        <!-- Card 9 -->
-        <div class="job-card">
+        <!-- Card 9 — Vingroup → job id: 9 -->
+        <div class="job-card" onclick="goToJob(9)" style="cursor:pointer">
           <div class="job-card-top">
             <div class="company-logo"><img src="https://i.pinimg.com/736x/1a/b1/01/1ab1018caadab50b23b4317d01a59cf4.jpg"
                 alt="Vingroup" /></div>
@@ -370,7 +388,9 @@
               <span class="job-tag">1–3 năm</span>
               <span class="job-tag highlight">7 phút trước</span>
             </div>
-            <button class="job-save"><span class="mat-icon">favorite_border</span></button>
+            <button class="job-save" onclick="event.stopPropagation(); toggleHomeSave(this)">
+              <span class="mat-icon">favorite_border</span>
+            </button>
           </div>
         </div>
 
@@ -404,59 +424,59 @@
         <div>
           <div class="section-title">Top ngành nghề nổi bật</div>
         </div>
-        <a href="#" class="section-link">Xem tất cả ngành →</a>
+        <a href="Page/ViecLam/Jobs.html" class="section-link">Xem tất cả ngành →</a>
       </div>
       <div class="cat-grid">
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Kinh doanh')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-trending-up"></i></div>
           <div class="cat-body">
             <div class="cat-name">Kinh doanh - Bán hàng</div>
             <div class="cat-count">11.506 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Marketing')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-speakerphone"></i></div>
           <div class="cat-body">
             <div class="cat-name">Marketing - PR - Quảng cáo</div>
             <div class="cat-count">8.144 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Chăm sóc')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-headset"></i></div>
           <div class="cat-body">
             <div class="cat-name">Chăm sóc khách hàng</div>
             <div class="cat-count">1.631 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Nhân sự')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-users"></i></div>
           <div class="cat-body">
             <div class="cat-name">Nhân sự - Hành chính</div>
             <div class="cat-count">3.633 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Frontend')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-device-laptop"></i></div>
           <div class="cat-body">
             <div class="cat-name">Công nghệ Thông tin</div>
             <div class="cat-count">2.092 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Tài chính')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-building-bank"></i></div>
           <div class="cat-body">
             <div class="cat-name">Tài chính - Ngân hàng</div>
             <div class="cat-count">1.194 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Bất động sản')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-building"></i></div>
           <div class="cat-body">
             <div class="cat-name">Bất động sản</div>
             <div class="cat-count">424 việc làm</div>
           </div>
         </div>
-        <div class="cat-card">
+        <div class="cat-card" onclick="goToSearch('Kế toán')" style="cursor:pointer">
           <div class="cat-icon-wrap"><i class="ti ti-calculator"></i></div>
           <div class="cat-body">
             <div class="cat-name">Kế toán - Kiểm toán - Thuế</div>
@@ -519,7 +539,7 @@
   </section>
 
 
-  <!-- ── FOOTER (tự động inject từ footer.html) ── -->
+  <!-- ── FOOTER ── -->
   <div id="footer-placeholder"></div>
   <script src="/Component/loader.js"></script>
   <script src="main.js"></script>

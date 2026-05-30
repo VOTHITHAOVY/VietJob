@@ -1,6 +1,5 @@
 /* ============================================================
-   Career-guide.css – Riêng cho trang Cẩm nang nghề nghiệp
-   Không chứa style của Header/Footer, font 'Be Vietnam Pro'
+   Career-guide.css
    ============================================================ */
 
 .career-page {
@@ -25,21 +24,19 @@
   --gray-100: #F3F4F6;
   --gray-50: #F9FAFB;
   --white: #FFFFFF;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .05);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, .1);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, .15);
-  --shadow-xl: 0 24px 64px rgba(0, 0, 0, .18);
-  --shadow-violet: 0 8px 32px rgba(124, 58, 237, .25);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.1);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.15);
+  --shadow-xl: 0 24px 64px rgba(0,0,0,.18);
+  --shadow-violet: 0 8px 32px rgba(124,58,237,.25);
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-xl: 28px;
-  --transition: 0.25s cubic-bezier(.4, 0, .2, 1);
+  --transition: 0.2s ease;
 }
 
-.career-page *,
-.career-page *::before,
-.career-page *::after {
+.career-page *, .career-page *::before, .career-page *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -54,19 +51,9 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.career-page img {
-  max-width: 100%;
-  display: block;
-}
-
-.career-page a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.career-page ul {
-  list-style: none;
-}
+.career-page img { max-width: 100%; display: block; }
+.career-page a { text-decoration: none; color: inherit; }
+.career-page ul { list-style: none; }
 
 .career-page .container {
   width: 100%;
@@ -75,11 +62,9 @@
   padding-inline: 24px;
 }
 
-.career-page .section {
-  padding-block: 88px;
-}
+.career-page .section { padding-block: 88px; }
 
-/* Hero */
+/* ── Hero ── */
 .career-page .hero {
   position: relative;
   min-height: 680px;
@@ -90,11 +75,7 @@
   overflow: hidden;
 }
 
-.career-page .hero-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
+.career-page .hero-bg { position: absolute; inset: 0; pointer-events: none; }
 
 .career-page .hero-orb {
   position: absolute;
@@ -104,26 +85,23 @@
 }
 
 .career-page .orb1 {
-  width: 600px;
-  height: 600px;
+  width: 600px; height: 600px;
   background: radial-gradient(circle, #7C3AED, transparent 70%);
-  top: -150px;
-  right: -100px;
+  top: -150px; right: -100px;
 }
 
 .career-page .orb2 {
-  width: 400px;
-  height: 400px;
+  width: 400px; height: 400px;
   background: radial-gradient(circle, #F59E0B, transparent 70%);
-  bottom: -100px;
-  left: -80px;
+  bottom: -100px; left: -80px;
   opacity: .25;
 }
 
 .career-page .hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -137,10 +115,10 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, .1);
+  background: rgba(255,255,255,.1);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, .18);
-  color: rgba(255, 255, 255, .9);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.9);
   font-size: .8rem;
   font-weight: 500;
   letter-spacing: .05em;
@@ -148,26 +126,22 @@
   padding: 6px 16px;
   border-radius: 40px;
   margin-bottom: 24px;
-  animation: fadeUp .6s ease both;
 }
 
 .career-page .badge-dot {
-  width: 7px;
-  height: 7px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--amber-400);
   animation: pulse 2s infinite;
 }
 
 .career-page .hero-title {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 800;
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -.03em;
   margin-bottom: 20px;
-  animation: fadeUp .7s .1s ease both;
 }
 
 .career-page .hero-highlight {
@@ -179,11 +153,10 @@
 
 .career-page .hero-sub {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, .72);
+  color: rgba(255,255,255,.72);
   max-width: 560px;
   margin-inline: auto;
   margin-bottom: 40px;
-  animation: fadeUp .7s .2s ease both;
 }
 
 .career-page .hero-search {
@@ -192,13 +165,12 @@
   gap: 8px;
   max-width: 700px;
   margin-inline: auto;
-  background: rgba(255, 255, 255, .1);
+  background: rgba(255,255,255,.1);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, .2);
+  border: 1px solid rgba(255,255,255,.2);
   border-radius: 14px;
   padding: 6px 6px 6px 16px;
   margin-bottom: 28px;
-  animation: fadeUp .7s .3s ease both;
 }
 
 .career-page .search-box {
@@ -208,10 +180,7 @@
   gap: 10px;
 }
 
-.career-page .search-icon {
-  color: rgba(255, 255, 255, .5);
-  flex-shrink: 0;
-}
+.career-page .search-icon { color: rgba(255,255,255,.5); flex-shrink: 0; }
 
 .career-page .search-box input {
   flex: 1;
@@ -223,14 +192,12 @@
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-.career-page .search-box input::placeholder {
-  color: rgba(255, 255, 255, .45);
-}
+.career-page .search-box input::placeholder { color: rgba(255,255,255,.45); }
 
 .career-page .search-filter select {
-  background: rgba(255, 255, 255, .12);
-  border: 1px solid rgba(255, 255, 255, .2);
-  color: rgba(255, 255, 255, .8);
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.8);
   font-size: .85rem;
   font-family: 'Be Vietnam Pro', sans-serif;
   padding: 6px 12px;
@@ -239,9 +206,7 @@
   cursor: pointer;
 }
 
-.career-page .search-filter select option {
-  background: var(--violet-800);
-}
+.career-page .search-filter select option { background: var(--violet-800); }
 
 .career-page .btn-search {
   display: flex;
@@ -258,12 +223,12 @@
   cursor: pointer;
   white-space: nowrap;
   transition: all var(--transition);
-  box-shadow: 0 4px 14px rgba(245, 158, 11, .4);
+  box-shadow: 0 4px 14px rgba(245,158,11,.4);
 }
 
 .career-page .btn-search:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(245, 158, 11, .5);
+  box-shadow: 0 6px 18px rgba(245,158,11,.5);
 }
 
 .career-page .hero-tabs {
@@ -272,13 +237,12 @@
   justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
-  animation: fadeUp .7s .4s ease both;
 }
 
 .career-page .tab {
-  background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .18);
-  color: rgba(255, 255, 255, .75);
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.75);
   font-size: .825rem;
   font-weight: 500;
   font-family: 'Be Vietnam Pro', sans-serif;
@@ -296,7 +260,7 @@
   font-weight: 600;
 }
 
-/* Section heads */
+/* ── Section heads ── */
 .career-page .section-head {
   display: flex;
   align-items: flex-end;
@@ -322,7 +286,6 @@
 }
 
 .career-page .section-title {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 700;
   color: var(--gray-900);
@@ -346,14 +309,10 @@
   white-space: nowrap;
 }
 
-.career-page .see-all:hover {
-  text-decoration: underline;
-}
+.career-page .see-all:hover { text-decoration: underline; }
 
-/* Topics */
-.career-page .topics {
-  background: var(--gray-50);
-}
+/* ── Topics ── */
+.career-page .topics { background: var(--gray-50); }
 
 .career-page .topics-grid {
   display: grid;
@@ -367,60 +326,21 @@
   padding: 32px 28px;
   border: 1px solid var(--gray-200);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   position: relative;
   overflow: hidden;
 }
 
-.career-page .topic-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity var(--transition);
-  border-radius: inherit;
-}
-
-.career-page .topic-card[data-color="violet"]::before {
-  background: linear-gradient(135deg, rgba(124, 58, 237, .04), rgba(124, 58, 237, .08));
-}
-
-.career-page .topic-card[data-color="amber"]::before {
-  background: linear-gradient(135deg, rgba(245, 158, 11, .04), rgba(245, 158, 11, .08));
-}
-
-.career-page .topic-card[data-color="emerald"]::before {
-  background: linear-gradient(135deg, rgba(16, 185, 129, .04), rgba(16, 185, 129, .08));
-}
-
-.career-page .topic-card[data-color="rose"]::before {
-  background: linear-gradient(135deg, rgba(244, 63, 94, .04), rgba(244, 63, 94, .08));
-}
-
 .career-page .topic-card:hover {
   border-color: transparent;
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
-.career-page .topic-card:hover::before {
-  opacity: 1;
-}
-
-.career-page .topic-icon-wrap {
-  width: 56px;
-  height: 56px;
-  margin-bottom: 20px;
-}
-
-.career-page .topic-icon-wrap svg {
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-}
+.career-page .topic-icon-wrap { width: 56px; height: 56px; margin-bottom: 20px; }
+.career-page .topic-icon-wrap svg { width: 100%; height: 100%; border-radius: 14px; }
 
 .career-page .topic-card h3 {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--gray-900);
@@ -445,10 +365,8 @@
   letter-spacing: .03em;
 }
 
-/* Featured */
-.career-page .featured {
-  background: var(--white);
-}
+/* ── Featured ── */
+.career-page .featured { background: var(--white); }
 
 .career-page .featured-layout {
   display: grid;
@@ -463,11 +381,11 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--gray-200);
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .career-page .feat-main:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -478,26 +396,22 @@
 }
 
 .career-page .feat-main-img img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform .6s ease;
+  transition: transform .5s ease;
 }
 
-.career-page .feat-main:hover .feat-main-img img {
-  transform: scale(1.04);
-}
+.career-page .feat-main:hover .feat-main-img img { transform: scale(1.03); }
 
 .career-page .feat-main-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(30, 10, 60, .7) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(30,10,60,.7) 0%, transparent 60%);
 }
 
 .career-page .feat-badge {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 20px; left: 20px;
   background: var(--violet-600);
   color: var(--white);
   font-size: .72rem;
@@ -511,13 +425,10 @@
 .career-page .feat-badge.small {
   font-size: .68rem;
   padding: 4px 10px;
-  top: 12px;
-  left: 12px;
+  top: 12px; left: 12px;
 }
 
-.career-page .feat-main-body {
-  padding: 32px;
-}
+.career-page .feat-main-body { padding: 32px; }
 
 .career-page .article-meta {
   display: flex;
@@ -528,21 +439,13 @@
 }
 
 .career-page .author-avatar {
-  width: 28px;
-  height: 28px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.career-page .author-name {
-  font-size: .85rem;
-  font-weight: 600;
-  color: var(--gray-700);
-}
-
-.career-page .meta-dot {
-  color: var(--gray-400);
-}
+.career-page .author-name { font-size: .85rem; font-weight: 600; color: var(--gray-700); }
+.career-page .meta-dot { color: var(--gray-400); }
 
 .career-page .read-time {
   display: flex;
@@ -552,22 +455,13 @@
   color: var(--gray-500);
 }
 
-.career-page .date {
-  font-size: .82rem;
-  color: var(--gray-500);
-}
+.career-page .date { font-size: .82rem; color: var(--gray-500); }
 
-.career-page .article-meta.small {
-  margin-bottom: 0;
-}
-
+.career-page .article-meta.small { margin-bottom: 0; }
 .career-page .article-meta.small .read-time,
-.career-page .article-meta.small .date {
-  font-size: .78rem;
-}
+.career-page .article-meta.small .date { font-size: .78rem; }
 
 .career-page .feat-main-body h2 {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--gray-900);
@@ -598,8 +492,8 @@
 }
 
 .career-page .btn-read:hover {
-  transform: translateX(4px);
-  box-shadow: 0 10px 30px rgba(124, 58, 237, .4);
+  transform: translateX(3px);
+  box-shadow: 0 10px 30px rgba(124,58,237,.4);
 }
 
 .career-page .feat-side {
@@ -614,12 +508,12 @@
   overflow: hidden;
   border: 1px solid var(--gray-200);
   display: flex;
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   cursor: pointer;
 }
 
 .career-page .feat-card:hover {
-  transform: translateX(4px);
+  transform: translateX(3px);
   box-shadow: var(--shadow-md);
   border-color: #DDD6FE;
 }
@@ -632,20 +526,11 @@
 }
 
 .career-page .feat-card-img img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform .5s ease;
 }
 
-.career-page .feat-card:hover .feat-card-img img {
-  transform: scale(1.08);
-}
-
-.career-page .feat-card-body {
-  padding: 16px 18px;
-  flex: 1;
-}
+.career-page .feat-card-body { padding: 16px 18px; flex: 1; }
 
 .career-page .feat-card-body h3 {
   font-size: .9rem;
@@ -655,10 +540,8 @@
   margin-bottom: 8px;
 }
 
-/* AI Banner */
-.career-page .ai-banner {
-  background: var(--gray-50);
-}
+/* ── AI Banner ── */
+.career-page .ai-banner { background: var(--gray-50); }
 
 .career-page .ai-card {
   background: linear-gradient(135deg, #1A0533 0%, #3B0764 50%, #5B21B6 100%);
@@ -672,11 +555,7 @@
   box-shadow: var(--shadow-xl);
 }
 
-.career-page .ai-bg-shapes {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
+.career-page .ai-bg-shapes { position: absolute; inset: 0; pointer-events: none; }
 
 .career-page .ai-shape {
   position: absolute;
@@ -686,43 +565,33 @@
 }
 
 .career-page .s1 {
-  width: 350px;
-  height: 350px;
+  width: 350px; height: 350px;
   background: radial-gradient(#7C3AED, transparent 70%);
-  top: -100px;
-  right: -50px;
+  top: -100px; right: -50px;
 }
 
 .career-page .s2 {
-  width: 250px;
-  height: 250px;
+  width: 250px; height: 250px;
   background: radial-gradient(#F59E0B, transparent 70%);
-  bottom: -80px;
-  left: 200px;
+  bottom: -80px; left: 200px;
   opacity: .2;
 }
 
 .career-page .s3 {
-  width: 200px;
-  height: 200px;
+  width: 200px; height: 200px;
   background: radial-gradient(#EC4899, transparent 70%);
-  top: 50px;
-  left: -50px;
+  top: 50px; left: -50px;
   opacity: .25;
 }
 
-.career-page .ai-content {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-}
+.career-page .ai-content { position: relative; z-index: 1; flex: 1; }
 
 .career-page .ai-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, .12);
-  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
   color: var(--amber-400);
   font-size: .75rem;
   font-weight: 700;
@@ -734,7 +603,6 @@
 }
 
 .career-page .ai-content h2 {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
   color: var(--white);
@@ -745,7 +613,7 @@
 
 .career-page .ai-content p {
   font-size: .95rem;
-  color: rgba(255, 255, 255, .7);
+  color: rgba(255,255,255,.7);
   max-width: 440px;
   line-height: 1.7;
   margin-bottom: 28px;
@@ -765,19 +633,15 @@
   border-radius: 40px;
   cursor: pointer;
   transition: all var(--transition);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, .4);
+  box-shadow: 0 6px 20px rgba(245,158,11,.4);
 }
 
 .career-page .btn-ai:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(245, 158, 11, .5);
+  box-shadow: 0 10px 28px rgba(245,158,11,.5);
 }
 
-.career-page .ai-visual {
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-}
+.career-page .ai-visual { position: relative; z-index: 1; flex-shrink: 0; }
 
 .career-page .ai-cards-float {
   display: flex;
@@ -789,35 +653,21 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(255, 255, 255, .1);
+  background: rgba(255,255,255,.1);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255,255,255,.18);
   border-radius: 14px;
   padding: 14px 20px;
   color: var(--white);
   font-size: .875rem;
   font-weight: 500;
-  animation: float 3s ease-in-out infinite;
   min-width: 240px;
 }
 
-.career-page .ai-float-card.delay1 {
-  animation-delay: .8s;
-}
+.career-page .ai-float-card svg { color: var(--amber-400); flex-shrink: 0; }
 
-.career-page .ai-float-card.delay2 {
-  animation-delay: 1.6s;
-}
-
-.career-page .ai-float-card svg {
-  color: var(--amber-400);
-  flex-shrink: 0;
-}
-
-/* Latest Articles */
-.career-page .latest {
-  background: var(--white);
-}
+/* ── Latest Articles ── */
+.career-page .latest { background: var(--white); }
 
 .career-page .articles-grid {
   display: grid;
@@ -830,14 +680,14 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--gray-200);
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 
 .career-page .article-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: transparent;
 }
@@ -849,21 +699,17 @@
 }
 
 .career-page .article-img img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform .5s ease;
+  transition: transform .4s ease;
 }
 
-.career-page .article-card:hover .article-img img {
-  transform: scale(1.06);
-}
+.career-page .article-card:hover .article-img img { transform: scale(1.04); }
 
 .career-page .article-cat {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(124, 58, 237, .9);
+  bottom: 12px; left: 12px;
+  background: rgba(124,58,237,.9);
   color: var(--white);
   font-size: .72rem;
   font-weight: 700;
@@ -882,7 +728,6 @@
 }
 
 .career-page .article-body h3 {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--gray-900);
@@ -913,8 +758,7 @@
 }
 
 .career-page .article-author img {
-  width: 28px;
-  height: 28px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -964,18 +808,15 @@
   background: var(--violet-600);
   color: var(--white);
   border-color: var(--violet-600);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-violet);
 }
 
-/* Tools */
-.career-page .tools {
-  background: var(--gray-50);
-}
+/* ── Tools ── */
+.career-page .tools { background: var(--gray-50); }
 
 .career-page .tools-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -984,42 +825,41 @@
   border-radius: var(--radius-lg);
   padding: 32px 28px;
   border: 1px solid var(--gray-200);
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 .career-page .tool-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: transparent;
 }
 
+/* CV Checker: full width */
 .career-page .tool-card.primary-tool {
   background: linear-gradient(135deg, #1A0533, #3B0764, #5B21B6);
   border: none;
   color: var(--white);
   flex-direction: row;
   align-items: center;
-  gap: 24px;
-  grid-column: span 2;
+  gap: 40px;
+  grid-column: 1 / -1;
+  padding: 40px 48px;
 }
 
 .career-page .tool-score-ring {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
 }
 
-.career-page .tool-score-ring svg {
-  width: 100%;
-  height: 100%;
-}
+.career-page .tool-score-ring svg { width: 100%; height: 100%; }
 
 .career-page .score-arc {
-  transition: stroke-dashoffset 1.5s cubic-bezier(.4, 0, .2, 1);
+  transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
 }
 
 .career-page .score-text {
@@ -1033,50 +873,50 @@
 }
 
 .career-page .score-text strong {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--white);
 }
 
 .career-page .score-text span {
-  font-size: .7rem;
-  color: rgba(255, 255, 255, .6);
+  font-size: .75rem;
+  color: rgba(255,255,255,.6);
 }
 
+.career-page .tool-info { flex: 1; }
+
 .career-page .tool-info h3 {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .career-page .tool-checklist {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
+  flex-direction: row;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .career-page .tool-checklist li {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: .85rem;
-  color: rgba(255, 255, 255, .75);
+  font-size: .875rem;
+  color: rgba(255,255,255,.75);
 }
 
-.career-page .tool-checklist li.done {
-  color: rgba(255, 255, 255, .9);
-}
+.career-page .tool-checklist li.done { color: rgba(255,255,255,.95); }
 
 .career-page .btn-tool {
   background: linear-gradient(135deg, var(--amber-500), var(--amber-400));
   color: var(--gray-900);
   font-weight: 700;
-  font-size: .85rem;
+  font-size: .9rem;
   font-family: 'Be Vietnam Pro', sans-serif;
-  padding: 10px 20px;
+  padding: 11px 24px;
   border: none;
   border-radius: 40px;
   cursor: pointer;
@@ -1086,12 +926,11 @@
 
 .career-page .btn-tool:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(245, 158, 11, .35);
+  box-shadow: 0 6px 16px rgba(245,158,11,.35);
 }
 
 .career-page .tool-icon-wrap {
-  width: 60px;
-  height: 60px;
+  width: 60px; height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1114,7 +953,6 @@
 }
 
 .career-page .tool-card h3 {
-  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--gray-900);
@@ -1127,9 +965,7 @@
   flex: 1;
 }
 
-.career-page .tool-stat {
-  font-size: .875rem;
-}
+.career-page .tool-stat { font-size: .875rem; }
 
 .career-page .tool-stat strong {
   font-size: 1.1rem;
@@ -1158,10 +994,8 @@
   border-color: var(--violet-600);
 }
 
-/* Testimonials */
-.career-page .testimonials {
-  background: var(--white);
-}
+/* ── Testimonials ── */
+.career-page .testimonials { background: var(--white); }
 
 .career-page .testi-grid {
   display: grid;
@@ -1174,16 +1008,14 @@
   border-radius: var(--radius-lg);
   padding: 32px;
   border: 1px solid var(--gray-200);
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   position: relative;
 }
 
 .career-page .testi-card::before {
   content: '"';
   position: absolute;
-  top: 20px;
-  right: 28px;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  top: 20px; right: 28px;
   font-size: 5rem;
   line-height: 1;
   color: var(--violet-100);
@@ -1191,7 +1023,7 @@
 }
 
 .career-page .testi-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
   border-color: #DDD6FE;
 }
@@ -1201,11 +1033,7 @@
   border-color: #DDD6FE;
 }
 
-.career-page .testi-stars {
-  display: flex;
-  gap: 3px;
-  margin-bottom: 16px;
-}
+.career-page .testi-stars { display: flex; gap: 3px; margin-bottom: 16px; }
 
 .career-page .testi-card p {
   font-size: .925rem;
@@ -1222,8 +1050,7 @@
 }
 
 .career-page .testi-author img {
-  width: 44px;
-  height: 44px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #DDD6FE;
@@ -1241,122 +1068,11 @@
   color: var(--gray-500);
 }
 
-/* CTA Section */
-.career-page .cta-section {
-  background: var(--gray-50);
-}
-
-.career-page .cta-card {
-  background: linear-gradient(135deg, #1A0533, #3B0764, #5B21B6);
-  border-radius: var(--radius-xl);
-  padding: 56px 64px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-}
-
-.career-page .cta-card::before {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(#7C3AED, transparent 70%);
-  top: -200px;
-  right: -100px;
-  opacity: .4;
-  filter: blur(60px);
-}
-
-.career-page .cta-text {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 32px;
-}
-
-.career-page .cta-text h2 {
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -.02em;
-  margin-bottom: 12px;
-}
-
-.career-page .cta-text p {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, .7);
-  max-width: 500px;
-  margin-inline: auto;
-}
-
-.career-page .cta-form {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 520px;
-  margin-inline: auto;
-  background: rgba(255, 255, 255, .1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 14px;
-  padding: 6px 6px 6px 20px;
-  margin-bottom: 14px;
-}
-
-.career-page .cta-form input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: .95rem;
-  color: var(--white);
-  font-family: 'Be Vietnam Pro', sans-serif;
-}
-
-.career-page .cta-form input::placeholder {
-  color: rgba(255, 255, 255, .45);
-}
-
-.career-page .btn-cta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--amber-500), var(--amber-400));
-  color: var(--gray-900);
-  font-weight: 700;
-  font-size: .875rem;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  padding: 11px 22px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all var(--transition);
-  white-space: nowrap;
-}
-
-.career-page .btn-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(245, 158, 11, .5);
-}
-
-.career-page .cta-note {
-  position: relative;
-  z-index: 1;
-  font-size: .78rem;
-  color: rgba(255, 255, 255, .5);
-}
-
-/* Back to top (tùy chọn, không bắt buộc) */
-.career-page .back-top {
+/* ── Back to top ── */
+.back-top {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
-  width: 44px;
-  height: 44px;
+  bottom: 28px; right: 28px;
+  width: 44px; height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1365,59 +1081,37 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, .4);
+  box-shadow: 0 4px 16px rgba(124,58,237,.4);
   opacity: 0;
   transform: translateY(16px);
-  transition: all var(--transition);
+  transition: opacity var(--transition), transform var(--transition), background var(--transition);
   z-index: 999;
 }
 
-.career-page .back-top.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+.back-top.show { opacity: 1; transform: translateY(0); }
+.back-top:hover { background: var(--violet-700); transform: translateY(-2px); }
 
-.career-page .back-top:hover {
-  background: var(--violet-700);
-  transform: translateY(-3px);
-}
-
-/* Animations */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
+/* ── Animations (chỉ giữ những cái cần thiết) ── */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: .6;
-    transform: scale(.85);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .6; transform: scale(.85); }
 }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.career-page .hero-badge { animation: fadeUp .5s ease both; }
+.career-page .hero-title { animation: fadeUp .5s .08s ease both; }
+.career-page .hero-sub { animation: fadeUp .5s .16s ease both; }
+.career-page .hero-search { animation: fadeUp .5s .24s ease both; }
+.career-page .hero-tabs { animation: fadeUp .5s .32s ease both; }
 
 .career-page .fade-in {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity .7s ease, transform .7s ease;
+  transform: translateY(20px);
+  transition: opacity .5s ease, transform .5s ease;
 }
 
 .career-page .fade-in.visible {
@@ -1425,33 +1119,19 @@
   transform: translateY(0);
 }
 
-/* Responsive */
+/* ── Responsive ── */
 @media (max-width: 1024px) {
-  .career-page .topics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .career-page .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .career-page .tool-card.primary-tool {
-    grid-column: span 2;
-  }
-  .career-page .featured-layout {
-    grid-template-columns: 1fr;
-  }
-  .career-page .feat-side {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+  .career-page .topics-grid { grid-template-columns: repeat(2, 1fr); }
+  .career-page .tools-grid { grid-template-columns: repeat(3, 1fr); }
+  .career-page .tool-card.primary-tool { grid-column: 1 / -1; }
+  .career-page .featured-layout { grid-template-columns: 1fr; }
+  .career-page .feat-side { flex-direction: row; flex-wrap: wrap; }
   .career-page .feat-card {
     flex: 1 1 calc(33% - 12px);
     min-width: 200px;
     flex-direction: column;
   }
-  .career-page .feat-card-img {
-    width: 100%;
-    height: 140px;
-  }
+  .career-page .feat-card-img { width: 100%; height: 140px; }
   .career-page .testi-grid {
     grid-template-columns: 1fr;
     max-width: 600px;
@@ -1465,48 +1145,22 @@
 }
 
 @media (max-width: 768px) {
-  .career-page .section {
-    padding-block: 60px;
-  }
-  .career-page .topics-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .career-page .articles-grid {
-    grid-template-columns: 1fr;
-  }
-  .career-page .tools-grid {
-    grid-template-columns: 1fr;
-  }
+  .career-page .section { padding-block: 60px; }
+  .career-page .topics-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .career-page .articles-grid { grid-template-columns: 1fr; }
+  .career-page .tools-grid { grid-template-columns: 1fr; }
   .career-page .tool-card.primary-tool {
-    grid-column: span 1;
     flex-direction: column;
     align-items: flex-start;
+    padding: 28px;
   }
-  .career-page .hero-search {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .career-page .search-filter {
-    display: none;
-  }
-  .career-page .cta-card {
-    padding: 40px 28px;
-  }
-  .career-page .cta-form {
-    flex-direction: column;
-    padding: 12px 16px;
-  }
+  .career-page .tool-checklist { flex-direction: column; }
+  .career-page .hero-search { flex-direction: column; align-items: stretch; }
+  .career-page .search-filter { display: none; }
 }
 
 @media (max-width: 480px) {
-  .career-page .topics-grid {
-    grid-template-columns: 1fr;
-  }
-  .career-page .hero-title {
-    font-size: 2.4rem;
-  }
-  .career-page .ai-float-card {
-    min-width: 0;
-  }
+  .career-page .topics-grid { grid-template-columns: 1fr; }
+  .career-page .hero-title { font-size: 2.4rem; }
+  .career-page .ai-float-card { min-width: 0; }
 }

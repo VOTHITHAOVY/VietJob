@@ -1,0 +1,455 @@
+:root {
+  --purple:        #7C3AED;
+  --purple-dark:   #5B21B6;
+  --purple-deeper: #4C1D95;
+  --purple-light:  #EDE9FE;
+  --purple-mid:    #A78BFA;
+  --purple-100:    #F5F3FF;
+  --green:         #16A34A;
+  --green-light:   #DCFCE7;
+  --amber:         #F59E0B;
+  --red:           #EF4444;
+  --gray-900:      #111827;
+  --gray-800:      #1F2937;
+  --gray-700:      #374151;
+  --gray-600:      #4B5563;
+  --gray-500:      #6B7280;
+  --gray-400:      #9CA3AF;
+  --gray-300:      #D1D5DB;
+  --gray-100:      #F3F4F6;
+  --bg:            #F4F5F7;
+  --white:         #ffffff;
+  --shadow-card:   0 2px 12px rgba(0,0,0,.06);
+  --shadow-hover:  0 8px 28px rgba(124,58,237,.13);
+  --radius-card:   14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--bg);
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+.mat-icon {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block; line-height: 1;
+  font-style: normal; vertical-align: middle;
+}
+a { text-decoration: none; }
+
+/* ── BREADCRUMB ── */
+.breadcrumb-bar {
+  background: var(--white);
+  border-bottom: 1px solid #eef2f6;
+}
+.breadcrumb-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 10px 28px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; flex-wrap: wrap;
+}
+.breadcrumb-inner a { color: #16A34A; font-weight: 500; }
+.breadcrumb-inner a:hover { text-decoration: underline; }
+.breadcrumb-inner .bc-sep { color: var(--gray-300); }
+.breadcrumb-inner .bc-cur { color: var(--gray-700); font-weight: 500; }
+
+/* ── HERO BANNER ── */
+.company-hero {
+  background: var(--white);
+  border-bottom: 1px solid #eef2f6;
+}
+.hero-banner {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, var(--purple-deeper) 0%, var(--purple) 60%, var(--purple-mid) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-content {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+}
+.hero-logo-wrap {
+  display: flex; align-items: flex-end; gap: 20px;
+  padding-bottom: 18px;
+  margin-top: -48px;
+}
+.hero-logo {
+  width: 96px; height: 96px;
+  background: var(--white);
+  border: 3px solid var(--white);
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-logo img, .hero-logo svg { width: 100%; height: 100%; object-fit: contain; }
+.hero-title-block { flex: 1; padding-bottom: 4px; }
+.hero-company-name {
+  font-size: 22px; font-weight: 900;
+  color: var(--gray-900); margin-bottom: 4px;
+}
+.hero-company-tagline { font-size: 13px; color: var(--gray-500); }
+.hero-actions { display: flex; gap: 10px; align-items: center; padding-bottom: 4px; }
+.btn-follow {
+  height: 38px; padding: 0 20px;
+  border: 1.5px solid var(--purple);
+  background: var(--white); color: var(--purple);
+  border-radius: 8px; font-size: 13px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif; transition: all .15s;
+}
+.btn-follow:hover, .btn-follow.active { background: var(--purple); color: var(--white); }
+.btn-apply-hero {
+  height: 38px; padding: 0 20px;
+  background: var(--purple); color: var(--white);
+  border: none; border-radius: 8px;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; gap: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  box-shadow: 0 4px 12px rgba(124,58,237,.3);
+  transition: background .15s;
+}
+.btn-apply-hero:hover { background: var(--purple-dark); }
+
+/* ── STAT CHIPS ── */
+.hero-stats {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  padding: 14px 0 18px;
+  border-top: 1px solid #f3f4f6;
+}
+.stat-chip {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 13px; color: var(--gray-600);
+}
+.stat-chip .mat-icon { font-size: 17px; color: var(--purple); }
+.stat-chip strong { color: var(--gray-900); }
+
+/* ── TAB NAV ── */
+.company-tabs {
+  background: var(--white);
+  border-bottom: 1px solid #e5e7eb;
+}
+.tabs-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 28px;
+  display: flex; gap: 0;
+}
+.tab-btn {
+  padding: 13px 22px;
+  font-size: 13px; font-weight: 600;
+  color: var(--gray-500);
+  background: none; border: none;
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  transition: all .15s;
+}
+.tab-btn:hover { color: var(--purple); }
+.tab-btn.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+/* ── PAGE LAYOUT ── */
+.company-page {
+  max-width: 1280px; margin: 28px auto 80px;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 22px;
+  align-items: start;
+}
+
+/* ── TAB PANELS ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── CARD BASE ── */
+.card {
+  background: var(--white);
+  border: 1px solid #eef2f6;
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  margin-bottom: 16px;
+}
+.card:last-child { margin-bottom: 0; }
+
+/* Card heading */
+.card-heading {
+  font-size: 15px; font-weight: 800;
+  color: var(--gray-900);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--purple-light);
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-heading::before {
+  content: '';
+  display: inline-block;
+  width: 4px; height: 18px;
+  background: var(--purple);
+  border-radius: 2px; flex-shrink: 0;
+}
+
+/* ── OVERVIEW TAB ── */
+.about-text {
+  font-size: 14px; color: var(--gray-700);
+  line-height: 1.8; margin-bottom: 0;
+}
+.about-text p { margin-bottom: 12px; }
+.about-text p:last-child { margin-bottom: 0; }
+
+/* Section divider inside card */
+.card-divider { height: 1px; background: #f3f4f6; margin: 22px 0; }
+
+/* Benefit rows */
+.benefit-list { display: flex; flex-direction: column; gap: 9px; }
+.benefit-row {
+  padding: 10px 14px;
+  background: var(--gray-100);
+  border-radius: 8px;
+  font-size: 14px; color: var(--gray-700); line-height: 1.6;
+}
+.benefit-row strong { color: var(--gray-900); }
+
+/* Culture tags */
+.culture-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.culture-tag {
+  font-size: 12px; font-weight: 600;
+  padding: 5px 14px; border-radius: 999px;
+  background: var(--purple-100); color: var(--purple);
+  border: 1px solid #ddd6fe;
+}
+.culture-tag.green { background: var(--green-light); color: var(--green); border-color: #bbf7d0; }
+.culture-tag.amber { background: #fffbeb; color: var(--amber); border-color: #fde68a; }
+
+/* Photo grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-top: 4px;
+}
+.photo-grid img {
+  width: 100%; height: 110px;
+  object-fit: cover; border-radius: 8px;
+  border: 1px solid #eef2f6;
+}
+
+/* ── JOBS TAB ── */
+.jobs-filter-bar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.filter-chip {
+  padding: 6px 14px;
+  border: 1.5px solid #e5e7eb;
+  background: var(--white);
+  border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  color: var(--gray-600);
+  cursor: pointer; transition: all .15s;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+.filter-chip:hover, .filter-chip.active {
+  border-color: var(--purple);
+  color: var(--purple);
+  background: var(--purple-100);
+}
+.jobs-count { margin-left: auto; font-size: 13px; color: var(--gray-500); }
+.jobs-count strong { color: var(--purple); }
+
+/* Job card in company page */
+.job-card-c {
+  background: var(--white);
+  border: 1.5px solid #eef2f6;
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all .18s;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+}
+.job-card-c:hover {
+  border-color: var(--purple-mid);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+.job-card-c:last-child { margin-bottom: 0; }
+.jc-left { flex: 1; min-width: 0; }
+.jc-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--gray-900); margin-bottom: 6px;
+  transition: color .15s;
+}
+.job-card-c:hover .jc-title { color: var(--purple); }
+.jc-meta {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  font-size: 12px; color: var(--gray-500);
+}
+.jc-meta span { display: flex; align-items: center; gap: 4px; }
+.jc-meta .mat-icon { font-size: 14px; color: var(--purple); }
+.jc-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+.jc-salary { font-size: 13px; font-weight: 700; color: var(--red); }
+.jc-badge {
+  font-size: 10px; font-weight: 800;
+  padding: 2px 8px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: .4px;
+}
+.badge-hot { background: #fef2f2; color: var(--red); border: 1px solid #fecaca; }
+.badge-new { background: #fffbeb; color: var(--amber); border: 1px solid #fde68a; }
+.badge-top { background: var(--green-light); color: var(--green); border: 1px solid #bbf7d0; }
+.badge-ai  { background: var(--purple-100); color: var(--purple); border: 1px solid #ddd6fe; }
+
+/* ── REVIEWS TAB ── */
+.rating-overview {
+  display: flex; gap: 32px; align-items: center;
+  padding-bottom: 20px; margin-bottom: 20px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.rating-big {
+  text-align: center; flex-shrink: 0;
+}
+.rating-big .score {
+  font-size: 56px; font-weight: 900; color: var(--amber);
+  line-height: 1;
+}
+.rating-big .out-of { font-size: 13px; color: var(--gray-400); }
+.rating-stars { display: flex; gap: 3px; justify-content: center; margin: 4px 0; }
+.star { color: var(--amber); font-size: 18px; }
+.rating-bars { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+.rbar-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--gray-600); }
+.rbar-label { width: 60px; text-align: right; flex-shrink: 0; }
+.rbar-track {
+  flex: 1; height: 7px; background: #f3f4f6;
+  border-radius: 999px; overflow: hidden;
+}
+.rbar-fill {
+  height: 100%; background: var(--amber);
+  border-radius: 999px; transition: width .6s ease;
+}
+.rbar-val { width: 28px; font-weight: 700; color: var(--gray-700); flex-shrink: 0; }
+
+/* Review cards */
+.review-card {
+  border: 1px solid #eef2f6; border-radius: 10px;
+  padding: 18px 20px; margin-bottom: 12px;
+  background: var(--white);
+}
+.review-card:last-child { margin-bottom: 0; }
+.review-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 12px;
+  margin-bottom: 10px;
+}
+.reviewer-info { display: flex; gap: 10px; align-items: center; }
+.reviewer-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: var(--white); flex-shrink: 0;
+}
+.reviewer-name { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+.reviewer-role { font-size: 12px; color: var(--gray-500); }
+.review-stars { display: flex; gap: 2px; }
+.review-stars .star { font-size: 14px; }
+.review-text { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
+.review-pros-cons {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-top: 12px;
+}
+.pros-box, .cons-box {
+  padding: 10px 12px; border-radius: 8px;
+  font-size: 12px; line-height: 1.6;
+}
+.pros-box { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.pros-box strong { color: var(--green); font-size: 11px; text-transform: uppercase; letter-spacing: .4px; display: block; margin-bottom: 4px; }
+.cons-box { background: #fef2f2; border: 1px solid #fecaca; }
+.cons-box strong { color: var(--red); font-size: 11px; text-transform: uppercase; letter-spacing: .4px; display: block; margin-bottom: 4px; }
+.review-date { font-size: 11px; color: var(--gray-400); margin-top: 8px; }
+
+/* ── RIGHT SIDEBAR ── */
+.sidebar { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 84px; }
+
+.s-card {
+  background: var(--white);
+  border: 1px solid #eef2f6;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.s-card-body { padding: 18px 20px; }
+.s-title { font-size: 13px; font-weight: 800; color: var(--gray-900); margin-bottom: 14px; }
+
+.info-rows { display: flex; flex-direction: column; gap: 10px; }
+.info-row { display: flex; align-items: flex-start; gap: 10px; }
+.ir-icon {
+  width: 30px; height: 30px;
+  background: var(--purple-100); border-radius: 7px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ir-icon .mat-icon { color: var(--purple); font-size: 15px; }
+.ir-label { font-size: 11px; color: var(--gray-400); }
+.ir-value { font-size: 13px; font-weight: 600; color: var(--gray-800); }
+
+/* CTA card */
+.cta-s-card {
+  background: linear-gradient(135deg, var(--purple-deeper), var(--purple));
+  border-radius: var(--radius-card);
+  padding: 20px;
+  color: var(--white);
+}
+.cta-s-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.cta-s-card p { font-size: 12px; opacity: .85; line-height: 1.6; margin-bottom: 14px; }
+.cta-s-btn {
+  width: 100%; height: 36px;
+  background: var(--white); color: var(--purple);
+  border: none; border-radius: 8px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* Related companies */
+.related-company {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid #f3f4f6;
+  cursor: pointer; transition: background .15s;
+}
+.related-company:last-child { border-bottom: none; padding-bottom: 0; }
+.rc-logo {
+  width: 38px; height: 38px;
+  background: var(--purple-100); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 16px; font-weight: 800; color: var(--purple);
+}
+.rc-name { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+.rc-jobs { font-size: 11px; color: var(--gray-500); }
+.rc-arrow { margin-left: auto; color: var(--gray-300); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fadeUp .4s ease both; }
+.fu-1 { animation-delay: .07s; }
+.fu-2 { animation-delay: .13s; }
+.fu-3 { animation-delay: .19s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .company-page { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .photo-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  .hero-logo-wrap { flex-wrap: wrap; }
+  .hero-stats { gap: 14px; }
+  .review-pros-cons { grid-template-columns: 1fr; }
+  .company-page { padding: 0 16px; }
+}

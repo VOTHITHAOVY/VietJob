@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 Kỹ năng phỏng vấn then chốt | JobsGO Cẩm Nang</title>
+  <meta name="description" content="Khám phá 10 kỹ năng phỏng vấn then chốt giúp bạn chinh phục nhà tuyển dụng khó tính nhất." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="ArticleDetail.css" />
+  <!-- Preload Material Symbols để tránh "expand_more" text flash -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" /></noscript>
+  <style>
+    /* Ẩn Material Icons cho đến khi font load xong — tránh flash "expand_more" text */
+    .material-symbols-outlined,
+    .material-icons {
+      visibility: hidden;
+      font-size: inherit;
+    }
+  </style>
+  <style>
+    /* ── Breadcrumb: nằm sát ngay dưới header, không bị header che ── */
+    .ad-breadcrumb-wrapper {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-page, #f8f9fa);
+      border-bottom: 1px solid var(--border, #e5e7eb);
+    }
+    .ad-breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .ad-breadcrumb a {
+      color: var(--primary, #6366f1);
+      text-decoration: none;
+    }
+    .ad-breadcrumb a:hover { text-decoration: underline; }
+    .ad-breadcrumb span { color: var(--text-muted, #6b7280); }
+    .ad-breadcrumb i { font-size: 0.8rem; color: var(--text-muted, #9ca3af); }
+
+    /* ── Ảnh trong bài viết: layout chuẩn ── */
+    .ad-article figure {
+      margin: 1.5rem 0;
+    }
+    .ad-article figure img {
+      display: block;
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* ── Placeholder khi ảnh lỗi (inject bởi JS) ── */
+    .img-broken-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 160px;
+      background: #f3f4f6;
+      border: 1.5px dashed #d1d5db;
+      border-radius: 8px;
+      color: #9ca3af;
+      font-size: 0.82rem;
+      text-align: center;
+      padding: 20px 16px;
+      box-sizing: border-box;
+    }
+    .img-broken-placeholder svg {
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header & Footer được load bởi loader.js -->
+<div id="header-placeholder"></div>
+
+<!-- ── Reading Progress ── -->
+<div class="progress-bar-wrap">
+  <div class="progress-bar" id="reading-progress"></div>
+</div>
+
+<!-- ── Breadcrumb — nằm ngay dưới header, ngoài main ── -->
+<div class="ad-breadcrumb-wrapper">
+  <nav class="ad-breadcrumb" aria-label="Breadcrumb">
+    <a href="/index.html">Trang chủ</a>
+    <i class="ti ti-chevron-right" aria-hidden="true"></i>
+    <a href="../CamNangNgheNghiep/Career-guide.html">Cẩm nang</a>
+    <i class="ti ti-chevron-right" aria-hidden="true"></i>
+    <span>Kỹ năng phỏng vấn</span>
+  </nav>
+</div>
+
+<!-- ── Main ── -->
+<main class="ad-container">
+
+  <div class="ad-layout">
+
+    <!-- ── Cột trái: Bài viết ── -->
+    <div class="ad-main">
+
+      <!-- Article Header -->
+      <header class="ad-header fade-up">
+        <h1 class="ad-title">
+          10 Kỹ năng phỏng vấn then chốt giúp bạn chinh phục nhà tuyển dụng khó tính nhất
+        </h1>
+        <div class="ad-meta-bar">
+          <div class="ad-author-info">
+            <img src="https://i.pravatar.cc/88?img=47" alt="Minh Thư" class="ad-author-avatar" />
+            <div>
+              <p class="ad-author-name">Minh Thư</p>
+              <p class="ad-author-sub">15/10/2024 &nbsp;·&nbsp; 8 phút đọc</p>
+            </div>
+          </div>
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-tag">
+            <i class="ti ti-tag" aria-hidden="true"></i> Kỹ năng
+          </a>
+        </div>
+      </header>
+
+      <!-- Content row: floating share + article -->
+      <div class="ad-content-row">
+
+        <!-- Floating Share -->
+        <div class="ad-floating-share">
+          <button class="ad-share-btn" data-share="facebook" title="Chia sẻ Facebook" aria-label="Chia sẻ Facebook">
+            <i class="ti ti-brand-facebook" aria-hidden="true"></i>
+          </button>
+          <button class="ad-share-btn" data-share="linkedin" title="Chia sẻ LinkedIn" aria-label="Chia sẻ LinkedIn">
+            <i class="ti ti-brand-linkedin" aria-hidden="true"></i>
+          </button>
+          <button class="ad-share-btn" data-share="twitter" title="Chia sẻ Twitter" aria-label="Chia sẻ Twitter">
+            <i class="ti ti-brand-twitter" aria-hidden="true"></i>
+          </button>
+          <button class="ad-share-btn" data-share="copy" title="Sao chép link" aria-label="Sao chép link">
+            <i class="ti ti-link" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- Article Body -->
+        <article class="ad-article">
+
+          <!-- TOC -->
+          <div class="ad-toc fade-up">
+            <h4><i class="ti ti-list" aria-hidden="true"></i> Mục lục bài viết</h4>
+            <ul class="ad-toc-list">
+              <li><a href="#s1">1. Nghiên cứu kỹ về doanh nghiệp</a></li>
+              <li><a href="#s2">2. Kỹ năng lắng nghe chủ động</a></li>
+              <li><a href="#s3">3. Cách đặt câu hỏi thông minh</a></li>
+              <li><a href="#s4">4. Xử lý tình huống khó</a></li>
+              <li><a href="#s5">5. Ngôn ngữ cơ thể & giao tiếp phi ngôn từ</a></li>
+              <li><a href="#s6">6. Phương pháp STAR kể chuyện</a></li>
+            </ul>
+          </div>
+
+          <p>Phỏng vấn không chỉ là buổi hỏi đáp đơn thuần — đó là cơ hội để bạn "tiếp thị" bản thân một cách chuyên nghiệp. Để vượt qua những nhà tuyển dụng khắt khe nhất, bạn cần trang bị một bộ kỹ năng toàn diện vượt xa việc chỉ thuộc lòng CV của mình.</p>
+
+          <h2 id="s1">1. Nghiên cứu kỹ về doanh nghiệp</h2>
+          <p>Đừng bao giờ bước vào phòng phỏng vấn mà không biết gì về văn hóa hay sản phẩm của công ty. Việc nắm rõ các dự án gần đây của họ cho thấy bạn thực sự quan tâm và có sự chuẩn bị chu đáo — hai điều nhà tuyển dụng nhận ra ngay lập tức.</p>
+
+          <figure class="fade-up">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
+                 alt="Ứng viên ngồi tự tin trong buổi phỏng vấn với nhà tuyển dụng"
+                 loading="lazy" />
+            <figcaption>Sự tự tin đến từ việc chuẩn bị kỹ lưỡng trước mỗi buổi phỏng vấn.</figcaption>
+          </figure>
+
+          <p>Hãy dành ít nhất 2–3 tiếng để nghiên cứu trước ngày phỏng vấn. Đọc các thông cáo báo chí mới nhất, bài đăng trên LinkedIn của công ty, và nếu họ là doanh nghiệp niêm yết, hãy xem báo cáo thường niên của họ.</p>
+
+          <h2 id="s2">2. Kỹ năng lắng nghe chủ động</h2>
+          <p>Nhiều ứng viên quá tập trung vào việc mình sẽ nói gì tiếp theo mà quên mất việc lắng nghe câu hỏi. Hãy duy trì giao tiếp bằng mắt và gật đầu nhẹ để thể hiện bạn đang tiếp nhận thông tin.</p>
+
+          <blockquote>
+            "Lắng nghe không chỉ là im lặng, mà là cách bạn phản hồi dựa trên những gì nhà tuyển dụng vừa chia sẻ."
+          </blockquote>
+
+          <div class="ad-tip-box fade-up">
+            <p class="ad-tip-title"><i class="ti ti-bulb" aria-hidden="true"></i> Lời khuyên từ chuyên gia</p>
+            <ul>
+              <li>Sử dụng phương pháp STAR để trả lời các câu hỏi tình huống.</li>
+              <li>Luôn chuẩn bị ít nhất 3 câu hỏi cho nhà tuyển dụng.</li>
+              <li>Chú ý đến ngôn ngữ cơ thể: tư thế ngồi thẳng và mỉm cười tự nhiên.</li>
+              <li>Nếu chưa hiểu câu hỏi, hoàn toàn có thể xin hỏi lại.</li>
+            </ul>
+          </div>
+
+          <h2 id="s3">3. Cách đặt câu hỏi thông minh</h2>
+          <p>Khi nhà tuyển dụng hỏi "Bạn có câu hỏi nào không?", đừng bao giờ nói "Không". Hãy hỏi về lộ trình thăng tiến hoặc kỳ vọng của họ đối với vị trí này trong 6 tháng tới.</p>
+          <p>Những ứng viên xuất sắc coi đây là cuộc phỏng vấn hai chiều. Câu hỏi như <em>"Lộ trình sự nghiệp điển hình cho vị trí này là gì?"</em> hay <em>"Thách thức lớn nhất nhóm đang đối mặt hiện tại là gì?"</em> thể hiện sự trưởng thành và thực sự muốn gắn bó.</p>
+
+          <h2 id="s4">4. Xử lý tình huống khó</h2>
+          <p>Những câu hỏi khó như "Điểm yếu lớn nhất của bạn là gì?" hay "Kể về một lần bạn thất bại" được thiết kế để kiểm tra sự tự nhận thức và khả năng phục hồi của bạn. Đừng hoảng loạn — hãy thành thật, chỉ ra điều bạn đã học được và giải thích bạn đã trưởng thành như thế nào.</p>
+
+          <figure class="fade-up">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80"
+                 alt="Người phỏng vấn ngồi bình tĩnh, tự tin trước câu hỏi khó"
+                 loading="lazy" />
+            <figcaption>Bình tĩnh trước áp lực là một trong những kỹ năng phỏng vấn được đánh giá cao nhất.</figcaption>
+          </figure>
+
+          <h2 id="s5">5. Ngôn ngữ cơ thể & giao tiếp phi ngôn từ</h2>
+          <p>Nghiên cứu chỉ ra rằng phần lớn giao tiếp là phi ngôn từ. Bước vào với cái bắt tay chắc chắn, duy trì giao tiếp mắt thoải mái và tránh khoanh tay — điều này thể hiện sự phòng thủ. Nghiêng người nhẹ về phía trước truyền đạt sự nhiệt tình và gắn kết.</p>
+
+          <div class="ad-tip-box ad-tip-warn fade-up">
+            <p class="ad-tip-title"><i class="ti ti-alert-circle" aria-hidden="true"></i> Lỗi ngôn ngữ cơ thể thường gặp</p>
+            <ul>
+              <li>Nhìn vào điện thoại hoặc đồng hồ trong lúc phỏng vấn.</li>
+              <li>Ngồi khom lưng hoặc dựa lưng quá thoải mái.</li>
+              <li>Nghịch bút, trang sức hoặc tóc.</li>
+              <li>Tránh giao tiếp mắt — có thể bị hiểu là thiếu tự tin hoặc thiếu trung thực.</li>
+            </ul>
+          </div>
+
+          <h2 id="s6">6. Phương pháp STAR kể chuyện</h2>
+          <p>Câu hỏi phỏng vấn hành vi — "Kể cho tôi nghe về một lần bạn..." — được trả lời hiệu quả nhất bằng khung STAR. Mô tả <strong>S</strong>ituation (Tình huống), giải thích <strong>T</strong>ask (Nhiệm vụ), trình bày <strong>A</strong>ction (Hành động) bạn đã thực hiện, và kết thúc bằng <strong>R</strong>esult (Kết quả) đạt được. Hãy súc tích: mỗi câu chuyện khoảng 90–120 giây.</p>
+          <p>Luyện tập 4–5 câu chuyện STAR mạnh trước buổi phỏng vấn và có thể điều chỉnh cho nhiều câu hỏi khác nhau. Bao gồm ít nhất một câu chuyện về thách thức bạn đã vượt qua, một về thành tích nhóm, và một về sáng kiến bạn tự thực hiện.</p>
+
+        </article>
+      </div><!-- /ad-content-row -->
+
+      <!-- Article Footer -->
+      <div class="ad-footer-zone fade-up">
+
+        <!-- Vote & Share -->
+        <div class="ad-vote-row">
+          <div class="ad-vote-group">
+            <span class="ad-vote-label">Bài viết này có hữu ích không?</span>
+            <div class="ad-vote-btns">
+              <button class="ad-vote-btn" data-vote="up">
+                <i class="ti ti-thumb-up" aria-hidden="true"></i>
+                <span class="ad-vote-count">124</span>
+              </button>
+              <button class="ad-vote-btn" data-vote="down">
+                <i class="ti ti-thumb-down" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="ad-social-share">
+            <button class="ad-social-btn ad-fb" data-share="facebook" aria-label="Chia sẻ Facebook">
+              <i class="ti ti-brand-facebook" aria-hidden="true"></i>
+            </button>
+            <button class="ad-social-btn ad-li" data-share="linkedin" aria-label="Chia sẻ LinkedIn">
+              <i class="ti ti-brand-linkedin" aria-hidden="true"></i>
+            </button>
+            <button class="ad-social-btn ad-tw" data-share="twitter" aria-label="Chia sẻ Twitter">
+              <i class="ti ti-brand-twitter" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Prev / Next -->
+        <div class="ad-nav-cards">
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-nav-card">
+            <span><i class="ti ti-arrow-left" aria-hidden="true"></i> Bài trước</span>
+            <p>Cách viết CV gây ấn tượng mạnh</p>
+          </a>
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-nav-card ad-nav-next">
+            <span>Bài kế tiếp <i class="ti ti-arrow-right" aria-hidden="true"></i></span>
+            <p>Đàm phán lương hiệu quả</p>
+          </a>
+        </div>
+
+        <!-- Comments -->
+        <section class="ad-comments">
+          <h3>Để lại ý kiến của bạn</h3>
+          <form class="ad-comment-form" id="comment-form" novalidate>
+            <div class="ad-comment-avatar">
+              <i class="ti ti-user" aria-hidden="true"></i>
+            </div>
+            <div class="ad-comment-input-wrap">
+              <textarea placeholder="Viết bình luận của bạn..." rows="3" aria-label="Bình luận"></textarea>
+              <button type="submit" class="ad-btn-submit">Gửi bình luận</button>
+            </div>
+          </form>
+          <div id="comment-list">
+            <div class="ad-comment-item">
+              <img src="https://i.pravatar.cc/36?img=12" alt="Nguyen An" class="ad-comment-avatar-img" />
+              <div>
+                <p class="ad-comment-name">Nguyễn Văn An</p>
+                <p class="ad-comment-text">Bài viết rất hữu ích! Phương pháp STAR đặc biệt giúp tôi chuẩn bị tốt cho buổi phỏng vấn vừa rồi. Đã nhận được offer!</p>
+                <p class="ad-comment-date">2 ngày trước</p>
+              </div>
+            </div>
+            <div class="ad-comment-item">
+              <img src="https://i.pravatar.cc/36?img=25" alt="Tran Huong" class="ad-comment-avatar-img" />
+              <div>
+                <p class="ad-comment-name">Trần Thị Hương</p>
+                <p class="ad-comment-text">Phần ngôn ngữ cơ thể giúp tôi nhận ra mình hay khoanh tay khi phỏng vấn mà không để ý. Cảm ơn tác giả!</p>
+                <p class="ad-comment-date">5 ngày trước</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div><!-- /ad-main -->
+
+    <!-- ── Sidebar ── -->
+    <aside class="ad-sidebar">
+
+      <!-- Author Card -->
+      <div class="ad-sidebar-card fade-up">
+        <div class="ad-author-card-top">
+          <img src="https://i.pravatar.cc/120?img=47" alt="Minh Thư" class="ad-author-card-avatar" />
+          <div>
+            <p class="ad-author-card-name">Minh Thư</p>
+            <p class="ad-author-card-role">Career Coach &amp; Editor</p>
+          </div>
+        </div>
+        <p class="ad-author-card-bio">Chuyên gia tư vấn định hướng nghề nghiệp với hơn 5 năm kinh nghiệm trong lĩnh vực nhân sự và tuyển dụng cao cấp.</p>
+        <button class="ad-btn-follow">Theo dõi</button>
+      </div>
+
+      <!-- Promo -->
+      <div class="ad-promo-card fade-up">
+        <h4>Tạo CV chuyên nghiệp</h4>
+        <p>Sở hữu mẫu CV chuẩn HR để ứng tuyển ngay hôm nay.</p>
+        <button class="ad-btn-promo">Tạo CV Ngay</button>
+        <i class="ti ti-file-text ad-promo-icon" aria-hidden="true"></i>
+      </div>
+
+      <!-- Related -->
+      <div class="fade-up">
+        <h4 class="ad-sidebar-title">Bài viết liên quan</h4>
+        <div class="ad-related-list">
+          <a href="ArticleDetail.html" class="ad-related-item">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=200&q=75" alt="Câu hỏi phỏng vấn" class="ad-related-img" loading="lazy" />
+            <div>
+              <p class="ad-related-title">7 Câu hỏi phỏng vấn hóc búa nhất năm 2024</p>
+              <span class="ad-related-date">2 ngày trước</span>
+            </div>
+          </a>
+          <a href="ArticleDetail.html" class="ad-related-item">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=75" alt="Giới thiệu bản thân" class="ad-related-img" loading="lazy" />
+            <div>
+              <p class="ad-related-title">Bí quyết giới thiệu bản thân trong 60 giây</p>
+              <span class="ad-related-date">5 ngày trước</span>
+            </div>
+          </a>
+          <a href="ArticleDetail.html" class="ad-related-item">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&q=75" alt="Sau phỏng vấn" class="ad-related-img" loading="lazy" />
+            <div>
+              <p class="ad-related-title">Làm gì sau buổi phỏng vấn để tăng cơ hội?</p>
+              <span class="ad-related-date">1 tuần trước</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="fade-up">
+        <h4 class="ad-sidebar-title">Chủ đề hot</h4>
+        <div class="ad-tags-wrap">
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-tag-link">#MẹoPhỏngVấn</a>
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-tag-link">#PhátTriểnSựNghiệp</a>
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-tag-link">#KỹNăngMềm</a>
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-tag-link">#MạngLưới</a>
+          <a href="../CamNangNgheNghiep/Career-guide.html" class="ad-tag-link">#ĐàmPhán</a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div><!-- /ad-layout -->
+</main>
+
+<div id="footer-placeholder"></div>
+
+<!-- Back to Top -->
+<button class="ad-back-top" id="back-top" aria-label="Lên đầu trang">
+  <i class="ti ti-arrow-up" aria-hidden="true"></i>
+</button>
+
+<script src="/Component/loader.js"></script>
+<script src="ArticleDetail.js"></script>
+<script>
+/* ── 1. FIX ẢNH LỖI ── */
+function handleBrokenImg(img) {
+  if (img.dataset.broken) return;
+  img.dataset.broken = '1';
+  img.style.display = 'none';
+
+  const altText = img.getAttribute('alt') || 'Hình ảnh không hiển thị được';
+  const placeholder = document.createElement('div');
+  placeholder.className = 'img-broken-placeholder';
+  placeholder.innerHTML = `
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <path d="m3 9 5 5 4-4 4 4 5-5"/>
+      <circle cx="8.5" cy="6.5" r="1.5"/>
+    </svg>
+    <span>${altText}</span>`;
+  img.parentNode.insertBefore(placeholder, img.nextSibling);
+}
+
+
+document.querySelectorAll('.ad-article img, .ad-related-img').forEach(img => {
+  img.addEventListener('error', () => handleBrokenImg(img));
+});
+
+/* ── 2. FIX MATERIAL ICONS FLASH ── */
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    document.querySelectorAll('.material-symbols-outlined, .material-icons').forEach(el => {
+      el.style.visibility = 'visible';
+    });
+  });
+}
+</script>
+</body>
+</html>

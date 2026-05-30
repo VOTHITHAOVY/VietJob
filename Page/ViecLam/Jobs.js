@@ -27,12 +27,6 @@ let currentPage = 1;
 let currentJobs = [...JOBS];
 
 // ─── QUẢN LÝ CSS ───────────────────────────────────────────────
-
-/**
- * Tìm <link> Jobs.css trong <head> để disable/enable.
- * Jobs.css có nhiều class trùng tên (.page-wrap, .sidebar...) với
- * JobDetail.css / Apply.css → phải tắt nó khi vào trang con.
- */
 function setJobsCSS(enabled) {
     document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
         if (link.href && link.href.includes('Jobs.css')) {
@@ -41,16 +35,9 @@ function setJobsCSS(enabled) {
     });
 }
 
-/**
- * Inject CSS của trang con vào <head>, convert path tương đối → tuyệt đối.
- * Nếu đã inject rồi thì chỉ re-enable (không fetch lại).
- */
 function injectPageCSS(nodes, basePath, styleId) {
     const existing = document.getElementById(styleId);
-    if (existing) {
-        existing.disabled = false;
-        return;
-    }
+    if (existing) { existing.disabled = false; return; }
     nodes.forEach(node => {
         if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
             const link = document.createElement('link');
@@ -67,7 +54,6 @@ function injectPageCSS(nodes, basePath, styleId) {
     });
 }
 
-/** Disable CSS trang con (không xóa để tránh re-fetch lần sau). */
 function disablePageCSS(styleId) {
     const el = document.getElementById(styleId);
     if (el) el.disabled = true;
@@ -201,9 +187,14 @@ function setView(v) {
 function doSearch() {
     const kw = document.getElementById('searchInput')?.value.toLowerCase().trim() || '';
     currentJobs = kw
-        ? JOBS.filter(j => j.title.toLowerCase().includes(kw) || j.company.toLowerCase().includes(kw) || j.tags.some(t => t.toLowerCase().includes(kw)))
+        ? JOBS.filter(j =>
+            j.title.toLowerCase().includes(kw) ||
+            j.company.toLowerCase().includes(kw) ||
+            j.tags.some(t => t.toLowerCase().includes(kw))
+          )
         : [...JOBS];
-    document.getElementById('totalCount').textContent = currentJobs.length.toLocaleString();
+    const el = document.getElementById('totalCount');
+    if (el) el.textContent = currentJobs.length.toLocaleString();
     currentPage = 1;
     renderJobsGrid();
     renderPagination();
@@ -346,8 +337,7 @@ function getJobListHTML() {
     </div>`;
 }
 
-// ─── SET CONTENT (KHÔNG WRAP THÊM DIV THỪA) ───────────────────
-// FIX: Bỏ wrapper div scope — chèn thẳng HTML gốc vào #app-content
+// ─── SET CONTENT ───────────────────────────────────────────────
 function setContent(html) {
     const app = document.getElementById('app-content');
     if (!app) return;
@@ -356,7 +346,6 @@ function setContent(html) {
 }
 
 function showJobList() {
-    // Tắt CSS trang con, bật lại Jobs.css
     disablePageCSS('css-jobdetail');
     disablePageCSS('css-apply');
     setJobsCSS(true);
@@ -371,28 +360,20 @@ async function openDetail(jobId) {
     if (!job) return;
 
     try {
-        // Tắt Jobs.css (tránh xung đột .page-wrap, .sidebar...), tắt Apply.css nếu đang bật
         setJobsCSS(false);
         disablePageCSS('css-apply');
         const templateURL = new URL('../ChitietViecLam/JobDetail.html', location.href).href;
         const res = await fetch(templateURL);
         const html = await res.text();
 
-        // Dùng DOMParser để parse toàn bộ document — giữ đúng cấu trúc <body>
         const doc = new DOMParser().parseFromString(html, 'text/html');
-
-        // ── INJECT CSS của trang con vào <head> ──
         const cssNodes = [...doc.querySelectorAll('link[rel="stylesheet"], style')];
         injectPageCSS(cssNodes, templateURL, 'css-jobdetail');
 
-        // Lấy đúng <body> của trang con làm container thao tác
         const temp = doc.body;
-
-        // Xóa header/footer placeholder
         temp.querySelector('#header-placeholder')?.remove();
         temp.querySelector('#footer-placeholder')?.remove();
 
-        // ── Cập nhật dữ liệu job ──
         const heroTitle = temp.querySelector('.hero-title');
         if (heroTitle) {
             const span = heroTitle.querySelector('span');
@@ -446,10 +427,8 @@ async function openDetail(jobId) {
             btn.setAttribute('onclick', `event.stopPropagation(); toggleSave(this);`);
         });
 
-        // ── Chèn đúng nội dung <body> của trang con ──
         setContent(temp.innerHTML);
 
-        // Gắn nút quay lại
         setTimeout(() => {
             const backBtn = document.querySelector('#app-content .back-to-list-btn, #app-content .spa-back-btn');
             if (backBtn) backBtn.onclick = () => showJobList();
@@ -457,7 +436,7 @@ async function openDetail(jobId) {
 
     } catch (err) {
         console.error('Lỗi tải JobDetail:', err);
-        setContent('<div class="error">Không thể tải chi tiết công việc. Vui lòng thử lại.</div>');
+        setContent('<div class="error" style="text-align:center;padding:60px 20px;"><h3>Không thể tải chi tiết công việc</h3><p>Vui lòng thử lại sau.</p><button onclick="showJobList()" style="margin-top:16px;padding:10px 24px;background:var(--purple,#7C3AED);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:15px;">← Quay lại danh sách</button></div>');
     }
 }
 
@@ -467,27 +446,20 @@ async function openApply(jobId) {
     if (!job) return;
 
     try {
-        // Tắt Jobs.css, tắt JobDetail.css nếu đang bật
         setJobsCSS(false);
         disablePageCSS('css-jobdetail');
         const templateURL = new URL('../UngTuyen/Apply.html', location.href).href;
         const res = await fetch(templateURL);
         const html = await res.text();
 
-        // Dùng DOMParser để parse toàn bộ document
         const doc = new DOMParser().parseFromString(html, 'text/html');
-
-        // ── INJECT CSS của trang con ──
         const cssNodes = [...doc.querySelectorAll('link[rel="stylesheet"], style')];
         injectPageCSS(cssNodes, templateURL, 'css-apply');
 
-        // Lấy <body> làm container
         const temp = doc.body;
-
         temp.querySelector('#header-placeholder')?.remove();
         temp.querySelector('#footer-placeholder')?.remove();
 
-        // ── Cập nhật dữ liệu job ──
         const heroTitle = temp.querySelector('.apply-hero-title');
         if (heroTitle) heroTitle.textContent = `Apply — ${job.title}`;
         const companyChip = temp.querySelector('.meta-chip:first-child span:last-child');
@@ -520,14 +492,11 @@ async function openApply(jobId) {
         const viewJobBtn = temp.querySelector('.btn-view-job');
         if (viewJobBtn) viewJobBtn.setAttribute('onclick', `openDetail(${job.id}); return false;`);
 
-        // ── Chèn đúng nội dung <body> của trang con ──
         setContent(temp.innerHTML);
 
         setTimeout(() => {
             if (typeof initApplyLogic === 'function') {
                 initApplyLogic(job);
-            } else {
-                console.warn('initApplyLogic chưa được định nghĩa');
             }
             const backDetail = document.querySelector('#app-content .back-to-detail-btn');
             if (backDetail) backDetail.onclick = () => openDetail(job.id);
@@ -537,7 +506,7 @@ async function openApply(jobId) {
 
     } catch (err) {
         console.error('Lỗi tải Apply:', err);
-        setContent('<div class="error">Không thể tải trang ứng tuyển. Vui lòng thử lại.</div>');
+        setContent('<div class="error" style="text-align:center;padding:60px 20px;"><h3>Không thể tải trang ứng tuyển</h3><button onclick="showJobList()" style="margin-top:16px;padding:10px 24px;background:var(--purple,#7C3AED);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:15px;">← Quay lại danh sách</button></div>');
     }
 }
 
@@ -648,7 +617,33 @@ function initApplyLogic(job) {
     }
 }
 
-// ─── KHỞI TẠO ──────────────────────────────────────────────────
+// ─── ĐỌC URL PARAMS & KHỞI TẠO ────────────────────────────────
 window.addEventListener('load', () => {
     showJobList();
+
+    const params = new URLSearchParams(window.location.search);
+
+    // Trường hợp 1: Từ trang chủ click vào job card → ?job=ID
+    const jobId = params.get('job');
+    if (jobId) {
+        const id = parseInt(jobId);
+        if (!isNaN(id) && JOBS.find(j => j.id === id)) {
+            setTimeout(() => openDetail(id), 150);
+            return; // không cần xử lý thêm
+        }
+    }
+
+    // Trường hợp 2: Từ trang chủ click vào tag/ngành nghề → ?search=keyword
+    const searchKw = params.get('search');
+    if (searchKw) {
+        setTimeout(() => {
+            const inp = document.getElementById('searchInput');
+            if (inp) {
+                inp.value = decodeURIComponent(searchKw);
+                doSearch();
+                // Scroll mượt xuống kết quả
+                document.querySelector('.results-area')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 150);
+    }
 });
