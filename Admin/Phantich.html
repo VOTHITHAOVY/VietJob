@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân tích &amp; Báo cáo — ViecJob</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-2: #7c4dff;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --green: #16a34a;
+            --green-bg: #dcfce7;
+            --amber: #b45309;
+            --amber-bg: #fef3c7;
+            --red: #dc2626;
+            --red-bg: #fee2e2;
+            --blue: #1d4ed8;
+            --blue-bg: #dbeafe;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+            --fs-xl: 24px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            font-size: var(--fs-base);
+            padding: 0;
+            margin: 0;
+        }
+
+        .content {
+            padding: 28px 24px;
+        }
+
+        .page-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .page-title {
+            font-size: var(--fs-xl);
+            font-weight: 600;
+        }
+
+        .page-sub {
+            font-size: 14px;
+            color: var(--ink-3);
+            margin-top: 4px;
+        }
+
+        /* Filter tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .filter-tab {
+            padding: 8px 20px;
+            border-radius: 40px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            font-size: var(--fs-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab:hover {
+            background: var(--bg);
+        }
+
+        .filter-tab.active {
+            background: var(--violet);
+            color: white;
+            border-color: var(--violet);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--r-lg);
+            padding: 20px;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+
+        .stat-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--violet-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--violet);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-trend {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-trend.up {
+            color: var(--green);
+        }
+
+        .stat-trend.down {
+            color: var(--red);
+        }
+
+        .stat-target {
+            font-size: 11px;
+            color: var(--ink-3);
+            margin-top: 6px;
+        }
+
+        /* Charts Row */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .chart-card {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--r-lg);
+            padding: 20px;
+        }
+
+        .chart-title {
+            font-size: var(--fs-md);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+
+        .industry-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .industry-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .industry-name {
+            font-size: 13px;
+            color: var(--ink-2);
+        }
+
+        .industry-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--rule);
+            border-radius: 3px;
+            margin: 0 12px;
+            overflow: hidden;
+        }
+
+        .industry-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: var(--violet);
+        }
+
+        .industry-percent {
+            font-weight: 600;
+            color: var(--ink);
+            min-width: 45px;
+            text-align: right;
+        }
+
+        /* Revenue Chart (full width) */
+        .full-width-card {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--r-lg);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .month-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .month-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: var(--bg);
+            border: 1px solid var(--rule);
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .month-btn.active {
+            background: var(--violet);
+            color: white;
+            border-color: var(--violet);
+        }
+
+        /* Recent Events Table */
+        .events-card {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+        }
+
+        .events-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .events-header h3 {
+            font-size: var(--fs-md);
+            font-weight: 600;
+        }
+
+        .update-time {
+            font-size: 12px;
+            color: var(--ink-3);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .events-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .events-table th {
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .events-table td {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--rule);
+            font-size: 13px;
+        }
+
+        .events-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-success {
+            background: #eaf3de;
+            color: #27500a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-system {
+            background: #eef2ff;
+            color: #1d4ed8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-violation {
+            background: #fcebeb;
+            color: #791f1f;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Export buttons */
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--r);
+            font-size: var(--fs-sm);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        .export-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .export-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: var(--r);
+            min-width: 180px;
+            z-index: 10;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .export-options.show {
+            display: block;
+        }
+
+        .export-option {
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: var(--fs-sm);
+            transition: background 0.15s;
+        }
+
+        .export-option:hover {
+            background: var(--bg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="page-head">
+            <div>
+                <h1 class="page-title">Phân tích &amp; Báo cáo</h1>
+                <p class="page-sub">Theo dõi hiệu suất hệ thống và tăng trưởng thị trường lao động.</p>
+            </div>
+            <div class="export-dropdown"><button class="btn-outline" id="exportDropdownBtn">📊 Xuất báo cáo ▼</button>
+                <div class="export-options" id="exportOptions">
+                    <div class="export-option" data-type="excel">📈 Xuất Excel (Doanh thu)</div>
+                    <div class="export-option" data-type="pdf">📄 Xuất PDF (Biểu đồ)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <div class="filter-tab active" data-period="7">7 ngày</div>
+            <div class="filter-tab" data-period="30">30 ngày</div>
+            <div class="filter-tab" data-period="365">Năm nay</div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header"><span class="stat-label">Tổng người dùng</span>
+                    <div class="stat-icon"><span class="material-symbols-outlined" style="font-size:20px;">group</span>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalUsers">124,802</div>
+                <div class="stat-trend up"><span class="material-symbols-outlined"
+                        style="font-size:14px;">arrow_upward</span>↑12%</div>
+                <div class="stat-target">Số đối tượng</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header"><span class="stat-label">Tin tuyển dụng</span>
+                    <div class="stat-icon"><span class="material-symbols-outlined" style="font-size:20px;">work</span>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalJobs">18,540</div>
+                <div class="stat-trend up"><span class="material-symbols-outlined"
+                        style="font-size:14px;">arrow_upward</span>↑8.4%</div>
+                <div class="stat-target">Đạt mục tiêu tháng này</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header"><span class="stat-label">Doanh thu (VNĐ)</span>
+                    <div class="stat-icon"><span class="material-symbols-outlined"
+                            style="font-size:20px;">payments</span></div>
+                </div>
+                <div class="stat-value" id="totalRevenue">2.45B</div>
+                <div class="stat-trend up"><span class="material-symbols-outlined"
+                        style="font-size:14px;">arrow_upward</span>↑2.1%</div>
+                <div class="stat-target">Doanh thu từ gói Premium</div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <div class="chart-card">
+                <div class="chart-title">Tăng trưởng người dùng</div><canvas id="growthChart"
+                    style="height:200px; width:100%;"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Người dùng theo ngành</div>
+                <div class="industry-list">
+                    <div class="industry-item"><span class="industry-name">Công nghệ thông tin</span>
+                        <div class="industry-bar">
+                            <div class="industry-fill" style="width:42%"></div>
+                        </div><span class="industry-percent">42%</span>
+                    </div>
+                    <div class="industry-item"><span class="industry-name">Kinh doanh / Sales</span>
+                        <div class="industry-bar">
+                            <div class="industry-fill" style="width:28%"></div>
+                        </div><span class="industry-percent">28%</span>
+                    </div>
+                    <div class="industry-item"><span class="industry-name">Marketing</span>
+                        <div class="industry-bar">
+                            <div class="industry-fill" style="width:15%"></div>
+                        </div><span class="industry-percent">15%</span>
+                    </div>
+                    <div class="industry-item"><span class="industry-name">Kế toán / Tài chính</span>
+                        <div class="industry-bar">
+                            <div class="industry-fill" style="width:10%"></div>
+                        </div><span class="industry-percent">10%</span>
+                    </div>
+                    <div class="industry-item"><span class="industry-name">Khác</span>
+                        <div class="industry-bar">
+                            <div class="industry-fill" style="width:5%"></div>
+                        </div><span class="industry-percent">5%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Chart -->
+        <div class="full-width-card">
+            <div class="chart-title">Báo cáo doanh thu theo tháng</div><canvas id="revenueChart"
+                style="height:300px; width:100%;"></canvas>
+            <div class="month-selector" id="monthSelector"></div>
+        </div>
+
+        <!-- Recent Events -->
+        <div class="events-card">
+            <div class="events-header">
+                <h3>Sự kiện gần đây</h3>
+                <div class="update-time"><span class="material-symbols-outlined" style="font-size:14px;">schedule</span>
+                    Cập nhật: 2 phút trước</div>
+            </div>
+            <table class="events-table">
+                <thead>
+                    <tr>
+                        <th>THỜI GIAN</th>
+                        <th>HÀNH ĐỘNG</th>
+                        <th>ĐỐI TƯỢNG</th>
+                        <th>TRẠNG THÁI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>14:24:02</td>
+                        <td>Giao dịch thành công</td>
+                        <td>Gói Employer Pro - FPT Software</td>
+                        <td><span class="status-success">HOÀN TẤT</span></td>
+                    </tr>
+                    <tr>
+                        <td>14:18:55</td>
+                        <td>Người dùng mới đăng ký</td>
+                        <td>Candidate: nguyen.van@email.com</td>
+                        <td><span class="status-system">HỆ THỐNG</span></td>
+                    </tr>
+                    <tr>
+                        <td>14:05:12</td>
+                        <td>Tin tuyển dụng bị từ chối</td>
+                        <td>Job ID: #99281 - Bất động sản ABC</td>
+                        <td><span class="status-violation">VI PHẠM</span></td>
+                    </tr>
+                    <tr>
+                        <td>13:52:33</td>
+                        <td>Gia hạn gói dịch vụ</td>
+                        <td>Premium - TechCorp Vietnam</td>
+                        <td><span class="status-success">HOÀN TẤT</span></td>
+                    </tr>
+                    <tr>
+                        <td>13:41:20</td>
+                        <td>CV mới được tạo</td>
+                        <td>Candidate: tran.thi@email.com</td>
+                        <td><span class="status-system">HỆ THỐNG</span></td>
+                    </tr>
+                    <tr>
+                        <td>13:28:15</td>
+                        <td>Đăng tin tuyển dụng</td>
+                        <td>Senior DevOps - NashTech</td>
+                        <td><span class="status-success">ĐÃ DUYỆT</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Monthly revenue data
+        const monthlyRevenue = { 'Tháng 1': 125, 'Tháng 2': 142, 'Tháng 3': 138, 'Tháng 4': 156, 'Tháng 5': 168, 'Tháng 6': 189, 'Tháng 7': 210, 'Tháng 8': 245, 'Tháng 9': 238, 'Tháng 10': 256, 'Tháng 11': 268, 'Tháng 12': 289 };
+        const revenueValues = [125, 142, 138, 156, 168, 189, 210, 245, 238, 256, 268, 289];
+        const monthLabels = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'];
+
+        // Growth data
+        const growthData = { 'Tuần 1': 28000, 'Tuần 2': 35000, 'Tuần 3': 42000, 'Tuần 4': 48000 };
+        const growthLabels = ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'];
+        const growthValues = [28000, 35000, 42000, 48000];
+
+        // Initialize charts
+        let revenueChart, growthChart;
+
+        function initCharts() {
+            const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+            revenueChart = new Chart(ctxRevenue, { type: 'line', data: { labels: monthLabels, datasets: [{ label: 'Doanh thu (Triệu VNĐ)', data: revenueValues, borderColor: '#5b21f5', backgroundColor: 'rgba(91,33,245,0.1)', fill: true, tension: 0.3, pointBackgroundColor: '#5b21f5', pointBorderColor: 'white', pointRadius: 4, pointHoverRadius: 6 }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (ctx) => `${ctx.raw.toLocaleString()} Triệu VNĐ` } } }, scales: { y: { beginAtZero: true, ticks: { callback: (val) => val + 'Tr' }, title: { display: true, text: 'Triệu VNĐ' } } } } });
+            const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+            growthChart = new Chart(ctxGrowth, { type: 'bar', data: { labels: growthLabels, datasets: [{ label: 'Người dùng mới', data: growthValues, backgroundColor: '#5b21f5', borderRadius: 8 }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true, ticks: { callback: (val) => val.toLocaleString() }, title: { display: true, text: 'Số người dùng' } } } } });
+        }
+
+        // Month selector buttons
+        function generateMonthSelector() {
+            const container = document.getElementById('monthSelector');
+            container.innerHTML = '';
+            monthLabels.forEach((month, idx) => { const btn = document.createElement('button'); btn.className = 'month-btn'; btn.innerText = month; btn.onclick = () => { alert(`📊 Xem chi tiết tháng ${month}: Doanh thu ${revenueValues[idx]} Triệu VNĐ`); document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }; container.appendChild(btn); });
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => { tab.addEventListener('click', () => { document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active')); tab.classList.add('active'); const period = tab.dataset.period; updateStats(period); }); });
+
+        function updateStats(period) {
+            const multipliers = { '7': 1.2, '30': 3.5, '365': 12 };
+            const mult = multipliers[period] || 1;
+            document.getElementById('totalUsers').innerText = Math.round(124802 * mult).toLocaleString();
+            document.getElementById('totalJobs').innerText = Math.round(18540 * mult).toLocaleString();
+            document.getElementById('totalRevenue').innerText = `${Math.round(2.45 * mult)}B`;
+        }
+
+        // Export
+        const dropdownBtn = document.getElementById('exportDropdownBtn');
+        const exportOptions = document.getElementById('exportOptions');
+        dropdownBtn.addEventListener('click', (e) => { e.stopPropagation(); exportOptions.classList.toggle('show'); });
+        document.addEventListener('click', () => { exportOptions.classList.remove('show'); });
+        document.querySelectorAll('.export-option').forEach(opt => { opt.addEventListener('click', (e) => { e.stopPropagation(); const type = opt.dataset.type; if (type === 'excel') exportExcel(); else if (type === 'pdf') exportPDF(); exportOptions.classList.remove('show'); }); });
+
+        function exportExcel() {
+            const exportData = monthLabels.map((m, i) => ({ 'Tháng': m, 'Doanh thu (Triệu VNĐ)': revenueValues[i] }));
+            const ws = XLSX.utils.json_to_sheet(exportData);
+            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Doanh thu theo tháng');
+            XLSX.writeFile(wb, `bao_cao_doanh_thu_${new Date().toISOString().slice(0, 10)}.xlsx`);
+        }
+
+        function exportPDF() {
+            alert('📄 Tính năng xuất PDF đang được phát triển');
+        }
+
+        initCharts();
+        generateMonthSelector();
+    </script>
+</body>
+
+</html>

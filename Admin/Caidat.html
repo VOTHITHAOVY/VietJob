@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViecJob — Cài đặt hệ thống</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-xs: 11px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            font-size: var(--fs-base);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .settings-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: var(--surface);
+            border-right: 1px solid var(--rule);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .ss-header {
+            padding: 20px 18px;
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-to-admin {
+            background: var(--bg);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-2);
+            transition: all 0.2s;
+        }
+
+        .back-to-admin:hover {
+            background: var(--violet-bg);
+            border-color: var(--violet-mid);
+            color: var(--violet);
+        }
+
+        .ss-brand {
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--ink);
+        }
+
+        .ss-brand span {
+            color: var(--violet);
+        }
+
+        .ss-title {
+            padding: 20px 18px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+
+        .ss-nav {
+            list-style: none;
+            padding: 0 12px;
+        }
+
+        .ss-nav li {
+            margin-bottom: 4px;
+        }
+
+        .ss-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: var(--r);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            color: var(--ink-2);
+            text-decoration: none;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+        .ss-link:hover {
+            background: var(--bg);
+            color: var(--ink);
+        }
+
+        .ss-link.active {
+            background: var(--violet-bg);
+            color: var(--violet);
+        }
+
+        .ss-link svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            stroke-width: 1.8;
+        }
+
+        .settings-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .settings-topbar {
+            height: 56px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--rule);
+            display: flex;
+            align-items: center;
+            padding: 0 28px;
+            flex-shrink: 0;
+        }
+
+        .settings-topbar h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .settings-canvas {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 32px;
+            background: var(--bg);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+
+<aside class="settings-sidebar">
+    <div class="ss-header">
+        <button class="back-to-admin" id="backToAdminBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M15 18l-6-6 6-6" stroke-linecap="round"/>
+            </svg>
+            Quay lại
+        </button>
+        <div class="ss-brand">VIEC<span>JOB</span></div>
+    </div>
+    <div class="ss-title">CÀI ĐẶT HỆ THỐNG</div>
+    <ul class="ss-nav">
+        <li><a class="ss-link active" data-page="Cauhinhhethong.html" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            Cấu hình hệ thống
+        </a></li>
+        <li><a class="ss-link" data-page="Quanlyphanquyen.html" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Quản lý phân quyền
+        </a></li>
+        <li><a class="ss-link" data-page="Caidatemail.html" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Cài đặt thông báo email
+        </a></li>
+        <li><a class="ss-link" data-page="Cauhinhphidichvu.html" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Cấu hình phí dịch vụ
+        </a></li>
+        <li><a class="ss-link" data-page="Baomathethong.html" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Bảo mật hệ thống
+        </a></li>
+    </ul>
+</aside>
+
+<main class="settings-main">
+    <div class="settings-topbar">
+        <h2 id="settingsTitle">Cấu hình hệ thống</h2>
+    </div>
+    <div class="settings-canvas" id="settingsContent">
+        <iframe src="Cauhinhhethong.html" id="contentFrame" style="width:100%; height:100%; border:none;"></iframe>
+    </div>
+</main>
+
+<script>
+    const frame = document.getElementById('contentFrame');
+    const titleSpan = document.getElementById('settingsTitle');
+    const menuMap = {
+        'Cauhinhhethong.html': 'Cấu hình hệ thống',
+        'Quanlyphanquyen.html': 'Quản lý phân quyền',
+        'Caidatemail.html': 'Cài đặt thông báo email',
+        'Cauhinhphidichvu.html': 'Cấu hình phí dịch vụ',
+        'Baomathethong.html': 'Bảo mật hệ thống'
+    };
+
+    function loadPage(page) {
+        titleSpan.innerText = menuMap[page] || 'Cài đặt';
+        frame.src = page;
+    }
+
+    document.querySelectorAll('.ss-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = link.getAttribute('data-page');
+            if (page) {
+                loadPage(page);
+                document.querySelectorAll('.ss-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Nút Quay lại - quay về admin.html
+    document.getElementById('backToAdminBtn').addEventListener('click', function() {
+        window.location.href = 'admin.html';
+    });
+</script>
+</body>
+</html>

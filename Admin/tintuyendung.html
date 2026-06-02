@@ -1,314 +1,753 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quản lý Tin tuyển dụng — ViecJob Admin</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:       #0e0e10;
-  --ink-2:     #4a4a52;
-  --ink-3:     #9898a6;
-  --ink-4:     #c8c8d4;
-  --rule:      #ebebf0;
-  --surface:   #ffffff;
-  --bg:        #f7f7f9;
-  --violet:    #5b21f5;
-  --violet-2:  #7c4dff;
-  --violet-bg: #f0ebff;
-  --violet-mid:#c4b0fa;
-  --green:     #16a34a;
-  --green-bg:  #dcfce7;
-  --amber:     #b45309;
-  --amber-bg:  #fef3c7;
-  --red:       #dc2626;
-  --red-bg:    #fee2e2;
-  --blue:      #1d4ed8;
-  --blue-bg:   #dbeafe;
-  --r:         8px;
-  --r-lg:      12px;
-  --fs-xs:     11px;
-  --fs-sm:     12.5px;
-  --fs-base:   13.5px;
-  --fs-md:     15px;
-  --fs-lg:     18px;
-  --fs-xl:     24px;
-  --fs-2xl:    32px;
-}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:var(--fs-base);line-height:1.5;-webkit-font-smoothing:antialiased;display:flex;height:100vh;overflow:hidden;}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tin tuyển dụng — ViecJob</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* Sidebar */
-.sidebar{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--rule);display:flex;flex-direction:column;padding:0;height:100vh;overflow-y:auto;position:fixed;left:0;top:0;z-index:50;}
-.sb-logo{padding:20px 18px 12px;border-bottom:1px solid var(--rule);}
-.sb-logo-mark{display:flex;align-items:center;gap:9px;}
-.sb-brand{font-size:14px;font-weight:900;letter-spacing:2px;color:var(--ink);}
-.sb-brand span{color:var(--violet);}
-.sb-section{padding:16px 10px 4px;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);}
-.sb-nav{list-style:none;padding:0 8px;}
-.sb-nav li{margin-bottom:1px;}
-.sb-link{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r);font-size:var(--fs-sm);font-weight:400;color:var(--ink-2);text-decoration:none;transition:background .12s,color .12s;cursor:pointer;}
-.sb-link:hover{background:var(--bg);color:var(--ink);}
-.sb-link.active{background:var(--violet-bg);color:var(--violet);font-weight:500;}
-.sb-link svg{width:16px;height:16px;flex-shrink:0;stroke-width:1.8;opacity:.7;}
-.sb-link.active svg{opacity:1;}
-.sb-bottom{margin-top:auto;border-top:1px solid var(--rule);padding:14px 16px;}
-.sb-user{display:flex;align-items:center;gap:10px;}
-.sb-avatar{width:30px;height:30px;border-radius:50%;background:var(--violet);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;}
-.sb-user-name{font-size:var(--fs-sm);font-weight:500;color:var(--ink);}
-.sb-user-role{font-size:10px;color:var(--ink-3);}
+    :root {
+      --ink: #0e0e10;
+      --ink-2: #4a4a52;
+      --ink-3: #9898a6;
+      --ink-4: #c8c8d4;
+      --rule: #ebebf0;
+      --surface: #ffffff;
+      --bg: #f7f7f9;
+      --violet: #5b21f5;
+      --violet-2: #7c4dff;
+      --violet-bg: #f0ebff;
+      --violet-mid: #c4b0fa;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --blue: #1d4ed8;
+      --blue-bg: #dbeafe;
+      --r: 8px;
+      --r-lg: 12px;
+      --fs-xs: 11px;
+      --fs-sm: 12.5px;
+      --fs-base: 13.5px;
+      --fs-md: 15px;
+      --fs-lg: 18px;
+      --fs-xl: 24px;
+      --fs-2xl: 32px;
+    }
 
-/* Main */
-.main{margin-left:220px;flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-.topbar{height:52px;background:var(--surface);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0;}
-.topbar-left{display:flex;align-items:center;gap:6px;font-size:var(--fs-sm);color:var(--ink-3);}
-.topbar-left .crumb-active{color:var(--ink);font-weight:500;}
-.topbar-right{display:flex;align-items:center;gap:10px;}
-.search-wrap{position:relative;}
-.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--ink-3);stroke-width:2;fill:none;}
-.search-input{background:var(--bg);border:1px solid var(--rule);border-radius:var(--r);padding:6px 12px 6px 32px;font-size:var(--fs-sm);font-family:inherit;color:var(--ink);outline:none;width:200px;transition:border-color .15s;}
-.search-input:focus{border-color:var(--violet-mid);background:#fff;}
-.topbar-select{background:var(--bg);border:1px solid var(--rule);border-radius:var(--r);padding:5px 10px;font-size:var(--fs-sm);font-family:inherit;color:var(--ink);outline:none;cursor:pointer;}
-.topbar-icon-btn{background:none;border:none;cursor:pointer;padding:5px;color:var(--ink-2);position:relative;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background .12s;}
-.topbar-icon-btn:hover{background:var(--bg);}
-.topbar-icon-btn svg{width:18px;height:18px;stroke-width:1.8;}
-.notif-pip{width:6px;height:6px;background:var(--red);border-radius:50%;position:absolute;top:4px;right:4px;border:1.5px solid #fff;}
-.vr{width:1px;height:18px;background:var(--rule);}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: var(--fs-base);
+      line-height: 1.5;
+      padding: 0;
+      margin: 0;
+    }
 
-/* Canvas */
-.canvas{flex:1;overflow-y:auto;padding:28px 24px;}
-.page-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
-.page-title{font-size:var(--fs-xl);font-weight:600;letter-spacing:-.03em;color:var(--ink);line-height:1.2;}
-.page-sub{font-size:var(--fs-sm);color:var(--ink-3);margin-top:4px;}
+    /* Nội dung chính */
+    .content {
+      padding: 28px 24px;
+    }
 
-/* Filter bar */
-.filter-bar{display:flex;gap:16px;margin-bottom:24px;align-items:flex-end;}
-.filter-group{flex:1;min-width:0;}
-.filter-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);margin-bottom:6px;display:block;}
-.filter-select,.filter-input{width:100%;padding:8px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);font-size:var(--fs-sm);font-family:inherit;color:var(--ink);outline:none;}
-.filter-select:focus,.filter-input:focus{border-color:var(--violet-mid);}
-input[type="date"]{color-scheme:light;cursor:pointer;}
-input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;}
+    .page-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
 
-/* Buttons */
-.btn-outline{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);font-size:var(--fs-sm);font-weight:500;color:var(--ink-2);cursor:pointer;transition:all .12s;font-family:inherit;}
-.btn-outline:hover{background:var(--bg);border-color:var(--ink-4);}
-.btn-primary{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--violet);border:none;border-radius:var(--r);font-size:var(--fs-sm);font-weight:500;color:#fff;cursor:pointer;transition:background .12s;font-family:inherit;}
-.btn-primary:hover{background:var(--violet-2);}
+    .page-title {
+      font-size: var(--fs-xl);
+      font-weight: 600;
+      color: var(--ink);
+    }
 
-/* Table */
-.data-table{width:100%;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);overflow-x:auto;}
-.data-table table{width:100%;border-collapse:collapse;min-width:900px;}
-.data-table th{padding:12px 16px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);border-bottom:1px solid var(--rule);background:var(--surface);}
-.data-table td{padding:12px 16px;border-bottom:1px solid var(--rule);font-size:var(--fs-sm);color:var(--ink-2);vertical-align:middle;}
-.data-table tr:last-child td{border-bottom:none;}
-.data-table tr:hover{background:var(--bg);cursor:pointer;}
-.company-cell{display:flex;align-items:center;gap:10px;}
-.company-logo{width:32px;height:32px;border-radius:8px;background:var(--violet-bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--violet);flex-shrink:0;}
-.company-logo-img{width:32px;height:32px;border-radius:8px;object-fit:cover;}
-.job-title{font-weight:500;color:var(--ink);}
-.company-name{font-size:11px;color:var(--ink-3);margin-top:2px;}
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
 
-/* Status badges */
-.status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:500;}
-.status-badge svg{width:13px;height:13px;flex-shrink:0;}
-.status-pending{background:#faeeda;color:#633806;}
-.status-approved{background:#eaf3de;color:#27500a;}
-.status-rejected{background:#fcebeb;color:#791f1f;}
+    .filter-group {
+      flex: 1;
+      min-width: 140px;
+    }
 
-/* Action buttons */
-.action-buttons{display:flex;gap:8px;justify-content:flex-end;}
-.action-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:4px 0;width:80px;border-radius:7px;font-size:11px;font-weight:500;cursor:pointer;background:transparent;transition:background .12s;font-family:inherit;}
-.action-btn svg{width:13px;height:13px;flex-shrink:0;}
-.action-btn-view{border:1.5px solid #afa9ec;color:#3c3489;}
-.action-btn-view:hover{background:#eeedfe;}
-.action-btn-approve{border:1.5px solid #85b7eb;color:#0c447c;}
-.action-btn-approve:hover{background:#e6f1fb;}
-.action-btn-reject{border:1.5px solid #f09595;color:#791f1f;}
-.action-btn-reject:hover{background:#fcebeb;}
+    .filter-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 6px;
+      display: block;
+    }
 
-/* Pagination */
-.pagination{display:flex;align-items:center;justify-content:center;padding:14px 16px;border-top:1px solid var(--rule);}
-.pagination-controls{display:flex;gap:4px;align-items:center;}
-.pagination-btn{min-width:32px;height:32px;padding:0 6px;display:flex;align-items:center;justify-content:center;border-radius:7px;border:1.5px solid transparent;background:transparent;color:var(--ink-3);font-size:12px;font-weight:500;cursor:pointer;transition:all .12s;font-family:inherit;}
-.pagination-btn:hover{background:var(--bg);color:var(--ink);border-color:var(--rule);}
-.pagination-btn.active{background:#eeedfe;color:#3c3489;border-color:#afa9ec;font-weight:600;}
-.pagination-btn:disabled{opacity:.35;cursor:not-allowed;}
-</style>
+    .filter-select,
+    .filter-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--r);
+      font-size: var(--fs-sm);
+      font-family: inherit;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .filter-select:focus,
+    .filter-input:focus {
+      border-color: var(--violet-mid);
+    }
+
+    input[type="date"] {
+      color-scheme: light;
+      cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--r);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: var(--ink-2);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-outline:hover {
+      background: var(--bg);
+      border-color: var(--ink-4);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--violet);
+      border: none;
+      border-radius: var(--r);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      background: var(--violet-2);
+    }
+
+    /* Table */
+    .data-table {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      overflow-x: auto;
+    }
+
+    .data-table table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    .data-table th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      border-bottom: 1px solid var(--rule);
+      background: var(--surface);
+    }
+
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+      font-size: var(--fs-sm);
+      color: var(--ink-2);
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover {
+      background: var(--bg);
+      cursor: pointer;
+    }
+
+    .company-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .company-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--violet-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--violet);
+      flex-shrink: 0;
+    }
+
+    .job-title {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .company-name {
+      font-size: 11px;
+      color: var(--ink-3);
+      margin-top: 2px;
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .status-badge svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .status-pending {
+      background: #faeeda;
+      color: #633806;
+    }
+
+    .status-approved {
+      background: #eaf3de;
+      color: #27500a;
+    }
+
+    .status-rejected {
+      background: #fcebeb;
+      color: #791f1f;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 4px 0;
+      width: 80px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    .action-btn svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .action-btn-view {
+      border: 1.5px solid #afa9ec;
+      color: #3c3489;
+    }
+
+    .action-btn-view:hover {
+      background: #eeedfe;
+    }
+
+    .action-btn-approve {
+      border: 1.5px solid #85b7eb;
+      color: #0c447c;
+    }
+
+    .action-btn-approve:hover {
+      background: #e6f1fb;
+    }
+
+    .action-btn-reject {
+      border: 1.5px solid #f09595;
+      color: #791f1f;
+    }
+
+    .action-btn-reject:hover {
+      background: #fcebeb;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 16px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .pagination-btn {
+      min-width: 32px;
+      height: 32px;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      border: 1.5px solid transparent;
+      background: transparent;
+      color: var(--ink-3);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .pagination-btn:hover {
+      background: var(--bg);
+      color: var(--ink);
+      border-color: var(--rule);
+    }
+
+    .pagination-btn.active {
+      background: #eeedfe;
+      color: #3c3489;
+      border-color: #afa9ec;
+      font-weight: 600;
+    }
+
+    .pagination-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      background: white;
+      border-radius: 24px;
+      width: 780px;
+      max-width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-header h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .modal-close {
+      cursor: pointer;
+      color: var(--ink-3);
+    }
+
+    .modal-close:hover {
+      color: var(--ink);
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-company-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-company-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: var(--violet-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--violet);
+    }
+
+    .modal-company-info h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .modal-company-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .modal-company-tags span {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--bg);
+      color: var(--ink-2);
+    }
+
+    .modal-status-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .modal-status-active {
+      background: #eaf3de;
+      color: #27500a;
+    }
+
+    .modal-status-verified {
+      background: var(--violet-bg);
+      color: var(--violet);
+    }
+
+    .modal-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 32px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-info-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 6px;
+    }
+
+    .modal-info-item .value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .modal-stats {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-stat {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 16px;
+    }
+
+    .modal-stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--violet);
+    }
+
+    .modal-stat-label {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 4px;
+    }
+
+    .modal-jobs-list {
+      margin-bottom: 24px;
+    }
+
+    .modal-jobs-list h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .modal-job-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-job-title {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .modal-job-views {
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+
+    .modal-job-salary {
+      font-weight: 600;
+      color: var(--violet);
+    }
+
+    .modal-package {
+      background: linear-gradient(135deg, #f0ebff, #e9ddfe);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+
+    .modal-package-title {
+      font-weight: 700;
+      color: var(--violet);
+      margin-bottom: 4px;
+    }
+
+    .modal-package-days {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--violet);
+    }
+
+    .modal-package-limit {
+      font-size: 12px;
+      color: var(--ink-2);
+    }
+
+    .modal-transactions h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .modal-trans-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .modal-trans-name {
+      font-weight: 500;
+    }
+
+    .modal-trans-date {
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+
+    .modal-trans-price {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .modal-trans-status {
+      font-size: 11px;
+      color: var(--green);
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      padding: 16px 24px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .modal-footer .btn-secondary {
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .modal-footer .btn-secondary:hover {
+      background: var(--bg);
+    }
+
+    .modal-footer .btn-danger {
+      padding: 10px 20px;
+      background: #fee2e2;
+      border: 1px solid #f09595;
+      border-radius: 12px;
+      color: #791f1f;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .modal-footer .btn-danger:hover {
+      background: #fcebeb;
+    }
+
+    .modal-footer .btn-primary {
+      padding: 10px 20px;
+      background: var(--violet);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .modal-footer .btn-primary:hover {
+      background: var(--violet-2);
+    }
+  </style>
 </head>
+
 <body>
-
-<!-- Sidebar -->
-<nav class="sidebar">
-  <div class="sb-logo">
-    <div class="sb-logo-mark">
-      <svg width="38" height="38" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="52" cy="80" rx="38" ry="50" fill="#7C3AED" transform="rotate(-10, 52, 80)"/>
-        <path d="M 20 110 Q 5 130 0 145 Q 18 128 35 120 Z" fill="#7C3AED"/>
-        <path d="M 52 70 Q 85 55 95 65 Q 78 72 60 80 Z" fill="#7C3AED"/>
-        <path d="M 55 72 Q 82 60 90 67 Q 74 72 60 78 Z" fill="#5B21B6"/>
-        <circle cx="60" cy="42" r="22" fill="#7C3AED"/>
-        <path d="M 78 40 L 94 36 L 80 46 Z" fill="#7C3AED"/>
-        <path d="M 79 39 L 91 36 L 80 43 Z" fill="#5B21B6"/>
-        <circle cx="66" cy="38" r="8" fill="white"/>
-        <circle cx="68" cy="38" r="5" fill="#7C3AED"/>
-        <circle cx="70" cy="36" r="1.5" fill="white"/>
-        <ellipse cx="44" cy="88" rx="18" ry="26" fill="white" opacity="0.92"/>
-        <path d="M 32 105 Q 44 118 58 108 Q 50 125 35 120 Z" fill="white" opacity="0.7"/>
-      </svg>
-      <div>
-        <div class="sb-brand">VIEC<span>JOB</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sb-section">Chính</div>
-  <ul class="sb-nav">
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Tổng quan
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Người dùng
-    </a></li>
-    <li><a class="sb-link active" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Tin tuyển dụng
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="12" y2="13"/></svg>
-      Quản lý CV
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Nhà tuyển dụng
-    </a></li>
-  </ul>
-
-  <div class="sb-section">Quản trị</div>
-  <ul class="sb-nav">
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-      Gói dịch vụ
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Kiểm duyệt
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Phân tích
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Xuất báo cáo
-    </a></li>
-    <li><a class="sb-link" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-      Cài đặt
-    </a></li>
-  </ul>
-
-  <div class="sb-bottom">
-    <div class="sb-user">
-      <div class="sb-avatar">A</div>
-      <div>
-        <div class="sb-user-name">Admin</div>
-        <div class="sb-user-role">Super admin</div>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- Main -->
-<div class="main">
-  <header class="topbar">
-    <div class="topbar-left">
-      <span>ViecJob</span>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      <span class="crumb-active">Quản lý tin tuyển dụng</span>
-    </div>
-    <div class="topbar-right">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="search-input" type="text" placeholder="Tìm kiếm tin tuyển dụng...">
-      </div>
-      <select class="topbar-select">
-        <option>7 ngày qua</option>
-        <option>30 ngày qua</option>
-        <option>Quý này</option>
-      </select>
-      <div class="vr"></div>
-      <button class="topbar-icon-btn" title="Thông báo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        <span class="notif-pip"></span>
-      </button>
-      <div class="sb-avatar" style="width:30px;height:30px;font-size:12px;">A</div>
-    </div>
-  </header>
-
-  <main class="canvas">
-    <!-- Page Header -->
+  <div class="content">
     <div class="page-head">
       <div>
         <h1 class="page-title">Danh sách tin tuyển dụng</h1>
-      
       </div>
-      <div style="display:flex;gap:8px;align-items:center;margin-top:4px;">
-        <button class="btn-outline">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Xuất dữ liệu
-        </button>
-        <button class="btn-primary">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Đăng tin mới
-        </button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-outline" id="exportExcelBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>Xuất dữ liệu</button>
+        <button class="btn-primary"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>Đăng tin mới</button>
       </div>
     </div>
 
-    <!-- Filter Bar -->
     <div class="filter-bar">
-      <div style="display:flex;gap:12px;flex:1;align-items:flex-end;">
-        <div class="filter-group">
-          <label class="filter-label">Trạng thái duyệt</label>
-          <select class="filter-select">
-            <option value="">Tất cả trạng thái</option>
-            <option value="pending">Chờ duyệt</option>
-            <option value="approved">Đã duyệt</option>
-            <option value="rejected">Đã từ chối</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <label class="filter-label">Ngành nghề</label>
-          <select class="filter-select">
-            <option value="">Tất cả ngành nghề</option>
-            <option value="it">Công nghệ thông tin</option>
-            <option value="marketing">Marketing</option>
-            <option value="sales">Bán hàng</option>
-            <option value="design">Thiết kế</option>
-          </select>
-        </div>
-        <div class="filter-group" style="flex:2;">
-          <label class="filter-label">Khoảng ngày đăng</label>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <input class="filter-input" type="date" style="flex:1;min-width:0;">
-            <span style="font-size:12px;color:var(--ink-3);flex-shrink:0;">—</span>
-            <input class="filter-input" type="date" style="flex:1;min-width:0;">
-          </div>
-        </div>
+      <div class="filter-group"><label class="filter-label">Trạng thái duyệt</label><select class="filter-select"
+          id="statusFilter">
+          <option value="">Tất cả</option>
+          <option value="pending">Chờ duyệt</option>
+          <option value="approved">Đã duyệt</option>
+          <option value="rejected">Đã từ chối</option>
+        </select></div>
+      <div class="filter-group"><label class="filter-label">Ngành nghề</label><select class="filter-select"
+          id="industryFilter">
+          <option value="">Tất cả</option>
+          <option value="IT">Công nghệ thông tin</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Sales">Bán hàng</option>
+          <option value="Design">Thiết kế</option>
+        </select></div>
+      <div class="filter-group" style="flex:2;"><label class="filter-label">Khoảng ngày đăng</label>
+        <div style="display:flex;gap:6px;"><input class="filter-input" type="date" id="dateFrom"
+            style="flex:1;"><span>—</span><input class="filter-input" type="date" id="dateTo" style="flex:1;"></div>
       </div>
-      <button class="btn-outline" style="align-self:flex-end;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        Xóa bộ lọc
-      </button>
+      <button class="btn-outline" id="clearFiltersBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>Xóa bộ lọc</button>
     </div>
 
-    <!-- Data Table -->
     <div class="data-table">
       <table>
         <thead>
@@ -321,254 +760,199 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
             <th style="text-align:center;">THAO TÁC</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- FPT Software - Fullstack Java -->
-          <tr>
-            <td>
-              <div class="company-cell">
-                <div class="company-logo" style="background:#e8eef4; color:#0a5c8e;">F</div>
-                <div>
-                  <div class="job-title">Fullstack Java Developer</div>
-                  <div class="company-name">FPT Software · Hà Nội</div>
-                </div>
-              </div>
-            </td>
-            <td>Cầu Giấy, Hà Nội</td>
-            <td style="text-align:center; font-weight:500;">$1,800 - $2,500</td>
-            <td style="text-align:center;">15/12/2024</td>
-            <td style="text-align:center;">
-              <span class="status-badge status-pending">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                Chờ duyệt
-              </span>
-            </td>
-            <td style="text-align:center;">
-              <div class="action-buttons">
-                <button class="action-btn action-btn-view">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem
-                </button>
-                <button class="action-btn action-btn-approve">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </button>
-                <button class="action-btn action-btn-reject">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Từ chối
-                </button>
-              </div>
-            </td>
-          </tr>
-
-          <!-- VinCommerce - Digital Marketing -->
-          <tr>
-            <td>
-              <div class="company-cell">
-                <div class="company-logo" style="background:#e8f5e9; color:#2e7d32;">V</div>
-                <div>
-                  <div class="job-title">Digital Marketing Specialist</div>
-                  <div class="company-name">VinCommerce · TP.HCM</div>
-                </div>
-              </div>
-            </td>
-            <td>Quận 1, TP.HCM</td>
-            <td style="text-align:center; font-weight:500;">$1,200 - $1,800</td>
-            <td style="text-align:center;">10/12/2024</td>
-            <td style="text-align:center;">
-              <span class="status-badge status-approved">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Đã duyệt
-              </span>
-            </td>
-            <td style="text-align:center;">
-              <div class="action-buttons">
-                <button class="action-btn action-btn-view">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem
-                </button>
-                <button class="action-btn action-btn-approve">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </button>
-                <button class="action-btn action-btn-reject">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Từ chối
-                </button>
-              </div>
-            </td>
-          </tr>
-
-          <!-- KMS Technology - Machine Learning -->
-          <tr>
-            <td>
-              <div class="company-cell">
-                <div class="company-logo" style="background:#f3e5f5; color:#7b1fa2;">K</div>
-                <div>
-                  <div class="job-title">Machine Learning Engineer</div>
-                  <div class="company-name">KMS Technology · Đà Nẵng</div>
-                </div>
-              </div>
-            </td>
-            <td>Hải Châu, Đà Nẵng</td>
-            <td style="text-align:center; font-weight:500;">$3,000 - $4,500</td>
-            <td style="text-align:center;">20/12/2024</td>
-            <td style="text-align:center;">
-              <span class="status-badge status-pending">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                Chờ duyệt
-              </span>
-            </td>
-            <td style="text-align:center;">
-              <div class="action-buttons">
-                <button class="action-btn action-btn-view">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem
-                </button>
-                <button class="action-btn action-btn-approve">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </button>
-                <button class="action-btn action-btn-reject">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Từ chối
-                </button>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Masan Group - Trưởng phòng Kinh doanh -->
-          <tr>
-            <td>
-              <div class="company-cell">
-                <div class="company-logo" style="background:#e8eaf6; color:#283593;">M</div>
-                <div>
-                  <div class="job-title">Trưởng phòng Kinh doanh</div>
-                  <div class="company-name">Masan Group · TP.HCM</div>
-                </div>
-              </div>
-            </td>
-            <td>Quận 3, TP.HCM</td>
-            <td style="text-align:center; font-weight:500;">$2,000 - $3,000</td>
-            <td style="text-align:center;">05/12/2024</td>
-            <td style="text-align:center;">
-              <span class="status-badge status-rejected">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                Đã từ chối
-              </span>
-            </td>
-            <td style="text-align:center;">
-              <div class="action-buttons">
-                <button class="action-btn action-btn-view">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem
-                </button>
-                <button class="action-btn action-btn-approve">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </button>
-                <button class="action-btn action-btn-reject">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Từ chối
-                </button>
-              </div>
-            </td>
-           </tr>
-
-          <!-- TikTok - Senior UX/UI -->
-          <tr>
-            <td>
-              <div class="company-cell">
-                <div class="company-logo" style="background:#e1f5fe; color:#01579b;">T</div>
-                <div>
-                  <div class="job-title">Senior UX/UI Designer</div>
-                  <div class="company-name">TikTok Vietnam · TP.HCM</div>
-                </div>
-              </div>
-            </td>
-            <td>Quận 2, TP.HCM</td>
-            <td style="text-align:center; font-weight:500;">$2,500 - $3,800</td>
-            <td style="text-align:center;">18/12/2024</td>
-            <td style="text-align:center;">
-              <span class="status-badge status-approved">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Đã duyệt
-              </span>
-            </td>
-            <td style="text-align:center;">
-              <div class="action-buttons">
-                <button class="action-btn action-btn-view">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem
-                </button>
-                <button class="action-btn action-btn-approve">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </button>
-                <button class="action-btn action-btn-reject">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Từ chối
-                </button>
-              </div>
-            </td>
-           </tr>
-
-          <!-- NashTech - Cloud DevOps -->
-          <tr>
-            <td>
-              <div class="company-cell">
-                <div class="company-logo" style="background:#eceff1; color:#37474f;">N</div>
-                <div>
-                  <div class="job-title">Cloud DevOps Engineer</div>
-                  <div class="company-name">NashTech · Hà Nội</div>
-                </div>
-              </div>
-            </td>
-            <td>Ba Đình, Hà Nội</td>
-            <td style="text-align:center; font-weight:500;">$2,200 - $3,200</td>
-            <td style="text-align:center;">25/12/2024</td>
-            <td style="text-align:center;">
-              <span class="status-badge status-pending">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                Chờ duyệt
-              </span>
-            </td>
-            <td style="text-align:center;">
-              <div class="action-buttons">
-                <button class="action-btn action-btn-view">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Xem
-                </button>
-                <button class="action-btn action-btn-approve">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  Duyệt
-                </button>
-                <button class="action-btn action-btn-reject">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  Từ chối
-                </button>
-              </div>
-            </td>
-           </tr>
-        </tbody>
+        <tbody id="jobTableBody"></tbody>
       </table>
-
-      <!-- Pagination -->
       <div class="pagination">
-        <div class="pagination-controls">
-          <button class="pagination-btn" disabled>‹</button>
-          <button class="pagination-btn active">1</button>
-          <button class="pagination-btn">2</button>
-          <button class="pagination-btn">3</button>
-          <span style="color:var(--ink-3);">...</span>
-          <button class="pagination-btn">28</button>
-          <button class="pagination-btn">›</button>
-        </div>
+        <div class="pagination-controls" id="paginationControls"></div>
       </div>
     </div>
+  </div>
 
-    <div style="height:28px;"></div>
-  </main>
-</div>
+  <!-- MODAL Chi tiết Nhà tuyển dụng -->
+  <div id="companyModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Chi tiết Nhà tuyển dụng</h3><span class="modal-close" onclick="closeCompanyModal()"><span
+            class="material-symbols-outlined">close</span></span>
+      </div>
+      <div class="modal-body" id="companyModalBody"></div>
+      <div class="modal-footer"><button class="btn-secondary" onclick="closeCompanyModal()">Đóng</button><button
+          class="btn-danger" id="modalBlockCompanyBtn">Khóa tài khoản</button><button class="btn-primary"
+          onclick="alert('Xem hồ sơ đầy đủ (Demo)')">Xem hồ sơ đầy đủ →</button></div>
+    </div>
+  </div>
 
+  <script>
+    const jobsData = [
+      { id: 1, jobTitle: "Fullstack Java Developer", company: "FPT Software", companyCode: "FPT", location: "Cầu Giấy, Hà Nội", salary: "$1,800 - $2,500", deadline: "15/12/2024", status: "pending", industry: "IT", postDate: "2024-11-20", companyId: 1 },
+      { id: 2, jobTitle: "Digital Marketing Specialist", company: "VinCommerce", companyCode: "VC", location: "Quận 1, TP.HCM", salary: "$1,200 - $1,800", deadline: "10/12/2024", status: "approved", industry: "Marketing", postDate: "2024-11-18", companyId: 2 },
+      { id: 3, jobTitle: "Machine Learning Engineer", company: "KMS Technology", companyCode: "KMS", location: "Hải Châu, Đà Nẵng", salary: "$3,000 - $4,500", deadline: "20/12/2024", status: "pending", industry: "IT", postDate: "2024-11-15", companyId: 3 },
+      { id: 4, jobTitle: "Trưởng phòng Kinh doanh", company: "Masan Group", companyCode: "MAS", location: "Quận 3, TP.HCM", salary: "$2,000 - $3,000", deadline: "05/12/2024", status: "rejected", industry: "Sales", postDate: "2024-11-10", companyId: 4 },
+      { id: 5, jobTitle: "Senior UX/UI Designer", company: "TikTok Vietnam", companyCode: "TIK", location: "Quận 2, TP.HCM", salary: "$2,500 - $3,800", deadline: "18/12/2024", status: "approved", industry: "Design", postDate: "2024-11-12", companyId: 5 },
+      { id: 6, jobTitle: "Cloud DevOps Engineer", company: "NashTech", companyCode: "NASH", location: "Ba Đình, Hà Nội", salary: "$2,200 - $3,200", deadline: "25/12/2024", status: "pending", industry: "IT", postDate: "2024-11-14", companyId: 6 }
+    ];
+
+    const companyDetails = {
+      1: { id: "EMP-4920", name: "FPT Software", industry: "Công nghệ", size: "1,000 - 5,000 NV", status: "active", verified: true, email: "hr-contact@fpt.com.vn", phone: "024 3768 ****", address: "Lô E2a-7, Đường D1, Khu Công nghệ cao, P. Long Thạnh Mỹ, TP. Thủ Đức, TP. HCM", website: "https://fpt-software.com", tax: "0101248141", joinDate: "12/05/2021", jobs: [{ title: "Senior Java Backend Developer (Spring Boot)", views: "2.4k lượt xem", salary: "25 - 45 TRIỆU" }, { title: "React Native Team Lead - Finance Project", views: "1.1k lượt xem", salary: "Thỏa thuận" }, { title: "Product Designer (UI/UX) - Mobile Apps", views: "Vi phạm chính sách nội dung", salary: "" }], package: "Enterprise Gold", plan: "VIP PLAN", daysLeft: 187, postedLimit: "42 / 100 tin", totalJobs: 156, totalApplicants: "2.4k", totalCVViews: 892, transactions: [{ name: "Gia hạn gói Gold (12 tháng)", date: "Hôm nay, 14:30", price: "24.500.000đ", status: "Thành công" }, { name: "Mua 50 lượt xem CV", date: "02/11/2023", price: "1.250.000đ", status: "Thành công" }, { name: "Tin tuyển dụng Hot (7 ngày)", date: "25/10/2023", price: "850.000đ", status: "Thành công" }] },
+      2: { id: "EMP-4821", name: "VinCommerce", industry: "Bán lẻ", size: "10,000+ NV", status: "active", verified: true, email: "hr@vincommerce.vn", phone: "028 3820 ****", address: "Tầng 8, Tòa nhà Vincom Center, 72 Lê Thánh Tôn, Quận 1, TP.HCM", website: "https://vincommerce.vn", tax: "0301234567", joinDate: "15/03/2020", jobs: [{ title: "Digital Marketing Manager", views: "3.2k lượt xem", salary: "30 - 50 TRIỆU" }], package: "Enterprise Gold", plan: "VIP PLAN", daysLeft: 92, postedLimit: "28 / 80 tin", totalJobs: 98, totalApplicants: "1.8k", totalCVViews: 456, transactions: [] },
+      3: { id: "EMP-5102", name: "KMS Technology", industry: "Công nghệ", size: "1,000 - 5,000 NV", status: "active", verified: true, email: "recruiting@kms-technology.com", phone: "0236 388 ****", address: "Tòa nhà KMS, 123 Nguyễn Văn Linh, Đà Nẵng", website: "https://kms-technology.com", tax: "0400987654", joinDate: "20/08/2019", jobs: [], package: "Enterprise Silver", plan: "SILVER PLAN", daysLeft: 45, postedLimit: "15 / 50 tin", totalJobs: 67, totalApplicants: "892", totalCVViews: 234, transactions: [] },
+      4: { id: "EMP-5001", name: "Masan Group", industry: "Hàng tiêu dùng", size: "10,000+ NV", status: "active", verified: true, email: "hr@masan.com.vn", phone: "028 3910 ****", address: "Tầng 10, Tòa nhà Masan, 39 Lê Duẩn, Quận 1, TP.HCM", website: "https://masan.com.vn", tax: "0301234891", joinDate: "10/01/2018", jobs: [{ title: "Trưởng phòng Kinh doanh", views: "1.8k lượt xem", salary: "40 - 60 TRIỆU" }], package: "Enterprise Gold", plan: "VIP PLAN", daysLeft: 45, postedLimit: "35 / 100 tin", totalJobs: 124, totalApplicants: "3.2k", totalCVViews: 1023, transactions: [] },
+      5: { id: "EMP-5120", name: "TikTok Vietnam", industry: "Công nghệ", size: "500 - 1,000 NV", status: "active", verified: true, email: "hr@tiktok.com", phone: "028 3620 ****", address: "Tầng 25, Tòa nhà Vincom Center, 72 Lê Thánh Tôn, Quận 1, TP.HCM", website: "https://tiktok.com", tax: "0312345678", joinDate: "05/06/2019", jobs: [{ title: "Senior UX/UI Designer", views: "2.9k lượt xem", salary: "40 - 60 TRIỆU" }], package: "Enterprise Gold", plan: "VIP PLAN", daysLeft: 120, postedLimit: "28 / 70 tin", totalJobs: 86, totalApplicants: "2.1k", totalCVViews: 567, transactions: [] },
+      6: { id: "EMP-5210", name: "NashTech", industry: "Công nghệ", size: "500 - 1,000 NV", status: "active", verified: true, email: "recruitment@nashtech.com", phone: "024 3768 ****", address: "Tòa nhà NashTech, 123 Hoàng Quốc Việt, Cầu Giấy, Hà Nội", website: "https://nashtechglobal.com", tax: "0109876543", joinDate: "15/07/2020", jobs: [{ title: "Cloud DevOps Engineer", views: "1.5k lượt xem", salary: "35 - 50 TRIỆU" }], package: "Enterprise Silver", plan: "SILVER PLAN", daysLeft: 30, postedLimit: "18 / 50 tin", totalJobs: 54, totalApplicants: "789", totalCVViews: 234, transactions: [] }
+    };
+
+    let currentPage = 1;
+    const itemsPerPage = 5;
+
+    function getFilteredJobs() {
+      const status = document.getElementById('statusFilter').value;
+      const industry = document.getElementById('industryFilter').value;
+      const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
+      const dateFrom = document.getElementById('dateFrom').value;
+      const dateTo = document.getElementById('dateTo').value;
+
+      return jobsData.filter(job => {
+        if (status && job.status !== status) return false;
+        if (industry && job.industry !== industry) return false;
+        if (search && !job.jobTitle.toLowerCase().includes(search) && !job.company.toLowerCase().includes(search)) return false;
+        if (dateFrom) {
+          const fromDate = new Date(dateFrom);
+          const postDate = new Date(job.postDate);
+          if (postDate < fromDate) return false;
+        }
+        if (dateTo) {
+          const toDate = new Date(dateTo);
+          const postDate = new Date(job.postDate);
+          if (postDate > toDate) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderTable() {
+      const filtered = getFilteredJobs();
+      const totalPages = Math.ceil(filtered.length / itemsPerPage);
+      const start = (currentPage - 1) * itemsPerPage;
+      const paginated = filtered.slice(start, start + itemsPerPage);
+      const tbody = document.getElementById('jobTableBody');
+      tbody.innerHTML = '';
+
+      if (paginated.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:48px;">Không có dữ liệu</td></tr>';
+        document.getElementById('paginationControls').innerHTML = '';
+        return;
+      }
+
+      paginated.forEach(job => {
+        let statusHtml = '';
+        if (job.status === 'pending') statusHtml = '<span class="status-badge status-pending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Chờ duyệt</span>';
+        else if (job.status === 'approved') statusHtml = '<span class="status-badge status-approved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Đã duyệt</span>';
+        else statusHtml = '<span class="status-badge status-rejected"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Đã từ chối</span>';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `<td><div class="company-cell"><div class="company-logo">${job.companyCode.charAt(0)}</div><div><div class="job-title">${job.jobTitle}</div><div class="company-name">${job.company}</div></div></div></td><td>${job.location}</td><td style="text-align:center;">${job.salary}</td><td style="text-align:center;">${job.deadline}</td><td style="text-align:center;">${statusHtml}</td><td style="text-align:center;"><div class="action-buttons"><button class="action-btn action-btn-view" onclick="openCompanyModal(${job.companyId})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Xem</button>`;
+
+        if (job.status === 'pending') {
+          row.innerHTML += `<button class="action-btn action-btn-approve" onclick="approveJob(${job.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Duyệt</button>
+                          <button class="action-btn action-btn-reject" onclick="rejectJob(${job.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Từ chối</button>`;
+        } else {
+          row.innerHTML += `<button class="action-btn action-btn-approve" style="opacity:0.5;cursor:not-allowed;" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Duyệt</button>
+                          <button class="action-btn action-btn-reject" style="opacity:0.5;cursor:not-allowed;" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Từ chối</button>`;
+        }
+        row.innerHTML += `</div></td>`;
+        tbody.appendChild(row);
+      });
+
+      let pagHtml = `<button class="pagination-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+      for (let i = 1; i <= Math.min(totalPages, 5); i++) pagHtml += `<button class="pagination-btn ${currentPage === i ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+      if (totalPages > 5) pagHtml += `<span style="color:var(--ink-3);">...</span><button class="pagination-btn" onclick="changePage(${totalPages})">${totalPages}</button>`;
+      pagHtml += `<button class="pagination-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>›</button>`;
+      document.getElementById('paginationControls').innerHTML = pagHtml;
+    }
+
+    function changePage(page) {
+      const filtered = getFilteredJobs();
+      const totalPages = Math.ceil(filtered.length / itemsPerPage);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      renderTable();
+    }
+
+    function approveJob(id) {
+      const job = jobsData.find(j => j.id === id);
+      if (job && job.status === 'pending') {
+        job.status = 'approved';
+        renderTable();
+        alert(`✅ Đã duyệt tin "${job.jobTitle}"`);
+      }
+    }
+
+    function rejectJob(id) {
+      const job = jobsData.find(j => j.id === id);
+      if (job && job.status === 'pending') {
+        job.status = 'rejected';
+        renderTable();
+        alert(`❌ Đã từ chối tin "${job.jobTitle}"`);
+      }
+    }
+
+    function openCompanyModal(companyId) {
+      const comp = companyDetails[companyId];
+      if (!comp) return;
+      const jobsHtml = comp.jobs.map(j => `<div class="modal-job-item"><div><div class="modal-job-title">${j.title}</div><div class="modal-job-views">${j.views}</div></div><div class="modal-job-salary">${j.salary}</div></div>`).join('');
+      const transHtml = comp.transactions.map(t => `<div class="modal-trans-item"><div><div class="modal-trans-name">${t.name}</div><div class="modal-trans-date">${t.date}</div></div><div><div class="modal-trans-price">${t.price}</div><div class="modal-trans-status">${t.status}</div></div></div>`).join('');
+      document.getElementById('companyModalBody').innerHTML = `
+      <div class="modal-company-header"><div class="modal-company-logo">${comp.name.charAt(0)}</div><div class="modal-company-info"><h2>${comp.name}</h2><div class="modal-company-tags"><span>${comp.industry}</span><span>${comp.size}</span></div><div class="modal-company-tags" style="margin-top:8px;"><span style="background:#eaf3de;color:#27500a;">MÃ: ${comp.id}</span></div></div></div>
+      <div class="modal-status-row"><span class="modal-status-badge modal-status-active"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>ĐANG HOẠT ĐỘNG</span><span class="modal-status-badge modal-status-verified"><span class="material-symbols-outlined" style="font-size:16px;">verified</span>ĐÃ XÁC THỰC</span></div>
+      <div class="modal-info-grid"><div class="modal-info-item"><label>Email doanh nghiệp</label><div class="value">${comp.email}</div></div><div class="modal-info-item"><label>Số điện thoại</label><div class="value">${comp.phone} <span style="color:var(--violet);cursor:pointer;" onclick="alert('Hiện số điện thoại (Demo)')">Hiện</span></div></div><div class="modal-info-item"><label>Địa chỉ</label><div class="value">${comp.address}</div></div><div class="modal-info-item"><label>Website</label><div class="value"><a href="#" style="color:var(--violet);text-decoration:none;">${comp.website}</a></div></div><div class="modal-info-item"><label>Mã số thuế</label><div class="value">${comp.tax}</div></div><div class="modal-info-item"><label>Ngày tham gia</label><div class="value">${comp.joinDate}</div></div></div>
+      <div class="modal-stats"><div class="modal-stat"><div class="modal-stat-number">${comp.totalJobs}</div><div class="modal-stat-label">Tin tuyển dụng</div></div><div class="modal-stat"><div class="modal-stat-number">3</div><div class="modal-stat-label">Người liên hệ</div></div></div>
+      <div class="modal-jobs-list"><h4>📌 Tin tuyển dụng (${comp.jobs.length})</h4>${jobsHtml || '<div style="padding:16px;text-align:center;color:var(--ink-3);">Chưa có tin tuyển dụng</div>'}</div>
+      <div class="modal-package"><div class="modal-package-title">Đăng ký · ${comp.package}</div><div style="font-size:32px;font-weight:800;color:var(--violet);">${comp.plan}</div><div style="display:flex;justify-content:space-between;margin-top:12px;"><span>⏳ Thời gian còn lại</span><strong>${comp.daysLeft} ngày</strong></div><div style="display:flex;justify-content:space-between;"><span>📊 Hạn mức đăng tin</span><strong>${comp.postedLimit}</strong></div></div>
+      <div class="modal-stats"><div class="modal-stat"><div class="modal-stat-number">${comp.totalJobs}</div><div class="modal-stat-label">Tổng tin</div></div><div class="modal-stat"><div class="modal-stat-number">${comp.totalApplicants}</div><div class="modal-stat-label">Ứng tuyển</div></div><div class="modal-stat"><div class="modal-stat-number">${comp.totalCVViews}</div><div class="modal-stat-label">XEM CV</div></div></div>
+      <div class="modal-transactions"><h4>📜 Lịch sử giao dịch</h4>${transHtml || '<div style="padding:16px;text-align:center;color:var(--ink-3);">Chưa có giao dịch</div>'}</div>
+      <div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:12px;font-size:12px;color:var(--ink-3);">Cập nhật lần cuối: 2 giờ trước bởi Admin_Tu</div>
+    `;
+      const blockBtn = document.getElementById('modalBlockCompanyBtn');
+      blockBtn.onclick = () => { alert(`🔒 Đã khóa tài khoản ${comp.name}`); closeCompanyModal(); };
+      document.getElementById('companyModal').classList.add('active');
+    }
+
+    function closeCompanyModal() { document.getElementById('companyModal').classList.remove('active'); }
+    document.getElementById('companyModal').addEventListener('click', (e) => { if (e.target === document.getElementById('companyModal')) closeCompanyModal(); });
+
+    // Thêm search input listener
+    const searchInput = document.querySelector('.search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => { currentPage = 1; renderTable(); });
+    }
+
+    document.getElementById('statusFilter').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('industryFilter').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('dateFrom').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('dateTo').addEventListener('change', () => { currentPage = 1; renderTable(); });
+
+    document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+      document.getElementById('statusFilter').value = '';
+      document.getElementById('industryFilter').value = '';
+      if (searchInput) searchInput.value = '';
+      document.getElementById('dateFrom').value = '';
+      document.getElementById('dateTo').value = '';
+      currentPage = 1;
+      renderTable();
+    });
+
+    document.getElementById('exportExcelBtn').addEventListener('click', () => {
+      const filtered = getFilteredJobs();
+      if (filtered.length === 0) { alert('Không có dữ liệu để xuất!'); return; }
+      const exportData = filtered.map(j => ({ 'Tiêu đề': j.jobTitle, 'Công ty': j.company, 'Địa điểm': j.location, 'Mức lương': j.salary, 'Hạn nộp': j.deadline, 'Trạng thái': j.status === 'pending' ? 'Chờ duyệt' : j.status === 'approved' ? 'Đã duyệt' : 'Đã từ chối' }));
+      const ws = XLSX.utils.json_to_sheet(exportData);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Tin tuyển dụng');
+      XLSX.writeFile(wb, `tin_tuyen_dung_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.xlsx`);
+    });
+
+    renderTable();
+  </script>
 </body>
+
 </html>

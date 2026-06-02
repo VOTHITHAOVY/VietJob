@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt thông báo email</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --green: #16a34a;
+            --green-bg: #dcfce7;
+            --amber: #b45309;
+            --amber-bg: #fef3c7;
+            --red: #dc2626;
+            --red-bg: #fee2e2;
+            --blue: #1d4ed8;
+            --blue-bg: #dbeafe;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-xs: 11px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: transparent;
+            color: var(--ink);
+            font-size: var(--fs-base);
+        }
+
+        .email-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--ink-3);
+        }
+
+        /* Grid 2 cột */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Card chung */
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--rule);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .card-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .card-header p {
+            font-size: 12px;
+            color: var(--ink-3);
+            margin-top: 4px;
+        }
+
+        .card-body {
+            padding: 20px 24px;
+        }
+
+        /* Form group */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-2);
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px 14px;
+            border: 1px solid var(--ink-4);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: 0.15s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(91, 33, 245, 0.1);
+        }
+
+        /* Toggle switch */
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-info .toggle-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .toggle-info .toggle-desc {
+            font-size: 12px;
+            color: var(--ink-3);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--ink-4);
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--violet);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Template preview */
+        .template-preview {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid var(--rule);
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .template-subject {
+            padding: 10px;
+            background: var(--surface);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid var(--rule);
+        }
+
+        .template-html {
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 12px;
+            overflow-x: auto;
+            font-size: 11px;
+            line-height: 1.5;
+            border: 1px solid var(--rule);
+        }
+
+        .template-html pre {
+            font-family: 'DM Mono', monospace;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .btn-edit-template {
+            background: var(--violet-bg);
+            color: var(--violet);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 12px;
+            font-family: inherit;
+        }
+
+        .btn-edit-template:hover {
+            background: var(--violet-mid);
+        }
+
+        /* Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .btn-primary {
+            background: var(--violet);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: #4c1cd9;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--ink-4);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            color: var(--ink-2);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        .btn-test {
+            background: var(--blue-bg);
+            color: var(--blue);
+            border: 1px solid var(--blue);
+        }
+
+        .btn-test:hover {
+            background: var(--blue);
+            color: white;
+        }
+
+        select {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="page-header">
+            <h2>Cài đặt thông báo email</h2>
+            <p>Cấu hình các loại email tự động gửi từ hệ thống</p>
+        </div>
+
+        <div class="two-columns">
+            <!-- Cột trái: Cấu hình SMTP + Kích hoạt loại thông báo -->
+            <div>
+                <!-- Cấu hình SMTP -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Cấu hình SMTP</h3>
+                        <p>Thiết lập máy chủ gửi email</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>SMTP Host</label>
+                            <input type="text" value="smtp.gmail.com" id="smtpHost">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Port</label>
+                                <input type="text" value="587" id="smtpPort">
+                            </div>
+                            <div class="form-group">
+                                <label>Mã hóa</label>
+                                <select id="encryption">
+                                    <option selected>TLS</option>
+                                    <option>SSL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên hiển thị</label>
+                            <input type="text" value="Hệ thống Tuyển dụng" id="displayName">
+                        </div>
+                        <div class="form-group">
+                            <label>Email gửi đi</label>
+                            <input type="email" value="noreply@system.com" id="fromEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" value="password123" id="smtpPassword">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kích hoạt loại thông báo -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Kích hoạt loại thông báo</h3>
+                        <p>Bật/tắt các loại email tự động</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Welcome email</div>
+                                <div class="toggle-desc">Gửi email chào mừng khi người dùng mới đăng ký thành công.
+                                </div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="toggleWelcome" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Job approval</div>
+                                <div class="toggle-desc">Thông báo cho nhà tuyển dụng khi tin tuyển dụng được duyệt.
+                                </div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="toggleJobApproval" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Renewal reminder</div>
+                                <div class="toggle-desc">Nhắc nhở gia hạn dịch vụ trước khi hết hạn 3 ngày.</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="toggleRenewal" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Weekly report</div>
+                                <div class="toggle-desc">Gửi báo cáo hiệu quả tuyển dụng hàng tuần cho quản trị viên.
+                                </div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="toggleWeeklyReport">
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Xem trước Template -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Xem trước Template</h3>
+                        <p>Đây là mẫu hiển thị cho loại "Welcome email"</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Chọn loại email</label>
+                            <select id="templateType">
+                                <option value="welcome" selected>Welcome email</option>
+                                <option value="job_approval">Job approval</option>
+                                <option value="renewal">Renewal reminder</option>
+                                <option value="weekly">Weekly report</option>
+                            </select>
+                        </div>
+
+                        <div class="template-preview">
+                            <div class="template-subject">
+                                <strong>Subject:</strong> [Hệ thống] Chào mừng thành viên mới!
+                            </div>
+                            <div class="template-html">
+                                <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style="color: #5b21f5;"&gt;Chào {user_name}&lt;/h2&gt;
+    &lt;p&gt;Chào mừng bạn đã gia nhập cộng đồng của chúng tôi.&lt;/p&gt;
+    &lt;a href="#" style="background: #5b21f5; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;"&gt;
+        Kích hoạt tài khoản
+    &lt;/a&gt;
+    &lt;p&gt;&lt;strong&gt;Tên tài khoản:&lt;/strong&gt; {username}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; {email}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                            </div>
+                        </div>
+
+                        <button class="btn-edit-template" id="editTemplateBtn">✏️ Chỉnh sửa Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-outline" id="cancelBtn">Hủy bỏ</button>
+            <button class="btn-outline btn-test" id="testEmailBtn">📧 Gửi email thử</button>
+            <button class="btn-primary" id="saveBtn">Lưu thay đổi</button>
+        </div>
+    </div>
+
+    <script>
+        // Toast thông báo đang phát triển
+        function showDevToast(message = '⚙️ Chức năng đang được phát triển') {
+            let toast = document.getElementById('devToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'devToast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1e1e2a;
+                    color: white;
+                    padding: 10px 24px;
+                    border-radius: 40px;
+                    font-size: 13px;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: 0.2s;
+                    pointer-events: none;
+                    font-family: 'DM Sans', sans-serif;
+                    white-space: nowrap;
+                `;
+                document.body.appendChild(toast);
+            }
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Xử lý nút Chỉnh sửa Template
+        document.getElementById('editTemplateBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('✏️ Tính năng chỉnh sửa template đang phát triển');
+        });
+
+        // Xử lý nút Gửi email thử
+        document.getElementById('testEmailBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('📧 Tính năng gửi email thử đang phát triển');
+        });
+
+        // Xử lý nút Lưu
+        document.getElementById('saveBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('💾 Đang lưu cấu hình email...');
+        });
+
+        // Xử lý nút Hủy
+        document.getElementById('cancelBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('❌ Đã hủy thay đổi');
+        });
+
+        // Xử lý khi chọn loại template khác
+        document.getElementById('templateType').addEventListener('change', (e) => {
+            const type = e.target.value;
+            const subjectEl = document.querySelector('.template-subject');
+            const htmlPre = document.querySelector('.template-html pre');
+
+            if (type === 'welcome') {
+                subjectEl.innerHTML = '<strong>Subject:</strong> [Hệ thống] Chào mừng thành viên mới!';
+                htmlPre.innerHTML = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style="color: #5b21f5;"&gt;Chào {user_name}&lt;/h2&gt;
+    &lt;p&gt;Chào mừng bạn đã gia nhập cộng đồng của chúng tôi.&lt;/p&gt;
+    &lt;a href="#" style="background: #5b21f5; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;"&gt;
+        Kích hoạt tài khoản
+    &lt;/a&gt;
+    &lt;p&gt;&lt;strong&gt;Tên tài khoản:&lt;/strong&gt; {username}&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Email:&lt;/strong&gt; {email}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+            } else if (type === 'job_approval') {
+                subjectEl.innerHTML = '<strong>Subject:</strong> [Hệ thống] Tin tuyển dụng của bạn đã được duyệt';
+                htmlPre.innerHTML = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style="color: #16a34a;"&gt;Xin chào {employer_name}&lt;/h2&gt;
+    &lt;p&gt;Tin tuyển dụng &lt;strong&gt;{job_title}&lt;/strong&gt; đã được duyệt thành công.&lt;/p&gt;
+    &lt;p&gt;Tin của bạn đang được hiển thị trên hệ thống.&lt;/p&gt;
+    &lt;a href="{job_link}" style="background: #16a34a; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;"&gt;
+        Xem tin tuyển dụng
+    &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+            } else if (type === 'renewal') {
+                subjectEl.innerHTML = '<strong>Subject:</strong> [Thông báo] Gói dịch vụ sắp hết hạn';
+                htmlPre.innerHTML = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style="color: #b45309;"&gt;Thông báo gia hạn dịch vụ&lt;/h2&gt;
+    &lt;p&gt;Gói &lt;strong&gt;{package_name}&lt;/strong&gt; của bạn sẽ hết hạn sau &lt;strong&gt;3 ngày&lt;/strong&gt;.&lt;/p&gt;
+    &lt;p&gt;Vui lòng gia hạn để tiếp tục sử dụng dịch vụ.&lt;/p&gt;
+    &lt;a href="{renewal_link}" style="background: #b45309; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;"&gt;
+        Gia hạn ngay
+    &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+            } else if (type === 'weekly') {
+                subjectEl.innerHTML = '<strong>Subject:</strong> [Báo cáo tuần] Báo cáo hiệu quả tuyển dụng';
+                htmlPre.innerHTML = `&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2 style="color: #1d4ed8;"&gt;Báo cáo tuần {week}&lt;/h2&gt;
+    &lt;p&gt;Tổng số tin tuyển dụng mới: &lt;strong&gt;{total_jobs}&lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Tổng số đơn ứng tuyển: &lt;strong&gt;{total_applications}&lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;Tỷ lệ chuyển đổi: &lt;strong&gt;{conversion_rate}%&lt;/strong&gt;&lt;/p&gt;
+    &lt;a href="{report_link}" style="background: #1d4ed8; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px;"&gt;
+        Xem báo cáo chi tiết
+    &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;`;
+            }
+        });
+    </script>
+</body>
+
+</html>

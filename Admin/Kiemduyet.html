@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiểm duyệt nội dung — ViecJob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink: #0e0e10; --ink-2: #4a4a52; --ink-3: #9898a6; --ink-4: #c8c8d4;
+  --rule: #ebebf0; --surface: #ffffff; --bg: #f7f7f9;
+  --violet: #5b21f5; --violet-2: #7c4dff; --violet-bg: #f0ebff; --violet-mid: #c4b0fa;
+  --green: #16a34a; --green-bg: #dcfce7; --amber: #b45309; --amber-bg: #fef3c7;
+  --red: #dc2626; --red-bg: #fee2e2; --blue: #1d4ed8; --blue-bg: #dbeafe;
+  --r: 8px; --r-lg: 12px; --fs-sm: 12.5px; --fs-base: 13.5px; --fs-md: 15px; --fs-lg: 18px; --fs-xl: 24px;
+}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:var(--fs-base);
+  padding:0;
+  margin:0;
+}
+
+/* Nội dung chính */
+.content{padding:28px 24px;}
+.page-head{margin-bottom:28px;}
+.page-title{font-size:var(--fs-xl);font-weight:600;margin-bottom:8px;}
+.page-sub{font-size:14px;color:var(--ink-3);}
+
+/* Stats Cards */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:18px;}
+.stat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.stat-label{font-size:11px;font-weight:600;text-transform:uppercase;color:var(--ink-3);}
+.stat-icon{width:32px;height:32px;background:var(--violet-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--violet);}
+.stat-value{font-size:28px;font-weight:700;margin-bottom:6px;}
+.stat-trend{font-size:12px;display:flex;align-items:center;gap:4px;}
+.stat-trend.up{color:var(--green);}
+.stat-trend.down{color:var(--red);}
+
+/* Filter Bar */
+.filter-bar{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:24px;}
+.filter-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
+.filter-row:last-child{margin-bottom:0;}
+.filter-group{flex:1;min-width:140px;}
+.filter-label{font-size:10px;font-weight:600;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;display:block;}
+.filter-select,.filter-input{width:100%;padding:8px 12px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);font-size:var(--fs-sm);outline:none;cursor:pointer;}
+.filter-select:focus,.filter-input:focus{border-color:var(--violet-mid);}
+.filter-actions{display:flex;gap:12px;align-items:flex-end;}
+.btn-outline{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);font-size:var(--fs-sm);cursor:pointer;font-family:inherit;}
+.btn-outline:hover{background:var(--bg);}
+.btn-primary{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--violet);border:none;border-radius:var(--r);color:#fff;cursor:pointer;font-family:inherit;}
+.btn-primary:hover{background:var(--violet-2);}
+
+/* Request List */
+.request-list{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+.request-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow 0.2s;}
+.request-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.05);}
+.request-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--bg);border-bottom:1px solid var(--rule);}
+.request-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge-pending{background:var(--amber-bg);color:var(--amber);}
+.badge-company{background:var(--violet-bg);color:var(--violet);}
+.badge-cv{background:var(--blue-bg);color:var(--blue);}
+.request-time{font-size:12px;color:var(--ink-3);display:flex;align-items:center;gap:4px;}
+.request-body{padding:20px;}
+.request-info-row{display:flex;gap:24px;margin-bottom:20px;flex-wrap:wrap;}
+.info-item{flex:1;min-width:180px;}
+.info-label{font-size:10px;font-weight:600;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px;display:block;}
+.info-value{font-size:14px;font-weight:500;color:var(--ink);}
+.info-value.company{color:var(--violet);font-weight:600;}
+.request-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-bottom:20px;padding-top:16px;border-top:1px solid var(--rule);}
+.request-actions{display:flex;gap:12px;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--rule);}
+.btn-sm{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:inherit;}
+.btn-view{background:var(--bg);border:1px solid var(--rule);color:var(--ink-2);}
+.btn-view:hover{background:var(--violet-bg);border-color:var(--violet-mid);color:var(--violet);}
+.btn-approve{background:var(--green-bg);color:var(--green);}
+.btn-approve:hover{background:var(--green);color:white;}
+.btn-reject{background:var(--red-bg);color:var(--red);}
+.btn-reject:hover{background:var(--red);color:white;}
+
+/* Pagination */
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;padding:16px 0;}
+.pagination-btn{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--surface);border:1px solid var(--rule);cursor:pointer;font-family:inherit;font-size:13px;}
+.pagination-btn:hover{background:var(--bg);border-color:var(--ink-4);}
+.pagination-btn.active{background:var(--violet);color:white;border-color:var(--violet);}
+.pagination-btn:disabled{opacity:0.4;cursor:not-allowed;}
+
+/* Modal Preview */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(3px);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.2s;}
+.modal-overlay.active{opacity:1;visibility:visible;}
+.modal-container{background:white;border-radius:24px;width:800px;max-width:90%;max-height:85vh;overflow-y:auto;}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--rule);}
+.modal-header h3{font-size:20px;font-weight:700;}
+.modal-close{cursor:pointer;color:var(--ink-3);}
+.modal-body{padding:24px;}
+.modal-footer{display:flex;gap:12px;justify-content:flex-end;padding:16px 24px;border-top:1px solid var(--rule);}
+</style>
+</head>
+<body>
+<div class="content">
+  <!-- Header -->
+  <div class="page-head">
+    <h1 class="page-title">Kiểm duyệt nội dung</h1>
+    <p class="page-sub">Quản lý và phê duyệt các nội dung mới được đăng tải trên nền tảng.</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-header"><span class="stat-label">Tổng yêu cầu hôm nay</span><div class="stat-icon"><span class="material-symbols-outlined" style="font-size:20px;">assignment</span></div></div><div class="stat-value">42</div><div class="stat-trend up"><span class="material-symbols-outlined" style="font-size:14px;">arrow_upward</span>↑12%</div></div>
+    <div class="stat-card"><div class="stat-header"><span class="stat-label">Hồ sơ ứng viên mới</span><div class="stat-icon"><span class="material-symbols-outlined" style="font-size:20px;">description</span></div></div><div class="stat-value">128</div><div class="stat-trend up"><span class="material-symbols-outlined" style="font-size:14px;">arrow_upward</span>↑8%</div></div>
+    <div class="stat-card"><div class="stat-header"><span class="stat-label">Doanh nghiệp chờ duyệt</span><div class="stat-icon"><span class="material-symbols-outlined" style="font-size:20px;">business</span></div></div><div class="stat-value">05</div><div class="stat-trend down"><span class="material-symbols-outlined" style="font-size:14px;">arrow_downward</span>↓2%</div></div>
+    <div class="stat-card"><div class="stat-header"><span class="stat-label">Thời gian duyệt TB</span><div class="stat-icon"><span class="material-symbols-outlined" style="font-size:20px;">schedule</span></div></div><div class="stat-value">14<span style="font-size:14px;">m</span></div><div class="stat-trend">/yêu cầu</div></div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="filter-row">
+      <div class="filter-group"><label class="filter-label">Đối tượng</label><select class="filter-select" id="objectFilter"><option value="">Tất cả</option><option value="company">Doanh nghiệp</option><option value="candidate">Ứng viên</option><option value="job">Tin tuyển dụng</option></select></div>
+      <div class="filter-group"><label class="filter-label">Thời gian</label><select class="filter-select" id="timeFilter"><option value="24h">24 giờ qua</option><option value="7d">7 ngày qua</option><option value="30d">30 ngày qua</option></select></div>
+      <div class="filter-group"><label class="filter-label">Loại đối tượng</label><select class="filter-select" id="typeFilter"><option value="">Tất cả</option><option value="company">Tài khoản công ty</option><option value="cv">Hồ sơ ứng viên</option><option value="job">Tin tuyển dụng</option></select></div>
+      <div class="filter-group"><label class="filter-label">Trạng thái</label><select class="filter-select" id="statusFilter"><option value="">Tất cả</option><option value="pending">Chờ duyệt</option><option value="approved">Đã duyệt</option><option value="rejected">Đã từ chối</option></select></div>
+      <div class="filter-actions"><button class="btn-outline" id="clearFiltersBtn"><span class="material-symbols-outlined" style="font-size:16px;">filter_alt_off</span>Xóa bộ lọc</button></div>
+    </div>
+  </div>
+
+  <!-- Request List -->
+  <div class="request-list" id="requestList"></div>
+
+  <!-- Pagination -->
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- Modal Preview -->
+<div id="previewModal" class="modal-overlay"><div class="modal-container"><div class="modal-header"><h3 id="modalTitle">Xem trước nội dung</h3><span class="modal-close" onclick="closeModal()"><span class="material-symbols-outlined">close</span></span></div><div class="modal-body" id="modalBody"></div><div class="modal-footer"><button class="btn-outline" onclick="closeModal()">Đóng</button><button class="btn-approve" id="modalApproveBtn">Duyệt</button><button class="btn-reject" id="modalRejectBtn">Từ chối</button></div></div></div>
+
+<script>
+  // Dữ liệu mẫu
+  const requests = [
+    { id:1, type:"company", title:"Công ty TNHH TechVision", objectName:"Công ty TNHH TechVision", taxCode:"0101234567", email:"contact@techvision.vn", phone:"024 7300 1234", address:"Tòa nhà TechVision, 123 Nguyễn Trãi, Thanh Xuân, Hà Nội", representative:"Trần Văn Minh", industry:"Công nghệ thông tin", submitDate:"2024-05-23T10:45:00", status:"pending", requestType:"ĐĂNG KÝ TÀI KHOẢN" },
+    { id:2, type:"candidate", title:"Nguyễn Văn An", objectName:"Nguyễn Văn An", position:"UI/UX Designer", experience:"5 năm", email:"an.nguyen@email.com", phone:"0983 456 789", cvFile:"CV_NguyenVanAn_2024.pdf", skills:"Figma, Adobe XD, Sketch, UI Design", submitDate:"2024-05-23T14:30:00", status:"pending", requestType:"HỒ SƠ ỨNG VIÊN" },
+    { id:3, type:"company", title:"Công ty Cổ phần Sữa Việt Nam (Vinamilk)", objectName:"Vinamilk", taxCode:"0300588569", email:"hr@vinamilk.com.vn", phone:"028 3822 1234", address:"Số 10, Tân Trào, P. Tân Phú, Quận 7, TP.HCM", representative:"Lê Thị Hoa", industry:"Sản xuất / Chế biến", submitDate:"2024-05-23T09:15:00", status:"pending", requestType:"ĐĂNG KÝ TÀI KHOẢN" },
+    { id:4, type:"job", title:"Senior Product Manager", objectName:"FPT Software", jobTitle:"Senior Product Manager", salary:"3000 - 4000 USD", location:"Hà Nội", deadline:"2024-06-30", description:"FPT Software đang tìm kiếm Product Manager có kinh nghiệm 5+ năm...", submitDate:"2024-05-22T16:20:00", status:"pending", requestType:"TIN TUYỂN DỤNG" },
+    { id:5, type:"candidate", title:"Trần Thị Bích Ngọc", objectName:"Trần Thị Bích Ngọc", position:"Frontend Developer", experience:"3 năm", email:"bichngoc.tran@email.com", phone:"0975 123 456", cvFile:"CV_TranThiBichNgoc.pdf", skills:"ReactJS, VueJS, HTML5, CSS3", submitDate:"2024-05-22T11:00:00", status:"pending", requestType:"HỒ SƠ ỨNG VIÊN" },
+    { id:6, type:"company", title:"Công ty Cổ phần Grab Vietnam", objectName:"Grab Vietnam", taxCode:"0109876543", email:"hr@grab.com.vn", phone:"028 7300 1234", address:"Tầng 25, Tòa nhà Saigon Centre, 65 Lê Lợi, Quận 1, TP.HCM", representative:"Michael Tan", industry:"Logistics / Công nghệ", submitDate:"2024-05-21T08:30:00", status:"pending", requestType:"ĐĂNG KÝ TÀI KHOẢN" }
+  ];
+
+  let currentPage = 1;
+  const itemsPerPage = 3;
+  let currentRequest = null;
+
+  function getFilteredRequests() {
+    const object = document.getElementById('objectFilter').value;
+    const type = document.getElementById('typeFilter').value;
+    const status = document.getElementById('statusFilter').value;
+    const time = document.getElementById('timeFilter').value;
+    
+    return requests.filter(r => {
+      if(object && r.type !== object) return false;
+      if(type && r.requestType.toLowerCase().replace(/ /g,'') !== type.toLowerCase() && 
+         (type === 'company' && r.type !== 'company') && 
+         (type === 'cv' && r.type !== 'candidate') &&
+         (type === 'job' && r.type !== 'job')) return false;
+      if(status && r.status !== status) return false;
+      if(time) {
+        const now = new Date();
+        const submitDate = new Date(r.submitDate);
+        const hoursDiff = (now - submitDate) / (1000 * 60 * 60);
+        if(time === '24h' && hoursDiff > 24) return false;
+        if(time === '7d' && hoursDiff > 168) return false;
+        if(time === '30d' && hoursDiff > 720) return false;
+      }
+      return true;
+    });
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}, ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+  }
+
+  function renderRequestCard(req) {
+    const badgeClass = req.type === 'company' ? 'badge-company' : (req.type === 'candidate' ? 'badge-cv' : 'badge-pending');
+    const badgeText = req.type === 'company' ? '🏢 TÀI KHOẢN CÔNG TY' : (req.type === 'candidate' ? '📄 HỒ SƠ ỨNG VIÊN' : '📌 TIN TUYỂN DỤNG');
+    
+    let bodyHtml = '';
+    if(req.type === 'company') {
+      bodyHtml = `
+        <div class="request-info-row">
+          <div class="info-item"><span class="info-label">Mã số thuế</span><span class="info-value">${req.taxCode}</span></div>
+          <div class="info-item"><span class="info-label">Email</span><span class="info-value">${req.email}</span></div>
+          <div class="info-item"><span class="info-label">Số điện thoại</span><span class="info-value">${req.phone}</span></div>
+        </div>
+        <div class="request-detail-grid">
+          <div class="info-item"><span class="info-label">Địa chỉ</span><span class="info-value">${req.address}</span></div>
+          <div class="info-item"><span class="info-label">Người đại diện</span><span class="info-value">${req.representative}</span></div>
+          <div class="info-item"><span class="info-label">Ngành nghề</span><span class="info-value">${req.industry}</span></div>
+        </div>`;
+    } else if(req.type === 'candidate') {
+      bodyHtml = `
+        <div class="request-info-row">
+          <div class="info-item"><span class="info-label">Vị trí</span><span class="info-value">${req.position}</span></div>
+          <div class="info-item"><span class="info-label">Kinh nghiệm</span><span class="info-value">${req.experience}</span></div>
+          <div class="info-item"><span class="info-label">Email</span><span class="info-value">${req.email}</span></div>
+        </div>
+        <div class="request-detail-grid">
+          <div class="info-item"><span class="info-label">Số điện thoại</span><span class="info-value">${req.phone}</span></div>
+          <div class="info-item"><span class="info-label">Kỹ năng</span><span class="info-value">${req.skills}</span></div>
+          <div class="info-item"><span class="info-label">CV</span><span class="info-value"><span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle;">description</span> ${req.cvFile}</span></div>
+        </div>`;
+    } else {
+      bodyHtml = `
+        <div class="request-info-row">
+          <div class="info-item"><span class="info-label">Công ty</span><span class="info-value company">${req.objectName}</span></div>
+          <div class="info-item"><span class="info-label">Mức lương</span><span class="info-value">${req.salary}</span></div>
+          <div class="info-item"><span class="info-label">Địa điểm</span><span class="info-value">${req.location}</span></div>
+        </div>
+        <div class="request-detail-grid">
+          <div class="info-item"><span class="info-label">Hạn nộp</span><span class="info-value">${req.deadline}</span></div>
+          <div class="info-item"><span class="info-label">Mô tả</span><span class="info-value">${req.description.substring(0, 100)}...</span></div>
+        </div>`;
+    }
+
+    return `
+      <div class="request-card">
+        <div class="request-header">
+          <div><span class="request-badge ${badgeClass}">${badgeText}</span></div>
+          <div class="request-time"><span class="material-symbols-outlined" style="font-size:14px;">schedule</span> ${formatDate(req.submitDate)}</div>
+        </div>
+        <div class="request-body">
+          <div class="request-info-row">
+            <div class="info-item"><span class="info-label">Đối tượng</span><span class="info-value">${req.title}</span></div>
+            <div class="info-item"><span class="info-label">Loại yêu cầu</span><span class="info-value">${req.requestType}</span></div>
+          </div>
+          ${bodyHtml}
+          <div class="request-actions">
+            <button class="btn-sm btn-view" onclick="viewRequest(${req.id})"><span class="material-symbols-outlined" style="font-size:14px;">visibility</span> Xem</button>
+            <button class="btn-sm btn-approve" onclick="approveRequest(${req.id})"><span class="material-symbols-outlined" style="font-size:14px;">check_circle</span> Duyệt</button>
+            <button class="btn-sm btn-reject" onclick="rejectRequest(${req.id})"><span class="material-symbols-outlined" style="font-size:14px;">cancel</span> Từ chối</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderList() {
+    const filtered = getFilteredRequests();
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    const start = (currentPage - 1) * itemsPerPage;
+    const paginated = filtered.slice(start, start + itemsPerPage);
+    
+    const container = document.getElementById('requestList');
+    if(paginated.length === 0) {
+      container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--ink-3);">📭 Không có yêu cầu kiểm duyệt nào</div>';
+    } else {
+      container.innerHTML = paginated.map(r => renderRequestCard(r)).join('');
+    }
+    
+    // Pagination
+    let pagHtml = '';
+    pagHtml += `<button class="pagination-btn" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+    for(let i=1; i<=Math.min(totalPages,5); i++) {
+      pagHtml += `<button class="pagination-btn ${currentPage===i?'active':''}" onclick="changePage(${i})">${i}</button>`;
+    }
+    if(totalPages > 5) pagHtml += `<span>...</span><button class="pagination-btn" onclick="changePage(${totalPages})">${totalPages}</button>`;
+    pagHtml += `<button class="pagination-btn" onclick="changePage(${currentPage+1})" ${currentPage===totalPages||totalPages===0?'disabled':''}>›</button>`;
+    document.getElementById('pagination').innerHTML = pagHtml;
+  }
+
+  function changePage(page) {
+    const filtered = getFilteredRequests();
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if(page >= 1 && page <= totalPages) {
+      currentPage = page;
+      renderList();
+    }
+  }
+
+  function viewRequest(id) {
+    currentRequest = requests.find(r => r.id === id);
+    if(!currentRequest) return;
+    
+    const modalBody = document.getElementById('modalBody');
+    let contentHtml = '';
+    
+    if(currentRequest.type === 'company') {
+      contentHtml = `
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Mã số thuế</span><div class="info-value">${currentRequest.taxCode}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Email</span><div class="info-value">${currentRequest.email}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Số điện thoại</span><div class="info-value">${currentRequest.phone}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Địa chỉ</span><div class="info-value">${currentRequest.address}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Người đại diện</span><div class="info-value">${currentRequest.representative}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Ngành nghề</span><div class="info-value">${currentRequest.industry}</div></div>`;
+    } else if(currentRequest.type === 'candidate') {
+      contentHtml = `
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Vị trí ứng tuyển</span><div class="info-value">${currentRequest.position}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Kinh nghiệm</span><div class="info-value">${currentRequest.experience}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Email</span><div class="info-value">${currentRequest.email}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Số điện thoại</span><div class="info-value">${currentRequest.phone}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Kỹ năng</span><div class="info-value">${currentRequest.skills}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">CV đính kèm</span><div class="info-value"><a href="#" style="color:var(--violet);">${currentRequest.cvFile}</a></div></div>`;
+    } else {
+      contentHtml = `
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Công ty</span><div class="info-value">${currentRequest.objectName}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Mức lương</span><div class="info-value">${currentRequest.salary}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Địa điểm</span><div class="info-value">${currentRequest.location}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Hạn nộp</span><div class="info-value">${currentRequest.deadline}</div></div>
+        <div class="info-item" style="margin-bottom:16px;"><span class="info-label">Mô tả chi tiết</span><div class="info-value">${currentRequest.description}</div></div>`;
+    }
+    
+    modalBody.innerHTML = `
+      <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--rule);">
+        <div class="info-item"><span class="info-label">ĐỐI TƯỢNG</span><div class="info-value" style="font-size:18px;font-weight:600;">${currentRequest.title}</div></div>
+        <div class="info-item"><span class="info-label">LOẠI YÊU CẦU</span><div class="info-value">${currentRequest.requestType}</div></div>
+        <div class="info-item"><span class="info-label">NGÀY GỬI</span><div class="info-value">${formatDate(currentRequest.submitDate)}</div></div>
+      </div>
+      ${contentHtml}
+    `;
+    
+    document.getElementById('modalTitle').innerText = `Xem trước - ${currentRequest.requestType}`;
+    document.getElementById('previewModal').classList.add('active');
+  }
+  
+  function approveRequest(id) {
+    const req = requests.find(r => r.id === id);
+    if(req && req.status === 'pending') {
+      req.status = 'approved';
+      renderList();
+      alert(`✅ Đã duyệt "${req.title}"`);
+      closeModal();
+    }
+  }
+  
+  function rejectRequest(id) {
+    const req = requests.find(r => r.id === id);
+    if(req && req.status === 'pending') {
+      req.status = 'rejected';
+      renderList();
+      alert(`❌ Đã từ chối "${req.title}"`);
+      closeModal();
+    }
+  }
+  
+  function closeModal() {
+    document.getElementById('previewModal').classList.remove('active');
+  }
+  
+  // Modal buttons
+  document.getElementById('modalApproveBtn').addEventListener('click', () => {
+    if(currentRequest) approveRequest(currentRequest.id);
+  });
+  document.getElementById('modalRejectBtn').addEventListener('click', () => {
+    if(currentRequest) rejectRequest(currentRequest.id);
+  });
+  document.getElementById('previewModal').addEventListener('click', (e) => {
+    if(e.target === document.getElementById('previewModal')) closeModal();
+  });
+  
+  // Filter events
+  document.getElementById('objectFilter').addEventListener('change', () => { currentPage = 1; renderList(); });
+  document.getElementById('timeFilter').addEventListener('change', () => { currentPage = 1; renderList(); });
+  document.getElementById('typeFilter').addEventListener('change', () => { currentPage = 1; renderList(); });
+  document.getElementById('statusFilter').addEventListener('change', () => { currentPage = 1; renderList(); });
+  document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+    document.getElementById('objectFilter').value = '';
+    document.getElementById('timeFilter').value = '24h';
+    document.getElementById('typeFilter').value = '';
+    document.getElementById('statusFilter').value = '';
+    currentPage = 1;
+    renderList();
+  });
+  
+  renderList();
+</script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý phân quyền</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --green: #16a34a;
+            --green-bg: #dcfce7;
+            --amber: #b45309;
+            --amber-bg: #fef3c7;
+            --red: #dc2626;
+            --red-bg: #fee2e2;
+            --blue: #1d4ed8;
+            --blue-bg: #dbeafe;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-xs: 11px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: transparent;
+            color: var(--ink);
+            font-size: var(--fs-base);
+        }
+
+        /* Container chính */
+        .permission-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--ink-3);
+        }
+
+        /* Card chung */
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--rule);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .card-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .card-body {
+            padding: 20px 24px;
+        }
+
+        /* Bảng ma trận quyền */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--fs-sm);
+        }
+
+        .matrix-table th,
+        .matrix-table td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .matrix-table th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--ink-2);
+            font-size: var(--fs-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .matrix-table th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+
+        .matrix-table td:first-child {
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .check-yes {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .check-no {
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        .check-partial {
+            background: var(--amber-bg);
+            color: var(--amber);
+        }
+
+        /* Danh sách vai trò */
+        .role-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .role-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .role-item:last-child {
+            border-bottom: none;
+        }
+
+        .role-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .role-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--ink);
+            min-width: 140px;
+        }
+
+        .role-members {
+            font-size: 13px;
+            color: var(--ink-3);
+        }
+
+        .role-members strong {
+            color: var(--violet);
+            font-size: 16px;
+        }
+
+        .role-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: inherit;
+            color: var(--ink-2);
+            transition: all 0.15s;
+        }
+
+        .btn-icon:hover {
+            background: var(--bg);
+            color: var(--violet);
+        }
+
+        .btn-edit {
+            background: var(--violet-bg);
+            color: var(--violet);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-edit:hover {
+            background: var(--violet-mid);
+        }
+
+        /* Alert info */
+        .alert-info {
+            background: #eef2ff;
+            border-left: 4px solid var(--blue);
+            padding: 14px 18px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: #1e3a8a;
+            margin-top: 16px;
+        }
+
+        /* Form thêm vai trò */
+        .add-role-form {
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .add-role-form .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-2);
+        }
+
+        .form-group input {
+            padding: 10px 14px;
+            border: 1px solid var(--ink-4);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: 0.15s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(91, 33, 245, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--violet);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: #4c1cd9;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--ink-4);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        /* Badge số lượng */
+        .member-count {
+            background: var(--violet-bg);
+            color: var(--violet);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="permission-container">
+        <!-- Header -->
+        <div class="page-header">
+            <h2>Quản lý phân quyền</h2>
+            <p>Cấu hình quyền truy cập theo từng vai trò trong hệ thống</p>
+        </div>
+
+        <!-- Ma trận quyền theo vai trò -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Ma trận quyền theo vai trò</h3>
+            </div>
+            <div class="card-body" style="padding: 0; overflow-x: auto;">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 160px;">CHỨC NĂNG</th>
+                            <th style="min-width: 120px;">SUPER ADMIN</th>
+                            <th style="min-width: 120px;">QUẢN TRỊ VIÊN</th>
+                            <th style="min-width: 120px;">KIỂM DUYỆT VIÊN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Quản lý người dùng</td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Duyệt tin tuyển dụng</td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                        </tr>
+                        <tr>
+                            <td>Cấu hình hệ thống</td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-partial">◐</span></td>
+                            <td><span class="check-icon check-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Quản lý phí dịch vụ</td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-no">✗</span></td>
+                            <td><span class="check-icon check-no">✗</span></td>
+                        </tr>
+                        <tr>
+                            <td>Xem báo cáo & phân tích</td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-yes">✓</span></td>
+                            <td><span class="check-icon check-partial">◐</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Cấu hình chi tiết - Danh sách vai trò -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Cấu hình chi tiết</h3>
+            </div>
+            <div class="card-body">
+                <div class="role-list">
+                    <div class="role-item">
+                        <div class="role-info">
+                            <span class="role-name">Super Admin</span>
+                            <span class="role-members"><strong>2</strong> thành viên</span>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn-edit edit-role" data-role="Super Admin">Chỉnh sửa</button>
+                        </div>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-info">
+                            <span class="role-name">Quản trị viên</span>
+                            <span class="role-members"><strong>5</strong> thành viên</span>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn-edit edit-role" data-role="Quản trị viên">Chỉnh sửa</button>
+                        </div>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-info">
+                            <span class="role-name">Kiểm duyệt viên</span>
+                            <span class="role-members"><strong>12</strong> thành viên</span>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn-edit edit-role" data-role="Kiểm duyệt viên">Chỉnh sửa</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quy tắc bảo mật -->
+                <div class="alert-info">
+                    <span>🔒</span>
+                    <span>Thay đổi phân quyền sẽ có hiệu lực ngay lập tức sau khi người dùng làm mới phiên làm
+                        việc.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thêm vai trò mới -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Thêm vai trò mới</h3>
+            </div>
+            <div class="card-body">
+                <div class="add-role-form">
+                    <div class="form-group">
+                        <label>Tên vai trò</label>
+                        <input type="text" id="newRoleName" placeholder="VD: Cộng tác viên, Nhân viên CSKH...">
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng thành viên (dự kiến)</label>
+                        <input type="number" id="newRoleMembers" placeholder="0">
+                    </div>
+                    <button class="btn-primary" id="addRoleBtn">+ Thêm vai trò</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút hành động chung -->
+        <div class="action-buttons">
+            <button class="btn-outline" id="cancelBtn">Hủy bỏ</button>
+            <button class="btn-primary" id="saveBtn">Lưu thay đổi</button>
+        </div>
+    </div>
+
+    <script>
+        // Toast thông báo đang phát triển
+        function showDevToast() {
+            let toast = document.getElementById('devToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'devToast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1e1e2a;
+                    color: white;
+                    padding: 10px 24px;
+                    border-radius: 40px;
+                    font-size: 13px;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: 0.2s;
+                    pointer-events: none;
+                    font-family: 'DM Sans', sans-serif;
+                `;
+                toast.innerText = '⚙️ Chức năng đang được phát triển';
+                document.body.appendChild(toast);
+            }
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 1500);
+        }
+
+        // Xử lý nút Chỉnh sửa vai trò
+        document.querySelectorAll('.edit-role').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showDevToast();
+            });
+        });
+
+        // Xử lý nút Thêm vai trò
+        document.getElementById('addRoleBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const roleName = document.getElementById('newRoleName').value.trim();
+            if (roleName) {
+                showDevToast();
+                // Reset input (giả lập)
+                document.getElementById('newRoleName').value = '';
+                document.getElementById('newRoleMembers').value = '';
+            } else {
+                // Hiển thị toast nhập tên
+                let toast = document.getElementById('devToast');
+                if (!toast) {
+                    toast = document.createElement('div');
+                    toast.id = 'devToast';
+                    toast.style.cssText = `position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:#1e1e2a; color:white; padding:10px 24px; border-radius:40px; font-size:13px; z-index:9999; opacity:0; transition:0.2s; pointer-events:none; font-family:'DM Sans', sans-serif;`;
+                    document.body.appendChild(toast);
+                }
+                toast.innerText = '⚠️ Vui lòng nhập tên vai trò';
+                toast.style.opacity = '1';
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.innerText = '⚙️ Chức năng đang được phát triển';
+                }, 1500);
+            }
+        });
+
+        // Xử lý nút Lưu và Hủy
+        document.getElementById('saveBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast();
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast();
+        });
+    </script>
+</body>
+
+</html>

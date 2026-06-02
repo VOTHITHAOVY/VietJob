@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Nhà tuyển dụng — ViecJob</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --ink: #0e0e10;
+      --ink-2: #4a4a52;
+      --ink-3: #9898a6;
+      --ink-4: #c8c8d4;
+      --rule: #ebebf0;
+      --surface: #ffffff;
+      --bg: #f7f7f9;
+      --violet: #5b21f5;
+      --violet-2: #7c4dff;
+      --violet-bg: #f0ebff;
+      --violet-mid: #c4b0fa;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --blue: #1d4ed8;
+      --blue-bg: #dbeafe;
+      --r: 8px;
+      --r-lg: 12px;
+      --fs-xs: 11px;
+      --fs-sm: 12.5px;
+      --fs-base: 13.5px;
+      --fs-md: 15px;
+      --fs-lg: 18px;
+      --fs-xl: 24px;
+      --fs-2xl: 32px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: var(--fs-base);
+      line-height: 1.5;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Nội dung chính */
+    .content {
+      padding: 28px 24px;
+    }
+
+    .page-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: var(--fs-xl);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .filter-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .filter-select,
+    .filter-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--r);
+      font-size: var(--fs-sm);
+      font-family: inherit;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .filter-select:focus,
+    .filter-input:focus {
+      border-color: var(--violet-mid);
+    }
+
+    input[type="date"] {
+      color-scheme: light;
+      cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--r);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: var(--ink-2);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-outline:hover {
+      background: var(--bg);
+      border-color: var(--ink-4);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--violet);
+      border: none;
+      border-radius: var(--r);
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      background: var(--violet-2);
+    }
+
+    /* Table */
+    .data-table {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: var(--r-lg);
+      overflow-x: auto;
+    }
+
+    .data-table table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    .data-table th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      border-bottom: 1px solid var(--rule);
+      background: var(--surface);
+    }
+
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+      font-size: var(--fs-sm);
+      color: var(--ink-2);
+      vertical-align: middle;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover {
+      background: var(--bg);
+      cursor: pointer;
+    }
+
+    .employer-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .employer-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--violet-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--violet);
+      flex-shrink: 0;
+    }
+
+    .employer-name {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .employer-email {
+      font-size: 11px;
+      color: var(--ink-3);
+      margin-top: 2px;
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .status-badge svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .status-active {
+      background: #eaf3de;
+      color: #27500a;
+    }
+
+    .status-pending {
+      background: #faeeda;
+      color: #633806;
+    }
+
+    .status-suspended {
+      background: #fcebeb;
+      color: #791f1f;
+    }
+
+    /* Action buttons */
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 4px 0;
+      width: 70px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    .action-btn svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .action-btn-view {
+      border: 1.5px solid #afa9ec;
+      color: #3c3489;
+    }
+
+    .action-btn-view:hover {
+      background: #eeedfe;
+    }
+
+    .action-btn-block {
+      border: 1.5px solid #f09595;
+      color: #791f1f;
+    }
+
+    .action-btn-block:hover {
+      background: #fcebeb;
+    }
+
+    .action-btn-restore {
+      border: 1.5px solid #85b7eb;
+      color: #0c447c;
+    }
+
+    .action-btn-restore:hover {
+      background: #e6f1fb;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 16px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .pagination-btn {
+      min-width: 32px;
+      height: 32px;
+      padding: 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 7px;
+      border: 1.5px solid transparent;
+      background: transparent;
+      color: var(--ink-3);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .pagination-btn:hover {
+      background: var(--bg);
+      color: var(--ink);
+      border-color: var(--rule);
+    }
+
+    .pagination-btn.active {
+      background: #eeedfe;
+      color: #3c3489;
+      border-color: #afa9ec;
+      font-weight: 600;
+    }
+
+    .pagination-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Danh sách nhà tuyển dụng</h1>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-outline" id="exportExcelBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>Xuất dữ liệu</button>
+        <button class="btn-primary"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>Thêm nhà tuyển dụng</button>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group"><label class="filter-label">Trạng thái</label><select class="filter-select"
+          id="statusFilter">
+          <option value="">Tất cả trạng thái</option>
+          <option value="active">Đang hoạt động</option>
+          <option value="pending">Chờ xác thực</option>
+          <option value="suspended">Đã khóa</option>
+        </select></div>
+      <div class="filter-group"><label class="filter-label">Gói dịch vụ</label><select class="filter-select"
+          id="packageFilter">
+          <option value="">Tất cả gói</option>
+          <option value="trial">Dùng thử</option>
+          <option value="standard">Standard</option>
+          <option value="premium">Premium</option>
+          <option value="enterprise">Enterprise</option>
+        </select></div>
+      <div class="filter-group" style="flex:2;"><label class="filter-label">Khoảng ngày đăng ký</label>
+        <div style="display:flex;gap:6px;"><input class="filter-input" type="date" id="dateFrom"
+            style="flex:1;"><span>—</span><input class="filter-input" type="date" id="dateTo" style="flex:1;"></div>
+      </div>
+      <button class="btn-outline" id="clearFiltersBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>Xóa bộ lọc</button>
+    </div>
+
+    <div class="data-table">
+      <table id="employerTable">
+        <thead>
+          <tr>
+            <th>NHÀ TUYỂN DỤNG</th>
+            <th>THÔNG TIN LIÊN HỆ</th>
+            <th style="text-align:center;">SỐ TIN ĐĂNG</th>
+            <th style="text-align:center;">GÓI DỊCH VỤ</th>
+            <th style="text-align:center;">NGÀY ĐĂNG KÝ</th>
+            <th style="text-align:center;">TRẠNG THÁI</th>
+            <th style="text-align:center;">THAO TÁC</th>
+          </tr>
+        </thead>
+        <tbody id="employerTableBody"></tbody>
+      </table>
+      <div class="pagination">
+        <div class="pagination-controls" id="paginationControls"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const employersData = [
+      { id: 1, name: "FPT Software", email: "recruitment@fpt.com", phone: "024 7300 1234", location: "Hà Nội, Việt Nam", logo: "F", jobs: 42, package: "Enterprise Gold", packageClass: "violet", joinDate: "12/05/2023", status: "active" },
+      { id: 2, name: "Viettel Group", email: "hr@viettel.vn", phone: "024 3822 1234", location: "Hà Nội, Việt Nam", logo: "V", jobs: 156, package: "Premium Plus", packageClass: "violet", joinDate: "20/02/2023", status: "active" },
+      { id: 3, name: "Vingroup JSC", email: "tuyendung@vingroup.net", phone: "024 3939 1234", location: "Hà Nội, Việt Nam", logo: "V", jobs: 89, package: "Standard", packageClass: "gray", joinDate: "05/08/2023", status: "suspended" },
+      { id: 4, name: "Momo Kitchen", email: "contact@momokitchen.vn", phone: "028 7300 5678", location: "TP.HCM, Việt Nam", logo: "M", jobs: 12, package: "Dùng thử", packageClass: "gray", joinDate: "14/01/2024", status: "pending" },
+      { id: 5, name: "Grab Vietnam", email: "jobs@grab.com.vn", phone: "028 7300 1234", location: "TP.HCM, Việt Nam", logo: "G", jobs: 65, package: "Enterprise Gold", packageClass: "violet", joinDate: "30/03/2023", status: "active" },
+      { id: 6, name: "Techcombank", email: "careers@techcombank.com", phone: "024 3944 1234", location: "Hà Nội, Việt Nam", logo: "T", jobs: 214, package: "Diamond Member", packageClass: "violet", joinDate: "15/01/2023", status: "active" },
+      { id: 7, name: "Shopee Vietnam", email: "talent@shopee.vn", phone: "028 7300 9876", location: "TP.HCM, Việt Nam", logo: "S", jobs: 310, package: "Diamond Member", packageClass: "violet", joinDate: "02/02/2023", status: "active" }
+    ];
+
+    let currentPage = 1;
+    const itemsPerPage = 5;
+
+    function getFilteredEmployers() {
+      const status = document.getElementById('statusFilter').value;
+      const packageType = document.getElementById('packageFilter').value;
+      const dateFrom = document.getElementById('dateFrom').value;
+      const dateTo = document.getElementById('dateTo').value;
+
+      return employersData.filter(emp => {
+        if (status && emp.status !== status) return false;
+        if (packageType && !emp.package.toLowerCase().includes(packageType.toLowerCase())) return false;
+        if (dateFrom) {
+          const fromDate = new Date(dateFrom);
+          const joinDate = new Date(emp.joinDate.split('/').reverse().join('-'));
+          if (joinDate < fromDate) return false;
+        }
+        if (dateTo) {
+          const toDate = new Date(dateTo);
+          const joinDate = new Date(emp.joinDate.split('/').reverse().join('-'));
+          if (joinDate > toDate) return false;
+        }
+        return true;
+      });
+    }
+
+    function renderTable() {
+      const filtered = getFilteredEmployers();
+      const totalPages = Math.ceil(filtered.length / itemsPerPage);
+      const start = (currentPage - 1) * itemsPerPage;
+      const paginated = filtered.slice(start, start + itemsPerPage);
+      const tbody = document.getElementById('employerTableBody');
+      tbody.innerHTML = '';
+
+      if (paginated.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:48px;">Không có dữ liệu</td></tr>';
+        document.getElementById('paginationControls').innerHTML = '';
+        return;
+      }
+
+      paginated.forEach(emp => {
+        let statusHtml = '';
+        if (emp.status === 'active') statusHtml = '<span class="status-badge status-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Đang hoạt động</span>';
+        else if (emp.status === 'pending') statusHtml = '<span class="status-badge status-pending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Chờ xác thực</span>';
+        else statusHtml = '<span class="status-badge status-suspended"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Đã khóa</span>';
+
+        const packageBg = emp.packageClass === 'violet' ? 'background:var(--violet-bg); color:var(--violet);' : 'background:#e8eef0; color:#5d5f5f;';
+
+        const actionBtnHtml = emp.status === 'suspended'
+          ? '<button class="action-btn action-btn-restore" onclick="restoreEmployer(' + emp.id + ')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>Mở khóa</button>'
+          : (emp.status === 'pending'
+            ? '<button class="action-btn action-btn-restore" style="border-color:#85b7eb; color:#0c447c;" onclick="verifyEmployer(' + emp.id + ')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg>Xác thực</button>'
+            : '<button class="action-btn action-btn-block" onclick="blockEmployer(' + emp.id + ')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Khóa</button>');
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+        <td><div class="employer-cell"><div class="employer-logo" style="background:var(--violet-bg);">${emp.logo}</div><div><div class="employer-name">${emp.name}</div><div class="employer-email">${emp.email}</div></div></div></td>
+        <td><div>${emp.phone}</div><div style="font-size:11px;color:var(--ink-3);">${emp.location}</div></td>
+        <td style="text-align:center; font-weight:500;">${emp.jobs}</td>
+        <td style="text-align:center;"><span style="${packageBg} padding:4px 8px; border-radius:6px; font-size:11px; font-weight:500;">${emp.package}</span></td>
+        <td style="text-align:center;">${emp.joinDate}</td>
+        <td style="text-align:center;">${statusHtml}</td>
+        <td style="text-align:center;"><div class="action-buttons"><button class="action-btn action-btn-view" onclick="viewEmployer(${emp.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Xem</button>${actionBtnHtml}</div></td>
+      `;
+        tbody.appendChild(row);
+      });
+
+      let pagHtml = `<button class="pagination-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
+      for (let i = 1; i <= Math.min(totalPages, 5); i++) pagHtml += `<button class="pagination-btn ${currentPage === i ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+      if (totalPages > 5) pagHtml += `<span style="color:var(--ink-3);">...</span><button class="pagination-btn" onclick="changePage(${totalPages})">${totalPages}</button>`;
+      pagHtml += `<button class="pagination-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>›</button>`;
+      document.getElementById('paginationControls').innerHTML = pagHtml;
+    }
+
+    function changePage(page) {
+      const filtered = getFilteredEmployers();
+      const totalPages = Math.ceil(filtered.length / itemsPerPage);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      renderTable();
+    }
+
+    function viewEmployer(id) {
+      const emp = employersData.find(e => e.id === id);
+      alert(`👁️ Xem chi tiết ${emp.name} (Demo)`);
+    }
+
+    function blockEmployer(id) {
+      const emp = employersData.find(e => e.id === id);
+      if (emp && emp.status === 'active') {
+        emp.status = 'suspended';
+        renderTable();
+        alert(`🔒 Đã khóa tài khoản ${emp.name}`);
+      }
+    }
+
+    function restoreEmployer(id) {
+      const emp = employersData.find(e => e.id === id);
+      if (emp && emp.status === 'suspended') {
+        emp.status = 'active';
+        renderTable();
+        alert(`✅ Đã mở khóa ${emp.name}`);
+      }
+    }
+
+    function verifyEmployer(id) {
+      const emp = employersData.find(e => e.id === id);
+      if (emp && emp.status === 'pending') {
+        emp.status = 'active';
+        renderTable();
+        alert(`✅ Đã xác thực tài khoản ${emp.name}`);
+      }
+    }
+
+    // Filter event listeners
+    document.getElementById('statusFilter').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('packageFilter').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('dateFrom').addEventListener('change', () => { currentPage = 1; renderTable(); });
+    document.getElementById('dateTo').addEventListener('change', () => { currentPage = 1; renderTable(); });
+
+    document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+      document.getElementById('statusFilter').value = '';
+      document.getElementById('packageFilter').value = '';
+      document.getElementById('dateFrom').value = '';
+      document.getElementById('dateTo').value = '';
+      currentPage = 1;
+      renderTable();
+    });
+
+    document.getElementById('exportExcelBtn').addEventListener('click', () => {
+      const filtered = getFilteredEmployers();
+      if (filtered.length === 0) { alert('Không có dữ liệu để xuất!'); return; }
+      const exportData = filtered.map(e => ({
+        'Tên công ty': e.name,
+        'Email': e.email,
+        'Số điện thoại': e.phone,
+        'Địa chỉ': e.location,
+        'Số tin đã đăng': e.jobs,
+        'Gói dịch vụ': e.package,
+        'Ngày đăng ký': e.joinDate,
+        'Trạng thái': e.status === 'active' ? 'Đang hoạt động' : (e.status === 'pending' ? 'Chờ xác thực' : 'Đã khóa')
+      }));
+      const ws = XLSX.utils.json_to_sheet(exportData);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Danh sách nhà tuyển dụng');
+      XLSX.writeFile(wb, `nha_tuyen_dung_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.xlsx`);
+    });
+
+    renderTable();
+  </script>
+</body>
+
+</html>

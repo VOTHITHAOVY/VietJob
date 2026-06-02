@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cấu hình phí dịch vụ</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --green: #16a34a;
+            --green-bg: #dcfce7;
+            --amber: #b45309;
+            --amber-bg: #fef3c7;
+            --red: #dc2626;
+            --red-bg: #fee2e2;
+            --blue: #1d4ed8;
+            --blue-bg: #dbeafe;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-xs: 11px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: transparent;
+            color: var(--ink);
+            font-size: var(--fs-base);
+        }
+
+        .service-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--ink-3);
+        }
+
+        /* Grid 2 cột */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Card chung */
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--rule);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .card-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .card-header p {
+            font-size: 12px;
+            color: var(--ink-3);
+            margin-top: 4px;
+        }
+
+        .card-body {
+            padding: 20px 24px;
+        }
+
+        /* Danh sách gói dịch vụ */
+        .package-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .package-item {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--rule);
+            transition: all 0.2s;
+        }
+
+        .package-item:hover {
+            border-color: var(--violet-mid);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .package-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .package-badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--violet-bg);
+            color: var(--violet);
+            font-weight: 500;
+        }
+
+        .package-desc {
+            font-size: 13px;
+            color: var(--ink-3);
+            margin-bottom: 16px;
+        }
+
+        .package-pricing {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .price-old {
+            font-size: 14px;
+            color: var(--ink-3);
+            text-decoration: line-through;
+        }
+
+        .price-new {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--violet);
+        }
+
+        .price-free {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green);
+            background: var(--green-bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .package-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            color: var(--ink-2);
+            transition: all 0.15s;
+        }
+
+        .btn-icon:hover {
+            background: var(--surface);
+            color: var(--violet);
+        }
+
+        .btn-edit {
+            background: var(--violet-bg);
+            color: var(--violet);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .btn-edit:hover {
+            background: var(--violet-mid);
+        }
+
+        /* Form group */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-2);
+        }
+
+        input,
+        select {
+            padding: 10px 14px;
+            border: 1px solid var(--ink-4);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: 0.15s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(91, 33, 245, 0.1);
+        }
+
+        /* Payment methods */
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .payment-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            background: var(--bg);
+            border: 1px solid var(--rule);
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .payment-chip:hover {
+            border-color: var(--violet-mid);
+            background: var(--violet-bg);
+        }
+
+        .payment-chip.active {
+            background: var(--violet-bg);
+            border-color: var(--violet);
+            color: var(--violet);
+        }
+
+        .payment-chip input {
+            display: none;
+        }
+
+        /* Radio group */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .radio-label input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--violet);
+        }
+
+        /* Stats card */
+        .stats-card {
+            background: linear-gradient(135deg, var(--violet-bg) 0%, var(--surface) 100%);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .stats-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--violet);
+            margin-bottom: 8px;
+        }
+
+        .stats-label {
+            font-size: 13px;
+            color: var(--ink-3);
+            margin-bottom: 16px;
+        }
+
+        .btn-report {
+            background: white;
+            border: 1px solid var(--violet);
+            color: var(--violet);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-report:hover {
+            background: var(--violet);
+            color: white;
+        }
+
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .btn-primary {
+            background: var(--violet);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: #4c1cd9;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--ink-4);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            color: var(--ink-2);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        .btn-add {
+            background: var(--green);
+            color: white;
+            border: none;
+        }
+
+        .btn-add:hover {
+            background: #15803d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="service-container">
+        <!-- Header -->
+        <div class="page-header">
+            <h2>Quản lý các gói dịch vụ</h2>
+            <p>Quản lý các gói dịch vụ và mức giá cho nhà tuyển dụng để tối ưu hóa doanh thu.</p>
+        </div>
+
+        <div class="two-columns">
+            <!-- Cột trái: Các gói dịch vụ -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Các gói dịch vụ</h3>
+                        <p>Quản lý gói cước và tính năng</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="package-list">
+                            <!-- Gói Cơ bản -->
+                            <div class="package-item">
+                                <div class="package-header">
+                                    <span class="package-name">Gói Cơ bản</span>
+                                    <span class="package-badge">Phổ biến</span>
+                                </div>
+                                <div class="package-desc">Tối đa 5 tin tuyển dụng/tháng</div>
+                                <div class="package-pricing">
+                                    <span class="price-old">599.000đ</span>
+                                    <span class="price-free">Miễn phí</span>
+                                    <span class="price-new">0đ</span>
+                                </div>
+                                <div class="package-actions">
+                                    <button class="btn-icon btn-edit edit-package" data-package="basic">Chỉnh
+                                        sửa</button>
+                                </div>
+                            </div>
+
+                            <!-- Gói Tiêu chuẩn -->
+                            <div class="package-item">
+                                <div class="package-header">
+                                    <span class="package-name">Gói Tiêu chuẩn</span>
+                                    <span class="package-badge">Tiết kiệm</span>
+                                </div>
+                                <div class="package-desc">Không giới hạn tin tuyển dụng</div>
+                                <div class="package-pricing">
+                                    <span class="price-new">1.299.000đ</span>
+                                    <span class="price-old" style="margin-left: 8px;">/tháng</span>
+                                </div>
+                                <div class="package-actions">
+                                    <button class="btn-icon btn-edit edit-package" data-package="standard">Chỉnh
+                                        sửa</button>
+                                </div>
+                            </div>
+
+                            <!-- Gói Doanh nghiệp -->
+                            <div class="package-item">
+                                <div class="package-header">
+                                    <span class="package-name">Gói Doanh nghiệp</span>
+                                    <span class="package-badge">Cao cấp</span>
+                                </div>
+                                <div class="package-desc">Hỗ trợ quảng bá thương hiệu cao cấp</div>
+                                <div class="package-pricing">
+                                    <span class="price-new">2.999.000đ</span>
+                                    <span class="price-old" style="margin-left: 8px;">/tháng</span>
+                                </div>
+                                <div class="package-actions">
+                                    <button class="btn-icon btn-edit edit-package" data-package="enterprise">Chỉnh
+                                        sửa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Cài đặt thanh toán + Thống kê -->
+            <div>
+                <!-- Cài đặt thanh toán -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Cài đặt thanh toán</h3>
+                        <p>Cấu hình tiền tệ và cổng thanh toán</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Đơn vị tiền tệ</label>
+                            <select id="currency">
+                                <option selected>VND - Việt Nam Đồng</option>
+                                <option>USD - US Dollar</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chu kỳ thanh toán</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="billingCycle" value="monthly" checked> Hàng tháng
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="billingCycle" value="yearly"> Hàng năm
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phương thức thanh toán</label>
+                            <div class="payment-methods">
+                                <label class="payment-chip active">
+                                    <input type="checkbox" value="vnpay" checked> VNPay
+                                </label>
+                                <label class="payment-chip">
+                                    <input type="checkbox" value="momo"> MoMo
+                                </label>
+                                <label class="payment-chip">
+                                    <input type="checkbox" value="bank"> Chuyển khoản Ngân hàng
+                                </label>
+                                <label class="payment-chip">
+                                    <input type="checkbox" value="credit"> Thẻ tín dụng
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thống kê doanh thu -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Thống kê doanh thu</h3>
+                        <p>Xem chi tiết hiệu quả của các gói dịch vụ</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-card">
+                            <div class="stats-value">128.450.000đ</div>
+                            <div class="stats-label">Tổng doanh thu tháng này</div>
+                            <button class="btn-report" id="viewReportBtn">📊 Xem báo cáo</button>
+                        </div>
+                        <div style="margin-top: 16px; display: flex; justify-content: space-between; font-size: 13px;">
+                            <span>📈 Gói Doanh nghiệp: <strong>45%</strong></span>
+                            <span>📊 Gói Tiêu chuẩn: <strong>38%</strong></span>
+                            <span>📉 Gói Cơ bản: <strong>17%</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-outline" id="cancelBtn">Hủy bỏ</button>
+            <button class="btn-primary btn-add" id="addPackageBtn">+ Thêm gói mới</button>
+        </div>
+    </div>
+
+    <script>
+        // Toast thông báo đang phát triển
+        function showDevToast(message = '⚙️ Chức năng đang được phát triển') {
+            let toast = document.getElementById('devToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'devToast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1e1e2a;
+                    color: white;
+                    padding: 10px 24px;
+                    border-radius: 40px;
+                    font-size: 13px;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: 0.2s;
+                    pointer-events: none;
+                    font-family: 'DM Sans', sans-serif;
+                    white-space: nowrap;
+                `;
+                document.body.appendChild(toast);
+            }
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Xử lý nút Chỉnh sửa gói
+        document.querySelectorAll('.edit-package').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const packageName = btn.getAttribute('data-package');
+                const nameMap = {
+                    basic: 'Gói Cơ bản',
+                    standard: 'Gói Tiêu chuẩn',
+                    enterprise: 'Gói Doanh nghiệp'
+                };
+                showDevToast(`✏️ Đang chỉnh sửa ${nameMap[packageName] || 'gói dịch vụ'}`);
+            });
+        });
+
+        // Xử lý nút Thêm gói mới
+        document.getElementById('addPackageBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('➕ Tính năng thêm gói mới đang phát triển');
+        });
+
+        // Xử lý nút Xem báo cáo
+        document.getElementById('viewReportBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('📊 Tính năng xem báo cáo chi tiết đang phát triển');
+        });
+
+        // Xử lý nút Hủy bỏ
+        document.getElementById('cancelBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('❌ Đã hủy thay đổi');
+        });
+
+        // Xử lý click chọn phương thức thanh toán
+        document.querySelectorAll('.payment-chip').forEach(chip => {
+            chip.addEventListener('click', function (e) {
+                const checkbox = this.querySelector('input');
+                checkbox.checked = !checkbox.checked;
+                if (checkbox.checked) {
+                    this.classList.add('active');
+                } else {
+                    this.classList.remove('active');
+                }
+                showDevToast('💳 Cập nhật phương thức thanh toán');
+            });
+        });
+
+        // Xử lý thay đổi chu kỳ thanh toán
+        document.querySelectorAll('input[name="billingCycle"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    showDevToast('🔄 Đang cập nhật chu kỳ thanh toán');
+                }
+            });
+        });
+
+        // Xử lý thay đổi đơn vị tiền tệ
+        document.getElementById('currency').addEventListener('change', (e) => {
+            showDevToast('💱 Đang cập nhật đơn vị tiền tệ');
+        });
+    </script>
+</body>
+
+</html>

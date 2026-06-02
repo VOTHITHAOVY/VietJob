@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Hồ sơ cá nhân - ViecJob Admin</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: #f8f9fb;
+      color: #191c1e;
+    }
+
+    /* HEADER WITH BACK BUTTON */
+    .page-header {
+      background: white;
+      border-bottom: 1px solid #e9e9ef;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4b5563;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .back-btn:hover {
+      background: #7c3aed10;
+      border-color: #7c3aed;
+      color: #7c3aed;
+    }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      padding: 20px 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Modal animations */
+    .modal-card {
+      animation: modalFade 0.2s ease-out;
+    }
+
+    @keyframes modalFade {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER WITH BACK BUTTON -->
+  <div class="page-header">
+    <button class="back-btn" id="backToAdminBtn">
+      <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+      Quay lại
+    </button>
+    <h1 class="page-title">Hồ sơ cá nhân</h1>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Left Column -->
+      <div class="lg:col-span-4 space-y-5">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center">
+          <div class="relative inline-block mb-4">
+            <img id="profileLargeImg" class="w-28 h-28 rounded-full object-cover border-4 border-purple-200 shadow-sm"
+              src="https://randomuser.me/api/portraits/men/32.jpg">
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800" id="profileFullName">Minh Trần</h3>
+          <p class="text-purple-600 text-sm mb-5">Quản trị viên cấp cao</p>
+          <div class="space-y-3">
+            <button id="editProfileBtn"
+              class="w-full bg-purple-700 text-white py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-purple-800 transition"><span
+                class="material-symbols-outlined text-lg">edit</span>Chỉnh sửa hồ sơ</button>
+            <button id="changePasswordBtn"
+              class="w-full border border-gray-300 bg-white py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition"><span
+                class="material-symbols-outlined text-lg text-gray-600">lock_reset</span><span class="text-gray-700">Đổi
+                mật khẩu</span></button>
+          </div>
+          <div class="grid grid-cols-2 gap-5 mt-6 pt-5 border-t border-gray-100">
+            <div>
+              <p class="text-3xl font-bold text-purple-700">124</p>
+              <p class="text-xs text-gray-500">Duyệt tin</p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold text-purple-700">48</p>
+              <p class="text-xs text-gray-500">Hỗ trợ NTD</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+          <h4 class="font-semibold text-gray-800 mb-3">Trạng thái tài khoản</h4>
+          <div class="flex justify-between items-center">
+            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Đang hoạt động</span>
+            <span class="text-xs text-gray-500">Từ 15/01/2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="lg:col-span-8 space-y-5">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex gap-2 items-center mb-4"><span
+              class="material-symbols-outlined text-purple-600">person</span>
+            <h4 class="text-xl font-semibold text-gray-800">Thông tin cá nhân</h4>
+          </div>
+          <div class="grid md:grid-cols-2 gap-5">
+            <div><label class="text-xs text-gray-500">Email</label>
+              <p class="font-medium text-gray-800" id="displayEmail">minh.tran@viecjob.vn</p>
+            </div>
+            <div><label class="text-xs text-gray-500">Số điện thoại</label>
+              <p class="font-medium text-gray-800" id="displayPhone">+84 987 654 321</p>
+            </div>
+            <div><label class="text-xs text-gray-500">Ngày tham gia</label>
+              <p class="font-medium text-gray-800">15 Tháng 01, 2023</p>
+            </div>
+            <div><label class="text-xs text-gray-500">Bộ phận</label>
+              <p class="font-medium text-gray-800" id="displayDept">Quản lý nội dung &amp; Kiểm duyệt</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex gap-2 mb-4"><span class="material-symbols-outlined text-purple-600">security</span>
+            <h4 class="text-xl font-semibold text-gray-800">Bảo mật</h4>
+          </div>
+          <div class="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+            <div>
+              <p class="font-semibold text-gray-800">Xác thực 2 lớp (2FA)</p>
+              <p class="text-sm text-gray-500">Tăng cường bảo mật cho tài khoản quản trị của bạn.</p>
+            </div>
+            <div class="flex items-center"><span id="twoFaLabel" class="text-sm text-gray-600 mr-3">Bật</span><button
+                id="twoFaToggle" class="relative w-11 h-6 rounded-full bg-purple-600 transition"><span
+                  class="absolute top-1 right-1 w-4 h-4 bg-white rounded-full transition-transform"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex justify-between mb-4">
+            <div class="flex gap-2"><span class="material-symbols-outlined text-purple-600">history</span>
+              <h4 class="text-xl font-semibold text-gray-800">Nhật ký hoạt động gần đây</h4>
+            </div><button class="text-purple-600 text-sm hover:underline">Xem tất cả</button>
+          </div>
+          <div class="space-y-3">
+            <div class="flex gap-3 p-2 rounded-lg hover:bg-gray-50">
+              <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600"><span
+                  class="material-symbols-outlined text-lg">check_circle</span></div>
+              <div>
+                <p class="text-sm text-gray-800"><strong>Đã phê duyệt</strong> tin tuyển dụng "Lập trình viên Frontend"
+                  - <span class="text-gray-500">Công ty TechNova</span></p>
+                <p class="text-xs text-gray-400">Hôm nay, 10:45 AM</p>
+              </div>
+            </div>
+            <div class="flex gap-3 p-2 rounded-lg hover:bg-gray-50">
+              <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500"><span
+                  class="material-symbols-outlined text-lg">block</span></div>
+              <div>
+                <p class="text-sm text-gray-800"><strong>Đã khóa tài khoản</strong> nhà tuyển dụng "SpamRecruit" do vi
+                  phạm chính sách</p>
+                <p class="text-xs text-gray-400">Hôm qua, 02:15 PM</p>
+              </div>
+            </div>
+            <div class="flex gap-3 p-2 rounded-lg hover:bg-gray-50">
+              <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600"><span
+                  class="material-symbols-outlined text-lg">login</span></div>
+              <div>
+                <p class="text-sm text-gray-800">Đăng nhập thành công từ thiết bị mới: <span class="italic">MacBook Pro
+                    (Hà Nội, VN)</span></p>
+                <p class="text-xs text-gray-400">12 Tháng 05, 08:30 AM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHỈNH SỬA HỒ SƠ -->
+  <div id="editModal" class="fixed inset-0 z-50 hidden items-center justify-center"
+    style="background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);">
+    <div class="bg-white rounded-2xl w-[560px] max-w-[90%] modal-card overflow-hidden">
+      <div class="flex justify-between items-center p-5 border-b">
+        <h3 class="text-xl font-bold text-gray-800">Chỉnh sửa hồ sơ</h3><button id="closeEditModalBtn"
+          class="text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="p-5 space-y-5">
+        <div><label class="font-semibold text-sm text-gray-700 block mb-2">ẢNH ĐẠI DIỆN</label>
+          <div class="flex items-center gap-4">
+            <div class="relative cursor-pointer" id="avatarUploadArea"><img id="modalAvatar"
+                class="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+                src="https://randomuser.me/api/portraits/men/32.jpg">
+              <div
+                class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 hover:opacity-100 transition rounded-full">
+                <span class="material-symbols-outlined text-white text-lg">photo_camera</span></div>
+            </div>
+            <div class="text-xs text-gray-500">Dung lượng tối đa 2MB. Định dạng: JPG, PNG.<input type="file"
+                id="avatarFileInput" accept="image/jpeg,image/png" class="hidden"></div>
+          </div>
+        </div>
+        <div><label class="font-semibold text-sm text-gray-700">Họ và tên</label><input type="text" id="editNameInput"
+            class="w-full border border-gray-300 rounded-lg p-2.5 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div><label class="font-semibold text-sm text-gray-700">Email <span class="text-red-500 text-xs">(Không thể thay
+              đổi)</span></label><input type="email" id="editEmailInput"
+            class="w-full border border-gray-300 rounded-lg p-2.5 mt-1 bg-gray-100 text-gray-500 cursor-not-allowed"
+            readonly disabled></div>
+        <div><label class="font-semibold text-sm text-gray-700">Số điện thoại</label><input type="text"
+            id="editPhoneInput"
+            class="w-full border border-gray-300 rounded-lg p-2.5 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div><label class="font-semibold text-sm text-gray-700">Phòng ban / Vai trò</label><input type="text"
+            id="editDeptInput"
+            class="w-full border border-gray-300 rounded-lg p-2.5 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+      </div>
+      <div class="flex gap-3 justify-end p-5 border-t"><button id="cancelEditBtn"
+          class="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">Hủy
+          bỏ</button><button id="confirmSaveBtn"
+          class="px-5 py-2 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">Lưu thay đổi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ĐỔI MẬT KHẨU -->
+  <div id="pwdModal" class="fixed inset-0 z-50 hidden items-center justify-center"
+    style="background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);">
+    <div class="bg-white rounded-2xl w-[500px] max-w-[90%] modal-card">
+      <div class="flex justify-between p-5 border-b">
+        <h3 class="text-xl font-bold text-gray-800">Đổi mật khẩu</h3><button id="closePwdModalBtn"
+          class="text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="p-5 space-y-4"><input type="password" id="currentPass"
+          class="w-full border border-gray-300 rounded-lg p-2.5" placeholder="Mật khẩu hiện tại"><input type="password"
+          id="newPass" class="w-full border border-gray-300 rounded-lg p-2.5" placeholder="Mật khẩu mới"><input
+          type="password" id="confirmPass" class="w-full border border-gray-300 rounded-lg p-2.5"
+          placeholder="Xác nhận mật khẩu mới">
+        <p class="text-xs text-gray-500">* Ít nhất 6 ký tự, 1 ký tự đặc biệt (!@#$%^&*)</p>
+      </div>
+      <div class="flex gap-3 justify-end p-5 border-t"><button id="cancelPwdBtn"
+          class="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Hủy bỏ</button><button
+          id="updatePwdConfirmBtn" class="px-5 py-2 bg-purple-700 text-white rounded-lg hover:bg-purple-800">Cập nhật
+          mật khẩu</button></div>
+    </div>
+  </div>
+
+  <script>
+    // DOM elements
+    const editModal = document.getElementById('editModal');
+    const pwdModal = document.getElementById('pwdModal');
+    const editBtn = document.getElementById('editProfileBtn');
+    const changePwdBtn = document.getElementById('changePasswordBtn');
+    const closeEdit = document.getElementById('closeEditModalBtn');
+    const cancelEdit = document.getElementById('cancelEditBtn');
+    const closePwd = document.getElementById('closePwdModalBtn');
+    const cancelPwd = document.getElementById('cancelPwdBtn');
+    const saveProfile = document.getElementById('confirmSaveBtn');
+    const updatePwd = document.getElementById('updatePwdConfirmBtn');
+
+    const editName = document.getElementById('editNameInput');
+    const editEmail = document.getElementById('editEmailInput');
+    const editPhone = document.getElementById('editPhoneInput');
+    const editDept = document.getElementById('editDeptInput');
+    const modalAvatarImg = document.getElementById('modalAvatar');
+    const avatarUploadArea = document.getElementById('avatarUploadArea');
+    const avatarFileInput = document.getElementById('avatarFileInput');
+
+    const profileNameSpan = document.getElementById('profileFullName');
+    const displayPhoneSpan = document.getElementById('displayPhone');
+    const displayDeptSpan = document.getElementById('displayDept');
+    const profileLargeImg = document.getElementById('profileLargeImg');
+
+    let currentAvatarUrl = "https://randomuser.me/api/portraits/men/32.jpg";
+
+    function openModal(modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+    function closeModal(modal) { modal.classList.remove('flex'); modal.classList.add('hidden'); }
+
+    editBtn.addEventListener('click', () => {
+      editName.value = profileNameSpan.innerText;
+      editEmail.value = document.getElementById('displayEmail').innerText;
+      editPhone.value = displayPhoneSpan.innerText;
+      editDept.value = displayDeptSpan.innerText;
+      modalAvatarImg.src = currentAvatarUrl;
+      openModal(editModal);
+    });
+    changePwdBtn.addEventListener('click', () => openModal(pwdModal));
+    closeEdit.addEventListener('click', () => closeModal(editModal));
+    cancelEdit.addEventListener('click', () => closeModal(editModal));
+    closePwd.addEventListener('click', () => closeModal(pwdModal));
+    cancelPwd.addEventListener('click', () => closeModal(pwdModal));
+    window.addEventListener('click', (e) => { if (e.target === editModal) closeModal(editModal); if (e.target === pwdModal) closeModal(pwdModal); });
+
+    avatarUploadArea.addEventListener('click', () => avatarFileInput.click());
+    avatarFileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        if (file.size > 2 * 1024 * 1024) { alert("Dung lượng ảnh tối đa 2MB"); return; }
+        if (!file.type.match('image/jpeg') && !file.type.match('image/png')) { alert("Chỉ chấp nhận định dạng JPG hoặc PNG"); return; }
+        const reader = new FileReader();
+        reader.onload = (ev) => { modalAvatarImg.src = ev.target.result; };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    saveProfile.addEventListener('click', () => {
+      const newName = editName.value;
+      const newPhone = editPhone.value;
+      const newDept = editDept.value;
+      const newAvatar = modalAvatarImg.src;
+      profileNameSpan.innerText = newName;
+      displayPhoneSpan.innerText = newPhone;
+      displayDeptSpan.innerText = newDept;
+      profileLargeImg.src = newAvatar;
+      currentAvatarUrl = newAvatar;
+      closeModal(editModal);
+      alert("✅ Cập nhật hồ sơ thành công!");
+    });
+
+    updatePwd.addEventListener('click', () => {
+      const current = document.getElementById('currentPass').value;
+      const newP = document.getElementById('newPass').value;
+      const confirm = document.getElementById('confirmPass').value;
+      if (!current) { alert("Vui lòng nhập mật khẩu hiện tại"); return; }
+      if (newP.length < 6 || !/[!@#$%^&*(),.?":{}|<>]/.test(newP)) { alert("Mật khẩu mới phải có ít nhất 6 ký tự và 1 ký tự đặc biệt"); return; }
+      if (newP !== confirm) { alert("Xác nhận mật khẩu không khớp"); return; }
+      alert("🔐 Mật khẩu đã được thay đổi thành công!");
+      closeModal(pwdModal);
+      document.getElementById('currentPass').value = '';
+      document.getElementById('newPass').value = '';
+      document.getElementById('confirmPass').value = '';
+    });
+
+    let twoFaEnabled = true;
+    const twoFaToggleBtn = document.getElementById('twoFaToggle');
+    const twoFaLabel = document.getElementById('twoFaLabel');
+    function updateTwoFA() {
+      if (twoFaEnabled) { twoFaToggleBtn.classList.remove('bg-gray-400'); twoFaToggleBtn.classList.add('bg-purple-600'); twoFaToggleBtn.querySelector('span').classList.remove('left-1'); twoFaToggleBtn.querySelector('span').classList.add('right-1'); twoFaLabel.innerText = 'Bật'; }
+      else { twoFaToggleBtn.classList.remove('bg-purple-600'); twoFaToggleBtn.classList.add('bg-gray-400'); twoFaToggleBtn.querySelector('span').classList.remove('right-1'); twoFaToggleBtn.querySelector('span').classList.add('left-1'); twoFaLabel.innerText = 'Tắt'; }
+    }
+    twoFaToggleBtn.addEventListener('click', () => { twoFaEnabled = !twoFaEnabled; updateTwoFA(); alert(twoFaEnabled ? '🔒 Xác thực 2 lớp đã được BẬT' : '⚠️ Xác thực 2 lớp đã được TẮT'); });
+    updateTwoFA();
+
+    // NÚT QUAY LẠI ADMIN
+    document.getElementById('backToAdminBtn').addEventListener('click', function() {
+      window.location.href = 'admin.html';
+    });
+  </script>
+</body>
+</html>

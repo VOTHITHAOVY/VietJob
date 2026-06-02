@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cấu hình hệ thống</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --amber: #b45309;
+            --green: #16a34a;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-xs: 11px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: transparent;
+            color: var(--ink);
+            font-size: var(--fs-base);
+        }
+
+        .content-card {
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--rule);
+            max-width: 880px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 24px 28px 12px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .card-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-header p {
+            font-size: 13px;
+            color: var(--ink-3);
+            margin-top: 4px;
+        }
+
+        .card-body {
+            padding: 24px 28px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--ink);
+        }
+
+        input,
+        select {
+            font-family: inherit;
+            background: white;
+            border: 1px solid var(--ink-4);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 13.5px;
+            outline: none;
+            transition: 0.15s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(91, 33, 245, 0.1);
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            width: 44px;
+            height: 24px;
+            appearance: none;
+            background: var(--ink-4);
+            border-radius: 40px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-switch input:checked {
+            background: var(--violet);
+        }
+
+        .toggle-switch input::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 3px;
+            transition: 0.2s;
+        }
+
+        .toggle-switch input:checked::before {
+            left: 21px;
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .alert-banner {
+            background: #fef3c7;
+            border-left: 4px solid var(--amber);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #78350f;
+            margin-top: 12px;
+        }
+
+        .info-banner {
+            background: #eef2ff;
+            border-left: 4px solid #1d4ed8;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1e3a8a;
+            margin-top: 12px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .btn {
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.15s;
+        }
+
+        .btn-outline {
+            background: white;
+            border-color: var(--ink-4);
+            color: var(--ink-2);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+            border-color: var(--ink-3);
+        }
+
+        .btn-primary {
+            background: var(--violet);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4c1cd9;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid var(--rule);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-card">
+        <div class="card-header">
+            <h3>Cấu hình hệ thống</h3>
+            <p>Thiết lập thông tin cơ bản và tham số vận hành cho toàn bộ ứng dụng ViecJob Portal.</p>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Thông tin ứng dụng</label>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tên ứng dụng</label>
+                        <input type="text" value="ViecJob Portal" id="appName">
+                    </div>
+                    <div class="form-group">
+                        <label>Email hỗ trợ</label>
+                        <input type="email" value="support@viecjob.vn" id="supportEmail">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ngôn ngữ mặc định</label>
+                        <select id="defaultLang">
+                            <option selected>Tiếng Việt</option>
+                            <option>English</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Múi giờ (Timezone)</label>
+                        <select id="timezone">
+                            <option selected>(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                            <option>(GMT+08:00) Singapore, Kuala Lumpur</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <label>Chế độ vận hành</label>
+
+                <div class="toggle-switch">
+                    <input type="checkbox" id="maintenanceMode">
+                    <span class="toggle-label">Chế độ bảo trì</span>
+                </div>
+                <div class="alert-banner" id="maintenanceHint" style="display: none;">
+                    ⚠️ Khi bật chế độ này, người dùng thông thường sẽ không thể truy cập hệ thống ngoại trừ quản trị
+                    viên.
+                </div>
+
+                <div class="toggle-switch" style="margin-top: 16px;">
+                    <input type="checkbox" id="allowRegister" checked>
+                    <span class="toggle-label">Cho phép đăng ký mới</span>
+                </div>
+                <div class="info-banner">
+                    👥 Cho phép ứng viên hoặc nhà tuyển dụng mới tự động đăng ký tài khoản trên cổng thông tin.
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-outline" id="cancelBtn">Hủy bỏ</button>
+                <button class="btn btn-primary" id="saveBtn">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const maintCheck = document.getElementById('maintenanceMode');
+        const maintHint = document.getElementById('maintenanceHint');
+
+        function toggleMaintenanceHint() {
+            maintHint.style.display = maintCheck.checked ? 'flex' : 'none';
+        }
+
+        maintCheck.addEventListener('change', toggleMaintenanceHint);
+        toggleMaintenanceHint();
+
+        function showToast() {
+            let toast = document.getElementById('devToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'devToast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1e1e2a;
+                    color: white;
+                    padding: 10px 24px;
+                    border-radius: 40px;
+                    font-size: 13px;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: 0.2s;
+                    pointer-events: none;
+                    font-family: 'DM Sans', sans-serif;
+                `;
+                toast.innerText = '⚙️ Chức năng đang được phát triển';
+                document.body.appendChild(toast);
+            }
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 1500);
+        }
+
+        document.getElementById('saveBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast();
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showToast();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảo mật hệ thống</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0e0e10;
+            --ink-2: #4a4a52;
+            --ink-3: #9898a6;
+            --ink-4: #c8c8d4;
+            --rule: #ebebf0;
+            --surface: #ffffff;
+            --bg: #f7f7f9;
+            --violet: #5b21f5;
+            --violet-bg: #f0ebff;
+            --violet-mid: #c4b0fa;
+            --green: #16a34a;
+            --green-bg: #dcfce7;
+            --amber: #b45309;
+            --amber-bg: #fef3c7;
+            --red: #dc2626;
+            --red-bg: #fee2e2;
+            --blue: #1d4ed8;
+            --blue-bg: #dbeafe;
+            --r: 8px;
+            --r-lg: 12px;
+            --fs-xs: 11px;
+            --fs-sm: 12.5px;
+            --fs-base: 13.5px;
+            --fs-md: 15px;
+            --fs-lg: 18px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: transparent;
+            color: var(--ink);
+            font-size: var(--fs-base);
+        }
+
+        .security-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--ink-3);
+        }
+
+        /* Grid 2 cột */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Card chung */
+        .card {
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--rule);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .card-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .card-body {
+            padding: 20px 24px;
+        }
+
+        /* Status grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .status-item {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--rule);
+        }
+
+        .status-label {
+            font-size: 12px;
+            color: var(--ink-3);
+            margin-bottom: 8px;
+        }
+
+        .status-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .status-value.success {
+            color: var(--green);
+        }
+
+        .status-value.warning {
+            color: var(--amber);
+        }
+
+        .status-value.danger {
+            color: var(--red);
+        }
+
+        .status-value.info {
+            color: var(--blue);
+        }
+
+        /* Suggestion box */
+        .suggestion-box {
+            background: var(--blue-bg);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-top: 8px;
+            border-left: 4px solid var(--blue);
+        }
+
+        .suggestion-box p {
+            font-size: 13px;
+            color: var(--blue);
+        }
+
+        /* Toggle và form group */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-2);
+        }
+
+        input, select {
+            padding: 10px 14px;
+            border: 1px solid var(--ink-4);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: 0.15s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--violet);
+            box-shadow: 0 0 0 3px rgba(91,33,245,0.1);
+        }
+
+        /* Toggle switch */
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .toggle-desc {
+            font-size: 12px;
+            color: var(--ink-3);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--ink-4);
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--violet);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Bảng nhật ký */
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .log-table th,
+        .log-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .log-table th {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--ink-2);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .log-table td:first-child,
+        .log-table th:first-child {
+            padding-left: 0;
+        }
+
+        .log-table td:last-child,
+        .log-table th:last-child {
+            padding-right: 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-badge.success {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .status-badge.failed {
+            background: var(--red-bg);
+            color: var(--red);
+        }
+
+        /* Action buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        .btn-primary {
+            background: var(--violet);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: #4c1cd9;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--ink-4);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            color: var(--ink-2);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg);
+        }
+
+        /* Scroll table */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="security-container">
+        <!-- Header -->
+        <div class="page-header">
+            <h2>Bảo mật hệ thống</h2>
+            <p>Kiểm tra tình trạng bảo mật và cấu hình chính sách truy cập</p>
+        </div>
+
+        <div class="two-columns">
+            <!-- Cột trái: Tình trạng bảo mật + Chính sách mật khẩu -->
+            <div>
+                <!-- Tình trạng bảo mật -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Tình trạng bảo mật</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-grid">
+                            <div class="status-item">
+                                <div class="status-label">Chứng chỉ SSL</div>
+                                <div class="status-value success">✓ HOẠT ĐỘNG</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">Xác thực 2FA</div>
+                                <div class="status-value success">✓ ĐÃ BẬT</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">Đăng nhập thất bại</div>
+                                <div class="status-value warning">⚠ 12 CẢNH BÁO</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-label">Phiên hết hạn</div>
+                                <div class="status-value danger">⚡ 8 RỦI RO</div>
+                            </div>
+                        </div>
+
+                        <div class="suggestion-box">
+                            <p>💡 <strong>Gợi ý hệ thống</strong><br>Hệ thống đang hoạt động ổn định. Hãy kiểm tra các IP đăng nhập thất bại từ Nhật ký truy cập.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chính sách mật khẩu -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Chính sách mật khẩu</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Độ dài tối thiểu</label>
+                                <input type="number" value="8" id="minLength">
+                            </div>
+                            <div class="form-group">
+                                <label>Chu kỳ đổi mật khẩu (ngày)</label>
+                                <input type="number" value="90" id="passwordExpiry">
+                            </div>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Yêu cầu ký tự đặc biệt</div>
+                                <div class="toggle-desc">Mật khẩu phải bao gồm số, chữ hoa và ký tự đặc biệt.</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="requireSpecialChar" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Khóa tài khoản sau 5 lần sai</div>
+                                <div class="toggle-desc">Tạm dừng truy cập khi nhập sai mật khẩu liên tiếp.</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="lockAfterFailed" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Tự động đăng xuất</div>
+                                <div class="toggle-desc">Đăng xuất sau 30 phút không hoạt động.</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="autoLogout" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: Nhật ký truy cập gần đây -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Nhật ký truy cập gần đây</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-wrapper">
+                            <table class="log-table">
+                                <thead>
+                                    <tr>
+                                        <th>THỜI GIAN</th>
+                                        <th>TÀI KHOẢN</th>
+                                        <th>HÀNH ĐỘNG</th>
+                                        <th>ĐỊA CHỈ IP</th>
+                                        <th>TRẠNG THÁI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>14:25 24/05/2024</td>
+                                        <td><strong>admin_vinh</strong></td>
+                                        <td>Đăng nhập thành công</td>
+                                        <td>192.168.1.45</td>
+                                        <td><span class="status-badge success">THÀNH CÔNG</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>14:10 24/05/2024</td>
+                                        <td><strong>manager_hang</strong></td>
+                                        <td>Thay đổi chính sách phí</td>
+                                        <td>118.70.12.210</td>
+                                        <td><span class="status-badge success">THÀNH CÔNG</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13:55 24/05/2024</td>
+                                        <td><strong>guest_user_99</strong></td>
+                                        <td>Sai mật khẩu (lần 3)</td>
+                                        <td>27.67.143.12</td>
+                                        <td><span class="status-badge failed">THẤT BẠI</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13:40 24/05/2024</td>
+                                        <td><strong>system_bot</strong></td>
+                                        <td>Sao lưu dữ liệu định kỳ</td>
+                                        <td>Internal</td>
+                                        <td><span class="status-badge success">THÀNH CÔNG</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>13:25 24/05/2024</td>
+                                        <td><strong>tuyendung_vip</strong></td>
+                                        <td>Đăng tin tuyển dụng</td>
+                                        <td>113.22.45.67</td>
+                                        <td><span class="status-badge success">THÀNH CÔNG</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>12:58 24/05/2024</td>
+                                        <td><strong>unknown_user</strong></td>
+                                        <td>Sai mật khẩu (lần 5)</td>
+                                        <td>45.89.32.14</td>
+                                        <td><span class="status-badge failed">KHÓA TẠM</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-outline" id="cancelBtn">Hủy bỏ</button>
+            <button class="btn-primary" id="saveBtn">Lưu thay đổi</button>
+        </div>
+    </div>
+
+    <script>
+        // Toast thông báo đang phát triển
+        function showDevToast(message = '⚙️ Chức năng đang được phát triển') {
+            let toast = document.getElementById('devToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'devToast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #1e1e2a;
+                    color: white;
+                    padding: 10px 24px;
+                    border-radius: 40px;
+                    font-size: 13px;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: 0.2s;
+                    pointer-events: none;
+                    font-family: 'DM Sans', sans-serif;
+                    white-space: nowrap;
+                `;
+                document.body.appendChild(toast);
+            }
+            toast.innerText = message;
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Xử lý nút Lưu
+        document.getElementById('saveBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('💾 Đang lưu cấu hình bảo mật...');
+        });
+
+        // Xử lý nút Hủy
+        document.getElementById('cancelBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showDevToast('❌ Đã hủy thay đổi');
+        });
+
+        // Xử lý các toggle (hiển thị toast khi thay đổi)
+        const toggles = ['requireSpecialChar', 'lockAfterFailed', 'autoLogout'];
+        toggles.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('change', (e) => {
+                    const action = e.target.checked ? 'bật' : 'tắt';
+                    const labels = {
+                        requireSpecialChar: 'Yêu cầu ký tự đặc biệt',
+                        lockAfterFailed: 'Khóa tài khoản sau 5 lần sai',
+                        autoLogout: 'Tự động đăng xuất'
+                    };
+                    showDevToast(`🔄 Đã ${action} "${labels[id]}"`);
+                });
+            }
+        });
+
+        // Xử lý thay đổi input số
+        const minLengthInput = document.getElementById('minLength');
+        const passwordExpiryInput = document.getElementById('passwordExpiry');
+        
+        if (minLengthInput) {
+            minLengthInput.addEventListener('change', () => {
+                showDevToast(`🔐 Cập nhật độ dài mật khẩu tối thiểu: ${minLengthInput.value}`);
+            });
+        }
+        
+        if (passwordExpiryInput) {
+            passwordExpiryInput.addEventListener('change', () => {
+                showDevToast(`📅 Cập nhật chu kỳ đổi mật khẩu: ${passwordExpiryInput.value} ngày`);
+            });
+        }
+    </script>
+</body>
+</html>
